@@ -1,0 +1,8 @@
+query DeliverablesByWorkspace($workspaceSlug: String!) {
+  deliverables(where: { workspace: { slug: $workspaceSlug } }) {
+    id
+    title
+    slug
+    data
+  }
+}

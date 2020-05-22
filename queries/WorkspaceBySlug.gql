@@ -1,0 +1,7 @@
+query WorkspaceBySlug($workspaceSlug: String!) {
+  workspaces(where: { slug: $workspaceSlug }) {
+    id
+    name
+    slug
+  }
+}
