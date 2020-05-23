@@ -7,8 +7,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   data() {
     return {
@@ -21,7 +19,7 @@ export default {
       console.log('Logging in...');
 
       // TODO: Get base URL from nuxt.config.js
-      axios.post('/auth/local', {
+      this.$axios.post('/auth/local', {
         identifier: this.username,
         password: this.password,
       })
