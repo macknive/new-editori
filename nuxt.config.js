@@ -53,9 +53,7 @@ export default {
   */
  modules: [
     '@nuxtjs/apollo',
-    ['@nuxtjs/axios', {
-      baseURL: process.env.API_URL || 'http://localhost:1337',
-    }]
+    '@nuxtjs/axios',
   ],
   apollo: {
     clientConfigs: {
@@ -63,6 +61,9 @@ export default {
         httpEndpoint: process.env.BACKEND_URL || 'http://localhost:1337/graphql'
       }
     }
+  },
+  axios: {
+    baseURL: process.env.API_URL || 'http://localhost:1337',
   },
   /*
   ** vuetify module configuration
