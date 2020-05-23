@@ -21,7 +21,7 @@ export default {
       console.log('Logging in...');
 
       // TODO: Get base URL from nuxt.config.js
-      axios.post('http://localhost:1337/auth/local', {
+      axios.post('/auth/local', {
         identifier: this.username,
         password: this.password,
       })
