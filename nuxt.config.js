@@ -1,4 +1,5 @@
 // import colors from 'vuetify/es5/util/colors'
+import redirectSSL from 'redirect-ssl';
 
 export default {
   mode: 'universal',
@@ -65,6 +66,12 @@ export default {
   axios: {
     baseURL: process.env.API_URL || 'http://localhost:1337',
   },
+  serverMiddleware: [
+    // Will register redirect-ssl npm package
+    redirectSSL.create({
+      redirect: (process.env.HTTPS_REDIRECT || '').toLowerCase() === 'true',
+    }),
+  ],
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module
