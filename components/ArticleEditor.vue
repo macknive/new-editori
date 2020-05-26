@@ -11,7 +11,7 @@
           class="editor">
         </medium-editor>
       </div>
-      <div class="content" disabled slot="placeholder">
+      <div class="placeholder content" disabled slot="placeholder">
         <h1 contenteditable>{{title}}</h1>
         <article v-html="body"></article>
       </div>
@@ -56,8 +56,14 @@ export default {
 </script>
 
 <style scoped>
-[disabled] {
-  color: #ccc;
+@-webkit-keyframes loading-pulse { 0% { opacity: 0.2; } 100% { opacity: 0.4; } }
+@keyframes loading-pulse         { 0% { opacity: 0.2; } 100% { opacity: 0.4; } }
+
+.placeholder {
+  -webkit-animation: loading-pulse cubic-bezier(0.45, 0, 0.55, 1) 1s infinite alternate;
+  animation: loading-pulse cubic-bezier(0.45, 0, 0.55, 1) 1s infinite alternate;
+  opacity: 0.3;
+  filter: grayscale(1);
 }
 [contenteditable] {
   outline: none;
