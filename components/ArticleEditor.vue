@@ -24,7 +24,16 @@ export default {
   data() {
     return {
       body: this.deliverable.data.html,
-      options: {},
+      options: {
+        paste: {
+          forcePlainText: false,
+          cleanPastedHTML: false,
+          cleanReplacements: [],
+          cleanAttrs: ['class', 'style', 'dir'],
+          cleanTags: ['meta'],
+          unwrapTags: []
+       }
+      },
       title: this.deliverable.title,
     };
   },
