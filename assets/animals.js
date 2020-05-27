@@ -3,7 +3,7 @@ const ALL_ANIMALS = [
   { "emoji": "🐒", "name": "Monkey" },
   { "emoji": "🦍", "name": "Gorilla" },
   { "emoji": "🦧", "name": "Orangutan" },
-  { "emoji": "🐶", "name": "Dog Face" },
+  { "emoji": "🐶", "name": "Dog" },
   { "emoji": "🐺", "name": "Wolf" },
   { "emoji": "🦊", "name": "Fox" },
   { "emoji": "🦝", "name": "Raccoon" },
