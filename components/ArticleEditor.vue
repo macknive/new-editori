@@ -2,7 +2,9 @@
   <main class="article-root">
     <client-only>
       <div class="content">
-        <h1 contenteditable ref="titleEl">{{title}}</h1>
+        <h1 contenteditable ref="titleEl" @blur="onTitleUpdate">
+          {{title}}
+        </h1>
         <medium-editor
           :text="body"
           :options="options"
@@ -44,12 +46,24 @@ export default {
     onBodyUpdate(e) {
       const newBody = e.api.origElements.innerHTML;
       this.deliverable.data.html = newBody;
+      this.deliverable.title = this.title;
       this.$emit('autoSave');
     },
     onTitleUpdate(e) {
-      const newTitle = this.$refs.titleEl.textContent;
+      const newTitle = this.sanitizeTitle(this.$refs.titleEl.textContent);
+      this.$refs.titleEl.textContent = newTitle;
+
+      if (this.title === newTitle) {
+        // No-op.
+        return;
+      }
+
+      this.title = newTitle;
       this.deliverable.title = newTitle;
       this.$emit('autoSave');
+    },
+    sanitizeTitle(title) {
+      return title.trim().replace(/\s+/g,' ');
     }
   }
 }
