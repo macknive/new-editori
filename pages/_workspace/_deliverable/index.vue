@@ -42,8 +42,9 @@ export default {
 
         const stepSlug = stepSlugsById[nextStepInstance.step.id];
 
-        this.$router
-            .push(`/${this.workspaceSlug}/${this.deliverableSlug}/${stepSlug}`);
+        this.$router.replace(
+          `/${this.workspaceSlug}/${this.deliverableSlug}/${stepSlug}`
+        );
       },
     },
   }
