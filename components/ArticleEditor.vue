@@ -2,7 +2,7 @@
   <main class="article-root">
     <client-only>
       <div class="content">
-        <h1 contenteditable>{{title}}</h1>
+        <h1 contenteditable ref="titleEl">{{title}}</h1>
         <medium-editor
           :text="body"
           :options="options"
@@ -43,22 +43,19 @@ export default {
   methods: {
     onBodyUpdate(e) {
       const newBody = e.api.origElements.innerHTML;
-      this.deliverable.data.html = newBody
-      this.$emit('update:deliverable', this.deliverable);
+      this.deliverable.data.html = newBody;
+      this.$emit('autoSave');
     },
     onTitleUpdate(e) {
-      const newTitle = 'foo';
+      const newTitle = this.$refs.titleEl.textContent;
       this.deliverable.title = newTitle;
-      this.$emit('update:deliverable', this.deliverable);
+      this.$emit('autoSave');
     }
   }
 }
 </script>
 
 <style scoped>
-@-webkit-keyframes loading-pulse { 0% { opacity: 0.2; } 100% { opacity: 0.4; } }
-@keyframes loading-pulse         { 0% { opacity: 0.2; } 100% { opacity: 0.4; } }
-
 .placeholder {
   -webkit-animation: loading-pulse cubic-bezier(0.45, 0, 0.55, 1) 1s infinite alternate;
   animation: loading-pulse cubic-bezier(0.45, 0, 0.55, 1) 1s infinite alternate;

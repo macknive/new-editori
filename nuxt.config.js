@@ -41,6 +41,7 @@ export default {
   ** Plugins to load before mounting the App
   */
  plugins: [
+    '~/plugins/vue-fontawesome.js',
     '~/plugins/vue2-medium-editor.client.js',
   ],
   /*

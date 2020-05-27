@@ -2,6 +2,7 @@
 query DeliverableBySlug($deliverableSlug: String!) {
   deliverables(where: { slug: $deliverableSlug }) {
     id
+    updated_at
     title
     data
     attachments {
