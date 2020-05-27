@@ -1,0 +1,21 @@
+mutation UpdateDeliverable(
+    $id: ID!,
+    $data: JSON,
+    $title: String,
+    $slug: String) {
+  updateDeliverable(
+    input: {
+      where: { id: $id }
+      data: {
+        title: $title,
+        data: $data,
+        slug: $slug
+      }
+    }
+  ) {
+    deliverable {
+      id
+      updated_at
+    }
+  }
+}
