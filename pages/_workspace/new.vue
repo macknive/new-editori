@@ -154,19 +154,17 @@ export default {
         }
       };
 
-      console.log('create deliverable', JSON.stringify(mutationConfig.variables));
-
       this.$apollo.mutate(mutationConfig)
           .then(result => this.onCreateSuccess(result))
           .catch(err => this.onCreateError(err));
     },
     onCreateSuccess(result) {
-      console.log('Created', result);
       const newDeliverable = result.data.createDeliverable.deliverable;
       this.$router.push(`/${this.workspaceSlug}/${newDeliverable.slug}`);
     },
     onCreateError(err) {
-      console.error(err);
+      // TODO: Build error UI.
+      alert(err);
     }
   },
   watch: {

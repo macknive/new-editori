@@ -84,7 +84,6 @@ const ALL_ANIMALS = [
 ];
 
 export const getRandomAnimal = () => {
-  console.log('getting animal');
   const index = Math.floor(Math.random() * ALL_ANIMALS.length);
   return ALL_ANIMALS[index];
 };
