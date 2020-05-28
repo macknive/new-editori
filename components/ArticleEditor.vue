@@ -2,12 +2,17 @@
   <main class="article-root">
     <client-only>
       <div class="content">
-        <h1 contenteditable ref="titleEl" @blur="onTitleUpdate">
-          {{title}}
-        </h1>
+        <medium-editor
+          :text="title"
+          :options="titleOptions"
+          custom-tag="h1"
+          v-on:edit="onTitleUpdate"
+          @blur="onTitleBlur"
+          class="editor">
+        </medium-editor>
         <medium-editor
           :text="body"
-          :options="options"
+          :options="bodyOptions"
           custom-tag="article"
           v-on:edit="onBodyUpdate"
           class="editor">
@@ -26,7 +31,12 @@ export default {
   data() {
     return {
       body: this.deliverable.data.html,
-      options: {
+      bodyOptions: {
+        anchor: {
+          linkValidation: true,
+        },
+        disableDoubleReturn: true,
+        disableExtraSpaces: true,
         paste: {
           forcePlainText: false,
           cleanPastedHTML: false,
@@ -34,9 +44,30 @@ export default {
           cleanAttrs: ['class', 'style', 'dir'],
           cleanTags: ['meta'],
           unwrapTags: []
-       }
+        },
+        toolbar: {
+          buttons: [
+            'bold',
+            'italic',
+            'underline',
+            'anchor',
+            'h2',
+            'h3',
+            'h4',
+            'orderedlist',
+            'unorderedlist',
+            'quote',
+            'removeFormat',
+          ],
+          updateOnEmptySelection: true,
+        },
       },
       title: this.deliverable.title,
+      titleOptions: {
+        disableReturn: true,
+        disableExtraSpaces: true,
+        toolbar: false,
+      }
     };
   },
   props: [
@@ -46,20 +77,15 @@ export default {
     onBodyUpdate(e) {
       const newBody = e.api.origElements.innerHTML;
       this.deliverable.data.html = newBody;
-      this.deliverable.title = this.title;
       this.$emit('autoSave');
     },
     onTitleUpdate(e) {
-      const newTitle = this.sanitizeTitle(this.$refs.titleEl.textContent);
-      this.$refs.titleEl.textContent = newTitle;
-
-      if (this.title === newTitle) {
-        // No-op.
-        return;
-      }
-
-      this.title = newTitle;
+      const newTitle = e.api.origElements.innerHTML;
       this.deliverable.title = newTitle;
+      this.$emit('autoSave');
+    },
+    onTitleBlur() {
+      this.title = this.sanitizeTitle(this.title);
       this.$emit('autoSave');
     },
     sanitizeTitle(title) {
