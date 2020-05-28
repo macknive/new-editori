@@ -89,17 +89,10 @@ export default {
         return [];
       }
 
-      const roles = {};
-      this.selectedWorkflow.steps.forEach(step => {
-        if (roles[step.custom_role.id]) {
-          // Role has already been seen.
-          return;
-        }
-
+      return this.selectedWorkflow.steps.reduce((roles, step) => {
         roles[step.custom_role.id] = step.custom_role;
-      });
-
-      return Object.values(roles);
+        return roles;
+      }, {});
     },
     workflowData() {
       let previousDeadlineTimestamp = Date.now();
