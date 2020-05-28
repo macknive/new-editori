@@ -83,6 +83,7 @@ export default {
   font-family: 'Merriweather', 'Georgia', serif;
   text-rendering: optimizeLegibility;
   box-sizing: border-box;
+  line-height: 1.75;
 }
 .article-root >>> h1,
 .article-root >>> h2,
