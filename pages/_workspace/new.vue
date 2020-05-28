@@ -106,9 +106,10 @@ export default {
         }
 
         return {
-          // TODO: Don't unroll role/user pairings on client; store it and
-          // pull dynamically so that future edits to workflow can have correct
-          // assignees.
+          // TODO: Don't assign workflow steps to users on the client; store the
+          // role/user mappings in the deliverable and pull dynamically from
+          // that where assignees are needed, so that future edits to the
+          // workflow can have correct assignees.
           assignee: this.usersForRole[step.custom_role.name],
           deadline: deadline,
           step: step.id,
