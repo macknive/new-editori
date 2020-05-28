@@ -26,6 +26,7 @@
     "nuxt": "^2.0.0",
     "reading-time": "^1.2.0",
     "redirect-ssl": "^1.4.1",
+    "slugify": "^1.4.0",
     "text-readability": "^1.0.5",
     "universal-dom-parser": "^0.0.3",
     "vue-debounce": "^2.5.5",

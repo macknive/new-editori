@@ -2,16 +2,19 @@
   <div class="root">
     <h1>{{workspace.name}} Workspace</h1>
     <table class="">
-      <tr v-for="deliverable in deliverables" :key="deliverable.id">
-        <td>
-          <nuxt-link :to="`/${workspace.slug}/${deliverable.slug}`"
-              class="deliverable">
-            {{ deliverable.title }}
-          </nuxt-link>
-        </td>
-      </tr>
+      <tbody>
+        <tr v-for="deliverable in deliverables" :key="deliverable.id">
+          <td>
+            <nuxt-link :to="`./${deliverable.slug}`" class="deliverable">
+              {{ deliverable.title }}
+            </nuxt-link>
+          </td>
+        </tr>
+      </tbody>
     </table>
-    <button class="fab">+</button>
+    <nuxt-link to="./new" >
+      <button class="fab">+</button>
+    </nuxt-link>
   </div>
 </template>
 
@@ -83,5 +86,6 @@ table .deliverable {
   position: absolute;
   bottom: var(--gap);
   right: var(--gap);
+  cursor: pointer;
 }
 </style>

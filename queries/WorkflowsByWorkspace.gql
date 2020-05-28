@@ -1,0 +1,19 @@
+query WorkflowsByWorkspace($workspaceSlug: String!) {
+  workflows(where: { workspace: { slug: $workspaceSlug } }) {
+    id
+    name
+    steps {
+      id
+      label
+      slug
+      custom_role {
+        id
+        name
+        users {
+          id
+          username
+        }
+      }
+    }
+  }
+}
