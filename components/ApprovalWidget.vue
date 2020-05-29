@@ -101,14 +101,16 @@ export default {
     display: flex;
     flex-direction: row;
     padding: 0;
-    position: fixed;
-    bottom: 60px;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-bottom: 10px;
+    z-index: 2;
+    align-self: end;
+    justify-self: center;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
   }
 
   .approval-root button {
     border: none;
+    outline: none;
     cursor: pointer;
     width: 50%;
     flex: 1;
