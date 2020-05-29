@@ -1,6 +1,7 @@
 <template>
   <div class="root">
     <Workflow class="workflow" :steps="workflowSteps"
+        :viewer="me"
         :baseUrl="`/${workspaceSlug}/${deliverableSlug}`">
     </Workflow>
     <div class="grid" :style="gridStyle" v-if="layout && layout.components">
@@ -9,7 +10,8 @@
           :is="componentData.component.name"
           :deliverable="deliverable"
           :currentStepId="currentStep.id"
-          :isViewerAssignee="isViewerAssignee"
+          :viewer="me"
+          :assignee="currentStep.assignee"
           @autoSave="autoSave"
           @save="save"
           class="view-component"
@@ -35,6 +37,7 @@ import ContentAnalysis from '~/components/ContentAnalysis';
 import EditorialBrief from '~/components/EditorialBrief';
 import SaveIcon from '~/components/SaveIcon';
 import Workflow from '~/components/Workflow';
+import ViewerId from '~/queries/ViewerId';
 import DeliverableBySlug from '~/queries/DeliverableBySlug';
 import UpdateDeliverable from '~/queries/UpdateDeliverable';
 import WorkspaceBySlug from '~/queries/WorkspaceBySlug';
@@ -73,6 +76,7 @@ export default {
   },
   data() {
     return {
+      me: undefined,
       deliverables: [],
       deliverableSlug: this.$route.params.deliverable,
       saveStatus: SaveStatus.SAVED,
@@ -90,11 +94,6 @@ export default {
     },
     deliverable() {
       return this.deliverables[0];
-    },
-    isViewerAssignee() {
-      // TODO: Get logged in user's ID.
-      // this.currentStep.assignee.id === viewerId
-      return true;
     },
     layout() {
       if (!this.view) {
@@ -212,6 +211,10 @@ export default {
     };
   },
   apollo: {
+    me: {
+      prefetch: true,
+      query: ViewerId,
+    },
     deliverables: {
       prefetch: true,
       query: DeliverableBySlug,
@@ -264,6 +267,7 @@ body {
 .workflow {
   background: #fff;
   border-radius: calc(var(--gap) / 2);
+  overflow: hidden;
   padding: var(--gap);
 }
 .save-icon {

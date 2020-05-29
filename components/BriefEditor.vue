@@ -1,5 +1,5 @@
 <template>
-  <main class="brief-root">
+  <main class="brief-root" :class="{ locked: !isViewerAssignee }">
     <client-only>
       <div class="content">
         <medium-editor
@@ -9,6 +9,10 @@
           v-on:edit="onBriefUpdate"
           class="editor">
         </medium-editor>
+        <div v-if="!isViewerAssignee" class="lock-label">
+          <font-awesome-icon icon="lock"></font-awesome-icon>
+          Locked for editing by {{assignee.display_name}}
+        </div>
       </div>
       <div class="placeholder content" disabled slot="placeholder">
         <article v-html="brief"></article>
@@ -20,12 +24,32 @@
 <script>
 export default {
   data() {
+    const isViewerAssignee = this.viewer.id === this.assignee.id;
+    const toolbarOptions = {
+      buttons: [
+        'bold',
+        'italic',
+        'underline',
+        'anchor',
+        'h2',
+        'h3',
+        'h4',
+        'orderedlist',
+        'unorderedlist',
+        'quote',
+        'removeFormat',
+      ],
+      updateOnEmptySelection: true,
+    };
+
     return {
       brief: this.deliverable.data.brief,
+      isViewerAssignee: isViewerAssignee,
       options: {
         anchor: {
           linkValidation: true,
         },
+        disableEditing: !isViewerAssignee,
         paste: {
           forcePlainText: false,
           cleanPastedHTML: false,
@@ -37,27 +61,14 @@ export default {
         placeholder: {
           text: 'Enter your brief here',
         },
-        toolbar: {
-          buttons: [
-            'bold',
-            'italic',
-            'underline',
-            'anchor',
-            'h1',
-            'h2',
-            'h3',
-            'orderedlist',
-            'unorderedlist',
-            'quote',
-            'removeFormat',
-          ],
-          updateOnEmptySelection: true,
-        },
+        toolbar: isViewerAssignee ? toolbarOptions : false,
       },
     };
   },
   props: [
-    'deliverable'
+    'assignee',
+    'deliverable',
+    'viewer',
   ],
   methods: {
     onBriefUpdate(e) {
@@ -84,6 +95,7 @@ export default {
   text-rendering: optimizeLegibility;
   box-sizing: border-box;
   line-height: 1.75;
+  color: #000;
 }
 .brief-root >>> h1,
 .brief-root >>> h2,
@@ -97,5 +109,14 @@ export default {
 }
 .brief-root >>> h1 {
   text-align: center;
+}
+.locked {
+  color: #777;
+}
+.lock-label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 80%;
+  text-align: right;
+  color: #aaa;
 }
 </style>

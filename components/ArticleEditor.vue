@@ -1,5 +1,5 @@
 <template>
-  <main class="article-root">
+  <main class="article-root" :class="{ locked: !isViewerAssignee }">
     <client-only>
       <div class="content">
         <medium-editor
@@ -17,6 +17,10 @@
           v-on:edit="onBodyUpdate"
           class="editor">
         </medium-editor>
+        <div v-if="!isViewerAssignee" class="lock-label">
+          <font-awesome-icon icon="lock"></font-awesome-icon>
+          Locked for editing by {{assignee.display_name}}
+        </div>
       </div>
       <div class="placeholder content" disabled slot="placeholder">
         <h1 contenteditable>{{title}}</h1>
@@ -29,6 +33,24 @@
 <script>
 export default {
   data() {
+    const isViewerAssignee = this.viewer.id === this.assignee.id;
+    const toolbarOptions = {
+      buttons: [
+        'bold',
+        'italic',
+        'underline',
+        'anchor',
+        'h2',
+        'h3',
+        'h4',
+        'orderedlist',
+        'unorderedlist',
+        'quote',
+        'removeFormat',
+      ],
+      updateOnEmptySelection: true,
+    };
+
     return {
       body: this.deliverable.data.html,
       bodyOptions: {
@@ -36,6 +58,7 @@ export default {
           linkValidation: true,
         },
         disableDoubleReturn: true,
+        disableEditing: !isViewerAssignee,
         disableExtraSpaces: true,
         paste: {
           forcePlainText: false,
@@ -45,33 +68,22 @@ export default {
           cleanTags: ['meta'],
           unwrapTags: []
         },
-        toolbar: {
-          buttons: [
-            'bold',
-            'italic',
-            'underline',
-            'anchor',
-            'h2',
-            'h3',
-            'h4',
-            'orderedlist',
-            'unorderedlist',
-            'quote',
-            'removeFormat',
-          ],
-          updateOnEmptySelection: true,
-        },
+        toolbar: isViewerAssignee ? toolbarOptions : false,
       },
+      isViewerAssignee: isViewerAssignee,
       title: this.deliverable.title,
       titleOptions: {
         disableReturn: true,
+        disableEditing: !isViewerAssignee,
         disableExtraSpaces: true,
         toolbar: false,
       }
     };
   },
   props: [
-    'deliverable'
+    'assignee',
+    'deliverable',
+    'viewer',
   ],
   methods: {
     onBodyUpdate(e) {
@@ -110,6 +122,8 @@ export default {
   text-rendering: optimizeLegibility;
   box-sizing: border-box;
   line-height: 1.75;
+  position: relative;
+  color: #000;
 }
 .article-root >>> h1,
 .article-root >>> h2,
@@ -123,5 +137,14 @@ export default {
 }
 .article-root >>> h1 {
   text-align: center;
+}
+.locked {
+  color: #777;
+}
+.lock-label {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 80%;
+  text-align: right;
+  color: #aaa;
 }
 </style>

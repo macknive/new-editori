@@ -17,7 +17,7 @@
     <span class="label">{{ step.label }}</span>
     <span class="assignee">
       {{ step.assignee.display_name }}
-      {{ step.assignee.id == 2 ? '(You)' : '' }}
+      {{ step.assignee.id === viewer.id ? '(You)' : '' }}
     </span>
   </nuxt-link>
 </template>
@@ -31,7 +31,8 @@ const StepStatus = {
 export default {
   props: [
     'baseUrl',
-    'step'
+    'step',
+    'viewer',
   ],
   computed: {
     isCompleted() {

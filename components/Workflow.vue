@@ -1,7 +1,7 @@
 <template>
   <div class="workflow-root">
     <WorkflowStep v-for="step in steps" :key="step.id"
-        :step="step" :baseUrl="baseUrl" class="step">
+        :step="step" :baseUrl="baseUrl" class="step" :viewer="viewer">
     </WorkflowStep>
   </div>
 </template>
@@ -15,7 +15,8 @@
     },
     props: [
       'baseUrl',
-      'steps'
+      'steps',
+      'viewer',
     ]
   }
 </script>
