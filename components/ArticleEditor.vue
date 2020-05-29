@@ -86,7 +86,7 @@ export default {
     },
     onTitleBlur() {
       this.title = this.sanitizeTitle(this.title);
-      this.$emit('autoSave');
+      this.$emit('save');
     },
     sanitizeTitle(title) {
       return title.trim().replace(/\s+/g,' ');
