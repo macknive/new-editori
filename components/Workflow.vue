@@ -32,8 +32,6 @@
     font-family: 'Open Sans', sans-serif;
     align-items: center;
     justify-content: space-evenly;
-    margin: 0;
-    padding: 30px 30px 20px;
   }
   .step {
     display: flex;

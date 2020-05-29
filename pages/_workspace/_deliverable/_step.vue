@@ -3,7 +3,7 @@
     <Workflow class="workflow" :steps="workflowSteps"
         :baseUrl="`/${workspaceSlug}/${deliverableSlug}`">
     </Workflow>
-    <div class="grid" :style="gridStyle">
+    <div class="grid" :style="gridStyle" v-if="layout && layout.components">
       <component v-for="componentData in layout.components"
           :key="componentData.id"
           :is="componentData.component.name"
@@ -66,15 +66,24 @@ export default {
   },
   computed: {
     currentStep() {
+      if (!this.workflowSteps) {
+        return undefined;
+      }
       return Object.values(this.workflowSteps).find(step => step.active);
     },
     deliverable() {
       return this.deliverables[0];
     },
     layout() {
+      if (!this.view) {
+        return undefined;
+      }
       return this.view.layout;
     },
     gridStyle() {
+      if (!this.layout) {
+        return undefined;
+      }
       return `
         --gap: ${this.stringifyLength(this.layout.gap)};
         grid-template-rows: ${this.stringifyLengths(this.layout.rows)};
@@ -197,6 +206,7 @@ body {
 }
 .workflow {
   flex-grow: 0;
+  margin: var(--gap) var(--gap) 0;
 }
 .grid {
   background: #f0f0f0;
@@ -206,7 +216,8 @@ body {
   grid-gap: var(--gap);
   padding: var(--gap);
 }
-.grid > * {
+.grid > *,
+.workflow {
   background: #fff;
   border-radius: calc(var(--gap) / 2);
   padding: var(--gap);
