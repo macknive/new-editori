@@ -3,11 +3,13 @@
     <Workflow class="workflow" :steps="workflowSteps"
         :baseUrl="`/${workspaceSlug}/${deliverableSlug}`">
     </Workflow>
-    <div class="grid" :style="gridStyle">
+    <div class="grid" :style="gridStyle" v-if="layout && layout.components">
       <component v-for="componentData in layout.components"
           :key="componentData.id"
           :is="componentData.component.name"
           :deliverable="deliverable"
+          :currentStepId="currentStep.id"
+          :isViewerAssignee="isViewerAssignee"
           @autoSave="autoSave"
           :style="`
             grid-column-start: ${componentData.column_start};
@@ -23,7 +25,10 @@
 </template>
 
 <script>
+// TODO: Import view components dynamically based on what is actually used.
+import ApprovalWidget from '~/components/ApprovalWidget';
 import ArticleEditor from '~/components/ArticleEditor';
+import BriefEditor from '~/components/BriefEditor';
 import ContentAnalysis from '~/components/ContentAnalysis';
 import EditorialBrief from '~/components/EditorialBrief';
 import SaveIcon from '~/components/SaveIcon';
@@ -39,6 +44,14 @@ import {debounce} from 'vue-debounce';
  */
 const AUTOSAVE_DEBOUNCE_MS = 3000;
 
+const WORKFLOW_DATA_KEYS_WHITELIST = [
+  'assignee',
+  'completed',
+  'deadline',
+  'rejected',
+  'step',
+];
+
 const SaveStatus = {
   ERROR: 'error',
   SAVING: 'saving',
@@ -48,7 +61,9 @@ const SaveStatus = {
 
 export default {
   components: {
+    ApprovalWidget,
     ArticleEditor,
+    BriefEditor,
     ContentAnalysis,
     EditorialBrief,
     SaveIcon,
@@ -66,15 +81,29 @@ export default {
   },
   computed: {
     currentStep() {
+      if (!this.workflowSteps) {
+        return undefined;
+      }
       return Object.values(this.workflowSteps).find(step => step.active);
     },
     deliverable() {
       return this.deliverables[0];
     },
+    isViewerAssignee() {
+      // TODO: Get logged in user's ID.
+      // this.currentStep.assignee.id === viewerId
+      return true;
+    },
     layout() {
+      if (!this.view) {
+        return undefined;
+      }
       return this.view.layout;
     },
     gridStyle() {
+      if (!this.layout) {
+        return undefined;
+      }
       return `
         --gap: ${this.stringifyLength(this.layout.gap)};
         grid-template-rows: ${this.stringifyLengths(this.layout.rows)};
@@ -125,11 +154,31 @@ export default {
       const unit = length.unit === 'percent' ? '%' : length.unit;
       return `${value}${unit}`;
     },
+    sanitizeWorkflowDataForUpdate(instance) {
+      return Object.keys(instance).reduce((data, key) => {
+        if (!WORKFLOW_DATA_KEYS_WHITELIST.includes(key)) {
+          return data;
+        }
+
+        const value = instance[key];
+
+        if (value && typeof value === 'object' && value.id !== undefined) {
+          // Only send ID for relational values.
+          data[key] = value.id;
+        } else {
+          data[key] = value;
+        }
+
+        return data;
+      }, {});
+    },
     save() {
       this.saveStatus = SaveStatus.SAVING;
 
       // TODO: Can this be a constant object with functions for the variables to
       // prevent frequent object allocation?
+      // TODO: Log changes and send only the changed fields OR have semantic
+      // update functions to update specific fields.
       const mutationConfig = {
         mutation: UpdateDeliverable,
         variables: {
@@ -137,6 +186,8 @@ export default {
           data: this.deliverable.data,
           title: this.deliverable.title,
           slug: this.deliverable.slug,
+          workflowData: this.deliverable.workflow_data
+              .map(instance => this.sanitizeWorkflowDataForUpdate(instance)),
         }
       };
 
@@ -197,6 +248,7 @@ body {
 }
 .workflow {
   flex-grow: 0;
+  margin: var(--gap) var(--gap) 0;
 }
 .grid {
   background: #f0f0f0;
@@ -206,7 +258,8 @@ body {
   grid-gap: var(--gap);
   padding: var(--gap);
 }
-.grid > * {
+.grid > *,
+.workflow {
   background: #fff;
   border-radius: calc(var(--gap) / 2);
   padding: var(--gap);
