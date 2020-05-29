@@ -23,7 +23,9 @@
 </template>
 
 <script>
+// TODO: Import view components dynamically based on what is actually used.
 import ArticleEditor from '~/components/ArticleEditor';
+import BriefEditor from '~/components/BriefEditor';
 import ContentAnalysis from '~/components/ContentAnalysis';
 import EditorialBrief from '~/components/EditorialBrief';
 import SaveIcon from '~/components/SaveIcon';
@@ -49,6 +51,7 @@ const SaveStatus = {
 export default {
   components: {
     ArticleEditor,
+    BriefEditor,
     ContentAnalysis,
     EditorialBrief,
     SaveIcon,
