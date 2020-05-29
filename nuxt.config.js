@@ -42,6 +42,7 @@ export default {
   */
  plugins: [
     '~/plugins/vue-fontawesome.js',
+    '~/plugins/vue-timeago.js',
     '~/plugins/vue2-medium-editor.client.js',
   ],
   /*

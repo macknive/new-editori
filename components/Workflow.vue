@@ -8,7 +8,7 @@
       <span class="icon">{{ step.completed ? '✓' : '' }}</span>
       <span class="label">{{ step.label }}</span>
       <span class="assignee">
-        {{ step.assignee.username }}
+        {{ step.assignee.display_name }}
         {{ step.assignee.id == 2 ? '(You)' : '' }}
       </span>
     </nuxt-link>
@@ -41,7 +41,6 @@
     justify-content: center;
     flex-direction: column;
     flex-basis: 0;
-    color: var(--complete);
     flex-grow: 1;
     margin: 0;
     padding: 0;
@@ -52,8 +51,11 @@
     color: #343330;
     font-weight: 600;
   }
-  .step.active ~ .step {
+  .step {
     color: #ccc;
+  }
+  .complete {
+    color: var(--complete);
   }
   .step:not(:last-child)::after {
     content: '';
@@ -89,18 +91,19 @@
     font-size: 80%;
   }
   .icon {
-    background: var(--complete);
-    color: #fff;
-  }
-  .active .icon {
-    background: #fff;
-    border: 2px solid #343330;
-    color: #343330;
-  }
-  .active ~ .step .icon {
     background: #fff;
     border: 2px solid #ccc;
     color: #ccc;
+  }
+  .active .icon {
+    background: #fff;
+    border-color: #343330;
+    color: #343330;
+  }
+  .complete .icon {
+    background: var(--complete);
+    border-color: var(--complete);
+    color: #fff;
   }
   .icon, .label, .assignee {
     cursor: pointer;

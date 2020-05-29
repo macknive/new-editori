@@ -212,7 +212,7 @@ body {
   padding: var(--gap);
 }
 .save-icon {
-  position: absolute;
+  position: fixed;
   bottom: 16px;
   right: 16px;
 }
