@@ -1,0 +1,5 @@
+query CurrentUserId {
+  me {
+    id
+  }
+}
