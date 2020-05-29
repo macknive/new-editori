@@ -23,13 +23,13 @@ export default {
     approve() {
       this.changeStatus(this.previousStepIndex, 'completed', true)
       this.changeStatus(this.currentStepIndex, 'completed', true)
-      this.$emit('autoSave');
+      this.$emit('save');
       this.goToStep(this.nextStepIndex);
     },
     reject() {
       this.changeStatus(this.previousStepIndex, 'rejected', true)
       this.changeStatus(this.currentStepIndex, 'completed', false)
-      this.$emit('autoSave');
+      this.$emit('save');
       this.goToStep(this.previousStepIndex);
     },
     goToStep(stepIndex) {
