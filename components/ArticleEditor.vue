@@ -122,7 +122,6 @@ export default {
   text-rendering: optimizeLegibility;
   box-sizing: border-box;
   line-height: 1.75;
-  position: relative;
   color: #000;
 }
 .article-root >>> h1,
