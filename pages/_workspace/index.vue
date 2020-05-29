@@ -1,15 +1,17 @@
 <template>
   <div class="root">
     <h1>{{workspace.name}} Workspace</h1>
-    <table class="">
+    <table class="table">
       <tbody>
-        <tr v-for="deliverable in deliverables" :key="deliverable.id">
-          <td>
-            <nuxt-link :to="`./${deliverable.slug}`" class="deliverable">
-              {{ deliverable.title }}
-            </nuxt-link>
-          </td>
+        <tr class="header-row">
+          <th>Name</th>
+          <th>Last Updated</th>
+          <th>Status</th>
         </tr>
+        <DeliverableTableRow v-for="deliverable in deliverables"
+            class="deliverable"
+            :key="deliverable.id" :deliverable="deliverable">
+        </DeliverableTableRow>
       </tbody>
     </table>
     <nuxt-link to="./new" >
@@ -19,10 +21,14 @@
 </template>
 
 <script>
+import DeliverableTableRow from '~/components/DeliverableTableRow';
 import WorkspaceBySlug from '~/queries/WorkspaceBySlug';
 import DeliverablesByWorkspace from '~/queries/DeliverablesByWorkspace';
 
 export default {
+  components: {
+    DeliverableTableRow,
+  },
   data() {
     return {
       deliverables: [],
@@ -66,11 +72,23 @@ body {
 </style>
 
 <style scoped>
-table .deliverable {
-  font-size: 20px;
-  font-family: 'Merriweather', 'Georgia', serif;
-  font-weight: 600;
+.table {
+  border: 1px solid #ccc;
+  font-family: 'Open Sans', sans-serif;
+  width: 100%;
+}
+.header-row {
+  background-color: #def;
+}
+.deliverable:nth-child(even) {
+  background: #fff;
+}
+.deliverable:nth-child(odd) {
+  background: #f0f0f0
+}
+th {
   color: #343330;
+  padding: 20px;
 }
 .fab {
   width: 64px;

@@ -4,5 +4,16 @@ query DeliverablesByWorkspace($workspaceSlug: String!) {
     title
     slug
     data
+    updated_at
+    workflow_data {
+      assignee {
+        display_name
+      }
+      deadline
+      completed
+      step {
+        label
+      }
+    }
   }
 }

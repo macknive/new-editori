@@ -11,7 +11,7 @@ query WorkflowsByWorkspace($workspaceSlug: String!) {
         name
         users {
           id
-          username
+          display_name
         }
       }
     }

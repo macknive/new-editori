@@ -48,7 +48,7 @@ query DeliverableBySlug($deliverableSlug: String!) {
     workflow_data {
       deadline
       assignee {
-        username
+        display_name
       }
       completed
       step {

@@ -32,7 +32,7 @@
           <select v-model="usersForRole[role.name]">
             <option :value="undefined" selected disabled>Select a User</option>
             <option v-for="user in role.users" :key="user.id" :value="user.id">
-              {{user.username}}
+              {{user.display_name}}
             </option>
           </select>
         </td>
