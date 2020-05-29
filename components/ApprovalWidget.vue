@@ -116,9 +116,6 @@ export default {
     flex: 1;
   }
 
-  .approval-root button:hover {
-  }
-
   .approval-root button:first-child {
     border-top-left-radius: var(--border-radius);
     border-bottom-left-radius: var(--border-radius);
