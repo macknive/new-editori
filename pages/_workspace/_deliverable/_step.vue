@@ -11,6 +11,7 @@
           :currentStepId="currentStep.id"
           :isViewerAssignee="isViewerAssignee"
           @autoSave="autoSave"
+          @save="save"
           class="view-component"
           :style="`
             grid-column-start: ${componentData.column_start};
