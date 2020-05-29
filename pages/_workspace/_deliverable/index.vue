@@ -37,7 +37,7 @@ export default {
         });
 
         const nextStepInstance = deliverable.workflow_data.find(instance => {
-           return !instance.completed;
+           return !instance.completed || instance.rejected;
         });
 
         const stepSlug = stepSlugsById[nextStepInstance.step.id];

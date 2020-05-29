@@ -11,6 +11,7 @@
           :currentStepId="currentStep.id"
           :isViewerAssignee="isViewerAssignee"
           @autoSave="autoSave"
+          class="view-component"
           :style="`
             grid-column-start: ${componentData.column_start};
             grid-column-end: span ${componentData.column_span};
@@ -258,7 +259,7 @@ body {
   grid-gap: var(--gap);
   padding: var(--gap);
 }
-.grid > *,
+.view-component:not(.prevent-default-component-style),
 .workflow {
   background: #fff;
   border-radius: calc(var(--gap) / 2);
