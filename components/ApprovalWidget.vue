@@ -1,5 +1,6 @@
 <template>
-  <aside class="approval-root prevent-default-component-style">
+  <aside class="approval-root prevent-default-component-style"
+      v-if="isViewerAssignee">
     <button class="reject-button" @click="reject">
       <span class="button-text">
         <font-awesome-icon icon="exclamation-triangle"></font-awesome-icon>
@@ -16,8 +17,10 @@
 <script>
 export default {
   props: [
-    'deliverable',
+    'assignee',
     'currentStepId',
+    'deliverable',
+    'viewer',
   ],
   methods: {
     approve() {
@@ -65,6 +68,13 @@ export default {
     }
   },
   computed: {
+    isViewerAssignee() {
+      if (!this.viewer) {
+        return false;
+      }
+
+      return this.viewer.id === this.assignee.id;
+    },
     previousStepIndex() {
       if (this.currentStepIndex < 0) {
         return -1;

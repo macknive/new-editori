@@ -17,7 +17,7 @@
     <span class="label">{{ step.label }}</span>
     <span class="assignee">
       {{ step.assignee.display_name }}
-      {{ step.assignee.id === viewer.id ? '(You)' : '' }}
+      {{ viewer && step.assignee.id === viewer.id ? '(You)' : '' }}
     </span>
   </nuxt-link>
 </template>

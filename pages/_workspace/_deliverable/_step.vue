@@ -1,7 +1,7 @@
 <template>
   <div class="root">
     <Workflow class="workflow" :steps="workflowSteps"
-        :viewer="me"
+        :viewer="viewer"
         :baseUrl="`/${workspaceSlug}/${deliverableSlug}`">
     </Workflow>
     <div class="grid" :style="gridStyle" v-if="layout && layout.components">
@@ -10,7 +10,7 @@
           :is="componentData.component.name"
           :deliverable="deliverable"
           :currentStepId="currentStep.id"
-          :viewer="me"
+          :viewer="viewer"
           :assignee="currentStep.assignee"
           @autoSave="autoSave"
           @save="save"
@@ -76,7 +76,7 @@ export default {
   },
   data() {
     return {
-      me: undefined,
+      viewer: undefined,
       deliverables: [],
       deliverableSlug: this.$route.params.deliverable,
       saveStatus: SaveStatus.SAVED,
@@ -211,7 +211,7 @@ export default {
     };
   },
   apollo: {
-    me: {
+    viewer: {
       prefetch: true,
       query: ViewerId,
     },

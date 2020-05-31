@@ -11,6 +11,7 @@ query DeliverablesByWorkspace($workspaceSlug: String!) {
       }
       deadline
       completed
+      rejected
       step {
         label
       }
