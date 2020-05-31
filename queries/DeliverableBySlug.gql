@@ -1,4 +1,4 @@
-
+# TODO: Add additional `where` clause for workspace slug.
 query DeliverableBySlug($deliverableSlug: String!) {
   deliverables(where: { slug: $deliverableSlug }) {
     id

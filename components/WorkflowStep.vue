@@ -17,7 +17,7 @@
     <span class="label">{{ step.label }}</span>
     <span class="assignee">
       {{ step.assignee.display_name }}
-      {{ viewer && step.assignee.id === viewer.id ? '(You)' : '' }}
+      {{ isViewerAssignee ? '(You)' : '' }}
     </span>
   </nuxt-link>
 </template>
@@ -35,11 +35,20 @@ export default {
     'viewer',
   ],
   computed: {
+    canMarkAsDone() {
+      return step.active && isViewerAssignee && requiresAction;
+    },
     isCompleted() {
       return this.status === StepStatus.COMPLETED;
     },
     isRejected() {
       return this.status === StepStatus.REJECTED;
+    },
+    isViewerAssignee() {
+      return this.viewer && this.step.assignee.id === this.viewer.id;
+    },
+    requiresAction() {
+      return !this.isCompleted || this.isRejected;
     },
     status() {
       const completionTime = Date.parse(this.step.completed) || -1;
@@ -106,6 +115,7 @@ export default {
   .assignee {
     opacity: 0.8;
     font-size: 80%;
+    text-align: center;
   }
   .icon {
     background: #fff;

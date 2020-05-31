@@ -10,7 +10,8 @@
         </tr>
         <DeliverableTableRow v-for="deliverable in deliverables"
             class="deliverable"
-            :key="deliverable.id" :deliverable="deliverable">
+            :key="deliverable.id" :deliverable="deliverable"
+            :baseUrl="`/${workspaceSlug}`">
         </DeliverableTableRow>
       </tbody>
     </table>

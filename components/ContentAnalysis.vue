@@ -1,16 +1,21 @@
 <template>
-  <div>
-    <ul>
-      <li>Readability: {{stats.readability.score}}% ({{stats.readability.grade}})</li>
-      <li>Words: {{stats.structure.wordCount}}</li>
-      <li>Sentences: {{stats.structure.sentenceCount}}</li>
-      <li>Syllables: {{stats.structure.syllableCount}}</li>
-      <li>Reading Time: {{stats.readability.readingTime}}</li>
-      <li>Headings: {{stats.structure.headings}}</li>
-      <li>Links: {{stats.structure.links}}</li>
-      <li>Images: {{stats.structure.images}} ({{stats.structure.imagesMissingAlt}} without alt text)</li>
-    </ul>
-  </div>
+  <dl>
+    <dt>Readability:</dt><dd>{{stats.readability.score}}%</dd>
+    <dt>Reading Level:</dt><dd>{{stats.readability.grade}}</dd>
+    <dt>Reading Time:</dt><dd>{{stats.readability.readingTime}}</dd>
+    <dt>Words:</dt><dd>{{stats.structure.wordCount}}</dd>
+    <dt>Sentences:</dt><dd>{{stats.structure.sentenceCount}}</dd>
+    <dt>Syllables:</dt><dd>{{stats.structure.syllableCount}}</dd>
+    <dt>Headings:</dt><dd>{{stats.structure.headings}}</dd>
+    <dt>Links:</dt><dd>{{stats.structure.links}}</dd>
+    <dt>Images:</dt>
+    <dd>
+      {{stats.structure.images}}
+      <span v-if="stats.structure.imagesMissingAlt">
+        ({{stats.structure.imagesMissingAlt}} without alt text)
+      </span>
+    </dd>
+  </dl>
 </template>
 
 <script>
@@ -45,14 +50,14 @@ export default {
     formatGradeLevel(rawGradeLevel) {
       const nearestGradeLevel = Math.round(rawGradeLevel);
       if (nearestGradeLevel > 12) {
-        return 'Readable by those with a college education';
+        return 'College';
       } else if (nearestGradeLevel < 1) {
-        return 'Readable by everyone';
+        return 'Everyone';
       }
 
       const ordinalSuffix = ORDINAL_SUFFIXES[nearestGradeLevel] || DEFAULT_ORDINAL_SUFFIX;
       const ordinalGrade = `${nearestGradeLevel}${ordinalSuffix}`;
-      return `Readable by those with a ${ordinalGrade} grade education`;
+      return `${ordinalGrade} grade`;
     },
     score(rawScore, wordCount) {
       if (wordCount < MIN_WORD_COUNT_THRESHOLD) {
@@ -93,5 +98,12 @@ export default {
 </script>
 
 <style scoped>
-
+dd {
+  display: inline-block;
+  margin: 0 0 0.5em;
+  padding: 0;
+}
+dt {
+  font-weight: bold;
+}
 </style>
