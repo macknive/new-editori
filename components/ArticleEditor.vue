@@ -33,51 +33,9 @@
 <script>
 export default {
   data() {
-    const isViewerAssignee = this.viewer.id === this.assignee.id;
-    const toolbarOptions = {
-      buttons: [
-        'bold',
-        'italic',
-        'underline',
-        'anchor',
-        'h2',
-        'h3',
-        'h4',
-        'orderedlist',
-        'unorderedlist',
-        'quote',
-        'removeFormat',
-      ],
-      updateOnEmptySelection: true,
-    };
-
     return {
       body: this.deliverable.data.html,
-      bodyOptions: {
-        anchor: {
-          linkValidation: true,
-        },
-        disableDoubleReturn: true,
-        disableEditing: !isViewerAssignee,
-        disableExtraSpaces: true,
-        paste: {
-          forcePlainText: false,
-          cleanPastedHTML: false,
-          cleanReplacements: [],
-          cleanAttrs: ['class', 'style', 'dir'],
-          cleanTags: ['meta'],
-          unwrapTags: []
-        },
-        toolbar: isViewerAssignee ? toolbarOptions : false,
-      },
-      isViewerAssignee: isViewerAssignee,
       title: this.deliverable.title,
-      titleOptions: {
-        disableReturn: true,
-        disableEditing: !isViewerAssignee,
-        disableExtraSpaces: true,
-        toolbar: false,
-      }
     };
   },
   props: [
@@ -103,6 +61,59 @@ export default {
     sanitizeTitle(title) {
       return title.trim().replace(/\s+/g,' ');
     }
+  },
+  computed: {
+    isViewerAssignee() {
+      if (!this.viewer) {
+        return false;
+      }
+
+      return this.viewer.id === this.assignee.id;
+    },
+    bodyOptions() {
+      const toolbarOptions = {
+        buttons: [
+          'bold',
+          'italic',
+          'underline',
+          'anchor',
+          'h2',
+          'h3',
+          'h4',
+          'orderedlist',
+          'unorderedlist',
+          'quote',
+          'removeFormat',
+        ],
+        updateOnEmptySelection: true,
+      };
+
+      return {
+        anchor: {
+          linkValidation: true,
+        },
+        disableDoubleReturn: true,
+        disableEditing: !this.isViewerAssignee,
+        disableExtraSpaces: true,
+        paste: {
+          forcePlainText: false,
+          cleanPastedHTML: false,
+          cleanReplacements: [],
+          cleanAttrs: ['class', 'style', 'dir'],
+          cleanTags: ['meta'],
+          unwrapTags: []
+        },
+        toolbar: this.isViewerAssignee ? toolbarOptions : false,
+      };
+    },
+    titleOptions() {
+      return {
+        disableReturn: true,
+        disableEditing: !this.isViewerAssignee,
+        disableExtraSpaces: true,
+        toolbar: false,
+      };
+    },
   }
 }
 </script>

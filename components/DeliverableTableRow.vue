@@ -26,8 +26,9 @@ export default {
   props: ['deliverable'],
   computed: {
     status() {
+      // TODO: Factor out and share with ~/pages/_workspace/_deliverable/index.vue
       return this.deliverable.workflow_data.find(step => {
-        return !step.completed;
+        return !step.completed || step.rejected;
       });
     }
   }
