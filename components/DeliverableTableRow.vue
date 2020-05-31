@@ -1,7 +1,7 @@
 <template>
   <tr>
     <td>
-      <nuxt-link :to="`./${deliverable.slug}`" class="title">
+      <nuxt-link :to="`${baseUrl}/${deliverable.slug}`" class="title">
         {{ deliverable.title }}
       </nuxt-link>
     </td>
@@ -23,7 +23,10 @@
 
 <script>
 export default {
-  props: ['deliverable'],
+  props: [
+    'baseUrl',
+    'deliverable',
+  ],
   computed: {
     status() {
       // TODO: Factor out and share with ~/pages/_workspace/_deliverable/index.vue

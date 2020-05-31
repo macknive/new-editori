@@ -28,7 +28,7 @@
     display: flex;
     background: #fff;
     font-family: 'Open Sans', sans-serif;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-evenly;
   }
   .step {

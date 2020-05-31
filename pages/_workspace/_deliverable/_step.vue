@@ -267,7 +267,6 @@ body {
 .workflow {
   background: #fff;
   border-radius: calc(var(--gap) / 2);
-  overflow: hidden;
   padding: var(--gap);
 }
 .save-icon {
