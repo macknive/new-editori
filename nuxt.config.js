@@ -26,6 +26,7 @@ export default {
    * Environment variables
    */
   env: {
+    clientBaseUrl: process.env.CLIENT_BASE_URL || 'http://localhost:3000',
     strapiBaseUri: process.env.API_URL || 'http://localhost:1337'
   },
   /*

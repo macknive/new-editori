@@ -23,10 +23,12 @@
 </template>
 
 <script>
-const StepStatus = {
-  COMPLETED: 'completed',
-  REJECTED: 'rejected',
-};
+
+import {
+  StepStatus,
+  getStepStatus,
+  isActionRequired,
+} from '~/utils/steps';
 
 export default {
   props: [
@@ -36,7 +38,7 @@ export default {
   ],
   computed: {
     canMarkAsDone() {
-      return step.active && isViewerAssignee && requiresAction;
+      return this.step.active && this.isViewerAssignee && this.requiresAction;
     },
     isCompleted() {
       return this.status === StepStatus.COMPLETED;
@@ -48,21 +50,10 @@ export default {
       return this.viewer && this.step.assignee.id === this.viewer.id;
     },
     requiresAction() {
-      return !this.isCompleted || this.isRejected;
+      return isActionRequired(this.step);
     },
     status() {
-      const completionTime = Date.parse(this.step.completed) || -1;
-      const rejectionTime = Date.parse(this.step.rejected) || -1;
-
-      if (completionTime > rejectionTime) {
-        return StepStatus.COMPLETED;
-      }
-
-      if (rejectionTime !== undefined && rejectionTime >= 0) {
-        return StepStatus.REJECTED;
-      }
-
-      return undefined;
+      return getStepStatus(this.step);
     }
   }
 }

@@ -27,13 +27,13 @@ export default {
       this.changeStatus(this.previousStepIndex, 'completed', true)
       this.changeStatus(this.currentStepIndex, 'completed', true)
       this.$emit('save');
-      this.goToStep(this.nextStepIndex);
+      this.$emit('advance');
     },
     reject() {
       this.changeStatus(this.previousStepIndex, 'rejected', true)
       this.changeStatus(this.currentStepIndex, 'completed', false)
       this.$emit('save');
-      this.goToStep(this.previousStepIndex);
+      this.$emit('advance');
     },
     goToStep(stepIndex) {
       const stepData = this.workflowData[stepIndex];
