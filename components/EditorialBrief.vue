@@ -1,5 +1,10 @@
 <template>
-  <div v-html="deliverable.data.brief"></div>
+  <div>
+    <p v-if="deliverable.data.keyword">
+      <b>Primary keyword:</b> {{deliverable.data.keyword}}
+    </p>
+    <div v-html="deliverable.data.brief"></div>
+  </div>
 </template>
 
 <script>
