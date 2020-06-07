@@ -37,7 +37,7 @@ import ArticleEditor from '~/components/ArticleEditor';
 import BriefEditor from '~/components/BriefEditor';
 import ContentAnalysis from '~/components/ContentAnalysis';
 import EditorialBrief from '~/components/EditorialBrief';
-import PaymentWidget from '~/components/PaymentWidget';
+import PaymentTable from '~/components/PaymentTable';
 import SaveIcon from '~/components/SaveIcon';
 import Workflow from '~/components/Workflow';
 import ViewerId from '~/queries/ViewerId';
@@ -75,7 +75,7 @@ export default {
     BriefEditor,
     ContentAnalysis,
     EditorialBrief,
-    PaymentWidget,
+    PaymentTable,
     SaveIcon,
     Workflow,
   },
