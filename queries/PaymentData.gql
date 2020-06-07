@@ -1,0 +1,19 @@
+query PaymentData($stepIds: [ID]!, $userIds: [ID]!) {
+  paymentData(where: {
+    step: { id: $stepIds },
+    user: { id: $userIds }
+  }) {
+    paypalEmail
+    rate
+    currency
+    type
+    user {
+      id
+      display_name
+    }
+    step {
+      id
+      label
+    }
+  }
+}

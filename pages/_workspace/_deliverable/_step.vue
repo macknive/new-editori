@@ -12,8 +12,10 @@
           :currentStepId="currentStep.id"
           :viewer="viewer"
           :assignee="currentStep.assignee"
+          :workspace="workspace"
           @autoSave="autoSave"
           @save="save"
+          @advance="advanceToNextStepRequiringAction"
           class="view-component"
           :style="`
             grid-column-start: ${componentData.column_start};
@@ -35,6 +37,7 @@ import ArticleEditor from '~/components/ArticleEditor';
 import BriefEditor from '~/components/BriefEditor';
 import ContentAnalysis from '~/components/ContentAnalysis';
 import EditorialBrief from '~/components/EditorialBrief';
+import PaymentTable from '~/components/PaymentTable';
 import SaveIcon from '~/components/SaveIcon';
 import Workflow from '~/components/Workflow';
 import ViewerId from '~/queries/ViewerId';
@@ -42,6 +45,7 @@ import DeliverableBySlug from '~/queries/DeliverableBySlug';
 import UpdateDeliverable from '~/queries/UpdateDeliverable';
 import WorkspaceBySlug from '~/queries/WorkspaceBySlug';
 import {debounce} from 'vue-debounce';
+import {nextStepRequiringAction} from '~/utils/steps';
 
 /**
  * How long to wait (in milliseconds) after the most recent changes to the
@@ -71,12 +75,15 @@ export default {
     BriefEditor,
     ContentAnalysis,
     EditorialBrief,
+    PaymentTable,
     SaveIcon,
     Workflow,
   },
   data() {
     return {
       viewer: undefined,
+      shouldMarkCurrentStepComplete: this.$route.query['complete'] ?
+        this.$route.query['complete'].toLowerCase() : undefined,
       deliverables: [],
       deliverableSlug: this.$route.params.deliverable,
       saveStatus: SaveStatus.SAVED,
@@ -124,15 +131,30 @@ export default {
       }
     },
     view() {
+      if (!this.currentStep) {
+        return undefined;
+      }
       return this.currentStep.view;
     },
     workflowSteps() {
-      const data = {};
-      let currentStepId = null;
+      if (!this.deliverable || !this.deliverable.workflow) {
+        return {};
+      }
 
-      this.deliverable.workflow.steps.forEach(template => {
+      const data = {};
+      let previousStepId = null;
+
+      this.deliverable.workflow.steps.forEach((template, index) => {
         data[template.id] = template;
         data[template.id].active = template.slug === this.stepSlug;
+        data[template.id].index = index;
+
+        if (previousStepId) {
+          data[template.id].previous = data[previousStepId];
+          data[previousStepId].next = data[template.id];
+        }
+
+        previousStepId = template.id;
       });
       this.deliverable.workflow_data.forEach(instance => {
         const stepId = instance.step.id;
@@ -201,6 +223,37 @@ export default {
     },
     onSaveError(err) {
       this.saveStatus = SaveStatus.ERROR;
+    },
+    onDeliverableLoaded() {
+      if (!this.stepSlug) {
+        this.advanceToNextStepRequiringAction();
+        return;
+      }
+
+      if (!this.shouldMarkCurrentStepComplete || !this.deliverable ||
+          !this.deliverable.workflow_data) {
+        return;
+      }
+
+      this.markCurrentStepComplete();
+      this.advanceToNextStepRequiringAction();
+    },
+    markCurrentStepComplete() {
+      this.deliverable.workflow_data
+          .find(instance => instance.step.id === this.currentStep.id)
+          .completed = new Date().toISOString();
+      this.save();
+    },
+    advanceToNextStepRequiringAction() {
+      const nextStep = nextStepRequiringAction(this.deliverable);
+
+      if (!nextStep) {
+        return;
+      }
+
+      const newPath =
+          `/${this.workspaceSlug}/${this.deliverableSlug}/${nextStep.slug}`;
+      this.$router.replace(newPath);
     }
   },
   created() {
@@ -222,6 +275,13 @@ export default {
         return {
           deliverableSlug: this.deliverableSlug,
         }
+      },
+      result ({ data, loading, networkStatus }, key) {
+        if (!data.deliverables) {
+          return;
+        }
+
+        this.onDeliverableLoaded();
       }
     },
     workspaces: {

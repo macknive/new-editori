@@ -5,15 +5,24 @@ query DeliverablesByWorkspace($workspaceSlug: String!) {
     slug
     data
     updated_at
+    workflow {
+      name
+      steps {
+        id
+        label
+        slug
+      }
+    }
     workflow_data {
+      deadline
       assignee {
+        id
         display_name
       }
-      deadline
       completed
       rejected
       step {
-        label
+        id
       }
     }
   }

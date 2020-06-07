@@ -9,30 +9,35 @@
       <timeago :auto-update="60" :datetime="deliverable.updated_at">
       </timeago>
     </td>
-    <td v-if="status.complete" class="status">
-      All done!
+    <td v-if="nextStep" class="status">
+      <span v-if="nextStep.assignee">
+        {{ nextStep.assignee.display_name }}
+      </span>
+      needs to
+      <span v-if="nextStep.label">
+        {{ nextStep.label }}
+      </span>
+      <span v-if="nextStep.deadline" class="deadline">
+        (due <timeago :auto-update="60" :datetime="nextStep.deadline"></timeago>)
+      </span>
     </td>
     <td v-else class="status">
-      {{ status.assignee.display_name }} needs to {{ status.step.label }}
-      <span v-if="status.deadline" class="deadline">
-        (due <timeago :auto-update="60" :datetime="status.deadline"></timeago>)
-      </span>
+      All done!
     </td>
   </tr>
 </template>
 
 <script>
+import {nextStepRequiringAction} from '~/utils/steps';
+
 export default {
   props: [
     'baseUrl',
     'deliverable',
   ],
   computed: {
-    status() {
-      // TODO: Factor out and share with ~/pages/_workspace/_deliverable/index.vue
-      return this.deliverable.workflow_data.find(step => {
-        return !step.completed || step.rejected;
-      });
+    nextStep() {
+      return nextStepRequiringAction(this.deliverable);
     }
   }
 }
