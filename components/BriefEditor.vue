@@ -2,6 +2,9 @@
   <main class="brief-root" :class="{ locked: !isViewerAssignee }">
     <client-only>
       <div class="content">
+        <input type="text" placeholder="Primary keyword" v-model="keyword"
+            :disabled="!isViewerAssignee"
+            @input="onKeywordUpdate" @blur="onKeywordUpdate">
         <medium-editor
           :text="brief"
           :options="options"
@@ -15,6 +18,8 @@
         </div>
       </div>
       <div class="placeholder content" disabled slot="placeholder">
+        <input type="text" placeholder="Primary keyword" v-model="keyword"
+            disabled="disabled">
         <article v-html="brief"></article>
       </div>
     </client-only>
@@ -44,6 +49,7 @@ export default {
 
     return {
       brief: this.deliverable.data.brief,
+      keyword: this.deliverable.data.keyword,
       isViewerAssignee: isViewerAssignee,
       options: {
         anchor: {
@@ -76,6 +82,10 @@ export default {
       this.deliverable.data.brief = newBrief;
       this.$emit('autoSave');
     },
+    onKeywordUpdate(e) {
+      this.deliverable.data.keyword = this.keyword;
+      this.$emit('autoSave');
+    }
   }
 }
 </script>
