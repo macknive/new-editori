@@ -20,6 +20,7 @@
     "@nuxtjs/axios": "^5.10.3",
     "apollo-cache-inmemory": "^1.6.5",
     "axios": "^0.19.2",
+    "base-64": "^0.1.0",
     "core-js": "@2.6.10",
     "graphql": "^15.0.0",
     "graphql-tag": "^2.10.3",
