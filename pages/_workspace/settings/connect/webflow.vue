@@ -7,7 +7,7 @@
       </li>
     </ul>
     <div v-if="sites">
-    Choose a site: <select>
+      Choose a site: <select>
       <option v-for="site in sites" :key="site['_id']">{{site.name}}</option>
     </select>
     </div>
