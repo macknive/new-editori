@@ -7,9 +7,10 @@
       </li>
     </ul>
     <div v-if="sites">
-      Choose a site: <select>
-      <option v-for="site in sites" :key="site['_id']">{{site.name}}</option>
-    </select>
+      Choose a site:
+      <select>
+        <option v-for="site in sites" :key="site['_id']">{{site.name}}</option>
+      </select>
     </div>
     <button @click="authorizeWebflow">Connect Webflow</button>
   </div>
