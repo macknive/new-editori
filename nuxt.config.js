@@ -64,6 +64,7 @@ export default {
  modules: [
     '@nuxtjs/apollo',
     '@nuxtjs/axios',
+    '@nuxtjs/proxy',
   ],
   apollo: {
     clientConfigs: {
@@ -82,6 +83,14 @@ export default {
     }),
     { path: '/settings/connect/webflow', handler: '~/api/webflow-auth-redirect.js' },
   ],
+  proxy: {
+    '/api/webflow': {
+      target: 'https://api.webflow.com',
+      pathRewrite: {
+        '^/api/webflow' : '/'
+      }
+    }
+  },
   /*
   ** vuetify module configuration
   ** https://github.com/nuxt-community/vuetify-module

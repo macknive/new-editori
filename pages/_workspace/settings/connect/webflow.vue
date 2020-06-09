@@ -1,11 +1,17 @@
 <template>
-  <div>
+  <div class="webflow-settings-root">
     <ul v-if="connections && connections.length > 0">
       <li v-for="connection in connections" :key="connection.id">
         <p>Connected to {{connection.service}} at {{connection.created_at}}</p>
         <p><b>Token:</b> <code>{{connection.data.access_token}}</code></p>
       </li>
     </ul>
+    <div v-if="sites">
+      Choose a site:
+      <select>
+        <option v-for="site in sites" :key="site['_id']">{{site.name}}</option>
+      </select>
+    </div>
     <button @click="authorizeWebflow">Connect Webflow</button>
   </div>
 </template>
@@ -14,6 +20,7 @@
 import CreateConnection from '~/queries/CreateConnection';
 import ConnectionsByWorkspace from '~/queries/ConnectionsByWorkspace';
 import WorkspaceBySlug from '~/queries/WorkspaceBySlug';
+import {axiosForService} from '~/utils/request-utils';
 import base64 from 'base-64';
 
 const RESPONSE_TYPE = 'code';
@@ -28,9 +35,17 @@ const deserialize = function(s) {
 };
 
 export default {
+  async asyncData(ctx) {
+    const webflowAxios = await axiosForService(ctx, 'webflow');
+    const sitesResponse = await webflowAxios.get('/sites');
+    return {
+      sites: sitesResponse.data,
+    }
+  },
   data() {
     return {
       connections: [],
+      sites: [],
       workspaceSlug: this.$route.params.workspace,
       workspaces: [],
     }
@@ -134,6 +149,11 @@ export default {
 </script>
 
 <style scoped>
+  .webflow-settings-root {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
   code {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
@@ -147,7 +167,7 @@ export default {
     padding: 0;
     line-height: 1.5;
   }
-  li {
+  li, select {
     margin-bottom: 20px;
   }
 </style>
