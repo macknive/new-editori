@@ -26,6 +26,12 @@ export default {
    * Environment variables
    */
   env: {
+    apiKeys: {
+      webflow: {
+        clientId: process.env.API_KEY_WEBFLOW_CLIENT_ID,
+        clientSecret: process.env.API_KEY_WEBFLOW_CLIENT_SECRET,
+      },
+    },
     clientBaseUrl: process.env.CLIENT_BASE_URL || 'http://localhost:3000',
     strapiBaseUri: process.env.API_URL || 'http://localhost:1337'
   },
@@ -74,6 +80,7 @@ export default {
     redirectSSL.create({
       redirect: (process.env.HTTPS_REDIRECT || '').toLowerCase() === 'true',
     }),
+    { path: '/settings/connect/webflow', handler: '~/api/webflow-auth-redirect.js' },
   ],
   /*
   ** vuetify module configuration

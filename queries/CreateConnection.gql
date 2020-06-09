@@ -1,0 +1,25 @@
+mutation CreateConnection(
+    $service: ENUM_CONNECTIONS_SERVICE!,
+    $workspaceId: ID!,
+    $data: JSON!) {
+  createConnection(
+    input: {
+      data: {
+        service: $service,
+        workspace: $workspaceId,
+        data: $data
+      }
+    }
+  ) {
+    # TODO: Factor out DeliverableBySlug into a fragment and make it cacheable.
+    connection {
+      id
+      service
+      created_at
+      workspace {
+        id
+      }
+      data
+    }
+  }
+}
