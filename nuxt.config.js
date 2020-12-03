@@ -1,5 +1,6 @@
 // import colors from 'vuetify/es5/util/colors'
 import redirectSSL from 'redirect-ssl';
+require('dotenv').config()
 
 export default {
   mode: 'universal',
