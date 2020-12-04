@@ -1,6 +1,5 @@
 // import colors from 'vuetify/es5/util/colors'
 import redirectSSL from 'redirect-ssl';
-require('dotenv').config()
 
 export default {
   mode: 'universal',
@@ -35,6 +34,15 @@ export default {
     },
     clientBaseUrl: process.env.CLIENT_BASE_URL || 'http://localhost:3000',
     strapiBaseUri: process.env.API_URL || 'http://localhost:1337'
+  },
+  /**
+   * Dotenv
+   */
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_URL || 'https://api.editori.io',
+  },
+  privateRuntimeConfig: {
+    backendURL: process.env.BACKEND_URL || 'https://api.editori.io/graphql'
   },
   /*
   ** Customize the progress-bar color

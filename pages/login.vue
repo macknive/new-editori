@@ -29,10 +29,7 @@ export default {
         console.log('Well done!');
         console.log('User profile', response.data.user);
         console.log('User token', response.data.jwt);
-        //redirect to home
-        window.location.href = "/";
-        //redirect to a specific link
-        //window.location.href = 'http://localhost:3000/acme';
+        this.$router.push('/')
       })
       .catch(error => {
         // Handle error.
