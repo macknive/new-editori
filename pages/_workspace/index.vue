@@ -23,8 +23,8 @@
 
 <script>
 import DeliverableTableRow from '~/components/DeliverableTableRow';
-import WorkspaceBySlug from '~/queries/WorkspaceBySlug';
-import DeliverablesByWorkspace from '~/queries/DeliverablesByWorkspace';
+import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug';
+import ListDeliverablesByWorkspace from '~/queries/ListDeliverablesByWorkspace';
 
 export default {
   components: {
@@ -45,7 +45,7 @@ export default {
   apollo: {
     deliverables: {
       prefetch: true,
-      query: DeliverablesByWorkspace,
+      query: ListDeliverablesByWorkspace,
       variables() {
         return {
           workspaceSlug: this.workspaceSlug,
@@ -54,7 +54,7 @@ export default {
     },
     workspaces: {
       prefetch: true,
-      query: WorkspaceBySlug,
+      query: GetWorkspaceBySlug,
       variables() {
         return {
           workspaceSlug: this.workspaceSlug,

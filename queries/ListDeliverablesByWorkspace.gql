@@ -1,4 +1,4 @@
-query DeliverablesByWorkspace($workspaceSlug: String!) {
+query ListDeliverablesByWorkspace($workspaceSlug: String!) {
   deliverables(where: { workspace: { slug: $workspaceSlug } }) {
     id
     title

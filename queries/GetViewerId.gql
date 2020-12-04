@@ -1,4 +1,4 @@
-query CurrentUserId {
+query GetViewerId {
   viewer: me {
     id
   }

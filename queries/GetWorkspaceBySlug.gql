@@ -1,4 +1,4 @@
-query WorkspaceBySlug($workspaceSlug: String!) {
+query GetWorkspaceBySlug($workspaceSlug: String!) {
   workspaces(where: { slug: $workspaceSlug }) {
     id
     name

@@ -11,7 +11,7 @@ mutation CreateConnection(
       }
     }
   ) {
-    # TODO: Factor out DeliverableBySlug into a fragment and make it cacheable.
+    # TODO: Factor out GetDeliverableBySlug into a fragment and make it cacheable.
     connection {
       id
       service

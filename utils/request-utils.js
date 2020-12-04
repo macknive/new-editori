@@ -1,5 +1,5 @@
 import axios from 'axios';
-import ConnectionsByWorkspace from '~/queries/ConnectionsByWorkspace';
+import ListConnectionsByWorkspace from '~/queries/ListConnectionsByWorkspace';
 
 const AXIOS_INSTANCES_BY_CONNECTION = {};
 const DEFAULT_RESPONSE = {
@@ -47,7 +47,7 @@ export const axiosForService = async function(ctx, service) {
   try {
     const apollo = ctx.app.apolloProvider.defaultClient;
     const apolloResult = await apollo.query({
-      query: ConnectionsByWorkspace,
+      query: ListConnectionsByWorkspace,
       variables: {
         workspaceSlug: ctx.route.params.workspace,
         service: service,

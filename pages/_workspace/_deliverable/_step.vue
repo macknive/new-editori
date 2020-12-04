@@ -40,10 +40,10 @@ import EditorialBrief from '~/components/EditorialBrief';
 import PaymentTable from '~/components/PaymentTable';
 import SaveIcon from '~/components/SaveIcon';
 import Workflow from '~/components/Workflow';
-import ViewerId from '~/queries/ViewerId';
-import DeliverableBySlug from '~/queries/DeliverableBySlug';
+import GetViewerId from '~/queries/GetViewerId';
+import GetDeliverableBySlug from '~/queries/GetDeliverableBySlug';
 import UpdateDeliverable from '~/queries/UpdateDeliverable';
-import WorkspaceBySlug from '~/queries/WorkspaceBySlug';
+import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug';
 import {debounce} from 'vue-debounce';
 import {nextStepRequiringAction} from '~/utils/steps';
 
@@ -266,11 +266,11 @@ export default {
   apollo: {
     viewer: {
       prefetch: true,
-      query: ViewerId,
+      query: GetViewerId,
     },
     deliverables: {
       prefetch: true,
-      query: DeliverableBySlug,
+      query: GetDeliverableBySlug,
       variables() {
         return {
           deliverableSlug: this.deliverableSlug,
@@ -286,7 +286,7 @@ export default {
     },
     workspaces: {
       prefetch: true,
-      query: WorkspaceBySlug,
+      query: GetWorkspaceBySlug,
       variables() {
         return {
           workspaceSlug: this.workspaceSlug,
