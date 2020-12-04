@@ -15,7 +15,7 @@
         </DeliverableTableRow>
       </tbody>
     </table>
-    <nuxt-link to="./new" >
+    <nuxt-link :to="`${workspace.slug}/new`" >
       <button class="fab">+</button>
     </nuxt-link>
   </div>

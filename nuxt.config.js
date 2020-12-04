@@ -1,5 +1,6 @@
 // import colors from 'vuetify/es5/util/colors'
 import redirectSSL from 'redirect-ssl';
+require('dotenv').config()
 
 export default {
   mode: 'universal',
@@ -65,6 +66,7 @@ export default {
     '@nuxtjs/apollo',
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
+    '@nuxtjs/dotenv',
   ],
   apollo: {
     clientConfigs: {
