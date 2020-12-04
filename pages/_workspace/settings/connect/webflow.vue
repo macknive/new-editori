@@ -18,8 +18,8 @@
 
 <script>
 import CreateConnection from '~/queries/CreateConnection';
-import ConnectionsByWorkspace from '~/queries/ConnectionsByWorkspace';
-import WorkspaceBySlug from '~/queries/WorkspaceBySlug';
+import ListConnectionsByWorkspace from '~/queries/ListConnectionsByWorkspace';
+import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug';
 import {axiosForService} from '~/utils/request-utils';
 import base64 from 'base-64';
 
@@ -127,7 +127,7 @@ export default {
   apollo: {
     connections: {
       prefetch: true,
-      query: ConnectionsByWorkspace,
+      query: ListConnectionsByWorkspace,
       variables() {
         return {
           workspaceSlug: this.workspaceSlug,
@@ -137,7 +137,7 @@ export default {
     },
     workspaces: {
       prefetch: true,
-      query: WorkspaceBySlug,
+      query: GetWorkspaceBySlug,
       variables() {
         return {
           workspaceSlug: this.workspaceSlug,

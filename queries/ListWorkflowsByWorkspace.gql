@@ -1,4 +1,4 @@
-query WorkflowsByWorkspace($workspaceSlug: String!) {
+query ListWorkflowsByWorkspace($workspaceSlug: String!) {
   workflows(where: { workspace: { slug: $workspaceSlug } }) {
     id
     name

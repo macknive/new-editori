@@ -1,5 +1,5 @@
 # TODO: Add additional `where` clause for workspace slug.
-query DeliverableBySlug($deliverableSlug: String!) {
+query GetDeliverableBySlug($deliverableSlug: String!) {
   deliverables(where: { slug: $deliverableSlug }) {
     id
     updated_at

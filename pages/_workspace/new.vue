@@ -49,8 +49,8 @@
 
 <script>
 import CreateDeliverable from '~/queries/CreateDeliverable';
-import WorkflowsByWorkspace from '~/queries/WorkflowsByWorkspace';
-import WorkspaceBySlug from '~/queries/WorkspaceBySlug';
+import ListWorkflowsByWorkspace from '~/queries/ListWorkflowsByWorkspace';
+import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug';
 import slugify from 'slugify';
 import {getRandomAnimal} from '~/assets/animals';
 
@@ -172,7 +172,7 @@ export default {
   apollo: {
     workflows: {
       prefetch: true,
-      query: WorkflowsByWorkspace,
+      query: ListWorkflowsByWorkspace,
       variables() {
         return {
           workspaceSlug: this.workspaceSlug,
@@ -181,7 +181,7 @@ export default {
     },
     workspaces: {
       prefetch: true,
-      query: WorkspaceBySlug,
+      query: GetWorkspaceBySlug,
       variables() {
         return {
           workspaceSlug: this.workspaceSlug,

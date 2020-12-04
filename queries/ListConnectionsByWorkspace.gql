@@ -1,4 +1,4 @@
-query ConnectionsByWorkspace(
+query ListConnectionsByWorkspace(
     $workspaceSlug: String!,
     $service: ENUM_CONNECTIONS_SERVICE!) {
   connections(where: { workspace: { slug: $workspaceSlug }, service: $service }) {

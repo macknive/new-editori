@@ -19,7 +19,7 @@ mutation CreateDeliverable(
       }
     }
   ) {
-    # TODO: Factor out DeliverableBySlug into a fragment and make it cacheable.
+    # TODO: Factor out GetDeliverableBySlug into a fragment and make it cacheable.
     deliverable {
       id
       created_at

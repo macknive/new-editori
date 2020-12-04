@@ -19,7 +19,7 @@
 
 <script>
 import PaymentTableRow from '~/components/PaymentTableRow';
-import PaymentData from '~/queries/PaymentData';
+import GetPaymentData from '~/queries/GetPaymentData';
 import readingTime from 'reading-time';
 
 export default {
@@ -45,7 +45,7 @@ export default {
   apollo: {
     paymentData: {
       prefetch: true,
-      query: PaymentData,
+      query: GetPaymentData,
       variables() {
         const stepIds = [];
         const userIds = [];
