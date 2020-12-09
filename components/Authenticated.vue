@@ -5,7 +5,7 @@
   <p>List of workspace</p>
   <ul v-for="workspace in workspaces" :key="workspace.id">
     <li>
-      <nuxt-link :to="`${workspace.slug}`" @click="window.location.reload(true)">{{workspace.name}}</nuxt-link>
+      <nuxt-link :to="`${workspace.slug}`" target="_blank">{{workspace.name}}</nuxt-link>
     </li>
   </ul>
 
