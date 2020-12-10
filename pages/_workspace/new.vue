@@ -157,7 +157,6 @@ export default {
       this.$router.push(`/${this.workspaceSlug}/${newDeliverable.slug}`);
     },
     onCreateError(err) {
-      // TODO: Build error UI.
       alert(err);
     }
   },

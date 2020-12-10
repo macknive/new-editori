@@ -59,7 +59,6 @@ export default {
     },
     changeStatus(index, field, setValue) {
       if (index < 0) {
-        // TODO: Error handling
         return;
       }
 
