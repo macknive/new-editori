@@ -7,9 +7,8 @@
       <nuxt-link :to="`${workspace.slug}`" target="_blank">{{workspace.name}}</nuxt-link>
     </li>
   </ul>
-  
-</div>
 
+</div>
 </template>
 
 <script>
