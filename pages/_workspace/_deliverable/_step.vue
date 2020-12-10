@@ -31,7 +31,6 @@
 </template>
 
 <script>
-// TODO: Import view components dynamically based on what is actually used.
 import ApprovalWidget from '~/components/ApprovalWidget';
 import ArticleEditor from '~/components/ArticleEditor';
 import BriefEditor from '~/components/BriefEditor';
