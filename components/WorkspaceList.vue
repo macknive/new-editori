@@ -1,7 +1,6 @@
 <template>
 <div>
 
-  <button @click="onLogout" class="logout">Logout</button>
   <p>List of workspace</p>
   <ul v-for="workspace in workspaces" :key="workspace.id">
     <li>
@@ -26,12 +25,6 @@ export default {
       }
     }`
   },
-  methods: {
-    async onLogout() {
-      await this.$apolloHelpers.onLogout()
-      await this.$auth.logout()
-    }
-  }
 }
 </script>
 

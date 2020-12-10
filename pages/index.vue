@@ -5,14 +5,15 @@
     Not Authenticated. Please <nuxt-link to="/login">login</nuxt-link> to continue.
   </div>
   <div v-if="isAuthenticated">
-    <Authenticated/>
+    <button @click="onLogout" class="logout">Logout</button>
+    <WorkspaceList/>
   </div>
 </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import Authenticated from '@/components/Authenticated'
+import WorkspaceList from '@/components/WorkspaceList'
 
 export default {
   middleware: "auth",
@@ -20,7 +21,13 @@ export default {
   ...mapGetters(["isAuthenticated", "loggedInUser"]),
   },
   components: {
-    Authenticated
+    WorkspaceList
+  },
+  methods: {
+    async onLogout() {
+      await this.$apolloHelpers.onLogout()
+      await this.$auth.logout()
+    }
   }
 }
 </script>
