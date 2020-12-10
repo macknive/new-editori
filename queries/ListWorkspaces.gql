@@ -1,0 +1,7 @@
+query ListWorkspaces {
+  workspaces {
+    id
+    name
+    slug
+  }
+}

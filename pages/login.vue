@@ -1,45 +1,41 @@
 <template>
-  <div>
-    <input type="text" placeholder="Username" v-model="username">
-    <input type="password" placeholder="Password" v-model="password">
-    <button @click="onLogin">Login</button>
-  </div>
+<div>
+  <input type="text" placeholder="Username" v-model="username">
+  <input type="password" placeholder="Password" v-model="password">
+  <button @click="login">Login</button>
+</div>
 </template>
 
 <script>
 export default {
+  middleware: "guest",
   data() {
     return {
-      username: '',
-      password: '',
+    username: "",
+    password: "",
+    error: null,
     };
   },
   methods: {
-    onLogin(e) {
-      console.log('Logging in...');
-
-      // TODO: Get base URL from nuxt.config.js
-      this.$axios.post('/auth/local', {
-        identifier: this.username,
-        password: this.password,
-      })
-      .then(response => {
-        // Handle success.
-        this.$apolloHelpers.onLogin(response.data.jwt);
-        console.log('Well done!');
-        console.log('User profile', response.data.user);
-        console.log('User token', response.data.jwt);
-        this.$router.push('/')
-      })
-      .catch(error => {
-        // Handle error.
-        console.log('An error occurred:', error);
-      });
-    }
-  }
-}
+    async login() {
+      this.error = null;
+      try {
+        await this.$auth.loginWith("local", {
+        data: {
+          identifier: this.username,
+          password: this.password,
+        },
+        })
+        .then(response => { 
+          this.$apolloHelpers.onLogin(response.data.jwt);
+          console.log('Well done!');
+          console.log('User profile', response.data.user);
+          console.log('User token', response.data.jwt);
+        })
+      } catch (e) {
+      this.error = e.response.data.message[0].messages[0].message;
+      }
+    },
+  },
+};
 </script>
-
-<style>
-
-</style>

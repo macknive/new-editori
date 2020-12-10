@@ -67,6 +67,7 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/proxy',
     '@nuxtjs/dotenv',
+    '@nuxtjs/auth',
   ],
   apollo: {
     clientConfigs: {
@@ -77,6 +78,30 @@ export default {
   },
   axios: {
     baseURL: process.env.API_URL || 'http://localhost:1337',
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            url: 'auth/local',
+            method: 'post',
+            propertyName: 'jwt'
+          },
+          user: {
+            url: 'users/me',
+            method: 'get',
+            propertyName: false
+          },
+        }
+      }
+    },
+    redirect: {
+      login: '/login',
+      logout: '/',
+      callback: '/',
+      home: '/'
+    }
   },
   serverMiddleware: [
     // Will register redirect-ssl npm package
