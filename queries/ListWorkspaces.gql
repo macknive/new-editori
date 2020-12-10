@@ -1,4 +1,4 @@
-query GetWorkspaceBySlug {
+query ListWorkspaces {
   workspaces {
     id
     name
