@@ -175,7 +175,7 @@ export default {
       if (!this.value) {
         return ''
       }
-      const value = length.value || '';
+      const value = length.value;
       const unit = length.unit === 'percent' ? '%' : length.unit;
       return `${value}${unit}`;
     },
