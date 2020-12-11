@@ -173,7 +173,7 @@ export default {
     },
     stringifyLength(length) {
       if (!this.value) {
-        return ''
+        return '0'
       }
       const value = length.value;
       const unit = length.unit === 'percent' ? '%' : length.unit;
