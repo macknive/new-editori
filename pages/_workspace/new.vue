@@ -106,10 +106,6 @@ export default {
         }
 
         return {
-          // TODO: Don't assign workflow steps to users on the client; store the
-          // role/user mappings in the deliverable and pull dynamically from
-          // that where assignees are needed, so that future edits to the
-          // workflow can have correct assignees.
           assignee: this.usersForRole[step.custom_role.name],
           deadline: deadline,
           step: step.id,
@@ -135,8 +131,6 @@ export default {
       this.lastUpdatedSlug = newSlugValue;
     },
     createDeliverable() {
-      // TODO: Can this be a constant object with functions for the variables to
-      // prevent frequent object allocation?
       const mutationConfig = {
         mutation: CreateDeliverable,
         variables: {

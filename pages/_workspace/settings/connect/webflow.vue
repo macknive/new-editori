@@ -79,8 +79,6 @@ export default {
       'grant_type': GRANT_TYPE,
     })
     .then(response => {
-      // TODO: Can this be a constant object with functions for the variables to
-      // prevent frequent object allocation?
       const stateStr = ctx.route.query['state'];
       const state = stateStr ? deserialize(stateStr) : {};
 
@@ -96,7 +94,6 @@ export default {
         }
       };
 
-      // TODO: Get a handle to the apollo client.
       return apollo.mutate(mutationConfig)
           .then(connectionResponse => {
             // Strip query params
