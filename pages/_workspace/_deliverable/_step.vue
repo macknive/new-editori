@@ -172,8 +172,8 @@ export default {
       return lengths.map(length => this.stringifyLength(length)).join(' ');
     },
     stringifyLength(length) {
-      if (!this.value) {
-        return '0'
+      if (!length || !length.value) {
+        return ''
       }
       const value = length.value;
       const unit = length.unit === 'percent' ? '%' : length.unit;
