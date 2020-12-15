@@ -196,7 +196,11 @@ export default {
     },
     save() {
       this.saveStatus = SaveStatus.SAVING;
-      
+
+      // TODO: Can this be a constant object with functions for the variables to
+      // prevent frequent object allocation?
+      // TODO: Log changes and send only the changed fields OR have semantic
+      // update functions to update specific fields.
       const mutationConfig = {
         mutation: UpdateDeliverable,
         variables: {
