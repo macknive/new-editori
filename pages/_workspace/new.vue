@@ -145,20 +145,6 @@ export default {
     }
   },
   methods: {
-    submit() {
-      console.log('submit!')
-      this.$v.$touch()
-      if (this.$v.$invalid) {
-        this.submitStatus = 'ERROR'
-      }
-      else {
-        // do your submit logic here
-        this.submitStatus = 'PENDING'
-        setTimeout(() => {
-          this.submitStatus = 'OK'
-        }, 500)
-      }
-    },
     setTitle(value) {
       this.title = value
       this.$v.title.$touch()
@@ -193,8 +179,6 @@ export default {
             workflowId: this.selectedWorkflow.id,
           }
         };
-      
-      
 
       this.$apollo.mutate(mutationConfig)
           .then(result => this.onCreateSuccess(result))
