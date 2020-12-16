@@ -172,7 +172,10 @@ export default {
       return lengths.map(length => this.stringifyLength(length)).join(' ');
     },
     stringifyLength(length) {
-      const value = length.value || '';
+      if (!length || !length.value) {
+        return ''
+      }
+      const value = length.value;
       const unit = length.unit === 'percent' ? '%' : length.unit;
       return `${value}${unit}`;
     },
