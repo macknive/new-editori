@@ -196,7 +196,7 @@ export default {
         }
       };
 
-    this.$apollo.mutate(mutationConfig)
+      this.$apollo.mutate(mutationConfig)
         .then(result => this.onCreateSuccess(result))
         .catch(err => this.onCreateError(err));
         
