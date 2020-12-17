@@ -181,24 +181,25 @@ export default {
       this.$v.$touch()
       if (this.$v.$invalid || this.roleChecker() !== 2) {
         this.submitStatus = 'ERROR'   
-      } else {
-        console.log("Success")
-        this.submitStatus = 'PENDING'
-        const mutationConfig = {
-          mutation: CreateDeliverable,
-          variables: {
-            title: this.title,
-            slug: this.slug,
-            workspaceId: this.workspace.id,
-            workflowData: this.workflowData,
-            workflowId: this.selectedWorkflow.id,
-          }
-        };
+        return
+      } 
+      console.log("Success")
+      this.submitStatus = 'PENDING'
+      const mutationConfig = {
+        mutation: CreateDeliverable,
+        variables: {
+          title: this.title,
+          slug: this.slug,
+          workspaceId: this.workspace.id,
+          workflowData: this.workflowData,
+          workflowId: this.selectedWorkflow.id,
+        }
+      };
 
-      this.$apollo.mutate(mutationConfig)
-          .then(result => this.onCreateSuccess(result))
-          .catch(err => this.onCreateError(err));
-      }    
+    this.$apollo.mutate(mutationConfig)
+        .then(result => this.onCreateSuccess(result))
+        .catch(err => this.onCreateError(err));
+        
     },
     onCreateSuccess(result) {
       const newDeliverable = result.data.createDeliverable.deliverable;
