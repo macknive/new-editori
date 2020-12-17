@@ -45,6 +45,7 @@
               {{user.display_name}}
             </option>
           </select>
+          <input :placeholder="usersForRole[role.name]" class="displayName" type="hidden">
         </td>
       </tr>
       <tr>
@@ -162,12 +163,26 @@ export default {
       this.$refs.slugInput.value = newSlugValue;
       this.lastUpdatedSlug = newSlugValue;
     },
+    roleChecker() {
+      var x, i;
+      var countNum = 0
+      x = document.querySelectorAll('.displayName');
+      for (i = 0; i < x.length; i++) {
+        if (x[i].placeholder == "1") {
+          countNum ++
+        }
+        if (x[i].placeholder == "2") {
+          countNum ++
+        }
+      }
+      return countNum
+    },
     createDeliverable() {
-      console.log('submit!')
       this.$v.$touch()
-      if (this.$v.$invalid) {
-        this.submitStatus = 'ERROR'
+      if (this.$v.$invalid || this.roleChecker() !== 2) {
+        this.submitStatus = 'ERROR'   
       } else {
+        console.log("Success")
         this.submitStatus = 'PENDING'
         const mutationConfig = {
           mutation: CreateDeliverable,
@@ -183,7 +198,7 @@ export default {
       this.$apollo.mutate(mutationConfig)
           .then(result => this.onCreateSuccess(result))
           .catch(err => this.onCreateError(err));
-      }
+      }    
     },
     onCreateSuccess(result) {
       const newDeliverable = result.data.createDeliverable.deliverable;
