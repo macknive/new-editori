@@ -45,7 +45,6 @@
               {{user.display_name}}
             </option>
           </select>
-          <input :placeholder="usersForRole[role.name]" class="displayName" type="hidden">
         </td>
       </tr>
       <tr>
@@ -53,8 +52,6 @@
         <td>
           <button @click="createDeliverable">Create!</button>
            <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
-
-         
         </td>
       </tr>
     </tbody>
@@ -163,24 +160,14 @@ export default {
       this.$refs.slugInput.value = newSlugValue;
       this.lastUpdatedSlug = newSlugValue;
     },
-    roleChecker() {
-      var x, i;
-      var countNum = 0
-      x = document.querySelectorAll('.displayName');
-      for (i = 0; i < x.length; i++) {
-        if (x[i].placeholder == "1") {
-          countNum ++
-        }
-        if (x[i].placeholder == "2") {
-          countNum ++
-        }
-      }
-      return countNum
+    hasAllRolesAssigned() {
+      return Object.values(this.customRoles).every(role => this.usersForRole[role.name]);
     },
     createDeliverable() {
       this.$v.$touch()
-      if (this.$v.$invalid || this.roleChecker() !== 2) {
+      if (this.$v.$invalid  || !this.hasAllRolesAssigned()) {
         this.submitStatus = 'ERROR'   
+        console.log("Error")
         return
       } 
       console.log("Success")
@@ -195,7 +182,7 @@ export default {
           workflowId: this.selectedWorkflow.id,
         }
       };
-
+      
       this.$apollo.mutate(mutationConfig)
         .then(result => this.onCreateSuccess(result))
         .catch(err => this.onCreateError(err));
