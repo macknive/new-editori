@@ -52,6 +52,7 @@ export default {
     '~/plugins/vue-fontawesome.js',
     '~/plugins/vue-timeago.js',
     '~/plugins/vue2-medium-editor.client.js',
+    '~/plugins/vuelidate.js',
   ],
   /*
   ** Nuxt.js dev-modules

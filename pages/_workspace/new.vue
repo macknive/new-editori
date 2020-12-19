@@ -1,29 +1,39 @@
 <template>
+<div>
   <table>
     <tbody>
       <tr>
         <th>Title</th>
         <td>
-          <input type="text" v-model="title">
+          <div class="form-group" :class="{ 'form-group--error': $v.title.$error }">
+            <input type="text" v-model.trim="$v.title.$model">
+          </div>
+          <div class="error" v-if="!$v.title.required">Title is required</div>
+          <div class="error" v-if="!$v.title.minLength">Title must have at least {{$v.title.$params.minLength.min}} letters.</div>
         </td>
       </tr>
       <tr>
         <th>Slug</th>
         <td>
-          <input type="text" ref="slugInput"
-              @focus="onSlugFocus" @blur="onSlugBlur" v-model="slug">
+          <div class="form-group" :class="{ 'form-group--error': $v.slug.$error }">
+            <input type="text" ref="slugInput" @focus="onSlugFocus" @blur="onSlugBlur" v-model.trim="$v.slug.$model">
+          </div>
+          <div class="error" v-if="!$v.slug.required">Slug name is required</div>
         </td>
       </tr>
       <tr>
         <th>Workflow</th>
         <td>
-          <select v-model="selectedWorkflow">
+          <div class="form-group" :class="{ 'form-group--error': $v.selectedWorkflow.$error }">
+          <select v-model.trim="$v.selectedWorkflow.$model">
             <option :value="undefined" selected disabled>Select a Workflow</option>
             <option v-for="workflow in workflows"
                 :key="workflow.id" :value="workflow">
               {{workflow.name}}
             </option>
           </select>
+          </div>
+          <div class="error" v-if="!$v.selectedWorkflow.required"></div>
         </td>
       </tr>
       <tr v-for="role in customRoles" :key="role.id">
@@ -41,10 +51,12 @@
         <td></td>
         <td>
           <button @click="createDeliverable">Create!</button>
+           <p class="typo__p" v-if="submitStatus === 'ERROR'">Please fill the form correctly.</p>
         </td>
       </tr>
     </tbody>
   </table>
+  </div>
 </template>
 
 <script>
@@ -53,6 +65,7 @@ import ListWorkflowsByWorkspace from '~/queries/ListWorkflowsByWorkspace';
 import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug';
 import slugify from 'slugify';
 import {getRandomAnimal} from '~/assets/animals';
+import { required, minLength } from 'vuelidate/lib/validators'
 
 // See https://www.npmjs.com/package/slugify#options.
 const SLUG_OPTIONS = {
@@ -81,7 +94,20 @@ export default {
       usersForRole: {},
       workflows: [],
       workspaceSlug: this.$route.params.workspace,
+      submitStatus: null
     };
+  },
+  validations: {
+    title: {
+      required,
+      minLength: minLength(4)
+    },
+    slug: {
+      required
+    },
+    selectedWorkflow: {
+      required
+    }
   },
   computed: {
     customRoles() {
@@ -106,10 +132,6 @@ export default {
         }
 
         return {
-          // TODO: Don't assign workflow steps to users on the client; store the
-          // role/user mappings in the deliverable and pull dynamically from
-          // that where assignees are needed, so that future edits to the
-          // workflow can have correct assignees.
           assignee: this.usersForRole[step.custom_role.name],
           deadline: deadline,
           step: step.id,
@@ -121,6 +143,10 @@ export default {
     }
   },
   methods: {
+    setTitle(value) {
+      this.title = value
+      this.$v.title.$touch()
+    },
     onSlugFocus() {
       this.lastUpdatedSlug = this.slug;
     },
@@ -134,9 +160,18 @@ export default {
       this.$refs.slugInput.value = newSlugValue;
       this.lastUpdatedSlug = newSlugValue;
     },
+    hasAllRolesAssigned() {
+      return Object.values(this.customRoles).every(role => this.usersForRole[role.name]);
+    },
     createDeliverable() {
-      // TODO: Can this be a constant object with functions for the variables to
-      // prevent frequent object allocation?
+      this.$v.$touch()
+      if (this.$v.$invalid  || !this.hasAllRolesAssigned()) {
+        this.submitStatus = 'ERROR'   
+        console.log("Error")
+        return
+      } 
+      console.log("Success")
+      this.submitStatus = 'PENDING'
       const mutationConfig = {
         mutation: CreateDeliverable,
         variables: {
@@ -147,10 +182,11 @@ export default {
           workflowId: this.selectedWorkflow.id,
         }
       };
-
+      
       this.$apollo.mutate(mutationConfig)
-          .then(result => this.onCreateSuccess(result))
-          .catch(err => this.onCreateError(err));
+        .then(result => this.onCreateSuccess(result))
+        .catch(err => this.onCreateError(err));
+        
     },
     onCreateSuccess(result) {
       const newDeliverable = result.data.createDeliverable.deliverable;
