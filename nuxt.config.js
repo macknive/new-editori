@@ -69,6 +69,7 @@ export default {
     '@nuxtjs/proxy',
     '@nuxtjs/dotenv',
     '@nuxtjs/auth',
+    '@nuxtjs/vuetify',
   ],
   apollo: {
     clientConfigs: {
