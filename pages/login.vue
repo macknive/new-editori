@@ -49,7 +49,6 @@
             </div>
           </v-col>
         </v-container>
-      
       </div>
     </v-col>
   </v-row>
