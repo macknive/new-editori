@@ -1,0 +1,20 @@
+{
+  "env": {
+    "API_URL": "https://dev.api.editori.io",
+    "BACKEND_URL": "https://dev.api.editori.io/graphql",
+    "CLIENT_BASE_URL": "https://dev.app.editori.io",
+    "HOST": "0.0.0.0",
+    "HTTPS_REDIRECT": "false",
+    "NODE_ENV": "production",
+    "NPM_CONFIG_PRODUCTION": "false"
+  },
+  "formation": {
+    "web": {
+      "quantity": 1,
+      "size": "free"
+    }
+  },
+  "scripts": {
+    "heroku-postbuild": "nuxt build"
+  }
+}
