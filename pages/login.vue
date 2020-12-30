@@ -99,7 +99,6 @@ export default {
 .container {
   max-width: 500px;
 }
-
 p, .fa-facebook, .fa-google, .fa-apple {
   color: #593d3b;
 }
