@@ -1,12 +1,12 @@
 <template>
-  <v-container class="content-container">
+  <v-container>
     <v-row class="d-flex flex-column">
       <v-col align="center">
         <h1>Tell Us About You...</h1>
         <p>The best relationships start with at least this much...</p>
       </v-col>
       <v-col>
-        <p>Your Name</p>
+        <p class="text-brown">Your Name</p>
         <v-text-field
           v-model="name"
           solo
@@ -14,7 +14,7 @@
           hide-details="auto"
           clearable
         ></v-text-field><br>
-        <p>Email Address</p>
+        <p class="text-brown">Email Address</p>
         <v-text-field
           v-model="email"
           solo
@@ -22,7 +22,7 @@
           hide-details="auto"
           clearable
         ></v-text-field><br>
-        <p>Password</p>
+        <p class="text-brown">Password</p>
         <v-text-field
           v-model="password"
           solo
@@ -32,7 +32,7 @@
           name="input-10-1"
           @click:append="show1 = !show1"
         ></v-text-field><br>
-        <p>Confirm Password</p>
+        <p class="text-brown">Confirm Password</p>
         <v-text-field
           v-model="password"
           solo
@@ -45,7 +45,7 @@
         <v-checkbox
           v-model="checkbox"
         >
-        <template v-slot:label>I accept the<a class="ml-1">Terms of Service</a></template>
+        <template v-slot:label>I accept the<a class="ml-1 text-brown">Terms of Service</a></template>
         </v-checkbox>
       </v-col>
     </v-row>
