@@ -147,5 +147,4 @@ export default {
 .v-stepper--vertical .v-stepper__step {
   padding: unset;
 }
-
 </style>
