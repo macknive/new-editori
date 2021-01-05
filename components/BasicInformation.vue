@@ -27,17 +27,17 @@
           v-model="password"
           solo
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="rules"
+          :rules="passwordRules"
           :type="show1 ? 'text' : 'password'"
           name="input-10-1"
           @click:append="show1 = !show1"
         ></v-text-field><br>
         <p class="text-brown">Confirm Password</p>
         <v-text-field
-          v-model="password"
+          v-model="confirmPassword"
           solo
           :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-          :rules="rules"
+          :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
           :type="show1 ? 'text' : 'password'"
           name="input-10-1"
           @click:append="show1 = !show1"
@@ -54,21 +54,33 @@
 
 <script>
 export default {
- data () {
+  data () {
     return {
-      e6: 1,
       name: "",
       email: "",
       password: "",
+      confirmPassword: "",
       error: null,
       show1: false,
       checkbox: false,
       rules: [
         value => !!value || 'Required.',
-        //value => (value && value.length >= 6) || 'Min 6 characters',
       ],
+      passwordRules: [v => !!v || "Password is required"],
+      confirmPasswordRules: [v => !!v || "Password is required"],
     }
   },
+  computed: {
+    passwordConfirmationRule() {
+      return () =>
+        this.password === this.confirmPassword || "Password must match";
+    }
+  },
+  method: {
+    changeName: function () {
+      this.$emit('changeName', this.name)
+    }
+  }
 }
 </script>
 

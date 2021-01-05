@@ -96,7 +96,19 @@ export default {
 </script>
 
 <style>
+.rcorners {	
+  border-radius: 50%;	
+  border: 1px solid #593d3b;	
+  padding: 22px; 	
+  height: 80px;	
+  width: 80px;  	
+}
+
+.text-brown {
+  color: #593d3b !important;
+}
 
 </style>
+
 
 
