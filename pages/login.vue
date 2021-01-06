@@ -38,7 +38,7 @@
           </v-col><br>
           <v-col align="right" class="pt-0 pb-10">
             Don't have an account?
-            <nuxt-link to="#" class="pr-10 text-brown">Sign Up</nuxt-link >
+            <nuxt-link to="/register" class="pr-10 text-brown">Sign Up</nuxt-link >
           </v-col><br><br>
           <v-col align="center">
             <p class="text-brown">CONTINUE WITH</p>

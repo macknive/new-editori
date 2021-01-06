@@ -5,9 +5,9 @@
       v-model="e6"
       vertical
     >
-      <v-container class="leftcontainer">
+      <v-container class="newcontainer">
         <v-row>
-          <v-col class="col-1">
+          <v-col class="col-1 leftcol">
           <div class="rectangle"></div>
           <div class="rectangle2"></div>
           <div class="rectangle3"></div>
@@ -55,11 +55,7 @@
           </v-col>
           <v-col class="pt-12">
             <v-stepper-content step="1" class="pt-0 step">
-              <BasicInformation/>
-              <v-container>
-                <v-btn block @click="checkRequire() ? e6 = 2 : errorMessage()" color="brown lighten-1 white--text py-7 step-button">NEXT</v-btn>
-                <p align="right">Already have an account?<a class="ml-1">Login</a></p>
-              </v-container>
+              <BasicInformation v-on:thisUser="createUser($event)"/>
             </v-stepper-content>
             <v-stepper-content step="2" class="pt-0 step">
               <v-container>
@@ -88,10 +84,7 @@
               </v-container>
             </v-stepper-content>
             <v-stepper-content step="4" class="pt-0 step">
-              <CreateWorkspace/>
-              <v-container>
-                <v-btn block @click="e6 = 5" color="brown lighten-1 white--text py-7 step-button">NEXT</v-btn>
-              </v-container>
+              <CreateWorkspace v-on:thisWorkspace="createWorkspace($event)"/>
             </v-stepper-content>
             <v-stepper-content step="5" class="pt-0 step">
               <v-container>
@@ -119,20 +112,24 @@ export default {
     JoinWorkspace,
     CreateWorkspace,
   },
-
   data () {
     return {
       e6: 1,
+      userInfo: {},
+      workspaceInfo: {}
     }
   },
   methods: {
-    checkRequire() {
-      alert("Error checking, returning true for now to navigate")
-      return true
+    //create mutation for user and workspace then 
+    //proceed to next step
+    createUser(addNewUser) {
+      this.userInfo = addNewUser
+      this.e6 = 2
     },
-    errorMessage() {
-      console.log("error")
-    }
+    createWorkspace(addNewWorkspace) {
+      this.workspaceInfo = addNewWorkspace
+      this.e6 = 5
+    },
   }
 }
 </script>
@@ -158,9 +155,14 @@ export default {
 .container {
   max-width: 700px;
 }
-.leftcontainer {
+.newcontainer {
   max-width: unset;
 }
+
+.leftcol {
+  max-width: 50px;
+}
+
 .v-stepper {
   box-shadow: none;
 }
@@ -230,4 +232,11 @@ export default {
   background: #ab947e;
 }
 
+.v-btn--disabled {
+  padding: 28px 0 !important;
+}
+
+.svgpay {
+  max-width: 100px;
+}
 </style>
