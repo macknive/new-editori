@@ -34,7 +34,7 @@
             <nuxt-link to="#" class="pr-10 text-brown">Forgot Password?</nuxt-link >
           </v-col>
           <v-col class="px-10">
-            <v-btn block @click="login" color="brown lighten-1 white--text py-7">LOG IN</v-btn>
+            <v-btn block @click="login" color="brown darken-3 white--text py-7">LOG IN</v-btn>
           </v-col><br>
           <v-col align="right" class="pt-0 pb-10">
             Don't have an account?

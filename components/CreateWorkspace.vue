@@ -49,13 +49,13 @@
         <div v-if="visible">
           <v-row>
             <v-col class="col pt-5">
-              <v-btn @click="visible = !visible" block color="brown lighten-1 white--text py-7 step-button"><font-awesome-icon class="text-white" icon="credit-card" size="1x"></font-awesome-icon>&nbsp;&nbsp;&nbsp;CREDIT CARD</v-btn>
+              <v-btn @click="visible = !visible" block color="brown darken-3 white--text py-7 step-button"><font-awesome-icon class="text-white" icon="credit-card" size="1x"></font-awesome-icon>&nbsp;&nbsp;&nbsp;CREDIT CARD</v-btn>
             </v-col>
-            <v-col class="col svgpay" align="right">
-              <font-awesome-icon :icon="['fab', 'apple-pay']" class="icon alt text-brown" size="4x"/>
+            <v-col class="col svgcol pt-5" align="right">
+              <font-awesome-icon :icon="['fab', 'apple-pay']" class="icon alt svgapple" size="4x"/>
             </v-col>
-            <v-col class="col svgpay" align="right">
-              <font-awesome-icon :icon="['fab', 'google-pay']" class="icon alt text-brown" size="4x"/>
+            <v-col class="col svgcol pt-5" align="right">
+              <font-awesome-icon :icon="['fab', 'google-pay']" class="icon alt svggoogle" size="4x"/>
             </v-col>
           </v-row>
         </div>
@@ -83,11 +83,11 @@
               ></v-text-field>
             </v-col>
             <v-col class="col-4">
-              <v-btn block color="brown lighten-1 white--text py-7 step-button">SUBSCRIBE</v-btn>
+              <v-btn block color="brown darken-3 white--text py-7 step-button">SUBSCRIBE</v-btn>
             </v-col>
 
           </v-row>
-          <a @click="visible = !visible">Other payment methods</a>
+          <a @click="visible = !visible" class="text-brown">Other payment methods</a>
         </div><br>
 
         <p align="center">You will be charged $29.97 on December 14, 2020</p>
@@ -98,7 +98,7 @@
       :disabled="!valid"
       block 
       @click="validate() ? addWorkspace() : errorMessage()" 
-      color="brown lighten-1 white--text py-7 step-button"
+      color="brown darken-3 white--text py-7 step-button"
     >NEXT</v-btn>
   </v-form>
 </v-container>

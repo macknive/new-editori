@@ -36,7 +36,7 @@
             :type="show1 ? 'text' : 'password'"
             name="input-10-1"
             @click:append="show1 = !show1"
-          ></v-text-field><br>
+          ></v-text-field>
           <p class="text-brown">Confirm Password</p>
           <v-text-field
             v-model="newUser.confirmPassword"
@@ -52,17 +52,17 @@
             :rules="[v => !!v || 'You must agree to continue!']"
           >
           <template v-slot:label>I accept the<a class="ml-1 text-brown">Terms of Service</a></template>
-          </v-checkbox>
+          </v-checkbox><br>
 
           <v-btn 
             :disabled="!valid"
             block 
             @click="validate() ? addUser() : errorMessage()" 
-            color="brown lighten-1 white--text py-7 step-button"
+            color="brown darken-3 white--text py-7 step-button"
           >NEXT</v-btn>
 
         </v-form><br>
-          <p align="right">Already have an account?&nbsp;<nuxt-link to="/login">Login</nuxt-link></p>
+          <p align="right">Already have an account?&nbsp;<nuxt-link to="/login" class="text-brown">Login</nuxt-link></p>
       </v-col>
     </v-row>
   </v-container>
