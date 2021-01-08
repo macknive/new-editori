@@ -1,59 +1,68 @@
 <template>
-<div>
-<v-app>
-  <v-row>
-    <v-col class="pa-0 brown lighten-2">
-    </v-col>
-    <v-col class="pa-0">
-      <div class="d-flex flex-column">
-        <v-container>
-          <h1 align="center" class="py-12 mt-12">LOGIN</h1>
-          <v-col class="px-10">
-          <p class="mb-0 text-brown">Email Address</p>
-          <v-text-field
-            v-model="email"
-            solo
-            :rules="rules"
-            hide-details="auto"
-            clearable
-          ></v-text-field>
-          </v-col>
-          <v-col class="px-10 pb-0">  
-          <p class="mb-0 text-brown">Password</p>
-          <v-text-field
-            v-model="password"
-            solo
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="rules"
-            :type="show1 ? 'text' : 'password'"
-            name="input-10-1"
-            @click:append="show1 = !show1"
-          ></v-text-field>
-          </v-col>
-          <v-col align="right" class="pt-0 pb-10">
-            <nuxt-link to="#" class="pr-10 text-brown">Forgot Password?</nuxt-link >
-          </v-col>
-          <v-col class="px-10">
-            <v-btn block @click="login" color="brown darken-3 white--text py-7">LOG IN</v-btn>
-          </v-col><br>
-          <v-col align="right" class="pt-0 pb-10">
-            Don't have an account?
-            <nuxt-link to="/register" class="pr-10 text-brown">Sign Up</nuxt-link >
-          </v-col><br><br>
-          <v-col align="center">
-            <p class="text-brown">CONTINUE WITH</p>
-            <div class="d-flex justify-center">
-            <div class="px-5"><nuxt-link to="#"><div class="rcorners"><font-awesome-icon :icon="['fab', 'facebook']" class="icon alt text-brown" size="2x"/></div></nuxt-link ></div>
-            <div class="px-5"><nuxt-link to="#"><div class="rcorners"><font-awesome-icon :icon="['fab', 'google']" class="icon alt text-brown" size="2x"/></div></nuxt-link ></div>
-            <div class="px-5"><nuxt-link to="#"><div class="rcorners"><font-awesome-icon :icon="['fab', 'apple']" class="icon alt text-brown" size="2x"/></div></nuxt-link ></div>
-            </div>
-          </v-col>
-        </v-container>
-      </div>
-    </v-col>
-  </v-row>
-</v-app>
-</div>
+  <v-app>
+    <v-row>
+      <v-col class="pa-0 brown lighten-2">
+      </v-col>
+      <v-col class="pa-0">
+        <div class="d-flex flex-column">
+          <v-container>
+            <v-form
+            ref="form"
+            v-model="valid"
+            lazy-validation
+            >
+            <h1 align="center" class="py-12 mt-12">LOGIN</h1>
+            <v-col class="px-10">
+            <p class="mb-0 text-brown">Email Address</p>
+            <v-text-field
+              v-model="email"
+              solo
+              :rules="emailRules"
+              hide-details="auto"
+              clearable
+            ></v-text-field>
+            </v-col>
+            <v-col class="px-10 pb-0">  
+            <p class="mb-0 text-brown">Password</p>
+            <v-text-field
+              v-model="password"
+              solo
+              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+              :rules="rules"
+              :type="show1 ? 'text' : 'password'"
+              name="input-10-1"
+              @click:append="show1 = !show1"
+            ></v-text-field>
+            </v-col>
+            <v-col align="right" class="pt-0 pb-10">
+              <nuxt-link to="#" class="pr-10 text-brown">Forgot Password?</nuxt-link >
+            </v-col>
+            <v-col class="px-10">
+              <v-btn 
+                :disabled="!valid"
+                block 
+                @click="validate() ? login() : errorMessage()" 
+                color="brown darken-3 white--text py-7 step-button"
+              >LOGIN</v-btn>
+            </v-col><br>
+            <v-col align="right" class="pt-0 pb-10">
+              Don't have an account?
+              <nuxt-link to="/register" class="pr-10 text-brown">Sign Up</nuxt-link >
+            </v-col><br><br>
+            <v-col align="center">
+              <p class="text-brown">CONTINUE WITH</p>
+              <div class="d-flex justify-center">
+              <div class="px-5"><nuxt-link to="#"><div class="rcorners"><font-awesome-icon :icon="['fab', 'facebook']" class="icon alt text-brown" size="2x"/></div></nuxt-link ></div>
+              <div class="px-5"><nuxt-link to="#"><div class="rcorners"><font-awesome-icon :icon="['fab', 'google']" class="icon alt text-brown" size="2x"/></div></nuxt-link ></div>
+              <div class="px-5"><nuxt-link to="#"><div class="rcorners"><font-awesome-icon :icon="['fab', 'apple']" class="icon alt text-brown" size="2x"/></div></nuxt-link ></div>
+              </div>
+            </v-col>
+            </v-form>
+          </v-container>
+        </div>
+      </v-col>
+    </v-row>
+  </v-app>
 </template>
 
 <script>
@@ -61,17 +70,31 @@ export default {
   middleware: "guest",
   data() {
     return {
-    email: "",
-    password: "",
-    error: null,
-    show1: false,
-    rules: [
-      value => !!value || 'Required.',
-      //value => (value && value.length >= 6) || 'Min 6 characters',
-    ],
+      valid: true,
+      email: "",
+      password: "",
+      error: null,
+      show1: false,
+      rules: [
+        value => !!value || 'Required.',
+        //value => (value && value.length >= 6) || 'Min 6 characters',
+      ],
+      emailRules: [
+        v => !!v || 'E-mail is required',
+        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      ],
     };
   },
   methods: {
+    validate() {
+      if(!this.$refs.form.validate()) {
+        return false
+      }
+      return true
+    },
+    errorMessage() {
+      console.log("Please fill the required form")
+    },
     async login() {
       this.error = null;
       try {
@@ -89,13 +112,19 @@ export default {
         })
       } catch (e) {
       this.error = e.response.data.message[0].messages[0].message;
+      alert("Wrong account input")
       }
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 .rcorners {	
   border-radius: 50%;	
   border: 1px solid #593d3b;	
@@ -109,6 +138,3 @@ export default {
 }
 
 </style>
-
-
-

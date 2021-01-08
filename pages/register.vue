@@ -1,5 +1,4 @@
 <template>
-<div>
   <v-app>
     <v-stepper
       v-model="e6"
@@ -18,7 +17,6 @@
               step="Step 1"
             >
             </v-stepper-step>
-
             </div>
             <div v-if="e6 == 2" class="step2">
             <v-stepper-step
@@ -27,7 +25,6 @@
             >
             </v-stepper-step>
             </div>
-
             <div v-if="e6 == 3" class="step3">
             <v-stepper-step
               :complete="e6 > 3"
@@ -35,7 +32,6 @@
             >
             </v-stepper-step>
             </div>
-
             <div v-if="e6 == 4" class="step3">
             <v-stepper-step
               :complete="e6 > 4"
@@ -43,7 +39,6 @@
             >
             </v-stepper-step>
             </div>
-
             <div v-if="e6 == 5" class="step4">
             <v-stepper-step
               :complete="e6 > 5"
@@ -51,7 +46,6 @@
             >
             </v-stepper-step>
             </div>
-
           </v-col>
           <v-col class="pt-12">
             <v-stepper-content step="1" class="pt-0 step">
@@ -100,7 +94,6 @@
       </v-container>    
     </v-stepper>
   </v-app>
-</div>
 </template>
 
 <script>
@@ -108,6 +101,7 @@ import BasicInformation from '~/components/BasicInformation';
 import JoinWorkspace from '~/components/JoinWorkspace'
 import CreateWorkspace from '~/components/CreateWorkspace'
 export default {
+  middleware: "guest",
   components: {
     BasicInformation,
     JoinWorkspace,
@@ -139,6 +133,7 @@ export default {
 .text-brown {
   color: #593d3b !important;
 }
+
 .rcorners {
   border-radius: 50%;
   border: 1px solid #593d3b;
@@ -146,99 +141,170 @@ export default {
   height: 80px;
   width: 80px;  
 }
+
 .square {
   height: 300px;
   border: 1px solid #593d3b;
   border-radius: 3%;
 }
+
 .svgworkspace {
   margin-top: 60px;
 }
+
 .step {
   border-left: none !important;
 }
+
 .container {
   max-width: 700px;
 }
+
 .newcontainer {
   max-width: unset;
 }
+
 .leftcol {
   max-width: 50px;
+  padding-bottom: 20px;
 }
+
 .v-stepper {
   box-shadow: none;
 }
+
+.step1 div > span {
+  background: #593d3b !important;
+}
+
+.step2 div > span {
+  top: 250px !important;
+  background: #6f5e53 !important;
+}
+
+.step3 div > span {
+  top: 400px !important;
+  background: #8a7968 !important;
+}
+
+.step4 div > span {
+  top: 550px !important;
+  background: #ab947e !important;
+}
+
+.v-stepper--vertical .v-stepper__step {
+  padding: unset;
+}
+
 .v-stepper__step__step {
   height: 50px !important;
   width: 150px !important;
   transform: rotate(-90deg) !important;
   border-radius: unset;
   position: fixed;
-  top: 150px;
+  top: 100px;
   font-size: 20px;
   left: -23px;
 } 
-.step1 div > span {
-  background: #593d3b !important;
-}
-.step2 div > span {
-  top: 300px !important;
-  background: #6f5e53 !important;
-}
-.step3 div > span {
-  top: 450px !important;
-  background: #8a7968 !important;
-}
-.step4 div > span {
-  top: 600px !important;
-  background: #ab947e !important;
-}
-.v-stepper--vertical .v-stepper__step {
-  padding: unset;
-}
+
 .rectangle, .rectangle2, .rectangle3, .rectangle4 {
   position: fixed;
   left: 17px;
   height: 150px;
   width: 10px;
 }
+
 .rectangle {
-  top: 100px;
+  top: 50px;
   border: 1px solid #593d3b;
   background: #593d3b;
 }
+
 .rectangle2 {
-  top: 250px;
+  top: 200px;
   border: 1px solid #6f5e53;
   background: #6f5e53;
 }
+
 .rectangle3 {
-  top: 400px;
+  top: 350px;
   border: 1px solid #8a7968;
   background: #8a7968;
 }
+
 .rectangle4 {
-  top: 550px;
+  top: 500px;
   border: 1px solid #ab947e;
   background: #ab947e;
 }
+
 .v-btn--disabled {
   padding: 28px 0 !important;
 }
+
 .svgcol {
   max-width: 150px;
 }
+
 .svgapple, .svggoogle {
   height: 56px;
   border-radius: 4px;
   width: 120px !important;
 }
+
 .svgapple {
   color: white;
   background: black;
 }
+
 .svggoogle {
   border: 1px solid gray;
+}
+
+@media only screen and (max-width: 375px) {
+  .rectangle, .rectangle2, .rectangle3, .rectangle4 {
+    left: 0px;
+    height: 130px;
+  }
+
+  .rectangle {
+    top: 20px;
+  }
+
+  .rectangle2 {
+    top: 150px;
+  }
+
+  .rectangle3 {
+    top: 280px;
+  }
+
+  .rectangle4 {
+    top: 410px;
+  }
+
+  .v-stepper__step__step {
+    height: 30px !important;
+    width: 130px !important;
+    top: 50px;
+    font-size: 16px;
+    left: -40px;
+  } 
+
+  .step1 div > span { 
+    top: 70px;
+  }
+
+  .step2 div > span {
+    top: 200px !important;
+  }
+
+  .step3 div > span {
+    top: 330px !important;
+  }
+
+  .step4 div > span {
+    top: 460px !important;
+  }
 }
 </style>
