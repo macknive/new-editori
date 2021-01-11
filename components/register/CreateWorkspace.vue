@@ -35,7 +35,7 @@
         <p class="text-brown">Monthly Subscription</p>
         <v-row>
           <v-col>
-            <p> {{selected}} collaborators @ ${{basePrice}} permonth</p>
+            <p> {{selected}} collaborators @ ${{basePrice}} per month</p>
             <h3>${{totalPrice}} per month</h3>
           </v-col>
           <v-col align="right">
@@ -43,10 +43,6 @@
             <h3>$0 due today</h3>
           </v-col>
         </v-row>
-
-    
-      
-
         <div v-if="visible">
           <v-row>
             <v-col class="col pt-5">
