@@ -15,41 +15,35 @@
           <v-text-field
             v-model="newUser.name"
             solo
-            :rules="rules"
+            :rules="rules.name"
             hide-details="auto"
-            clearable
           ></v-text-field><br>
           <p class="text-brown">Email Address</p>
           <v-text-field
             v-model="newUser.email"
             solo
-            :rules="emailRules"
+            :rules="rules.email"
             hide-details="auto"
-            clearable
           ></v-text-field><br>
           <p class="text-brown">Password</p>
           <v-text-field
             v-model="newUser.password"
             solo
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="passwordRules"
-            :type="show1 ? 'text' : 'password'"
+            :rules="rules.password"
+            :type="show ? 'text' : 'password'"
             name="input-10-1"
-            @click:append="show1 = !show1"
           ></v-text-field>
           <p class="text-brown">Confirm Password</p>
           <v-text-field
             v-model="newUser.confirmPassword"
             solo
-            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-            :rules="confirmPasswordRules.concat(passwordConfirmationRule)"
-            :type="show1 ? 'text' : 'password'"
+            :rules="rules.confirmPassword.concat(passwordConfirmationRule)"
+            :type="show ? 'text' : 'password'"
             name="input-10-1"
-            @click:append="show1 = !show1"
           ></v-text-field>
           <v-checkbox
             v-model="newUser.checkbox"
-            :rules="[v => !!v || 'You must agree to continue!']"
+            :rules="rules.termsOfService"
           >
           <template v-slot:label>I accept the<a class="ml-1 text-brown">Terms of Service</a></template>
           </v-checkbox><br>
@@ -73,6 +67,8 @@ export default {
   data () {
     return {
       valid: true,
+      error: null,
+      show: false,
       newUser: {
         name: "",
         email: "",
@@ -80,17 +76,13 @@ export default {
         confirmPassword: "",
         checkbox: false,
       },
-      rules: [
-        value => !!value || 'Required.',
-      ],
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
-      passwordRules: [v => !!v || "Password is required"],
-      confirmPasswordRules: [v => !!v || "Password is required"],
-      error: null,
-      show1: false,
+      rules: {
+        name: [ value => !!value || 'Required.',],
+        email: [ v => !!v || 'E-mail is required', v => /.+@.+\..+/.test(v) || 'E-mail must be valid',],
+        password: [v => !!v || "Password is required"],
+        confirmPassword: [v => !!v || "Password is required"],
+        termsOfService: [v => !!v || 'You must agree to continue!']
+      },
     }
   },
   computed: {

@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-stepper
-      v-model="e6"
+      v-model="step"
       vertical
     >
       <v-container class="newcontainer">
@@ -11,37 +11,37 @@
           <div class="rectangle2"></div>
           <div class="rectangle3"></div>
           <div class="rectangle4"></div>
-            <div v-if="e6 == 1" class="step1">
+            <div v-if="step == 1" class="step1">
             <v-stepper-step
-              :complete="e6 > 1"
+              :complete="step > 1"
               step="Step 1"
             >
             </v-stepper-step>
             </div>
-            <div v-if="e6 == 2" class="step2">
+            <div v-if="step == 2" class="step2">
             <v-stepper-step
-              :complete="e6 > 2"
+              :complete="step > 2"
               step="Step 2"
             >
             </v-stepper-step>
             </div>
-            <div v-if="e6 == 3" class="step3">
+            <div v-if="step == 3" class="step3">
             <v-stepper-step
-              :complete="e6 > 3"
+              :complete="step > 3"
               step="Step 3"
             >
             </v-stepper-step>
             </div>
-            <div v-if="e6 == 4" class="step3">
+            <div v-if="step == 4" class="step3">
             <v-stepper-step
-              :complete="e6 > 4"
+              :complete="step > 4"
               step="Step 3"
             >
             </v-stepper-step>
             </div>
-            <div v-if="e6 == 5" class="step4">
+            <div v-if="step == 5" class="step4">
             <v-stepper-step
-              :complete="e6 > 5"
+              :complete="step > 5"
               step="Step 4"
             >
             </v-stepper-step>
@@ -52,42 +52,16 @@
               <BasicInformation v-on:thisUser="createUser($event)"/>
             </v-stepper-content>
             <v-stepper-content step="2" class="pt-0 step">
-              <v-container>
-                <v-row class="d-flex flex-column">
-                  <v-col align="center">
-                    <h1>How can we help you?</h1>
-                    <p>The best relationships start with at least this much...</p>
-                    <br><br><br>
-                  </v-col>
-                </v-row>
-                <v-row>
-                  <v-col>
-                    <a @click="e6 = 3"><div class="square pa-12" align="center"><font-awesome-icon class="text-brown svgworkspace" icon="envelope-open-text" size="4x"></font-awesome-icon></div></a>
-                    <br><p align="center" class="text-brown">Join Existing Workspace</p>
-                  </v-col>
-                  <v-col>
-                    <a @click="e6 = 4"><div class="square pa-12" align="center"><font-awesome-icon class="text-brown svgworkspace" icon="plus" size="4x"></font-awesome-icon></div></a>
-                    <br><p align="center" class="text-brown">Create New Workspace</p>
-                  </v-col>
-                </v-row>
-              </v-container>
+              <WorkspaceMenu v-on:thisPickWorkspace="joinOrCreate($event)"/>
             </v-stepper-content>
             <v-stepper-content step="3" class="pt-0 step">
-              <JoinWorkspace/>
-              <v-container>
-                <v-btn block @click="e6 = 5" color="brown darken-3 white--text py-7 step-button">NEXT</v-btn>
-              </v-container>
+              <JoinWorkspace v-on:thisJoinWorkspace="joinWorkspace($event)"/>
             </v-stepper-content>
             <v-stepper-content step="4" class="pt-0 step">
               <CreateWorkspace v-on:thisWorkspace="createWorkspace($event)"/>
             </v-stepper-content>
             <v-stepper-content step="5" class="pt-0 step">
-              <v-container>
-                <h1 align="center" class="pt-5">You Are All Set</h1><br>
-                <p align="center">It all starts here, let's invite the people that help make your projects a success</p>
-                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-                <v-btn block @click="e6 = 1" color="brown darken-3 white--text py-7 step-button">GO TO DASHBOARD</v-btn>
-              </v-container>
+              <Success />
             </v-stepper-content>
           </v-col> 
         </v-row>
@@ -97,21 +71,27 @@
 </template>
 
 <script>
-import BasicInformation from '~/components/BasicInformation';
-import JoinWorkspace from '~/components/JoinWorkspace'
-import CreateWorkspace from '~/components/CreateWorkspace'
+import BasicInformation from '~/components/register/BasicInformation';
+import JoinWorkspace from '~/components/register/JoinWorkspace'
+import CreateWorkspace from '~/components/register/CreateWorkspace'
+import WorkspaceMenu from '~/components/register/WorkspaceMenu'
+import Success from '~/components/register/Success'
 export default {
   middleware: "guest",
   components: {
     BasicInformation,
     JoinWorkspace,
     CreateWorkspace,
+    WorkspaceMenu,
+    Success
   },
   data () {
     return {
-      e6: 1,
+      step: 1,
       userInfo: {},
-      workspaceInfo: {}
+      workspaceInfo: {},
+      joinWorkspaceInfo: {},
+      joinCreateInfo: {}
     }
   },
   methods: {
@@ -119,11 +99,24 @@ export default {
     //proceed to next step
     createUser(addNewUser) {
       this.userInfo = addNewUser
-      this.e6 = 2
+      this.step = 2
+    },
+    joinOrCreate(joinCreate) {
+      this.joinCreateInfo = joinCreate
+      if(this.joinCreateInfo == "join") {
+        this.step = 3
+      }
+      if(this.joinCreateInfo == "create") {
+        this.step = 4
+      }
     },
     createWorkspace(addNewWorkspace) {
       this.workspaceInfo = addNewWorkspace
-      this.e6 = 5
+      this.step = 5
+    },
+    joinWorkspace(joinNewWorkspace) {
+      this.joinWorkspaceInfo = joinNewWorkspace
+      this.step = 5
     },
   }
 }

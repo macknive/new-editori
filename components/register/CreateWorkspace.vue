@@ -19,23 +19,24 @@
     ></v-text-field><br>
     <p class="text-brown">Type of Project</p>
     <v-select
-      :items="newWorkspace.items"
+      :items="newWorkspace.projectType"
       outlined
       :rules="rules"
     ></v-select>
     <p class="text-brown">Number of Collaborators</p>
     <v-select
-      :items="newWorkspace.numbers"
+      v-model="selected"
+      :items="newWorkspace.collaboratorCount"
       outlined
       :rules="rules"
     ></v-select>
-    <v-card class="pa-1">
+    <v-card class="pa-1" v-if="selected">
       <v-container>
         <p class="text-brown">Monthly Subscription</p>
         <v-row>
           <v-col>
-            <p>3 collaborators @ $9.99 permonth</p>
-            <h3>$29.97 per month</h3>
+            <p> {{selected}} collaborators @ ${{basePrice}} permonth</p>
+            <h3>${{totalPrice}} per month</h3>
           </v-col>
           <v-col align="right">
             <p>3-day free trial</p>
@@ -90,7 +91,7 @@
           <a @click="visible = !visible" class="text-brown">Other payment methods</a>
         </div><br>
 
-        <p align="center">You will be charged $29.97 on December 14, 2020</p>
+        <p align="center">You will be charged ${{totalPrice}} on {{ formattedDate }}</p>
 
       </v-container>
     </v-card><br>
@@ -105,20 +106,23 @@
 </template>
 
 <script>
+import moment from 'moment';
 export default {
   data() {
     return {
       valid: true,
+      moment: moment,
+      selected: '',
+      basePrice: 9.99,
       newWorkspace: {
         workspaceName: "",
         cardName: "",
         cardNumber: "",
-        items: ['Blog', 'Post', 'Article', 'Editor'],
-        numbers: ['1', '2', '3', '4'],
+        projectType: ['Blog', 'Post', 'Article', 'Editor'],
+        collaboratorCount: ['1', '2', '3', '4'],
       },
       rules: [
-      value => !!value || 'Required.',
-      //value => (value && value.length >= 6) || 'Min 6 characters',
+        value => !!value || 'Required.',
       ],
       visible: true
     }
@@ -135,6 +139,14 @@ export default {
     },
     errorMessage() {
       console.log("Please fill the required form")
+    }
+  },
+  computed: {
+    totalPrice() {
+      return this.selected * this.basePrice
+    },
+    formattedDate() {
+      return moment(this.givenDate).add(3, 'days').format('MMMM DD YYYY')
     }
   }
 }

@@ -17,7 +17,7 @@
             <v-text-field
               v-model="email"
               solo
-              :rules="emailRules"
+              :rules="rules.email"
               hide-details="auto"
               clearable
             ></v-text-field>
@@ -27,11 +27,9 @@
             <v-text-field
               v-model="password"
               solo
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :rules="rules"
-              :type="show1 ? 'text' : 'password'"
+              :rules="rules.password"
+              :type="show ? 'text' : 'password'"
               name="input-10-1"
-              @click:append="show1 = !show1"
             ></v-text-field>
             </v-col>
             <v-col align="right" class="pt-0 pb-10">
@@ -74,15 +72,11 @@ export default {
       email: "",
       password: "",
       error: null,
-      show1: false,
-      rules: [
-        value => !!value || 'Required.',
-        //value => (value && value.length >= 6) || 'Min 6 characters',
-      ],
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
+      show: false,
+      rules: {
+        email: [ v => !!v || 'E-mail is required', v => /.+@.+\..+/.test(v) || 'E-mail must be valid',],
+        password: [v => !!v || "Password is required"],
+      },
     };
   },
   methods: {
@@ -101,7 +95,7 @@ export default {
         await this.$auth.loginWith("local", {
         data: {
           identifier: this.email,
-          password: this.password,
+          password: this.password, 
         },
         })
         .then(response => { 
