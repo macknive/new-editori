@@ -11,9 +11,9 @@
             v-model="valid"
             lazy-validation
             >
-            <h1 align="center" class="py-12 mt-12">LOGIN</h1>
+            <h1 align="center" class="py-12 mt-12 testclass">LOGIN</h1>
             <v-col class="px-10">
-            <p class="mb-0 text-brown">Email Address</p>
+            <p class="mb-0 text-brown">EMAIL ADDRESS</p>
             <v-text-field
               v-model="email"
               solo
@@ -23,7 +23,7 @@
             ></v-text-field>
             </v-col>
             <v-col class="px-10 pb-0">  
-            <p class="mb-0 text-brown">Password</p>
+            <p class="mb-0 text-brown">PASSWORD</p>
             <v-text-field
               v-model="password"
               solo
@@ -113,22 +113,6 @@ export default {
 };
 </script>
 
-<style scoped>
-html, body {
-  max-width: 100%;
-  overflow-x: hidden;
-}
-
-.rcorners {	
-  border-radius: 50%;	
-  border: 1px solid #593d3b;	
-  padding: 22px; 	
-  height: 80px;	
-  width: 80px;  	
-}
-
-.text-brown {
-  color: #593d3b !important;
-}
+<style>
 
 </style>

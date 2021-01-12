@@ -2,13 +2,13 @@
 <v-container>
   <div align="center">
     <h1>Pending Invitations</h1>
-    <p>You have been invited to the following workspaces</p>
+    <h4>You have been invited to the following workspaces</h4>
   </div>
   <v-row class="d-flex flex-column">
     <v-col>
       <v-row v-for="value in existingWorkspace" :key="value.id">
         <v-col>
-          <h1>{{value.name}}</h1>
+          <h3>{{value.name}}</h3>
           <p>{{value.owner}}</p>
         </v-col>
         <v-col align="right" class="pt-8">

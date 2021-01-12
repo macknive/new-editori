@@ -4,7 +4,7 @@
       <v-row class="d-flex flex-column">
         <v-col align="center">
           <h1>How can we help you?</h1>
-          <p>The best relationships start with at least this much...</p>
+          <h4>The best relationships start with at least this much...</h4>
           <br><br><br>
         </v-col>
       </v-row>

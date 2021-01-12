@@ -3,9 +3,9 @@
     <v-row class="d-flex flex-column">
       <v-col align="center">
         <h1>Tell Us About You...</h1>
-        <p>The best relationships start with at least this much...</p>
+        <h4>The best relationships start with at least this much...</h4>
       </v-col>
-      <v-col>
+      <v-col class="mt-5">
         <p class="text-brown">Your Name</p>
         <v-form
           ref="form"

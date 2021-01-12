@@ -2,7 +2,7 @@
 <v-container>
   <div align="center">
     <h1>Workspace Setup</h1>
-    <p>The best relationships start with at least this much...</p>
+    <h4>The best relationships start with at least this much...</h4>
   </div>
   <v-form
     ref="form"
@@ -35,12 +35,12 @@
         <p class="text-brown">Monthly Subscription</p>
         <v-row>
           <v-col>
-            <p> {{selected}} collaborators @ ${{basePrice}} per month</p>
-            <h3>${{totalPrice}} per month</h3>
+            <p class="noto-serif text-gray"> {{selected}} collaborators @ ${{basePrice}} per month</p>
+            <h3 class="noto-serif">${{totalPrice}} per month</h3>
           </v-col>
           <v-col align="right">
-            <p>3-day free trial</p>
-            <h3>$0 due today</h3>
+            <p class="noto-serif">3-day free trial</p>
+            <h3 class="noto-serif">$0 due today</h3>
           </v-col>
         </v-row>
         <div v-if="visible">
