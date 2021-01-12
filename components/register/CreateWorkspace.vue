@@ -142,7 +142,7 @@ export default {
       return this.selected * this.basePrice
     },
     formattedDate() {
-      return moment(this.givenDate).add(3, 'days').format('MMMM DD YYYY')
+      return moment(this.givenDate).add(3, 'days').format('MMMM DD, YYYY')
     }
   }
 }

@@ -48,7 +48,7 @@
             </div>
           </v-col>
           <v-col class="pt-12">
-            <v-stepper-content step="1" class="pt-0 step">
+            <v-stepper-content step="1" class="pt-0 step basicinformation">
               <BasicInformation v-on:thisUser="createUser($event)"/>
             </v-stepper-content>
             <v-stepper-content step="2" class="pt-0 step">
@@ -100,6 +100,7 @@ export default {
     createUser(addNewUser) {
       this.userInfo = addNewUser
       this.step = 2
+      document.querySelector('.basicinformation').style.display="none"
     },
     joinOrCreate(joinCreate) {
       this.joinCreateInfo = joinCreate
