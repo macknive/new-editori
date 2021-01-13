@@ -32,6 +32,8 @@ h4, .noto-serif, input[type="text"]{
 p {
   font-weight: 700 !important;
   font-size: 18px !important;
+  line-height: 36px;
+  letter-spacing: 1px;
 }
 
 .step-button {
@@ -45,6 +47,15 @@ p,
 .step3 div > span,
 .step4 div > span {
   font-family: 'Noto Sans';
+  font-weight: 700 !important;
+  font-size: 18px !important;
+}
+
+.step1 div > span, 
+.step2 div > span,
+.step3 div > span,
+.step4 div > span {
+  padding-bottom: 10px;
 }
 
 .text-gray {

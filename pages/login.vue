@@ -41,12 +41,12 @@
                 block 
                 @click="validate() ? login() : errorMessage()" 
                 color="brown darken-3 white--text py-7 step-button"
-              >LOGIN</v-btn>
+              >LOG IN</v-btn>
             </v-col><br>
             <v-col align="right" class="pt-0 pb-10">
               Don't have an account?
               <nuxt-link to="/register" class="pr-10 text-brown">Sign Up</nuxt-link >
-            </v-col><br><br>
+            </v-col><br>
             <v-col align="center">
               <p class="text-brown">CONTINUE WITH</p>
               <div class="d-flex justify-center">

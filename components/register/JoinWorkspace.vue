@@ -3,7 +3,7 @@
   <div align="center">
     <h1>Pending Invitations</h1>
     <h4>You have been invited to the following workspaces</h4>
-  </div>
+  </div><br><br><br>
   <v-row class="d-flex flex-column">
     <v-col>
       <v-row v-for="value in existingWorkspace" :key="value.id">
@@ -12,12 +12,12 @@
           <p>{{value.owner}}</p>
         </v-col>
         <v-col align="right" class="pt-8">
-          <font-awesome-icon class="text-brown mr-3" icon="trash-alt" size="2x"></font-awesome-icon>
-          <font-awesome-icon class="text-brown" icon="check" size="2x"></font-awesome-icon>
+          <a><font-awesome-icon class="text-brown trashbtn mr-3" icon="trash-alt" size="2x"></font-awesome-icon></a>
+          <a><font-awesome-icon class="text-brown checkbtn" icon="check" size="2x"></font-awesome-icon></a>
         </v-col>
       </v-row>
     </v-col>
-  </v-row>
+  </v-row><br><br><br><br><br><br><br>
   <v-btn block @click="joinNewWorkspace()" color="brown darken-3 white--text py-7 step-button">NEXT</v-btn>
 </v-container>
 </template>
@@ -38,7 +38,7 @@ export default {
     },
     errorMessage() {
       console.log("error")
-    }
+    },
   }
 }
 </script>

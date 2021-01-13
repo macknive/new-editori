@@ -6,7 +6,7 @@
         <h4>The best relationships start with at least this much...</h4>
       </v-col>
       <v-col class="mt-5">
-        <p class="text-brown">Your Name</p>
+        <p class="text-brown mb-0">NAME</p>
         <v-form
           ref="form"
           v-model="valid"
@@ -18,14 +18,14 @@
             :rules="rules.name"
             hide-details="auto"
           ></v-text-field><br>
-          <p class="text-brown">Email Address</p>
+          <p class="text-brown mb-0">EMAIL ADDRESS</p>
           <v-text-field
             v-model="newUser.email"
             solo
             :rules="rules.email"
             hide-details="auto"
           ></v-text-field><br>
-          <p class="text-brown">Password</p>
+          <p class="text-brown mb-0">PASSWORD</p>
           <v-text-field
             v-model="newUser.password"
             solo
@@ -33,7 +33,7 @@
             :type="show ? 'text' : 'password'"
             name="input-10-1"
           ></v-text-field>
-          <p class="text-brown">Confirm Password</p>
+          <p class="text-brown mb-0">CONFIRM PASSWORD</p>
           <v-text-field
             v-model="newUser.confirmPassword"
             solo
@@ -42,6 +42,7 @@
             name="input-10-1"
           ></v-text-field>
           <v-checkbox
+            class="checkbox"
             v-model="newUser.checkbox"
             :rules="rules.termsOfService"
           >

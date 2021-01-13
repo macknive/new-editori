@@ -1,6 +1,6 @@
 <template>
 <v-container>
-  <div align="center">
+  <div align="center" class="pb-12">
     <h1>Workspace Setup</h1>
     <h4>The best relationships start with at least this much...</h4>
   </div>
@@ -45,13 +45,13 @@
         </v-row>
         <div v-if="visible">
           <v-row>
-            <v-col class="col pt-5">
-              <v-btn @click="visible = !visible" block color="brown darken-3 white--text py-7 step-button"><font-awesome-icon class="text-white" icon="credit-card" size="1x"></font-awesome-icon>&nbsp;&nbsp;&nbsp;CREDIT CARD</v-btn>
+            <v-col class="col">
+              <v-btn @click="visible = !visible" block color="brown darken-3 white--text py-7 step-button"><font-awesome-icon class="text-white" icon="credit-card" size="1x"></font-awesome-icon>&nbsp;&nbsp;CREDIT CARD</v-btn>
             </v-col>
-            <v-col class="col svgcol pt-5" align="right">
+            <v-col class="col">
               <font-awesome-icon :icon="['fab', 'apple-pay']" class="icon alt svgapple" size="4x"/>
             </v-col>
-            <v-col class="col svgcol pt-5" align="right">
+            <v-col class="col svggooglepay">
               <font-awesome-icon :icon="['fab', 'google-pay']" class="icon alt svggoogle" size="4x"/>
             </v-col>
           </v-row>
@@ -59,28 +59,24 @@
 
         <div v-if="!visible">
           <v-row>
-            <v-col class="col-5">
+            <v-col>
               <v-text-field
                 v-model="newWorkspace.cardName"
                 label="Card Number"
                 solo
-         
                 hide-details="auto"
-                clearable
               ></v-text-field>
             </v-col>
-            <v-col class="col-3">
+            <v-col>
               <v-text-field
                 v-model="newWorkspace.cardNumber"
                 label="MM/YY"
                 solo
-     
                 hide-details="auto"
-                clearable
               ></v-text-field>
             </v-col>
-            <v-col class="col-4">
-              <v-btn block color="brown darken-3 white--text py-7 step-button">SUBSCRIBE</v-btn>
+            <v-col>
+              <v-btn block color="brown darken-3 white--text py-6 step-button">SUBSCRIBE</v-btn>
             </v-col>
 
           </v-row>
