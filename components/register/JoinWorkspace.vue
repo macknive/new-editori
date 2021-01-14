@@ -1,5 +1,5 @@
 <template>
-<v-container>
+<v-container class="mxh-container">
   <div align="center">
     <h1>Pending Invitations</h1>
     <h4>You have been invited to the following workspaces</h4>
@@ -17,8 +17,10 @@
         </v-col>
       </v-row>
     </v-col>
-  </v-row><br><br><br><br><br><br><br>
-  <v-btn block @click="joinNewWorkspace()" color="brown darken-3 white--text py-7 step-button">NEXT</v-btn>
+  </v-row>
+  <div class="btn-holder">
+    <v-btn block @click="joinNewWorkspace()" color="bottom-button brown darken-3 white--text py-7 step-button">NEXT</v-btn>
+  </div>
 </v-container>
 </template>
 

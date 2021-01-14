@@ -142,6 +142,18 @@ html, body {
   border: none;
 }
 
+.mxh-container {
+  height: 700px;
+  justify-content: space-between;
+  flex-direction: column;
+  display: flex;
+}
+
+.btn-end {
+  justify-content: flex-end;
+  display: flex;
+}
+
 @media only screen and (max-width: 375px) {
   .rectangle, .rectangle2, .rectangle3, .rectangle4 {
     left: 0px;
