@@ -18,7 +18,7 @@
       </v-row>
     </v-col>
   </v-row>
-  <div class="btn-holder">
+  <div class="btn-end">
     <v-btn block @click="joinNewWorkspace()" color="bottom-button brown darken-3 white--text py-7 step-button">NEXT</v-btn>
   </div>
 </v-container>
