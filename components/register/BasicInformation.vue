@@ -17,14 +17,16 @@
             solo
             :rules="rules.name"
             hide-details="auto"
-          ></v-text-field><br>
+            class="pb-3"
+          ></v-text-field>
           <p class="text-brown mb-0">EMAIL ADDRESS</p>
           <v-text-field
             v-model="newUser.email"
             solo
             :rules="rules.email"
             hide-details="auto"
-          ></v-text-field><br>
+            class="pb-3"
+          ></v-text-field>
           <p class="text-brown mb-0">PASSWORD</p>
           <v-text-field
             v-model="newUser.password"
@@ -47,16 +49,14 @@
             :rules="rules.termsOfService"
           >
           <template v-slot:label>I accept the<a class="ml-1 text-brown">Terms of Service</a></template>
-          </v-checkbox><br>
-
+          </v-checkbox>
           <v-btn 
             :disabled="!valid"
             block 
             @click="validate() ? addUser() : errorMessage()" 
             color="brown darken-3 white--text py-7 step-button"
           >NEXT</v-btn>
-
-        </v-form><br>
+        </v-form>
           <p align="right">Already have an account?&nbsp;<nuxt-link to="/login" class="text-brown">Login</nuxt-link></p>
       </v-col>
     </v-row>

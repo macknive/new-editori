@@ -3,8 +3,8 @@
   <div align="center">
     <h1>Pending Invitations</h1>
     <h4>You have been invited to the following workspaces</h4>
-  </div><br><br><br>
-  <v-row class="d-flex flex-column">
+  </div>
+  <v-row class="d-flex flex-column pt-12">
     <v-col>
       <v-row v-for="value in existingWorkspace" :key="value.id">
         <v-col>

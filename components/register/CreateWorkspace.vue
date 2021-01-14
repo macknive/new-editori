@@ -16,7 +16,8 @@
       :rules="rules"
       hide-details="auto"
       clearable
-    ></v-text-field><br>
+      class="pb-3"
+    ></v-text-field>
     <p class="text-brown">Type of Project</p>
     <v-select
       :items="newWorkspace.projectType"
@@ -29,21 +30,22 @@
       :items="newWorkspace.collaboratorCount"
       outlined
       :rules="rules"
+      class="pb-3"
     ></v-select>
-    <v-card class="pa-1" v-if="selected">
+    <v-card class="pa-1 mb-8 pb-3" v-if="selected">
       <v-container>
         <p class="text-brown">Monthly Subscription</p>
         <v-row>
           <v-col>
             <p class="noto-serif text-gray"> {{selected}} collaborators @ ${{basePrice}} per month</p>
-            <h3 class="noto-serif">${{totalPrice}} per month</h3>
+            <h4 class="noto-serif">${{totalPrice}} per month</h4>
           </v-col>
           <v-col align="right">
-            <p class="noto-serif">3-day free trial</p>
-            <h3 class="noto-serif">$0 due today</h3>
+            <p class="noto-serif mb-12">3-day free trial</p>
+            <h4 class="noto-serif">$0 due today</h4>
           </v-col>
         </v-row>
-        <div v-if="visible">
+        <div v-if="visible" class="pb-3">
           <v-row>
             <v-col class="col">
               <v-btn @click="visible = !visible" block color="brown darken-3 white--text py-7 step-button"><font-awesome-icon class="text-white" icon="credit-card" size="1x"></font-awesome-icon>&nbsp;&nbsp;CREDIT CARD</v-btn>
@@ -57,7 +59,7 @@
           </v-row>
         </div>
 
-        <div v-if="!visible">
+        <div v-if="!visible" class="pb-3">
           <v-row>
             <v-col>
               <v-text-field
@@ -80,13 +82,13 @@
             </v-col>
 
           </v-row>
-          <a @click="visible = !visible" class="text-brown">Other payment methods</a>
-        </div><br>
+          <a @click="visible = !visible" class="text-brown pb-3">Other payment methods</a>
+        </div>
 
-        <p align="center">You will be charged ${{totalPrice}} on {{ formattedDate }}</p>
+        <h4 align="center">You will be charged ${{totalPrice}} on {{ formattedDate }}</h4>
 
       </v-container>
-    </v-card><br>
+    </v-card>
     <v-btn 
       :disabled="!valid"
       block 
