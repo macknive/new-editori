@@ -1,0 +1,68 @@
+@font-face {
+  font-family: 'Enriq';
+  src:url('~assets/fonts/ENRIQRegular.ttf')
+}
+
+@font-face {
+  font-family: 'Noto Sans';
+  src:url('~assets/fonts/NotoSans-Regular.ttf')
+}
+
+@font-face {
+  font-family: 'Noto Serif';
+  src:url('~assets/fonts/NotoSerif-Regular.ttf')
+}
+
+h1, h3, .step-button {
+  font-family: 'Enriq';
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h3 {
+  font-size: 32px;
+}
+
+h4, .noto-serif, input[type="text"]{
+  font-family: 'Noto Serif';
+}
+
+p {
+  font-weight: 700 !important;
+  font-size: 18px !important;
+  line-height: 36px;
+  letter-spacing: 1px;
+}
+
+.step-button {
+  font-weight: 700 !important;
+  font-size: 18px !important;
+}
+
+p,
+.step1 div > span, 
+.step2 div > span,
+.step3 div > span,
+.step4 div > span {
+  font-family: 'Noto Sans';
+  font-weight: 700 !important;
+  font-size: 18px !important;
+}
+
+.step1 div > span, 
+.step2 div > span,
+.step3 div > span,
+.step4 div > span {
+  padding-bottom: 10px;
+}
+
+.text-gray {
+  color: gray;
+  font-weight: 300 !important;
+}
+
+.text-brown {
+  color: #593d3b !important;
+}

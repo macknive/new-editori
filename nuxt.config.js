@@ -44,6 +44,7 @@ export default {
   ** Global CSS
   */
   css: [
+    '@/assets/scss/main.scss'
   ],
   /*
   ** Plugins to load before mounting the App
@@ -69,6 +70,8 @@ export default {
     '@nuxtjs/proxy',
     '@nuxtjs/dotenv',
     '@nuxtjs/auth',
+    '@nuxtjs/vuetify',
+    '@nuxtjs/moment',
   ],
   apollo: {
     clientConfigs: {
