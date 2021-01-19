@@ -4,7 +4,7 @@
       <v-col class="pa-0 brown lighten-2"> </v-col>
       <v-col class="pa-0">
         <div class="d-flex flex-column">
-          <v-container>
+          <v-container class="container-700">
             <v-form ref="form" v-model="valid" lazy-validation>
               <h1 align="center" class="py-12 mt-12 testclass">LOGIN</h1>
               <v-col class="px-10">
@@ -14,7 +14,6 @@
                   solo
                   :rules="rules.email"
                   hide-details="auto"
-                  clearable
                 ></v-text-field>
               </v-col>
               <v-col class="px-10 pb-0">

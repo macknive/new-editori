@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="container-700">
     <v-row class="d-flex flex-column">
       <v-col align="center">
         <h1>Tell Us About You...</h1>

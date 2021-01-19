@@ -1,95 +1,101 @@
 <template>
-  <div>
-    <table>
-      <tbody>
-        <tr>
-          <th>Title</th>
-          <td>
-            <div
-              class="form-group"
-              :class="{ 'form-group--error': $v.title.$error }"
-            >
-              <input type="text" v-model.trim="$v.title.$model" />
-            </div>
-            <div class="error" v-if="!$v.title.required">Title is required</div>
-            <div class="error" v-if="!$v.title.minLength">
-              Title must have at least
-              {{ $v.title.$params.minLength.min }} letters.
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th>Slug</th>
-          <td>
-            <div
-              class="form-group"
-              :class="{ 'form-group--error': $v.slug.$error }"
-            >
-              <input
-                type="text"
-                ref="slugInput"
-                @focus="onSlugFocus"
-                @blur="onSlugBlur"
-                v-model.trim="$v.slug.$model"
-              />
-            </div>
-            <div class="error" v-if="!$v.slug.required">
-              Slug name is required
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th>Workflow</th>
-          <td>
-            <div
-              class="form-group"
-              :class="{ 'form-group--error': $v.selectedWorkflow.$error }"
-            >
-              <select v-model.trim="$v.selectedWorkflow.$model">
-                <option :value="undefined" selected disabled
-                  >Select a Workflow</option
+  <v-app>
+    <v-container>
+      <div>
+        <table>
+          <tbody>
+            <tr>
+              <th>Title</th>
+              <td>
+                <div
+                  class="form-group"
+                  :class="{ 'form-group--error': $v.title.$error }"
                 >
-                <option
-                  v-for="workflow in workflows"
-                  :key="workflow.id"
-                  :value="workflow"
+                  <v-text-field type="text" v-model.trim="$v.title.$model" />
+                </div>
+                <div class="error" v-if="!$v.title.required">
+                  Title is required
+                </div>
+                <div class="error" v-if="!$v.title.minLength">
+                  Title must have at least
+                  {{ $v.title.$params.minLength.min }} letters.
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>Slug</th>
+              <td>
+                <div
+                  class="form-group"
+                  :class="{ 'form-group--error': $v.slug.$error }"
                 >
-                  {{ workflow.name }}
-                </option>
-              </select>
-            </div>
-            <div class="error" v-if="!$v.selectedWorkflow.required"></div>
-          </td>
-        </tr>
-        <tr v-for="role in customRoles" :key="role.id">
-          <th>{{ role.name }}</th>
-          <td>
-            <select v-model="usersForRole[role.name]">
-              <option :value="undefined" selected disabled
-                >Select a User</option
-              >
-              <option
-                v-for="user in role.users"
-                :key="user.id"
-                :value="user.id"
-              >
-                {{ user.display_name }}
-              </option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-            <button @click="createDeliverable">Create!</button>
-            <p class="typo__p" v-if="submitStatus === 'ERROR'">
-              Please fill the form correctly.
-            </p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                  <v-text-field
+                    type="text"
+                    ref="slugInput"
+                    @focus="onSlugFocus"
+                    @blur="onSlugBlur"
+                    v-model.trim="$v.slug.$model"
+                  />
+                </div>
+                <div class="error" v-if="!$v.slug.required">
+                  Slug name is required
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <th>Workflow</th>
+              <td>
+                <div
+                  class="form-group"
+                  :class="{ 'form-group--error': $v.selectedWorkflow.$error }"
+                >
+                  <select v-model.trim="$v.selectedWorkflow.$model">
+                    <option :value="undefined" selected disabled
+                      >Select a Workflow</option
+                    >
+                    <option
+                      v-for="workflow in workflows"
+                      :key="workflow.id"
+                      :value="workflow"
+                    >
+                      {{ workflow.name }}
+                    </option>
+                  </select>
+                </div>
+                <div class="error" v-if="!$v.selectedWorkflow.required"></div>
+              </td>
+            </tr>
+            <tr v-for="role in customRoles" :key="role.id">
+              <th>{{ role.name }}</th>
+              <td>
+                <select v-model="usersForRole[role.name]">
+                  <option :value="undefined" selected disabled
+                    >Select a User</option
+                  >
+                  <option
+                    v-for="user in role.users"
+                    :key="user.id"
+                    :value="user.id"
+                  >
+                    {{ user.display_name }}
+                  </option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <v-btn @click="createDeliverable">Create!</v-btn>
+                <p class="typo__p" v-if="submitStatus === 'ERROR'">
+                  Please fill the form correctly.
+                </p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </v-container>
+  </v-app>
 </template>
 
 <script>

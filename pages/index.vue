@@ -1,15 +1,15 @@
 <template>
-  <div>
+  <v-container>
     <h1>Landing page</h1>
     <div v-if="!isAuthenticated">
       Not Authenticated. Please <nuxt-link to="/login">login</nuxt-link> to
       continue.
     </div>
     <div v-if="isAuthenticated">
-      <button @click="onLogout" class="logout">Logout</button>
+      <v-btn @click="onLogout" class="logout">Logout</v-btn>
       <WorkspaceList />
     </div>
-  </div>
+  </v-container>
 </template>
 
 <script>

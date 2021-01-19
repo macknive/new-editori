@@ -16,7 +16,6 @@ body {
 
 .square {
   height: 240px;
-  width: 240px;
   border: 1px solid #593d3b;
   border-radius: 3%;
 }
@@ -29,8 +28,12 @@ body {
   border-left: none !important;
 }
 
-.container {
+.container-700 {
   max-width: 700px !important;
+}
+
+.container-1200 {
+  max-width: 1200px !important;
 }
 
 .newcontainer {
@@ -134,10 +137,6 @@ body {
   border: 1px solid gray;
 }
 
-.svggooglepay {
-  padding-left: 0px !important;
-}
-
 .v-input__slot {
   border: 1px solid #593d3b;
   box-shadow: none !important;
@@ -147,7 +146,7 @@ body {
   border: none;
 }
 
-.mxh-container {
+.workspace-container {
   height: 700px;
   justify-content: space-between;
   flex-direction: column;
@@ -157,6 +156,16 @@ body {
 .btn-end {
   justify-content: flex-end;
   display: flex;
+}
+
+.cc-textfield {
+  min-width: 200px;
+}
+
+.logout {
+  position: absolute !important;
+  right: 12px;
+  top: 12px;
 }
 
 @media only screen and (max-width: 375px) {
@@ -206,8 +215,5 @@ body {
 
   .step4 div > span {
     top: 460px !important;
-  }
-  .svggooglepay {
-    padding-left: 12px !important;
   }
 }

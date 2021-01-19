@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container>
+    <v-container class="container-700">
       <v-row class="d-flex flex-column">
         <v-col align="center" class="mb-12">
           <h1>How can we help you?</h1>
