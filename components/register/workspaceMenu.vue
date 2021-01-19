@@ -9,11 +9,25 @@
       </v-row>
       <v-row>
         <v-col>
-          <a @click="proceedToJoin()"><div class="square pa-12 mb-3" align="center"><font-awesome-icon class="text-brown svgworkspace" icon="envelope-open-text" size="4x"></font-awesome-icon></div></a>
+          <a @click="proceedToJoin()"
+            ><div class="square pa-12 mb-3" align="center">
+              <font-awesome-icon
+                class="text-brown svgworkspace"
+                icon="envelope-open-text"
+                size="4x"
+              ></font-awesome-icon></div
+          ></a>
           <p align="center" class="text-brown">Join Existing Workspace</p>
         </v-col>
         <v-col>
-          <a @click="proceedToCreate()"><div class="square pa-12 mb-3" align="center"><font-awesome-icon class="text-brown svgworkspace" icon="plus" size="4x"></font-awesome-icon></div></a>
+          <a @click="proceedToCreate()"
+            ><div class="square pa-12 mb-3" align="center">
+              <font-awesome-icon
+                class="text-brown svgworkspace"
+                icon="plus"
+                size="4x"
+              ></font-awesome-icon></div
+          ></a>
           <p align="center" class="text-brown">Create New Workspace</p>
         </v-col>
       </v-row>
@@ -25,25 +39,23 @@
 export default {
   data() {
     return {
-      workspaceChoiceStatus: "",
+      workspaceChoiceStatus: ''
     }
   },
   methods: {
     proceedToJoin(stepThree) {
-      this.workspaceChoiceStatus = "join"
+      this.workspaceChoiceStatus = 'join'
       this.$emit('thisPickWorkspace', this.workspaceChoiceStatus)
     },
     proceedToCreate(stepFour) {
-      this.workspaceChoiceStatus = "create"
+      this.workspaceChoiceStatus = 'create'
       this.$emit('thisPickWorkspace', this.workspaceChoiceStatus)
     },
     errorMessage() {
-      console.log("error")
+      console.log('error')
     }
   }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

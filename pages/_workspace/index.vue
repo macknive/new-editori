@@ -1,6 +1,6 @@
 <template>
   <div class="root">
-    <h1>{{workspace.name}} Workspace</h1>
+    <h1>{{ workspace.name }} Workspace</h1>
     <table class="table">
       <tbody>
         <tr class="header-row">
@@ -8,38 +8,41 @@
           <th>Last Updated</th>
           <th>Status</th>
         </tr>
-        <DeliverableTableRow v-for="deliverable in deliverables"
-            class="deliverable"
-            :key="deliverable.id" :deliverable="deliverable"
-            :baseUrl="`/${workspaceSlug}`">
+        <DeliverableTableRow
+          v-for="deliverable in deliverables"
+          class="deliverable"
+          :key="deliverable.id"
+          :deliverable="deliverable"
+          :baseUrl="`/${workspaceSlug}`"
+        >
         </DeliverableTableRow>
       </tbody>
     </table>
-    <nuxt-link :to="`${workspace.slug}/new`" >
+    <nuxt-link :to="`${workspace.slug}/new`">
       <button class="fab">+</button>
     </nuxt-link>
   </div>
 </template>
 
 <script>
-import DeliverableTableRow from '~/components/DeliverableTableRow';
-import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug';
-import ListDeliverablesByWorkspace from '~/queries/ListDeliverablesByWorkspace';
+import DeliverableTableRow from '~/components/DeliverableTableRow'
+import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug'
+import ListDeliverablesByWorkspace from '~/queries/ListDeliverablesByWorkspace'
 
 export default {
   components: {
-    DeliverableTableRow,
+    DeliverableTableRow
   },
   data() {
     return {
       deliverables: [],
       workspaces: [],
-      workspaceSlug: this.$route.params.workspace,
+      workspaceSlug: this.$route.params.workspace
     }
   },
   computed: {
     workspace() {
-      return this.workspaces[0];
+      return this.workspaces[0]
     }
   },
   apollo: {
@@ -48,7 +51,7 @@ export default {
       query: ListDeliverablesByWorkspace,
       variables() {
         return {
-          workspaceSlug: this.workspaceSlug,
+          workspaceSlug: this.workspaceSlug
         }
       }
     },
@@ -57,10 +60,10 @@ export default {
       query: GetWorkspaceBySlug,
       variables() {
         return {
-          workspaceSlug: this.workspaceSlug,
+          workspaceSlug: this.workspaceSlug
         }
       }
-    },
+    }
   }
 }
 </script>
@@ -85,7 +88,7 @@ body {
   background: #fff;
 }
 .deliverable:nth-child(odd) {
-  background: #f0f0f0
+  background: #f0f0f0;
 }
 th {
   color: #343330;

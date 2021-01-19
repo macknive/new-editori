@@ -2,24 +2,35 @@
   <main class="brief-root" :class="{ locked: !isViewerAssignee }">
     <client-only>
       <div class="content">
-        <input type="text" placeholder="Primary keyword" v-model="keyword"
-            :disabled="!isViewerAssignee"
-            @input="onKeywordUpdate" @blur="onKeywordUpdate">
+        <input
+          type="text"
+          placeholder="Primary keyword"
+          v-model="keyword"
+          :disabled="!isViewerAssignee"
+          @input="onKeywordUpdate"
+          @blur="onKeywordUpdate"
+        />
+
         <medium-editor
           :text="brief"
           :options="options"
           custom-tag="article"
           v-on:edit="onBriefUpdate"
-          class="editor">
+          class="editor"
+        >
         </medium-editor>
         <div v-if="!isViewerAssignee" class="lock-label">
           <font-awesome-icon icon="lock"></font-awesome-icon>
-          Locked for editing by {{assignee.display_name}}
+          Locked for editing by {{ assignee.display_name }}
         </div>
       </div>
       <div class="placeholder content" disabled slot="placeholder">
-        <input type="text" placeholder="Primary keyword" v-model="keyword"
-            disabled="disabled">
+        <input
+          type="text"
+          placeholder="Primary keyword"
+          v-model="keyword"
+          disabled="disabled"
+        />
         <article v-html="brief"></article>
       </div>
     </client-only>
@@ -29,7 +40,7 @@
 <script>
 export default {
   data() {
-    const isViewerAssignee = this.viewer.id === this.assignee.id;
+    const isViewerAssignee = this.viewer.id === this.assignee.id
     const toolbarOptions = {
       buttons: [
         'bold',
@@ -42,10 +53,10 @@ export default {
         'orderedlist',
         'unorderedlist',
         'quote',
-        'removeFormat',
+        'removeFormat'
       ],
-      updateOnEmptySelection: true,
-    };
+      updateOnEmptySelection: true
+    }
 
     return {
       brief: this.deliverable.data.brief,
@@ -53,7 +64,7 @@ export default {
       isViewerAssignee: isViewerAssignee,
       options: {
         anchor: {
-          linkValidation: true,
+          linkValidation: true
         },
         disableEditing: !isViewerAssignee,
         paste: {
@@ -65,26 +76,22 @@ export default {
           unwrapTags: []
         },
         placeholder: {
-          text: 'Enter your brief here',
+          text: 'Enter your brief here'
         },
-        toolbar: isViewerAssignee ? toolbarOptions : false,
-      },
-    };
+        toolbar: isViewerAssignee ? toolbarOptions : false
+      }
+    }
   },
-  props: [
-    'assignee',
-    'deliverable',
-    'viewer',
-  ],
+  props: ['assignee', 'deliverable', 'viewer'],
   methods: {
     onBriefUpdate(e) {
-      const newBrief = e.api.origElements.innerHTML;
-      this.deliverable.data.brief = newBrief;
-      this.$emit('autoSave');
+      const newBrief = e.api.origElements.innerHTML
+      this.deliverable.data.brief = newBrief
+      this.$emit('autoSave')
     },
     onKeywordUpdate(e) {
-      this.deliverable.data.keyword = this.keyword;
-      this.$emit('autoSave');
+      this.deliverable.data.keyword = this.keyword
+      this.$emit('autoSave')
     }
   }
 }
@@ -92,7 +99,8 @@ export default {
 
 <style scoped>
 .placeholder {
-  -webkit-animation: loading-pulse cubic-bezier(0.45, 0, 0.55, 1) 1s infinite alternate;
+  -webkit-animation: loading-pulse cubic-bezier(0.45, 0, 0.55, 1) 1s infinite
+    alternate;
   animation: loading-pulse cubic-bezier(0.45, 0, 0.55, 1) 1s infinite alternate;
   opacity: 0.3;
   filter: grayscale(1);

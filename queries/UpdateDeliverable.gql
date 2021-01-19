@@ -1,17 +1,18 @@
 mutation UpdateDeliverable(
-    $id: ID!,
-    $data: JSON,
-    $title: String,
-    $slug: String,
-    $workflowData: [editComponentWorkflowsWorkflowStepInstanceInput]) {
+  $id: ID!
+  $data: JSON
+  $title: String
+  $slug: String
+  $workflowData: [editComponentWorkflowsWorkflowStepInstanceInput]
+) {
   updateDeliverable(
     input: {
       where: { id: $id }
       data: {
-        title: $title,
-        data: $data,
-        slug: $slug,
-        workflow_data: $workflowData,
+        title: $title
+        data: $data
+        slug: $slug
+        workflow_data: $workflowData
       }
     }
   ) {

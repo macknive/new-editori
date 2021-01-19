@@ -1,8 +1,5 @@
 query GetPaymentData($stepIds: [ID]!, $userIds: [ID]!) {
-  paymentData(where: {
-    step: { id: $stepIds },
-    user: { id: $userIds }
-  }) {
+  paymentData(where: { step: { id: $stepIds }, user: { id: $userIds } }) {
     paypalEmail
     rate
     currency

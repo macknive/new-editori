@@ -1,7 +1,10 @@
 query ListConnectionsByWorkspace(
-    $workspaceSlug: String!,
-    $service: ENUM_CONNECTIONS_SERVICE!) {
-  connections(where: { workspace: { slug: $workspaceSlug }, service: $service }) {
+  $workspaceSlug: String!
+  $service: ENUM_CONNECTIONS_SERVICE!
+) {
+  connections(
+    where: { workspace: { slug: $workspaceSlug }, service: $service }
+  ) {
     id
     service
     created_at

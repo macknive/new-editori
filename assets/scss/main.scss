@@ -1,6 +1,7 @@
 @import '~assets/scss/typography.scss';
 
-html, body {
+html,
+body {
   max-width: 100%;
   overflow-x: hidden;
 }
@@ -8,9 +9,9 @@ html, body {
 .rcorners {
   border-radius: 50%;
   border: 1px solid #593d3b;
-  padding: 22px; 
+  padding: 22px;
   height: 80px;
-  width: 80px;  
+  width: 80px;
 }
 
 .square {
@@ -77,9 +78,12 @@ html, body {
   top: 100px;
   font-size: 20px;
   left: -23px;
-} 
+}
 
-.rectangle, .rectangle2, .rectangle3, .rectangle4 {
+.rectangle,
+.rectangle2,
+.rectangle3,
+.rectangle4 {
   position: fixed;
   left: 17px;
   height: 150px;
@@ -114,7 +118,8 @@ html, body {
   padding: 28px 0 !important;
 }
 
-.svgapple, .svggoogle {
+.svgapple,
+.svggoogle {
   height: 56px;
   border-radius: 4px;
   width: 120px !important;
@@ -155,7 +160,10 @@ html, body {
 }
 
 @media only screen and (max-width: 375px) {
-  .rectangle, .rectangle2, .rectangle3, .rectangle4 {
+  .rectangle,
+  .rectangle2,
+  .rectangle3,
+  .rectangle4 {
     left: 0px;
     height: 130px;
   }
@@ -182,9 +190,9 @@ html, body {
     top: 50px;
     font-size: 16px;
     left: -40px;
-  } 
+  }
 
-  .step1 div > span { 
+  .step1 div > span {
     top: 70px;
   }
 

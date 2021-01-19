@@ -1,15 +1,10 @@
 mutation CreateConnection(
-    $service: ENUM_CONNECTIONS_SERVICE!,
-    $workspaceId: ID!,
-    $data: JSON!) {
+  $service: ENUM_CONNECTIONS_SERVICE!
+  $workspaceId: ID!
+  $data: JSON!
+) {
   createConnection(
-    input: {
-      data: {
-        service: $service,
-        workspace: $workspaceId,
-        data: $data
-      }
-    }
+    input: { data: { service: $service, workspace: $workspaceId, data: $data } }
   ) {
     connection {
       id
