@@ -268,4 +268,9 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+select {
+  appearance: menulist;
+  border-style: solid;
+}
+</style>
