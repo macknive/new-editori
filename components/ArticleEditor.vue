@@ -8,22 +8,24 @@
           custom-tag="h1"
           v-on:edit="onTitleUpdate"
           @blur="onTitleBlur"
-          class="editor">
+          class="editor"
+        >
         </medium-editor>
         <medium-editor
           :text="body"
           :options="bodyOptions"
           custom-tag="article"
           v-on:edit="onBodyUpdate"
-          class="editor">
+          class="editor"
+        >
         </medium-editor>
         <div v-if="!isViewerAssignee" class="lock-label">
           <font-awesome-icon icon="lock"></font-awesome-icon>
-          Locked for editing by {{assignee.display_name}}
+          Locked for editing by {{ assignee.display_name }}
         </div>
       </div>
       <div class="placeholder content" disabled slot="placeholder">
-        <h1 contenteditable>{{title}}</h1>
+        <h1 contenteditable>{{ title }}</h1>
         <article v-html="body"></article>
       </div>
     </client-only>
@@ -35,40 +37,36 @@ export default {
   data() {
     return {
       body: this.deliverable.data.html,
-      title: this.deliverable.title,
-    };
+      title: this.deliverable.title
+    }
   },
-  props: [
-    'assignee',
-    'deliverable',
-    'viewer',
-  ],
+  props: ['assignee', 'deliverable', 'viewer'],
   methods: {
     onBodyUpdate(e) {
-      const newBody = e.api.origElements.innerHTML;
-      this.deliverable.data.html = newBody;
-      this.$emit('autoSave');
+      const newBody = e.api.origElements.innerHTML
+      this.deliverable.data.html = newBody
+      this.$emit('autoSave')
     },
     onTitleUpdate(e) {
-      const newTitle = e.api.origElements.innerHTML;
-      this.deliverable.title = newTitle;
-      this.$emit('autoSave');
+      const newTitle = e.api.origElements.innerHTML
+      this.deliverable.title = newTitle
+      this.$emit('autoSave')
     },
     onTitleBlur() {
-      this.title = this.sanitizeTitle(this.title);
-      this.$emit('save');
+      this.title = this.sanitizeTitle(this.title)
+      this.$emit('save')
     },
     sanitizeTitle(title) {
-      return title.trim().replace(/\s+/g,' ');
+      return title.trim().replace(/\s+/g, ' ')
     }
   },
   computed: {
     isViewerAssignee() {
       if (!this.viewer) {
-        return false;
+        return false
       }
 
-      return this.viewer.id === this.assignee.id;
+      return this.viewer.id === this.assignee.id
     },
     bodyOptions() {
       const toolbarOptions = {
@@ -83,14 +81,14 @@ export default {
           'orderedlist',
           'unorderedlist',
           'quote',
-          'removeFormat',
+          'removeFormat'
         ],
-        updateOnEmptySelection: true,
-      };
+        updateOnEmptySelection: true
+      }
 
       return {
         anchor: {
-          linkValidation: true,
+          linkValidation: true
         },
         disableDoubleReturn: true,
         disableEditing: !this.isViewerAssignee,
@@ -103,24 +101,25 @@ export default {
           cleanTags: ['meta'],
           unwrapTags: []
         },
-        toolbar: this.isViewerAssignee ? toolbarOptions : false,
-      };
+        toolbar: this.isViewerAssignee ? toolbarOptions : false
+      }
     },
     titleOptions() {
       return {
         disableReturn: true,
         disableEditing: !this.isViewerAssignee,
         disableExtraSpaces: true,
-        toolbar: false,
-      };
-    },
+        toolbar: false
+      }
+    }
   }
 }
 </script>
 
 <style scoped>
 .placeholder {
-  -webkit-animation: loading-pulse cubic-bezier(0.45, 0, 0.55, 1) 1s infinite alternate;
+  -webkit-animation: loading-pulse cubic-bezier(0.45, 0, 0.55, 1) 1s infinite
+    alternate;
   animation: loading-pulse cubic-bezier(0.45, 0, 0.55, 1) 1s infinite alternate;
   opacity: 0.3;
   filter: grayscale(1);

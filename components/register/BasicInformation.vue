@@ -7,11 +7,7 @@
       </v-col>
       <v-col class="mt-5">
         <p class="text-brown mb-0">NAME</p>
-        <v-form
-          ref="form"
-          v-model="valid"
-          lazy-validation
-        >
+        <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
             v-model="newUser.name"
             solo
@@ -48,16 +44,27 @@
             v-model="newUser.checkbox"
             :rules="rules.termsOfService"
           >
-          <template v-slot:label>I accept the<a class="ml-1 text-brown">Terms of Service</a></template>
+            <template v-slot:label
+              >I accept the<a class="ml-1 text-brown"
+                >Terms of Service</a
+              ></template
+            >
           </v-checkbox>
-          <v-btn 
+          <v-btn
             :disabled="!valid"
-            block 
-            @click="validate() ? addUser() : errorMessage()" 
+            block
+            @click="validate() ? addUser() : errorMessage()"
             color="brown darken-3 white--text py-7 step-button"
-          >NEXT</v-btn>
+            >NEXT</v-btn
+          >
         </v-form>
-          <p align="right">Already have an account?&nbsp;<nuxt-link to="/login" class="text-brown">Login</nuxt-link></p>
+        <p align="right">
+          Already have an account?&nbsp;<nuxt-link
+            to="/login"
+            class="text-brown"
+            >Login</nuxt-link
+          >
+        </p>
       </v-col>
     </v-row>
   </v-container>
@@ -65,36 +72,40 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       valid: true,
       error: null,
       show: false,
       newUser: {
-        name: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-        checkbox: false,
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        checkbox: false
       },
       rules: {
-        name: [ value => !!value || 'Required.',],
-        email: [ v => !!v || 'E-mail is required', v => /.+@.+\..+/.test(v) || 'E-mail must be valid',],
-        password: [v => !!v || "Password is required"],
-        confirmPassword: [v => !!v || "Password is required"],
+        name: [value => !!value || 'Required.'],
+        email: [
+          v => !!v || 'E-mail is required',
+          v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
+        ],
+        password: [v => !!v || 'Password is required'],
+        confirmPassword: [v => !!v || 'Password is required'],
         termsOfService: [v => !!v || 'You must agree to continue!']
-      },
+      }
     }
   },
   computed: {
     passwordConfirmationRule() {
       return () =>
-        this.newUser.password === this.newUser.confirmPassword || "Password must match";
+        this.newUser.password === this.newUser.confirmPassword ||
+        'Password must match'
     }
   },
   methods: {
     validate() {
-      if(!this.$refs.form.validate()) {
+      if (!this.$refs.form.validate()) {
         return false
       }
       return true
@@ -103,12 +114,10 @@ export default {
       this.$emit('thisUser', this.newUser)
     },
     errorMessage() {
-      console.log("Please fill the required form")
+      console.log('Please fill the required form')
     }
   }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

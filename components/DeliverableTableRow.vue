@@ -6,8 +6,7 @@
       </nuxt-link>
     </td>
     <td class="last-modified">
-      <timeago :auto-update="60" :datetime="deliverable.updated_at">
-      </timeago>
+      <timeago :auto-update="60" :datetime="deliverable.updated_at"> </timeago>
     </td>
     <td v-if="nextStep" class="status">
       <span v-if="nextStep.assignee">
@@ -18,7 +17,8 @@
         {{ nextStep.label }}
       </span>
       <span v-if="nextStep.deadline" class="deadline">
-        (due <timeago :auto-update="60" :datetime="nextStep.deadline"></timeago>)
+        (due
+        <timeago :auto-update="60" :datetime="nextStep.deadline"></timeago>)
       </span>
     </td>
     <td v-else class="status">
@@ -28,16 +28,13 @@
 </template>
 
 <script>
-import {nextStepRequiringAction} from '~/utils/steps';
+import { nextStepRequiringAction } from '~/utils/steps'
 
 export default {
-  props: [
-    'baseUrl',
-    'deliverable',
-  ],
+  props: ['baseUrl', 'deliverable'],
   computed: {
     nextStep() {
-      return nextStepRequiringAction(this.deliverable);
+      return nextStepRequiringAction(this.deliverable)
     }
   }
 }
