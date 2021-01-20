@@ -31,7 +31,7 @@
           </v-col>
           <v-col class="pt-12">
             <v-stepper-content step="1" class="pt-0 step basicinformation">
-              <BasicInformation v-on:thisUser="createUser($event)" />
+              <BasicInformation v-on:thisUser="register($event)" />
             </v-stepper-content>
             <v-stepper-content step="2" class="pt-0 step">
               <WorkspaceMenu v-on:thisPickWorkspace="joinOrCreate($event)" />
@@ -79,10 +79,23 @@ export default {
   methods: {
     //create mutation for user and workspace then
     //proceed to next step
-    createUser(addNewUser) {
+    async register(addNewUser) {
       this.userInfo = addNewUser
-      this.step = 2
-      document.querySelector('.basicinformation').style.display = 'none'
+      this.error = null
+      try {
+        this.$axios.setToken(false)
+        await this.$axios.post('auth/local/register', {
+          username: this.userInfo.username,
+          email: this.userInfo.email,
+          password: this.userInfo.password
+        })
+        //this.step = 2
+        //document.querySelector('.basicinformation').style.display = 'none'
+        console.log('success')
+      } catch (e) {
+        this.error = e.response.data.message[0].messages[0].message
+        console.log('error')
+      }
     },
     joinOrCreate(joinCreate) {
       this.joinCreateInfo = joinCreate

@@ -6,12 +6,12 @@
         <h4>The best relationships start with at least this much...</h4>
       </v-col>
       <v-col class="mt-5">
-        <p class="text-brown mb-0">NAME</p>
+        <p class="text-brown mb-0">USERNAME</p>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
-            v-model="newUser.name"
+            v-model="newUser.username"
             solo
-            :rules="rules.name"
+            :rules="rules.username"
             hide-details="auto"
             class="pb-3"
           ></v-text-field>
@@ -78,14 +78,14 @@ export default {
       error: null,
       show: false,
       newUser: {
-        name: '',
+        username: '',
         email: '',
         password: '',
         confirmPassword: '',
         checkbox: false
       },
       rules: {
-        name: [value => !!value || 'Required.'],
+        username: [value => !!value || 'Required.'],
         email: [
           v => !!v || 'E-mail is required',
           v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
