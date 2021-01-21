@@ -106,6 +106,7 @@ const SLUG_OPTIONS = {
 }
 
 export default {
+  layout: 'empty',
   asyncData() {
     // Using async data allows non-deterministism, as this will be generated in
     // the first render only (server-side for components rendered server-side,

@@ -1,27 +1,16 @@
 <template>
-  <v-container>
-    <h1>Landing page</h1>
-    <div v-if="!isAuthenticated">
-      Not Authenticated. Please <nuxt-link to="/login">login</nuxt-link> to
-      continue.
-    </div>
+  <div>
+    <nuxt />
     <div v-if="isAuthenticated">
-      <WorkspaceList />
+      <v-btn @click="onLogout" class="logout">Logout</v-btn>
     </div>
-  </v-container>
+  </div>
 </template>
-
 <script>
 import { mapGetters } from 'vuex'
-import WorkspaceList from '@/components/WorkspaceList'
-
 export default {
-  middleware: 'auth',
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser'])
-  },
-  components: {
-    WorkspaceList
   },
   methods: {
     async onLogout() {
