@@ -51,7 +51,7 @@
                 <div class="d-flex justify-center">
                   <div class="px-5">
                     <nuxt-link to="#"
-                      ><div class="rcorners">
+                      ><div class="round-corners">
                         <font-awesome-icon
                           :icon="['fab', 'facebook']"
                           class="icon alt text-brown"
@@ -61,7 +61,7 @@
                   </div>
                   <div class="px-5">
                     <nuxt-link to="#"
-                      ><div class="rcorners">
+                      ><div class="round-corners">
                         <font-awesome-icon
                           :icon="['fab', 'google']"
                           class="icon alt text-brown"
@@ -71,7 +71,7 @@
                   </div>
                   <div class="px-5">
                     <nuxt-link to="#"
-                      ><div class="rcorners">
+                      ><div class="round-corners">
                         <font-awesome-icon
                           :icon="['fab', 'apple']"
                           class="icon alt text-brown"
@@ -90,6 +90,7 @@
 </template>
 
 <script>
+2
 export default {
   middleware: 'guest',
   data() {

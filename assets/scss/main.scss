@@ -6,7 +6,7 @@ body {
   overflow-x: hidden;
 }
 
-.rcorners {
+.round-corners {
   border-radius: 50%;
   border: 1px solid #593d3b;
   padding: 22px;
@@ -14,13 +14,13 @@ body {
   width: 80px;
 }
 
-.square {
+.workspace-border {
   height: 240px;
   border: 1px solid #593d3b;
   border-radius: 3%;
 }
 
-.svgworkspace {
+.svg-workspace {
   margin-top: 35px;
 }
 
@@ -36,11 +36,11 @@ body {
   max-width: 1200px !important;
 }
 
-.newcontainer {
+.register-container {
   max-width: unset;
 }
 
-.leftcol {
+.step-col {
   max-width: 50px;
   padding-bottom: 20px;
 }
@@ -83,35 +83,35 @@ body {
   left: -23px;
 }
 
-.rectangle,
-.rectangle2,
-.rectangle3,
-.rectangle4 {
+.step1-bg,
+.step2-bg,
+.step3-bg,
+.step4-bg {
   position: fixed;
   left: 17px;
   height: 150px;
   width: 10px;
 }
 
-.rectangle {
+.step1-bg {
   top: 50px;
   border: 1px solid #593d3b;
   background: #593d3b;
 }
 
-.rectangle2 {
+.step2-bg {
   top: 200px;
   border: 1px solid #6f5e53;
   background: #6f5e53;
 }
 
-.rectangle3 {
+.step3-bg {
   top: 350px;
   border: 1px solid #8a7968;
   background: #8a7968;
 }
 
-.rectangle4 {
+.step4-bg {
   top: 500px;
   border: 1px solid #ab947e;
   background: #ab947e;
@@ -121,19 +121,19 @@ body {
   padding: 28px 0 !important;
 }
 
-.svgapple,
-.svggoogle {
+.svg-apple,
+.svg-google {
   height: 56px;
   border-radius: 4px;
   width: 120px !important;
 }
 
-.svgapple {
+.svg-apple {
   color: white;
   background: black;
 }
 
-.svggoogle {
+.svg-google {
   border: 1px solid gray;
 }
 
@@ -158,7 +158,7 @@ body {
   display: flex;
 }
 
-.cc-textfield {
+.payment-textfield {
   min-width: 200px;
 }
 
@@ -169,27 +169,27 @@ body {
 }
 
 @media only screen and (max-width: 375px) {
-  .rectangle,
-  .rectangle2,
-  .rectangle3,
-  .rectangle4 {
+  .step1-bg,
+  .step2-bg,
+  .step3-bg,
+  .step4-bg {
     left: 0px;
     height: 130px;
   }
 
-  .rectangle {
+  .step1-bg {
     top: 20px;
   }
 
-  .rectangle2 {
+  .step2-bg {
     top: 150px;
   }
 
-  .rectangle3 {
+  .step3-bg {
     top: 280px;
   }
 
-  .rectangle4 {
+  .step4-bg {
     top: 410px;
   }
 

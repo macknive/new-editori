@@ -23,6 +23,15 @@
             hide-details="auto"
             class="pb-3"
           ></v-text-field>
+          <p class="text-brown mb-0">NAME</p>
+
+          <v-text-field
+            v-model="newUser.displayName"
+            solo
+            :rules="rules.username"
+            hide-details="auto"
+            class="pb-3"
+          ></v-text-field>
           <p class="text-brown mb-0">PASSWORD</p>
           <v-text-field
             v-model="newUser.password"
@@ -82,6 +91,7 @@ export default {
         email: '',
         password: '',
         confirmPassword: '',
+        displayName: '',
         checkbox: false
       },
       rules: {

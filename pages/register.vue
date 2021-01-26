@@ -1,13 +1,13 @@
 <template>
   <v-app>
     <v-stepper v-model="step" vertical>
-      <v-container class="newcontainer">
+      <v-container class="register-container">
         <v-row>
-          <v-col class="col-1 leftcol">
-            <div class="rectangle"></div>
-            <div class="rectangle2"></div>
-            <div class="rectangle3"></div>
-            <div class="rectangle4"></div>
+          <v-col class="col-1 step-col">
+            <div class="step1-bg"></div>
+            <div class="step2-bg"></div>
+            <div class="step3-bg"></div>
+            <div class="step4-bg"></div>
             <div v-if="step == 1" class="step1">
               <v-stepper-step :complete="step > 1" step="Step 1">
               </v-stepper-step>
@@ -77,26 +77,28 @@ export default {
     }
   },
   methods: {
-    //create mutation for user and workspace then
-    //proceed to next step
     async register(addNewUser) {
       this.userInfo = addNewUser
       this.error = null
+
       try {
         this.$axios.setToken(false)
         await this.$axios.post('auth/local/register', {
-          username: this.userInfo.username,
           email: this.userInfo.email,
-          password: this.userInfo.password
+          username: this.userInfo.username,
+          password: this.userInfo.password,
+          display_name: this.userInfo.displayName
         })
-        //this.step = 2
-        //document.querySelector('.basicinformation').style.display = 'none'
+        this.step = 2
+        document.querySelector('.basicinformation').style.display = 'none'
         console.log('success')
       } catch (e) {
         this.error = e.response.data.message[0].messages[0].message
-        console.log('error')
+        alert(this.error)
+        console.log(this.userInfo.username)
       }
     },
+
     joinOrCreate(joinCreate) {
       this.joinCreateInfo = joinCreate
       if (this.joinCreateInfo == 'join') {

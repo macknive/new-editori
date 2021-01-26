@@ -67,14 +67,14 @@
               <v-col class="col" align="center">
                 <font-awesome-icon
                   :icon="['fab', 'apple-pay']"
-                  class="icon alt svgapple"
+                  class="icon alt svg-apple"
                   size="4x"
                 />
               </v-col>
-              <v-col class="col svggooglepay" align="center">
+              <v-col class="col" align="center">
                 <font-awesome-icon
                   :icon="['fab', 'google-pay']"
-                  class="icon alt svggoogle"
+                  class="icon alt svg-google"
                   size="4x"
                 />
               </v-col>
@@ -85,7 +85,7 @@
             <v-row>
               <v-col>
                 <v-text-field
-                  class="cc-textfield"
+                  class="payment-textfield"
                   v-model="newWorkspace.cardName"
                   label="Card Number"
                   solo
@@ -94,7 +94,7 @@
               </v-col>
               <v-col>
                 <v-text-field
-                  class="cc-textfield"
+                  class="payment-textfield"
                   v-model="newWorkspace.cardNumber"
                   label="MM/YY"
                   solo
