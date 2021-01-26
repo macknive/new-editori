@@ -31,7 +31,12 @@
           </v-col>
           <v-col class="pt-12">
             <v-stepper-content step="1" class="pt-0 step basicinformation">
-              <BasicInformation v-on:thisUser="register($event)" />
+              <div v-if="!isAuthenticated">
+                <BasicInformation v-on:thisUser="register($event)" />
+              </div>
+              <div v-if="isAuthenticated">
+                <Authenticated v-on:thisStep="proceedToNextStep($event)" />
+              </div>
             </v-stepper-content>
             <v-stepper-content step="2" class="pt-0 step">
               <WorkspaceMenu v-on:thisPickWorkspace="joinOrCreate($event)" />
@@ -58,10 +63,17 @@ import JoinWorkspace from '~/components/register/JoinWorkspace'
 import CreateWorkspace from '~/components/register/CreateWorkspace'
 import WorkspaceMenu from '~/components/register/WorkspaceMenu'
 import Success from '~/components/register/Success'
+import Authenticated from '~/components/register/Authenticated'
+import { mapGetters } from 'vuex'
+
 export default {
-  middleware: 'guest',
+  layout: 'empty',
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  },
   components: {
     BasicInformation,
+    Authenticated,
     JoinWorkspace,
     CreateWorkspace,
     WorkspaceMenu,
@@ -80,7 +92,6 @@ export default {
     async register(addNewUser) {
       this.userInfo = addNewUser
       this.error = null
-
       try {
         this.$axios.setToken(false)
         await this.$axios.post('auth/local/register', {
@@ -89,16 +100,30 @@ export default {
           password: this.userInfo.password,
           display_name: this.userInfo.displayName
         })
+        await this.$auth
+          .loginWith('local', {
+            data: {
+              identifier: this.userInfo.email,
+              password: this.userInfo.password
+            }
+          })
+          .then(response => {
+            this.$apolloHelpers.onLogin(response.data.jwt)
+            console.log('Well done!')
+            console.log('User profile', response.data.user)
+            console.log('User token', response.data.jwt)
+          })
         this.step = 2
         document.querySelector('.basicinformation').style.display = 'none'
         console.log('success')
       } catch (e) {
         this.error = e.response.data.message[0].messages[0].message
         alert(this.error)
-        console.log(this.userInfo.username)
       }
     },
-
+    proceedToNextStep() {
+      this.step = 2
+    },
     joinOrCreate(joinCreate) {
       this.joinCreateInfo = joinCreate
       if (this.joinCreateInfo == 'join') {

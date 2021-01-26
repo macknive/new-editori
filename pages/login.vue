@@ -135,6 +135,7 @@ export default {
             console.log('User profile', response.data.user)
             console.log('User token', response.data.jwt)
           })
+        this.$router.push('/')
       } catch (e) {
         this.error = e.response.data.message[0].messages[0].message
         alert('Wrong account input')
