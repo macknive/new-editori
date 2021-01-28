@@ -15,7 +15,7 @@
             type="submit"
             block
             color="brown darken-3 white--text py-7 step-button"
-            >PROCEED TO NEXT STEP</v-btn
+            >NEXT</v-btn
           >
         </div>
       </v-container>

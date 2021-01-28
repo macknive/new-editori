@@ -6,10 +6,10 @@
     </div>
     <v-row class="d-flex flex-column pt-12">
       <v-col>
-        <v-row v-for="value in existingWorkspace" :key="value.id">
+        <v-row v-for="workspace in workspaces" :key="workspace.id">
           <v-col>
-            <h3>{{ value.name }}</h3>
-            <p>{{ value.owner }}</p>
+            <h3>{{ workspace.name }}</h3>
+            <p>{{ workspaceOwner }}</p>
           </v-col>
           <v-col align="right" class="pt-8">
             <a
@@ -42,18 +42,23 @@
 </template>
 
 <script>
+import ListWorkspaces from '~/queries/ListWorkspaces'
 export default {
   data() {
     return {
-      existingWorkspace: [
-        { name: 'Drink Filtered', owner: 'Makus Nikomi' },
-        { name: 'OBB Studio', owner: 'Papa Nikomi' }
-      ]
+      workspaceOwner: 'Makus Nikomi',
+      workspaces: []
+    }
+  },
+  apollo: {
+    workspaces: {
+      prefetch: true,
+      query: ListWorkspaces
     }
   },
   methods: {
     joinNewWorkspace() {
-      this.$emit('thisJoinWorkspace', this.existingWorkspace)
+      this.$emit('thisJoinWorkspace', this.workspaceOwner)
     },
     errorMessage() {
       console.log('error')

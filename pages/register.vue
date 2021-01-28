@@ -45,7 +45,9 @@
               <JoinWorkspace v-on:thisJoinWorkspace="joinWorkspace($event)" />
             </v-stepper-content>
             <v-stepper-content step="4" class="pt-0 step">
-              <CreateWorkspace v-on:thisWorkspace="createWorkspace($event)" />
+              <CreateNewWorkspace
+                v-on:thisWorkspace="createWorkspace($event)"
+              />
             </v-stepper-content>
             <v-stepper-content step="5" class="pt-0 step">
               <Success />
@@ -60,11 +62,12 @@
 <script>
 import BasicInformation from '~/components/register/BasicInformation'
 import JoinWorkspace from '~/components/register/JoinWorkspace'
-import CreateWorkspace from '~/components/register/CreateWorkspace'
+import CreateNewWorkspace from '~/components/register/CreateNewWorkspace'
 import WorkspaceMenu from '~/components/register/WorkspaceMenu'
 import Success from '~/components/register/Success'
 import Authenticated from '~/components/register/Authenticated'
 import { mapGetters } from 'vuex'
+import CreateWorkspace from '~/queries/CreateWorkspace'
 
 export default {
   layout: 'empty',
@@ -77,6 +80,7 @@ export default {
     JoinWorkspace,
     CreateWorkspace,
     WorkspaceMenu,
+    CreateNewWorkspace,
     Success
   },
   data() {
@@ -135,8 +139,27 @@ export default {
     },
     createWorkspace(addNewWorkspace) {
       this.workspaceInfo = addNewWorkspace
-      this.step = 5
+      const mutationConfigss = {
+        mutation: CreateWorkspace,
+        variables: {
+          name: this.workspaceInfo.workspaceName,
+          slug: this.workspaceInfo.workspaceSlug
+        }
+      }
+      this.$apollo
+        .mutate(mutationConfigss)
+        .then(this.onCreateSuccess())
+        .catch(err => this.onCreateError(err))
     },
+    onCreateSuccess() {
+      console.log('success')
+      console.log(this.workspaceInfo.workspaceName)
+      console.log(this.workspaceInfo.workspaceSlug)
+    },
+    onCreateError(err) {
+      console.log(err)
+    },
+
     joinWorkspace(joinNewWorkspace) {
       this.joinWorkspaceInfo = joinNewWorkspace
       this.step = 5

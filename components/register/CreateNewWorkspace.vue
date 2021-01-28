@@ -14,6 +14,15 @@
         clearable
         class="pb-3"
       ></v-text-field>
+      <p class="text-brown">Workspace Slug</p>
+      <v-text-field
+        v-model="newWorkspace.workspaceSlug"
+        solo
+        :rules="rules"
+        hide-details="auto"
+        clearable
+        class="pb-3"
+      ></v-text-field>
       <p class="text-brown">Type of Project</p>
       <v-select
         :items="newWorkspace.projectType"
@@ -139,6 +148,7 @@ export default {
       basePrice: 9.99,
       newWorkspace: {
         workspaceName: '',
+        workspaceSlug: '',
         cardName: '',
         cardNumber: '',
         projectType: ['Blog', 'Post', 'Article', 'Editor'],
