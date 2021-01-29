@@ -139,7 +139,7 @@ export default {
     },
     createWorkspace(addNewWorkspace) {
       this.workspaceInfo = addNewWorkspace
-      const mutationConfigss = {
+      const mutationConfig = {
         mutation: CreateWorkspace,
         variables: {
           name: this.workspaceInfo.workspaceName,
@@ -147,9 +147,10 @@ export default {
         }
       }
       this.$apollo
-        .mutate(mutationConfigss)
+        .mutate(mutationConfig)
         .then(this.onCreateSuccess())
         .catch(err => this.onCreateError(err))
+      this.step = 5
     },
     onCreateSuccess() {
       console.log('success')
