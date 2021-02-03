@@ -1,0 +1,8 @@
+mutation createWorkspace($name: String!, $slug: String!) {
+  createWorkspace(input: { data: { name: $name, slug: $slug } }) {
+    workspace {
+      name
+      slug
+    }
+  }
+}

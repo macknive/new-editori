@@ -1,35 +1,37 @@
 <template>
-  <main class="article-root" :class="{ locked: !isViewerAssignee }">
-    <client-only>
-      <div class="content">
-        <medium-editor
-          :text="title"
-          :options="titleOptions"
-          custom-tag="h1"
-          v-on:edit="onTitleUpdate"
-          @blur="onTitleBlur"
-          class="editor"
-        >
-        </medium-editor>
-        <medium-editor
-          :text="body"
-          :options="bodyOptions"
-          custom-tag="article"
-          v-on:edit="onBodyUpdate"
-          class="editor"
-        >
-        </medium-editor>
-        <div v-if="!isViewerAssignee" class="lock-label">
-          <font-awesome-icon icon="lock"></font-awesome-icon>
-          Locked for editing by {{ assignee.display_name }}
+  <v-container>
+    <main class="article-root" :class="{ locked: !isViewerAssignee }">
+      <client-only>
+        <div class="content">
+          <medium-editor
+            :text="title"
+            :options="titleOptions"
+            custom-tag="h1"
+            v-on:edit="onTitleUpdate"
+            @blur="onTitleBlur"
+            class="editor"
+          >
+          </medium-editor>
+          <medium-editor
+            :text="body"
+            :options="bodyOptions"
+            custom-tag="article"
+            v-on:edit="onBodyUpdate"
+            class="editor"
+          >
+          </medium-editor>
+          <div v-if="!isViewerAssignee" class="lock-label">
+            <font-awesome-icon icon="lock"></font-awesome-icon>
+            Locked for editing by {{ assignee.display_name }}
+          </div>
         </div>
-      </div>
-      <div class="placeholder content" disabled slot="placeholder">
-        <h1 contenteditable>{{ title }}</h1>
-        <article v-html="body"></article>
-      </div>
-    </client-only>
-  </main>
+        <div class="placeholder content" disabled slot="placeholder">
+          <h1 contenteditable>{{ title }}</h1>
+          <article v-html="body"></article>
+        </div>
+      </client-only>
+    </main>
+  </v-container>
 </template>
 
 <script>

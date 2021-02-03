@@ -1,95 +1,93 @@
 <template>
-  <div>
-    <table>
-      <tbody>
-        <tr>
-          <th>Title</th>
-          <td>
-            <div
-              class="form-group"
-              :class="{ 'form-group--error': $v.title.$error }"
-            >
-              <input type="text" v-model.trim="$v.title.$model" />
-            </div>
-            <div class="error" v-if="!$v.title.required">Title is required</div>
-            <div class="error" v-if="!$v.title.minLength">
-              Title must have at least
-              {{ $v.title.$params.minLength.min }} letters.
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th>Slug</th>
-          <td>
-            <div
-              class="form-group"
-              :class="{ 'form-group--error': $v.slug.$error }"
-            >
-              <input
-                type="text"
-                ref="slugInput"
-                @focus="onSlugFocus"
-                @blur="onSlugBlur"
-                v-model.trim="$v.slug.$model"
-              />
-            </div>
-            <div class="error" v-if="!$v.slug.required">
-              Slug name is required
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <th>Workflow</th>
-          <td>
-            <div
-              class="form-group"
-              :class="{ 'form-group--error': $v.selectedWorkflow.$error }"
-            >
-              <select v-model.trim="$v.selectedWorkflow.$model">
-                <option :value="undefined" selected disabled
-                  >Select a Workflow</option
-                >
-                <option
-                  v-for="workflow in workflows"
-                  :key="workflow.id"
-                  :value="workflow"
-                >
-                  {{ workflow.name }}
-                </option>
-              </select>
-            </div>
-            <div class="error" v-if="!$v.selectedWorkflow.required"></div>
-          </td>
-        </tr>
-        <tr v-for="role in customRoles" :key="role.id">
-          <th>{{ role.name }}</th>
-          <td>
-            <select v-model="usersForRole[role.name]">
-              <option :value="undefined" selected disabled
-                >Select a User</option
+  <v-app>
+    <v-container class="container-700 pt-12">
+      <v-card class="pa-12">
+        <v-card-title>Create a New Workflow</v-card-title>
+        <div align="center">
+          <v-row class="d-flex flex-column">
+            <v-col>
+              <v-row>
+                <v-col class="col-4"><h4>Title</h4></v-col>
+                <v-col class="col-8"
+                  ><v-text-field
+                    type="text"
+                    v-model="title"
+                    :rules="rules.field"
+                /></v-col>
+              </v-row>
+            </v-col>
+            <v-col>
+              <v-row>
+                <v-col class="col-4">Slug</v-col>
+                <v-col class="col-8">
+                  <v-text-field
+                    :rules="rules.field"
+                    type="text"
+                    ref="slugInput"
+                    @focus="onSlugFocus"
+                    @blur="onSlugBlur"
+                    v-model="slug"
+                /></v-col>
+              </v-row>
+            </v-col>
+            <v-col>
+              <v-row>
+                <v-col class="col-4">Workflow</v-col>
+                <v-col class="col-8">
+                  <select v-model="selectedWorkflow" :rules="rules.field">
+                    <option :value="undefined" selected disabled
+                      >Select a Workflow</option
+                    >
+                    <option
+                      v-for="workflow in workflows"
+                      :key="workflow.id"
+                      :value="workflow"
+                    >
+                      {{ workflow.name }}
+                    </option>
+                  </select>
+                </v-col>
+              </v-row>
+            </v-col>
+            <v-col>
+              <v-row v-for="role in customRoles" :key="role.id">
+                <v-col class="col-4">
+                  {{ role.name }}
+                </v-col>
+                <v-col class="col-/">
+                  <select
+                    v-model="usersForRole[role.name]"
+                    :rules="rules.field"
+                  >
+                    <option :value="undefined" selected disabled
+                      >Select a User</option
+                    >
+                    <option
+                      v-for="user in role.users"
+                      :key="user.id"
+                      :value="user.id"
+                    >
+                      {{ user.display_name }}
+                    </option>
+                  </select>
+                </v-col>
+              </v-row>
+              <span
+                align="left"
+                class="typo__p v-messages error--text"
+                v-if="submitStatus === 'ERROR'"
               >
-              <option
-                v-for="user in role.users"
-                :key="user.id"
-                :value="user.id"
-              >
-                {{ user.display_name }}
-              </option>
-            </select>
-          </td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>
-            <button @click="createDeliverable">Create!</button>
-            <p class="typo__p" v-if="submitStatus === 'ERROR'">
-              Please fill the form correctly.
-            </p>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
+                Please fill the form correctly.
+              </span>
+            </v-col>
+            <v-col class="pt-6"
+              ><v-btn @click="createDeliverable">Create!</v-btn></v-col
+            >
+          </v-row>
+        </div>
+      </v-card>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -108,6 +106,7 @@ const SLUG_OPTIONS = {
 }
 
 export default {
+  layout: 'empty',
   asyncData() {
     // Using async data allows non-deterministism, as this will be generated in
     // the first render only (server-side for components rendered server-side,
@@ -127,7 +126,10 @@ export default {
       usersForRole: {},
       workflows: [],
       workspaceSlug: this.$route.params.workspace,
-      submitStatus: null
+      submitStatus: null,
+      rules: {
+        field: [value => !!value || 'Required.']
+      }
     }
   },
   validations: {
@@ -262,4 +264,16 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+select {
+  width: 100%;
+  appearance: menulist;
+  border-style: solid;
+  padding: 8px 0 8px;
+  margin-bottom: 12px;
+}
+.col {
+  margin: auto;
+  padding: 0;
+}
+</style>

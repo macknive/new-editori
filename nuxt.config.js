@@ -104,7 +104,7 @@ export default {
       login: '/login',
       logout: '/',
       callback: '/',
-      home: '/'
+      home: false
     }
   },
   serverMiddleware: [

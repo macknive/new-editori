@@ -4,7 +4,7 @@
       <v-col class="pa-0 brown lighten-2"> </v-col>
       <v-col class="pa-0">
         <div class="d-flex flex-column">
-          <v-container>
+          <v-container class="container-700">
             <v-form ref="form" v-model="valid" lazy-validation>
               <h1 align="center" class="py-12 mt-12 testclass">LOGIN</h1>
               <v-col class="px-10">
@@ -14,7 +14,6 @@
                   solo
                   :rules="rules.email"
                   hide-details="auto"
-                  clearable
                 ></v-text-field>
               </v-col>
               <v-col class="px-10 pb-0">
@@ -52,7 +51,7 @@
                 <div class="d-flex justify-center">
                   <div class="px-5">
                     <nuxt-link to="#"
-                      ><div class="rcorners">
+                      ><div class="round-corners">
                         <font-awesome-icon
                           :icon="['fab', 'facebook']"
                           class="icon alt text-brown"
@@ -62,7 +61,7 @@
                   </div>
                   <div class="px-5">
                     <nuxt-link to="#"
-                      ><div class="rcorners">
+                      ><div class="round-corners">
                         <font-awesome-icon
                           :icon="['fab', 'google']"
                           class="icon alt text-brown"
@@ -72,7 +71,7 @@
                   </div>
                   <div class="px-5">
                     <nuxt-link to="#"
-                      ><div class="rcorners">
+                      ><div class="round-corners">
                         <font-awesome-icon
                           :icon="['fab', 'apple']"
                           class="icon alt text-brown"
@@ -91,6 +90,7 @@
 </template>
 
 <script>
+2
 export default {
   middleware: 'guest',
   data() {
@@ -135,6 +135,7 @@ export default {
             console.log('User profile', response.data.user)
             console.log('User token', response.data.jwt)
           })
+        this.$router.push('/')
       } catch (e) {
         this.error = e.response.data.message[0].messages[0].message
         alert('Wrong account input')

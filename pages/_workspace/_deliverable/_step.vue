@@ -1,43 +1,45 @@
 <template>
-  <div class="root">
-    <Workflow
-      class="workflow"
-      :steps="workflowSteps"
-      :viewer="viewer"
-      :baseUrl="`/${workspaceSlug}/${deliverableSlug}`"
-    >
-    </Workflow>
-    <div class="grid" :style="gridStyle" v-if="layout && layout.components">
-      <component
-        v-for="componentData in layout.components"
-        :key="componentData.id"
-        :is="componentData.component.name"
-        :deliverable="deliverable"
-        :currentStepId="currentStep.id"
+  <v-container class="container-1200">
+    <div class="root">
+      <Workflow
+        class="workflow"
+        :steps="workflowSteps"
         :viewer="viewer"
-        :assignee="currentStep.assignee"
-        :workspace="workspace"
-        @autoSave="autoSave"
-        @save="save"
-        @advance="advanceToNextStepRequiringAction"
-        class="view-component"
-        :style="
-          `
+        :baseUrl="`/${workspaceSlug}/${deliverableSlug}`"
+      >
+      </Workflow>
+      <div class="grid" :style="gridStyle" v-if="layout && layout.components">
+        <component
+          v-for="componentData in layout.components"
+          :key="componentData.id"
+          :is="componentData.component.name"
+          :deliverable="deliverable"
+          :currentStepId="currentStep.id"
+          :viewer="viewer"
+          :assignee="currentStep.assignee"
+          :workspace="workspace"
+          @autoSave="autoSave"
+          @save="save"
+          @advance="advanceToNextStepRequiringAction"
+          class="view-component"
+          :style="
+            `
             grid-column-start: ${componentData.column_start};
             grid-column-end: span ${componentData.column_span};
             grid-row-start: ${componentData.row_start};
             grid-row-end: span ${componentData.row_span};
           `
-        "
-      >
-      </component>
+          "
+        >
+        </component>
+      </div>
+      <SaveIcon
+        :status="saveStatus"
+        class="save-icon"
+        :title="saveTooltip"
+      ></SaveIcon>
     </div>
-    <SaveIcon
-      :status="saveStatus"
-      class="save-icon"
-      :title="saveTooltip"
-    ></SaveIcon>
-  </div>
+  </v-container>
 </template>
 
 <script>
@@ -78,6 +80,7 @@ const SaveStatus = {
 }
 
 export default {
+  layout: 'empty',
   components: {
     ApprovalWidget,
     ArticleEditor,

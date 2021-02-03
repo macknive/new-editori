@@ -1,27 +1,29 @@
 <template>
-  <div class="root">
-    <h1>{{ workspace.name }} Workspace</h1>
-    <table class="table">
-      <tbody>
-        <tr class="header-row">
-          <th>Name</th>
-          <th>Last Updated</th>
-          <th>Status</th>
-        </tr>
-        <DeliverableTableRow
-          v-for="deliverable in deliverables"
-          class="deliverable"
-          :key="deliverable.id"
-          :deliverable="deliverable"
-          :baseUrl="`/${workspaceSlug}`"
-        >
-        </DeliverableTableRow>
-      </tbody>
-    </table>
-    <nuxt-link :to="`${workspace.slug}/new`">
-      <button class="fab">+</button>
-    </nuxt-link>
-  </div>
+  <v-container>
+    <div class="root">
+      <h1>{{ workspace.name }} Workspace</h1>
+      <table class="table">
+        <tbody>
+          <tr class="header-row">
+            <th>Name</th>
+            <th>Last Updated</th>
+            <th>Status</th>
+          </tr>
+          <DeliverableTableRow
+            v-for="deliverable in deliverables"
+            class="deliverable"
+            :key="deliverable.id"
+            :deliverable="deliverable"
+            :baseUrl="`/${workspaceSlug}`"
+          >
+          </DeliverableTableRow>
+        </tbody>
+      </table>
+      <nuxt-link :to="`${workspace.slug}/new`">
+        <button class="fab">+</button>
+      </nuxt-link>
+    </div>
+  </v-container>
 </template>
 
 <script>

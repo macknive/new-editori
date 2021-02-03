@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="container-700">
     <div align="center" class="pb-12">
       <h1>Workspace Setup</h1>
       <h4>The best relationships start with at least this much...</h4>
@@ -8,6 +8,15 @@
       <p class="text-brown">Workspace Name</p>
       <v-text-field
         v-model="newWorkspace.workspaceName"
+        solo
+        :rules="rules"
+        hide-details="auto"
+        clearable
+        class="pb-3"
+      ></v-text-field>
+      <p class="text-brown">Workspace Slug</p>
+      <v-text-field
+        v-model="newWorkspace.workspaceSlug"
         solo
         :rules="rules"
         hide-details="auto"
@@ -32,20 +41,26 @@
         <v-container>
           <p class="text-brown">Monthly Subscription</p>
           <v-row>
-            <v-col>
-              <p class="noto-serif text-gray">
+            <v-col class="pb-0 mb-0">
+              <span class="noto-serif text-gray">
                 {{ selected }} collaborators @ ${{ basePrice }} per month
-              </p>
+              </span>
+            </v-col>
+            <v-col class="pb-0 mb-0" align="right">
+              <span class="noto-serif text-gray">3-day free trial</span>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col>
               <h4 class="noto-serif">${{ totalPrice }} per month</h4>
             </v-col>
             <v-col align="right">
-              <p class="noto-serif mb-12">3-day free trial</p>
               <h4 class="noto-serif">$0 due today</h4>
             </v-col>
           </v-row>
           <div v-if="visible" class="pb-3">
             <v-row>
-              <v-col class="col">
+              <v-col class="col-6" align="center">
                 <v-btn
                   @click="visible = !visible"
                   block
@@ -58,17 +73,17 @@
                   >&nbsp;&nbsp;CREDIT CARD</v-btn
                 >
               </v-col>
-              <v-col class="col">
+              <v-col class="col" align="center">
                 <font-awesome-icon
                   :icon="['fab', 'apple-pay']"
-                  class="icon alt svgapple"
+                  class="icon alt svg-apple"
                   size="4x"
                 />
               </v-col>
-              <v-col class="col svggooglepay">
+              <v-col class="col" align="center">
                 <font-awesome-icon
                   :icon="['fab', 'google-pay']"
-                  class="icon alt svggoogle"
+                  class="icon alt svg-google"
                   size="4x"
                 />
               </v-col>
@@ -79,6 +94,7 @@
             <v-row>
               <v-col>
                 <v-text-field
+                  class="payment-textfield"
                   v-model="newWorkspace.cardName"
                   label="Card Number"
                   solo
@@ -87,6 +103,7 @@
               </v-col>
               <v-col>
                 <v-text-field
+                  class="payment-textfield"
                   v-model="newWorkspace.cardNumber"
                   label="MM/YY"
                   solo
@@ -131,6 +148,7 @@ export default {
       basePrice: 9.99,
       newWorkspace: {
         workspaceName: '',
+        workspaceSlug: '',
         cardName: '',
         cardNumber: '',
         projectType: ['Blog', 'Post', 'Article', 'Editor'],

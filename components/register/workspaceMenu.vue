@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container>
+    <v-container class="container-700">
       <v-row class="d-flex flex-column">
         <v-col align="center" class="mb-12">
           <h1>How can we help you?</h1>
@@ -10,9 +10,9 @@
       <v-row>
         <v-col>
           <a @click="proceedToJoin()"
-            ><div class="square pa-12 mb-3" align="center">
+            ><div class="workspace-border pa-12 mb-3" align="center">
               <font-awesome-icon
-                class="text-brown svgworkspace"
+                class="text-brown svg-workspace"
                 icon="envelope-open-text"
                 size="4x"
               ></font-awesome-icon></div
@@ -21,9 +21,9 @@
         </v-col>
         <v-col>
           <a @click="proceedToCreate()"
-            ><div class="square pa-12 mb-3" align="center">
+            ><div class="workspace-border pa-12 mb-3" align="center">
               <font-awesome-icon
-                class="text-brown svgworkspace"
+                class="text-brown svg-workspace"
                 icon="plus"
                 size="4x"
               ></font-awesome-icon></div

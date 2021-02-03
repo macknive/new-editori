@@ -1,13 +1,13 @@
 <template>
   <v-app>
     <v-stepper v-model="step" vertical>
-      <v-container class="newcontainer">
+      <v-container class="register-container">
         <v-row>
-          <v-col class="col-1 leftcol">
-            <div class="rectangle"></div>
-            <div class="rectangle2"></div>
-            <div class="rectangle3"></div>
-            <div class="rectangle4"></div>
+          <v-col class="col-1 step-col">
+            <div class="step1-bg"></div>
+            <div class="step2-bg"></div>
+            <div class="step3-bg"></div>
+            <div class="step4-bg"></div>
             <div v-if="step == 1" class="step1">
               <v-stepper-step :complete="step > 1" step="Step 1">
               </v-stepper-step>
@@ -31,7 +31,12 @@
           </v-col>
           <v-col class="pt-12">
             <v-stepper-content step="1" class="pt-0 step basicinformation">
-              <BasicInformation v-on:thisUser="createUser($event)" />
+              <div v-if="!isAuthenticated">
+                <BasicInformation v-on:thisUser="register($event)" />
+              </div>
+              <div v-if="isAuthenticated">
+                <Authenticated v-on:thisStep="proceedToNextStep($event)" />
+              </div>
             </v-stepper-content>
             <v-stepper-content step="2" class="pt-0 step">
               <WorkspaceMenu v-on:thisPickWorkspace="joinOrCreate($event)" />
@@ -40,7 +45,9 @@
               <JoinWorkspace v-on:thisJoinWorkspace="joinWorkspace($event)" />
             </v-stepper-content>
             <v-stepper-content step="4" class="pt-0 step">
-              <CreateWorkspace v-on:thisWorkspace="createWorkspace($event)" />
+              <CreateNewWorkspace
+                v-on:thisWorkspace="createWorkspace($event)"
+              />
             </v-stepper-content>
             <v-stepper-content step="5" class="pt-0 step">
               <Success />
@@ -55,16 +62,25 @@
 <script>
 import BasicInformation from '~/components/register/BasicInformation'
 import JoinWorkspace from '~/components/register/JoinWorkspace'
-import CreateWorkspace from '~/components/register/CreateWorkspace'
+import CreateNewWorkspace from '~/components/register/CreateNewWorkspace'
 import WorkspaceMenu from '~/components/register/WorkspaceMenu'
 import Success from '~/components/register/Success'
+import Authenticated from '~/components/register/Authenticated'
+import { mapGetters } from 'vuex'
+import CreateWorkspace from '~/queries/CreateWorkspace'
+
 export default {
-  middleware: 'guest',
+  layout: 'empty',
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  },
   components: {
     BasicInformation,
+    Authenticated,
     JoinWorkspace,
     CreateWorkspace,
     WorkspaceMenu,
+    CreateNewWorkspace,
     Success
   },
   data() {
@@ -77,12 +93,40 @@ export default {
     }
   },
   methods: {
-    //create mutation for user and workspace then
-    //proceed to next step
-    createUser(addNewUser) {
+    async register(addNewUser) {
       this.userInfo = addNewUser
+      this.error = null
+      try {
+        this.$axios.setToken(false)
+        await this.$axios.post('auth/local/register', {
+          email: this.userInfo.email,
+          username: this.userInfo.username,
+          password: this.userInfo.password,
+          display_name: this.userInfo.displayName
+        })
+        await this.$auth
+          .loginWith('local', {
+            data: {
+              identifier: this.userInfo.email,
+              password: this.userInfo.password
+            }
+          })
+          .then(response => {
+            this.$apolloHelpers.onLogin(response.data.jwt)
+            console.log('Well done!')
+            console.log('User profile', response.data.user)
+            console.log('User token', response.data.jwt)
+          })
+        this.step = 2
+        document.querySelector('.basicinformation').style.display = 'none'
+        console.log('success')
+      } catch (e) {
+        this.error = e.response.data.message[0].messages[0].message
+        alert(this.error)
+      }
+    },
+    proceedToNextStep() {
       this.step = 2
-      document.querySelector('.basicinformation').style.display = 'none'
     },
     joinOrCreate(joinCreate) {
       this.joinCreateInfo = joinCreate
@@ -95,8 +139,28 @@ export default {
     },
     createWorkspace(addNewWorkspace) {
       this.workspaceInfo = addNewWorkspace
+      const mutationConfig = {
+        mutation: CreateWorkspace,
+        variables: {
+          name: this.workspaceInfo.workspaceName,
+          slug: this.workspaceInfo.workspaceSlug
+        }
+      }
+      this.$apollo
+        .mutate(mutationConfig)
+        .then(this.onCreateSuccess())
+        .catch(err => this.onCreateError(err))
       this.step = 5
     },
+    onCreateSuccess() {
+      console.log('success')
+      console.log(this.workspaceInfo.workspaceName)
+      console.log(this.workspaceInfo.workspaceSlug)
+    },
+    onCreateError(err) {
+      console.log(err)
+    },
+
     joinWorkspace(joinNewWorkspace) {
       this.joinWorkspaceInfo = joinNewWorkspace
       this.step = 5

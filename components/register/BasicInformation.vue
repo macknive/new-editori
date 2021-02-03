@@ -1,17 +1,17 @@
 <template>
-  <v-container>
+  <v-container class="container-700">
     <v-row class="d-flex flex-column">
       <v-col align="center">
         <h1>Tell Us About You...</h1>
         <h4>The best relationships start with at least this much...</h4>
       </v-col>
       <v-col class="mt-5">
-        <p class="text-brown mb-0">NAME</p>
+        <p class="text-brown mb-0">USERNAME</p>
         <v-form ref="form" v-model="valid" lazy-validation>
           <v-text-field
-            v-model="newUser.name"
+            v-model="newUser.username"
             solo
-            :rules="rules.name"
+            :rules="rules.username"
             hide-details="auto"
             class="pb-3"
           ></v-text-field>
@@ -20,6 +20,15 @@
             v-model="newUser.email"
             solo
             :rules="rules.email"
+            hide-details="auto"
+            class="pb-3"
+          ></v-text-field>
+          <p class="text-brown mb-0">NAME</p>
+
+          <v-text-field
+            v-model="newUser.displayName"
+            solo
+            :rules="rules.username"
             hide-details="auto"
             class="pb-3"
           ></v-text-field>
@@ -78,14 +87,15 @@ export default {
       error: null,
       show: false,
       newUser: {
-        name: '',
+        username: '',
         email: '',
         password: '',
         confirmPassword: '',
+        displayName: '',
         checkbox: false
       },
       rules: {
-        name: [value => !!value || 'Required.'],
+        username: [value => !!value || 'Required.'],
         email: [
           v => !!v || 'E-mail is required',
           v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
