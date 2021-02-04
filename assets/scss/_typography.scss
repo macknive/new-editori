@@ -33,6 +33,20 @@ input[type='text'] {
   font-family: 'Noto Serif';
 }
 
+h5 {
+  font-family: 'Noto Sans';
+  font-size: 16px;
+}
+
+.title {
+  font-family: 'Noto Sans';
+  font-size: 24px;
+  letter-spacing: 0.65px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #000000 !important;
+}
+
 p {
   line-height: 36px;
   letter-spacing: 1px;
@@ -67,4 +81,8 @@ p,
 
 .text-brown {
   color: #593d3b !important;
+}
+
+.text-light-brown {
+  color: #6f5e53 !important;
 }

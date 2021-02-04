@@ -1,53 +1,70 @@
 <template>
-  <tr>
-    <td>
-      <nuxt-link :to="`${baseUrl}/${deliverable.slug}`" class="title">
-        {{ deliverable.title }}
-      </nuxt-link>
-    </td>
-    <td class="last-modified">
-      <timeago :auto-update="60" :datetime="deliverable.updated_at"> </timeago>
-    </td>
-    <td v-if="nextStep" class="status">
-      <span v-if="nextStep.assignee">
-        {{ nextStep.assignee.display_name }}
-      </span>
-      needs to
-      <span v-if="nextStep.label">
-        {{ nextStep.label }}
-      </span>
-      <span v-if="nextStep.deadline" class="deadline">
-        (due
-        <timeago :auto-update="60" :datetime="nextStep.deadline"></timeago>)
-      </span>
-    </td>
-    <td v-else class="status">
+  <v-row class="mb-6">
+    <v-col class="my-auto date">
+      <h4 class="pl-1">{{ updatedAtMonth }}</h4>
+      <h3>{{ updatedAtDate }}</h3>
+    </v-col>
+    <v-col class="my-auto">
+      <v-row no-gutters>
+        <v-col class="status-placeholder" cols="1">
+          <div class="status-green"></div>
+        </v-col>
+        <v-col>
+          <h5>ON TRACK</h5>
+        </v-col>
+      </v-row>
+      <div>
+        <nuxt-link :to="`${baseUrl}/${deliverable.slug}`" class="title">
+          {{ deliverable.title }} <br />
+        </nuxt-link>
+        <span v-if="nextStep.assignee"
+          >{{ nextStep.assignee.display_name }} is writing an article, agreed to
+          deliver by Friday.</span
+        >
+      </div>
+    </v-col>
+    <v-col
+      md="2"
+      v-if="nextStep"
+      class="status my-auto btn-right"
+      align="right"
+    >
+      <v-btn>{{ nextStep.label }}</v-btn>
+    </v-col>
+    <v-col v-else class="status">
       All done!
-    </td>
-  </tr>
+    </v-col>
+  </v-row>
 </template>
 
 <script>
 import { nextStepRequiringAction } from '~/utils/steps'
+import moment from 'moment'
 
 export default {
+  return: {
+    moment: moment
+  },
   props: ['baseUrl', 'deliverable'],
   computed: {
     nextStep() {
       return nextStepRequiringAction(this.deliverable)
+    },
+    updatedAtMonth() {
+      return moment(this.deliverable.updated_at).format('MMM')
+    },
+    updatedAtDate() {
+      return moment(this.deliverable.updated_at).format('DD')
     }
   }
 }
 </script>
 
 <style scoped>
-.title {
-  font-size: 20px;
-  font-family: 'Merriweather', 'Georgia', serif;
-  font-weight: 600;
-  color: #343330;
+.date {
+  max-width: 60px;
 }
-td {
-  padding: 20px;
+.status-placeholder {
+  max-width: 30px;
 }
 </style>
