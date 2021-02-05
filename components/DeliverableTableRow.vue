@@ -29,7 +29,7 @@
       class="status my-auto btn-right"
       align="right"
     >
-      <v-btn>{{ nextStep.label }}</v-btn>
+      <v-btn @click="isViewerAssignee()">{{ nextStep.label }}</v-btn>
     </v-col>
     <v-col v-else class="status">
       All done!
@@ -39,13 +39,27 @@
 
 <script>
 import { nextStepRequiringAction } from '~/utils/steps'
+import GetViewerId from '~/queries/GetViewerId'
 import moment from 'moment'
 
 export default {
+  components: {
+    GetViewerId
+  },
   return: {
-    moment: moment
+    moment: moment,
+    viewer: undefined
   },
   props: ['baseUrl', 'deliverable'],
+  methods: {
+    isViewerAssignee() {
+      if (this.viewer.id == this.nextStep.assignee.id) {
+        console.log('id match')
+        return
+      }
+      console.log('id does not match')
+    }
+  },
   computed: {
     nextStep() {
       return nextStepRequiringAction(this.deliverable)
@@ -55,6 +69,12 @@ export default {
     },
     updatedAtDate() {
       return moment(this.deliverable.updated_at).format('DD')
+    }
+  },
+  apollo: {
+    viewer: {
+      prefetch: true,
+      query: GetViewerId
     }
   }
 }
