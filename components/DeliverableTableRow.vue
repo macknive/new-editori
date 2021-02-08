@@ -15,12 +15,15 @@
       </v-row>
       <div>
         <nuxt-link :to="`${baseUrl}/${deliverable.slug}`" class="title">
-          {{ deliverable.title }} <br />
+          <div>
+            {{ deliverable.title }} <br />
+            <span v-if="nextStep.assignee">
+              {{ nextStep.assignee.display_name }} is on
+              {{ nextStep.label }} step, agreed to deliver by
+              {{ nextStep.deadline }}.
+            </span>
+          </div>
         </nuxt-link>
-        <span v-if="nextStep.assignee"
-          >{{ nextStep.assignee.display_name }} is writing an article, agreed to
-          deliver by Friday.</span
-        >
       </div>
     </v-col>
     <v-col
@@ -29,7 +32,10 @@
       class="status my-auto btn-right"
       align="right"
     >
-      <v-btn @click="isViewerAssignee()">{{ nextStep.label }}</v-btn>
+      <v-btn v-if="isViewerAssignee" color="brown-btn"
+        >{{ nextStep.label }}
+      </v-btn>
+      <v-btn v-if="!isViewerAssignee" color="grey-btn">PEEK</v-btn>
     </v-col>
     <v-col v-else class="status">
       All done!
@@ -43,23 +49,13 @@ import GetViewerId from '~/queries/GetViewerId'
 import moment from 'moment'
 
 export default {
-  components: {
-    GetViewerId
-  },
-  return: {
-    moment: moment,
-    viewer: undefined
-  },
-  props: ['baseUrl', 'deliverable'],
-  methods: {
-    isViewerAssignee() {
-      if (this.viewer.id == this.nextStep.assignee.id) {
-        console.log('id match')
-        return
-      }
-      console.log('id does not match')
+  data() {
+    return {
+      moment: moment,
+      viewer: []
     }
   },
+  props: ['baseUrl', 'deliverable', 'assignee'],
   computed: {
     nextStep() {
       return nextStepRequiringAction(this.deliverable)
@@ -69,6 +65,16 @@ export default {
     },
     updatedAtDate() {
       return moment(this.deliverable.updated_at).format('DD')
+    },
+    isViewerAssignee() {
+      if (!this.nextStep.assignee) {
+        console.log('workspace has no assignee')
+        return false
+      }
+      if (this.viewer.id == this.nextStep.assignee.id) {
+        console.log(this.nextStep.assignee.id)
+        return true
+      }
     }
   },
   apollo: {
@@ -80,11 +86,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.date {
-  max-width: 60px;
-}
-.status-placeholder {
-  max-width: 30px;
-}
-</style>
+<style></style>

@@ -42,9 +42,12 @@ h5 {
   font-family: 'Noto Sans';
   font-size: 24px;
   letter-spacing: 0.65px;
-  text-transform: uppercase;
   text-decoration: none;
   color: #000000 !important;
+}
+
+.title > div > span {
+  font-size: 16px;
 }
 
 p {
@@ -55,6 +58,21 @@ p {
 .step-button {
   font-weight: 700 !important;
   font-size: 18px !important;
+}
+
+.brown-btn {
+  background-color: #593d3b !important;
+  color: white !important;
+}
+
+.grey-btn {
+  color: #777777 !important;
+  background-color: #dddddd !important;
+}
+
+.brown-btn,
+.grey-btn {
+  min-width: 140px !important;
 }
 
 p,
