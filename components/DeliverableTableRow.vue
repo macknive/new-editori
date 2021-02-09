@@ -17,7 +17,7 @@
         <div>
           <div>
             {{ deliverable.title }} <br />
-            <span v-if="nextStep.assignee">
+            <span class="deliverable-description" v-if="nextStep.assignee">
               {{ nextStep.assignee.display_name }} is on
               {{ nextStep.label }} step, agreed to deliver {{ deadLine }}.
             </span>
