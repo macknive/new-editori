@@ -1,29 +1,45 @@
 <template>
-  <v-container>
-    <div class="root">
-      <h1>{{ workspace.name }} Workspace</h1>
-      <table class="table">
-        <tbody>
-          <tr class="header-row">
-            <th>Name</th>
-            <th>Last Updated</th>
-            <th>Status</th>
-          </tr>
+  <v-app>
+    <v-container class="container-1200">
+      <div class="root">
+        <h1 align="center" class="mb-6">{{ workspace.name }}</h1>
+        <v-row>
+          <v-col>
+            <v-btn-toggle v-model="toggle_exclusive" mandatory>
+              <v-btn @click="live = true">LIVE</v-btn>
+              <v-btn @click="live = false">UPCOMING</v-btn>
+            </v-btn-toggle>
+          </v-col>
+          <v-col align="right">
+            <v-text-field
+              solo
+              v-model="search"
+              class="searchbar"
+              append-icon="mdi-magnify"
+              label="Search"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <div v-if="live">
+          <h4>Live component or different deliverable status here</h4>
+          Current deliverables are in the upcoming page
+        </div>
+        <div v-if="!live">
           <DeliverableTableRow
-            v-for="deliverable in deliverables"
+            v-for="deliverable in deliverableList"
             class="deliverable"
             :key="deliverable.id"
             :deliverable="deliverable"
             :baseUrl="`/${workspaceSlug}`"
           >
           </DeliverableTableRow>
-        </tbody>
-      </table>
-      <nuxt-link :to="`${workspace.slug}/new`">
-        <button class="fab">+</button>
-      </nuxt-link>
-    </div>
-  </v-container>
+        </div>
+        <nuxt-link :to="`${workspace.slug}/new`">
+          <button class="fab">+</button>
+        </nuxt-link>
+      </div>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -32,6 +48,7 @@ import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug'
 import ListDeliverablesByWorkspace from '~/queries/ListDeliverablesByWorkspace'
 
 export default {
+  layout: 'empty',
   components: {
     DeliverableTableRow
   },
@@ -39,12 +56,26 @@ export default {
     return {
       deliverables: [],
       workspaces: [],
-      workspaceSlug: this.$route.params.workspace
+      workspaceSlug: this.$route.params.workspace,
+      toggle_exclusive: undefined,
+      search: '',
+      live: true
     }
   },
   computed: {
     workspace() {
       return this.workspaces[0]
+    },
+    deliverableList() {
+      return this.deliverables
+        .filter(deliverable => {
+          return deliverable.title
+            .toLowerCase()
+            .includes(this.search.toLowerCase())
+        })
+        .sort(function(a, b) {
+          return new Date(b.updated_at) - new Date(a.updated_at)
+        })
     }
   },
   apollo: {
@@ -72,30 +103,21 @@ export default {
 
 <style>
 body {
-  background: #f0f0f0;
+  background: #f8f8f8;
   --gap: 20px;
 }
 </style>
 
 <style scoped>
-.table {
-  border: 1px solid #ccc;
-  font-family: 'Open Sans', sans-serif;
-  width: 100%;
+.v-btn-toggle > .v-btn.v-btn--active {
+  background-color: #6f5e53 !important;
+  color: white;
 }
-.header-row {
-  background-color: #def;
+
+.searchbar {
+  width: 300px;
 }
-.deliverable:nth-child(even) {
-  background: #fff;
-}
-.deliverable:nth-child(odd) {
-  background: #f0f0f0;
-}
-th {
-  color: #343330;
-  padding: 20px;
-}
+
 .fab {
   width: 64px;
   height: 64px;

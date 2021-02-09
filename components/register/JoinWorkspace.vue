@@ -1,5 +1,5 @@
 <template>
-  <v-container class="workspace-container">
+  <v-container>
     <div align="center">
       <h1>Pending Invitations</h1>
       <h4>You have been invited to the following workspaces</h4>

@@ -168,6 +168,45 @@ body {
   top: 12px;
 }
 
+.status-green {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #a7d36f;
+  border: 1px solid #a7d36f;
+}
+
+.status-yellow {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #f5e658;
+  border: 1px solid #f5e658;
+}
+
+.status-red {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #eb6258;
+  border: 1px solid #eb6258;
+}
+
+.status-gray {
+  height: 24px;
+  width: 24px;
+  border-radius: 50%;
+  background-color: #777777;
+  border: 1px solid #777777;
+}
+
+.date {
+  max-width: 60px !important;
+}
+.status-placeholder {
+  max-width: 30px !important;
+}
+
 @media only screen and (max-width: 375px) {
   .step1-bg,
   .step2-bg,
