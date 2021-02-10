@@ -26,8 +26,7 @@
           <span
             class="deliverable-description"
             v-if="nextStep.assignee && isViewerAssignee"
-            >You need to deliver {{ nextStep.assignee.display_name }} by
-            {{ deadLine }}</span
+            >You need to deliver {{ nextStep.label }} by {{ deadLine }}</span
           >
         </div>
       </v-col>
