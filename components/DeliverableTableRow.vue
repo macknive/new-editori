@@ -15,13 +15,20 @@
           </v-col>
         </v-row>
         <div>
-          <div>
-            {{ deliverable.title }} <br />
-            <span class="deliverable-description" v-if="nextStep.assignee">
-              {{ nextStep.assignee.display_name }} is on
-              {{ nextStep.label }} step, agreed to deliver {{ deadLine }}.
-            </span>
-          </div>
+          {{ deliverable.title }} <br />
+          <span
+            class="deliverable-description"
+            v-if="nextStep.assignee && !isViewerAssignee"
+          >
+            {{ nextStep.assignee.display_name }} is on
+            {{ nextStep.label }} step, agreed to deliver {{ deadLine }}.
+          </span>
+          <span
+            class="deliverable-description"
+            v-if="nextStep.assignee && isViewerAssignee"
+            >You need to deliver {{ nextStep.assignee.display_name }} by
+            {{ deadLine }}</span
+          >
         </div>
       </v-col>
       <v-col
