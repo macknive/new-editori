@@ -8,10 +8,10 @@
       <v-col class="my-auto">
         <v-row no-gutters>
           <v-col class="status-placeholder" cols="1">
-            <div class="status-green"></div>
+            <div :class="`status-${trackStatus}`"></div>
           </v-col>
           <v-col>
-            <h5>ON TRACK</h5>
+            <h5>{{ trackStatusName }}</h5>
           </v-col>
         </v-row>
         <div>
@@ -57,7 +57,9 @@ export default {
   data() {
     return {
       moment: moment,
-      viewer: []
+      viewer: [],
+      trackStatus: 'green',
+      trackStatusName: 'On Track'
     }
   },
   props: ['baseUrl', 'deliverable', 'assignee'],
