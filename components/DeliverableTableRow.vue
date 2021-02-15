@@ -52,6 +52,7 @@
 import { nextStepRequiringAction } from '~/utils/steps'
 import GetViewerId from '~/queries/GetViewerId'
 import moment from 'moment'
+import isViewerAssignee from '~/mixins/isViewerAssignee'
 
 export default {
   data() {
@@ -59,7 +60,7 @@ export default {
       moment: moment,
       viewer: [],
       trackStatus: 'green',
-      trackStatusName: 'On Track'
+      trackStatusName: 'ON TRACK'
     }
   },
   props: ['baseUrl', 'deliverable', 'assignee'],
@@ -75,16 +76,6 @@ export default {
     },
     deadLine() {
       return moment(this.nextStep.deadline).fromNow()
-    },
-    isViewerAssignee() {
-      if (!this.nextStep.assignee) {
-        console.log('workspace has no assignee')
-        return false
-      }
-      if (this.viewer.id == this.nextStep.assignee.id) {
-        console.log(this.nextStep.assignee.id)
-        return true
-      }
     }
   },
   apollo: {
@@ -92,7 +83,8 @@ export default {
       prefetch: true,
       query: GetViewerId
     }
-  }
+  },
+  mixins: [isViewerAssignee]
 }
 </script>
 
