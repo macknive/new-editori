@@ -1,3 +1,4 @@
+import GetViewerId from '~/queries/GetViewerId'
 export default {
 	computed: {
 		isViewerAssignee() {
@@ -7,6 +8,12 @@ export default {
 			if (this.viewer.id == this.nextStep.assignee.id) {
 				return true
 			}
+		},
+	},
+	apollo: {
+		viewer: {
+			prefetch: true,
+			query: GetViewerId
 		}
 	}
 }

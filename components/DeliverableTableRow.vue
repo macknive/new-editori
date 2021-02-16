@@ -8,10 +8,10 @@
       <v-col class="my-auto">
         <v-row no-gutters>
           <v-col class="status-placeholder" cols="1">
-            <div :class="`status-${trackStatus}`"></div>
+            <div :class="`status-${status.level}`"></div>
           </v-col>
           <v-col>
-            <h5>{{ trackStatusName }}</h5>
+            <h5>{{ status.name }}</h5>
           </v-col>
         </v-row>
         <div>
@@ -50,7 +50,6 @@
 
 <script>
 import { nextStepRequiringAction } from '~/utils/steps'
-import GetViewerId from '~/queries/GetViewerId'
 import moment from 'moment'
 import isViewerAssignee from '~/mixins/isViewerAssignee'
 
@@ -58,9 +57,7 @@ export default {
   data() {
     return {
       moment: moment,
-      viewer: [],
-      trackStatus: 'green',
-      trackStatusName: 'ON TRACK'
+      viewer: []
     }
   },
   props: ['baseUrl', 'deliverable', 'assignee'],
@@ -76,12 +73,12 @@ export default {
     },
     deadLine() {
       return moment(this.nextStep.deadline).fromNow()
-    }
-  },
-  apollo: {
-    viewer: {
-      prefetch: true,
-      query: GetViewerId
+    },
+    status() {
+      return {
+        level: 'green',
+        name: 'ON TRACK'
+      }
     }
   },
   mixins: [isViewerAssignee]
