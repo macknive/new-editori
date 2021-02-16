@@ -8,10 +8,10 @@
       <v-col class="my-auto">
         <v-row no-gutters>
           <v-col class="status-placeholder" cols="1">
-            <div class="status-green"></div>
+            <div :class="`status-${status.level}`"></div>
           </v-col>
           <v-col>
-            <h5>ON TRACK</h5>
+            <h5>{{ status.name }}</h5>
           </v-col>
         </v-row>
         <div>
@@ -50,8 +50,8 @@
 
 <script>
 import { nextStepRequiringAction } from '~/utils/steps'
-import GetViewerId from '~/queries/GetViewerId'
 import moment from 'moment'
+import isViewerAssignee from '~/mixins/isViewerAssignee'
 
 export default {
   data() {
@@ -74,23 +74,14 @@ export default {
     deadLine() {
       return moment(this.nextStep.deadline).fromNow()
     },
-    isViewerAssignee() {
-      if (!this.nextStep.assignee) {
-        console.log('workspace has no assignee')
-        return false
-      }
-      if (this.viewer.id == this.nextStep.assignee.id) {
-        console.log(this.nextStep.assignee.id)
-        return true
+    status() {
+      return {
+        level: 'green',
+        name: 'ON TRACK'
       }
     }
   },
-  apollo: {
-    viewer: {
-      prefetch: true,
-      query: GetViewerId
-    }
-  }
+  mixins: [isViewerAssignee]
 }
 </script>
 
