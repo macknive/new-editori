@@ -21,8 +21,22 @@
           </v-col>
         </v-row>
         <div v-if="live">
-          <h4>Live component or different deliverable status here</h4>
-          Current deliverables are in the upcoming page
+          <v-container class="container-700">
+            <div align="center">
+              <h3>CAN YOU HELP US OUT?</h3>
+              <div class="placeholder-gray my-12"></div>
+              <p class="f-16 mb-12">
+                Before we start working on taking your blog to the next level
+                lets configure this workspace. Don't worry, it is quick and
+                painless. Easy Peasy!
+              </p>
+              <v-btn
+                class="brown darken-3 white--text py-7 step-button"
+                :to="`${workspaceSlug}/settings/connect/`"
+                >SURE, HERE IS WHAT YOU NEED...</v-btn
+              >
+            </div>
+          </v-container>
         </div>
         <div v-if="!live">
           <DeliverableTableRow
@@ -33,10 +47,10 @@
             :baseUrl="`/${workspaceSlug}`"
           >
           </DeliverableTableRow>
+          <nuxt-link :to="`${workspace.slug}/new`">
+            <button class="fab">+</button>
+          </nuxt-link>
         </div>
-        <nuxt-link :to="`${workspace.slug}/new`">
-          <button class="fab">+</button>
-        </nuxt-link>
       </div>
     </v-container>
   </v-app>
@@ -109,6 +123,14 @@ body {
 </style>
 
 <style scoped>
+.placeholder-gray {
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  border: 1px solid #c4c4c4;
+  background-color: #c4c4c4;
+}
+
 .v-btn-toggle > .v-btn.v-btn--active {
   background-color: #6f5e53 !important;
   color: white;
