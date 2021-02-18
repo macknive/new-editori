@@ -123,14 +123,6 @@ body {
 </style>
 
 <style scoped>
-.placeholder-gray {
-  height: 250px;
-  width: 250px;
-  border-radius: 50%;
-  border: 1px solid #c4c4c4;
-  background-color: #c4c4c4;
-}
-
 .v-btn-toggle > .v-btn.v-btn--active {
   background-color: #6f5e53 !important;
   color: white;

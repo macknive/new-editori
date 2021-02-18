@@ -216,9 +216,42 @@ body {
   padding-top: 45px;
 }
 
+.editori-logo {
+  color: white;
+  background-color: #6f5e53;
+  font-size: 70px;
+}
+
+.editori-text {
+  font-size: 40px;
+  font-family: Enriq;
+  color: #6f5e53;
+  font-weight: 700;
+}
+
+.editori-border {
+  width: 400px;
+  height: 250px;
+  border: 2px solid #593d3b;
+  padding: 50px;
+}
+
+.editori-container {
+  border: 4.6px solid #6f5e53;
+  line-height: 1.15;
+}
+
 .svg-live {
   display: block;
   margin: auto;
+}
+
+.placeholder-gray {
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  border: 1px solid #c4c4c4;
+  background-color: #c4c4c4;
 }
 
 @media only screen and (max-width: 375px) {
@@ -268,5 +301,14 @@ body {
 
   .step4 div > span {
     top: 460px !important;
+  }
+}
+
+@media only screen and (max-width: 1263px) {
+  .blog-selection-row {
+    flex-direction: column;
+  }
+  .svg-container {
+    margin: auto;
   }
 }

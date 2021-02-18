@@ -10,7 +10,7 @@
       </div>
     </v-container>
     <v-container class="container-1000">
-      <v-row align="center">
+      <v-row align="center" class="blog-selection-row">
         <v-col>
           <a @click="wordPress()">
             <div class="svg-container">

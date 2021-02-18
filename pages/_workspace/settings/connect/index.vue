@@ -34,7 +34,9 @@
               <BlogSelection v-on:chosenBlog="wordPressOrWebFlow($event)" />
             </v-stepper-content>
             <v-stepper-content step="2" class="pt-0 step">
-              <ConnectToWordpress />
+              <ConnectToWordpress
+                v-on:DataForWp="wordpressSetupIncomplete($event)"
+              />
             </v-stepper-content>
             <v-stepper-content step="3" class="pt-0 step">
               <ConnectToWebflow />
@@ -66,7 +68,8 @@ export default {
   data() {
     return {
       step: 1,
-      chosenBlogInfo: {}
+      chosenBlogInfo: {},
+      wpInfo: ''
     }
   },
   methods: {
@@ -78,6 +81,15 @@ export default {
       if (this.chosenBlogInfo == 'webflow') {
         this.step = 3
       }
+    },
+    wordpressSetupIncomplete(wpCurrentStatus) {
+      this.wpInfo = wpCurrentStatus
+      if (this.wpInfo == 'complete') {
+        console.log('WordPress connection success')
+        this.step = 4
+        return
+      }
+      console.log('WordPress connection failed')
     }
   }
 }
