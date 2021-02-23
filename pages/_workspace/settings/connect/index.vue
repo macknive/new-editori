@@ -35,17 +35,17 @@
             </v-stepper-content>
             <v-stepper-content step="2" class="pt-0 step">
               <ConnectToWordpress
-                v-on:DataForWp="wordpressSetupIncomplete($event)"
+                v-on:dataForWp="wordpressSetupIncomplete($event)"
               />
             </v-stepper-content>
             <v-stepper-content step="3" class="pt-0 step">
-              <ConnectToWebflow />
+              <ConnectToWebflow v-on:nextStep="proceedToNextStep($event)" />
             </v-stepper-content>
             <v-stepper-content step="4" class="pt-0 step">
-              4
+              <WebflowSite v-on:nextStep="proceedToNextStep($event)" />
             </v-stepper-content>
             <v-stepper-content step="5" class="pt-0 step">
-              5
+              <WebflowCollection v-on:nextStep="proceedToNextStep($event)" />
             </v-stepper-content>
           </v-col>
         </v-row>
@@ -58,18 +58,26 @@
 import BlogSelection from '~/components/live/BlogSelection'
 import ConnectToWordpress from '~/components/live/ConnectToWordpress'
 import ConnectToWebflow from '~/components/live/ConnectToWebflow'
+import WebflowSite from '~/components/live/WebflowSite'
+import WebflowCollection from '~/components/live/WebflowCollection'
+
 export default {
   layout: 'empty',
   components: {
     BlogSelection,
     ConnectToWordpress,
-    ConnectToWebflow
+    ConnectToWebflow,
+    WebflowSite,
+    WebflowCollection
   },
   data() {
     return {
       step: 1,
       chosenBlogInfo: {},
-      wpInfo: ''
+      wpInfo: '',
+      currentStep: '',
+      stepDone: '',
+      workspaceSlug: this.$route.params.workspace
     }
   },
   methods: {
@@ -90,6 +98,12 @@ export default {
         return
       }
       console.log('WordPress connection failed')
+    },
+    proceedToNextStep(stepInfo) {
+      this.step = stepInfo
+      if (this.step == 'done') {
+        this.$router.push(`/${this.workspaceSlug}/`)
+      }
     }
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-container class="wp-connection-fail" style="display: none">
+    <v-container class="wp-connection-fail container-700" style="display: none">
       <div align="center">
         <h3>HEY, NOT SO FAST...</h3>
         <div class="placeholder-gray"></div>
@@ -80,11 +80,11 @@ export default {
     checkWordpressConnection() {
       if (this.wpConnection == true) {
         this.wpStatus = 'complete'
-        this.$emit('DataForWp', this.wpStatus)
+        this.$emit('dataForWp', this.wpStatus)
         return
       }
       this.wpStatus = 'incomplete'
-      this.$emit('DataForWp', this.wpStatus)
+      this.$emit('dataForWp', this.wpStatus)
       document.querySelector('.wp-container').style.display = 'none'
       document.querySelector('.wp-connection-fail').style.display = 'block'
     },

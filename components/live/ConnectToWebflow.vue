@@ -15,6 +15,7 @@
         </div>
 
         <v-btn
+          @click="proceed()"
           type="submit"
           block
           class="py-7"
@@ -29,11 +30,18 @@
 <script>
 import Webflow from '~/components/live/Webflow'
 export default {
+  data() {
+    return {
+      stepNumber: '4'
+    }
+  },
   components: {
     Webflow
   },
   methods: {
-    proceed
+    proceed() {
+      this.$emit('nextStep', this.stepNumber)
+    }
   }
 }
 </script>

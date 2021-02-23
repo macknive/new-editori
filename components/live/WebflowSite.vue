@@ -1,5 +1,5 @@
 <template> </template>
-<template> 
+<template>
   <v-app>
     <v-container class="container-700">
       <div align="center">
@@ -7,23 +7,49 @@
           WHICH SITE ARE WE FOCUSING ON?
         </h3>
         <p class="f-16">
-          Okay, you granted permission but let's confirm which workspace we are focusing on
+          Okay, you granted permission but let's confirm which workspace we are
+          focusing on
         </p>
-        <v-row>
-            <v-col></v-col>
-        </v-row>
+      </div>
+
+      <v-row align="center">
+        <v-col
+          align="center"
+          cols="3"
+          v-for="data in sites"
+          :key="data.id"
+          class="site-border ma-4"
+        >
+          {{ data }}
+        </v-col>
+      </v-row>
+
+      <v-btn
+        @click="proceed()"
+        type="submit"
+        block
+        class="py-7"
+        color="brown darken-3 white--text"
+        >NEXT</v-btn
+      >
     </v-container>
   </v-app>
 </template>
 
 <script>
-export default {}
-</script>
-
-<style></style>
-
-<script>
-export default {}
+export default {
+  data() {
+    return {
+      sites: ['Drink Filtered', 'Ebb Studio', 'Example Site'],
+      stepNumber: '5'
+    }
+  },
+  methods: {
+    proceed() {
+      this.$emit('nextStep', this.stepNumber)
+    }
+  }
+}
 </script>
 
 <style></style>
