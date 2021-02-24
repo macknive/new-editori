@@ -76,7 +76,6 @@ export default {
       chosenBlogInfo: {},
       wpInfo: '',
       currentStep: '',
-      stepDone: '',
       workspaceSlug: this.$route.params.workspace
     }
   },

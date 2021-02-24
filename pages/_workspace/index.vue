@@ -10,16 +10,21 @@
               <v-btn @click="live = false">UPCOMING</v-btn>
             </v-btn-toggle>
           </v-col>
+
           <v-col align="right">
-            <v-text-field
-              solo
-              v-model="search"
-              class="searchbar"
-              append-icon="mdi-magnify"
-              label="Search"
-            ></v-text-field>
+            <div class="holder">
+              <Alert />
+              <v-text-field
+                solo
+                v-model="search"
+                class="searchbar"
+                append-icon="mdi-magnify"
+                label="Search"
+              ></v-text-field>
+            </div>
           </v-col>
         </v-row>
+
         <div v-if="live">
           <v-container class="container-700">
             <div align="center">
@@ -60,11 +65,13 @@
 import DeliverableTableRow from '~/components/DeliverableTableRow'
 import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug'
 import ListDeliverablesByWorkspace from '~/queries/ListDeliverablesByWorkspace'
+import Alert from '~/components/live/Alert'
 
 export default {
   layout: 'empty',
   components: {
-    DeliverableTableRow
+    DeliverableTableRow,
+    Alert
   },
   data() {
     return {
