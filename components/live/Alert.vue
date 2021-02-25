@@ -10,7 +10,12 @@
           ></i
         ></v-col>
       </v-row>
-      Your posts are being imported from wordPress
+      <div v-if="isWordPress">
+        Your posts are being imported from wordPress
+      </div>
+      <div v-if="!isWordPress">
+        Your posts are being imported from webFlow
+      </div>
     </div>
   </v-alert>
 </template>
@@ -19,13 +24,14 @@
 export default {
   data() {
     return {
-      alert: true
+      alert: true,
+      isWordPress: true
     }
   },
   created() {
     setTimeout(() => {
       this.alert = false
-    }, 1000)
+    }, 7000)
   }
 }
 </script>

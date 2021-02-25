@@ -26,22 +26,27 @@
         </v-row>
 
         <div v-if="live">
-          <v-container class="container-700">
-            <div align="center">
-              <h3>CAN YOU HELP US OUT?</h3>
-              <div class="placeholder-gray my-12"></div>
-              <p class="f-16 mb-12">
-                Before we start working on taking your blog to the next level
-                lets configure this workspace. Don't worry, it is quick and
-                painless. Easy Peasy!
-              </p>
-              <v-btn
-                class="brown darken-3 white--text py-7 step-button"
-                :to="`${workspaceSlug}/settings/connect/`"
-                >SURE, HERE IS WHAT YOU NEED...</v-btn
-              >
-            </div>
-          </v-container>
+          <div v-if="!integration">
+            <v-container class="container-700">
+              <div align="center">
+                <h3>CAN YOU HELP US OUT?</h3>
+                <div class="placeholder-gray my-12"></div>
+                <p class="f-16 mb-12">
+                  Before we start working on taking your blog to the next level
+                  lets configure this workspace. Don't worry, it is quick and
+                  painless. Easy Peasy!
+                </p>
+                <v-btn
+                  class="brown darken-3 white--text py-7 step-button"
+                  :to="`${workspaceSlug}/settings/connect/`"
+                  >SURE, HERE IS WHAT YOU NEED...</v-btn
+                >
+              </div>
+            </v-container>
+          </div>
+          <div v-if="integration">
+            WordPress / Webflow integrated successfully
+          </div>
         </div>
         <div v-if="!live">
           <DeliverableTableRow
@@ -80,7 +85,9 @@ export default {
       workspaceSlug: this.$route.params.workspace,
       toggle_exclusive: undefined,
       search: '',
-      live: true
+      live: true,
+      //set to true once integrated from live components
+      integration: false
     }
   },
   computed: {

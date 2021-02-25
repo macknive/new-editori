@@ -30,21 +30,21 @@
             </div>
           </v-col>
           <v-col class="pt-12">
-            <v-stepper-content step="1" class="pt-0 step">
+            <v-stepper-content step="1" class="step">
               <BlogSelection v-on:chosenBlog="wordPressOrWebFlow($event)" />
             </v-stepper-content>
-            <v-stepper-content step="2" class="pt-0 step">
+            <v-stepper-content step="2" class="step">
               <ConnectToWordpress
                 v-on:dataForWp="wordpressSetupIncomplete($event)"
               />
             </v-stepper-content>
-            <v-stepper-content step="3" class="pt-0 step">
+            <v-stepper-content step="3" class="step">
               <ConnectToWebflow v-on:nextStep="proceedToNextStep($event)" />
             </v-stepper-content>
-            <v-stepper-content step="4" class="pt-0 step">
+            <v-stepper-content step="4" class="step">
               <WebflowSite v-on:nextStep="proceedToNextStep($event)" />
             </v-stepper-content>
-            <v-stepper-content step="5" class="pt-0 step">
+            <v-stepper-content step="5" class="step">
               <WebflowCollection v-on:nextStep="proceedToNextStep($event)" />
             </v-stepper-content>
           </v-col>

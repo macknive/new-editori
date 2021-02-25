@@ -3,10 +3,10 @@
   <v-app>
     <v-container class="container-700">
       <div align="center">
-        <h3>
+        <h3 class="pb-8">
           WHICH SITE ARE WE FOCUSING ON?
         </h3>
-        <p class="f-16">
+        <p class="f-16 py-8">
           Okay, you granted permission but let's confirm which workspace we are
           focusing on
         </p>
@@ -23,15 +23,16 @@
           {{ data }}
         </v-col>
       </v-row>
-
-      <v-btn
-        @click="proceed()"
-        type="submit"
-        block
-        class="py-7"
-        color="brown darken-3 white--text"
-        >NEXT</v-btn
-      >
+      <v-container class="container-300 pt-8">
+        <v-btn
+          @click="proceed()"
+          type="submit"
+          block
+          class="py-7"
+          color="brown darken-3 white--text"
+          >NEXT</v-btn
+        >
+      </v-container>
     </v-container>
   </v-app>
 </template>

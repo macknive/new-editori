@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <v-container class="wp-connection-fail container-700" style="display: none">
+    <v-container v-if="!wpIncomplete" class="container-700">
       <div align="center">
-        <h3>HEY, NOT SO FAST...</h3>
+        <h3 class="pb-8">HEY, NOT SO FAST...</h3>
         <div class="placeholder-gray"></div>
-        <p class="f-16">
+        <p class="f-16 py-8">
           It looks like you haven’t finished setting things up in WordPress.
           Make sure you have the Editori Connector for WordPress plugin
           installed and configured before continuing.
@@ -31,12 +31,12 @@
         </v-row>
       </div>
     </v-container>
-    <v-container class="container-700 wp-container">
+    <v-container v-if="wpIncomplete" class="container-700">
       <div align="center">
-        <h3>
+        <h3 class="pb-8">
           AH, SO YOU'RE TEAM WORDPRESS
         </h3>
-        <p class="f-16">
+        <p class="f-16 pb-8">
           No Problem, we will use it as the source of truth to stay in sync. In
           Wordpress land the best way to do that is... you guessed it.. Plugins!
         </p>
@@ -47,22 +47,23 @@
                 <span class="editori-logo px-5">e</span>
                 <span class="editori-text" align="center">EDITORI</span>
               </div>
-              <span>CONNECTOR FOR WORDPRESS</span>
+              <span class="text-brown">CONNECTOR FOR WORDPRESS</span>
             </v-container>
           </div>
         </a>
         <div class="mb-12">
           <i>Click to view on Wordpress</i>
         </div>
-
-        <v-btn
-          @click="checkWordpressConnection()"
-          type="submit"
-          block
-          class="py-7"
-          color="brown darken-3 white--text"
-          >NEXT</v-btn
-        >
+        <v-container class="container-300">
+          <v-btn
+            @click="checkWordpressConnection()"
+            type="submit"
+            block
+            class="py-7"
+            color="brown darken-3 white--text"
+            >NEXT</v-btn
+          >
+        </v-container>
       </div>
     </v-container>
   </v-app>
@@ -73,7 +74,8 @@ export default {
   data() {
     return {
       wpStatus: '',
-      wpConnection: false
+      wpConnection: false,
+      wpIncomplete: true
     }
   },
   methods: {
@@ -83,14 +85,12 @@ export default {
         this.$emit('dataForWp', this.wpStatus)
         return
       }
+      this.wpIncomplete = false
       this.wpStatus = 'incomplete'
       this.$emit('dataForWp', this.wpStatus)
-      document.querySelector('.wp-container').style.display = 'none'
-      document.querySelector('.wp-connection-fail').style.display = 'block'
     },
     back() {
-      document.querySelector('.wp-container').style.display = 'block'
-      document.querySelector('.wp-connection-fail').style.display = 'none'
+      this.wpIncomplete = true
     }
   }
 }
