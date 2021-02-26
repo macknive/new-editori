@@ -12,16 +12,13 @@
           </v-col>
 
           <v-col align="right">
-            <div class="holder">
-              <Alert />
-              <v-text-field
-                solo
-                v-model="search"
-                class="searchbar"
-                append-icon="mdi-magnify"
-                label="Search"
-              ></v-text-field>
-            </div>
+            <v-text-field
+              solo
+              v-model="search"
+              class="searchbar"
+              append-icon="mdi-magnify"
+              label="Search"
+            ></v-text-field>
           </v-col>
         </v-row>
 
@@ -45,6 +42,7 @@
             </v-container>
           </div>
           <div v-if="integration">
+            <Alert />
             WordPress / Webflow integrated successfully
           </div>
         </div>
