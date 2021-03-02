@@ -16,11 +16,17 @@
         <v-col
           align="center"
           cols="3"
-          v-for="data in sites"
-          :key="data.id"
+          v-for="site in sites"
+          :key="site.id"
           class="site-border ma-4"
         >
-          {{ data }}
+          <v-checkbox
+            v-model="selectedSite"
+            :label="site"
+            :value="site"
+            class="checkbox-site"
+          >
+          </v-checkbox>
         </v-col>
       </v-row>
       <v-container class="container-300 pt-8">
@@ -42,7 +48,8 @@ export default {
   data() {
     return {
       sites: ['Drink Filtered', 'Ebb Studio', 'Example Site'],
-      stepNumber: '5'
+      stepNumber: '5',
+      selectedSite: ''
     }
   },
   methods: {

@@ -145,7 +145,7 @@ body {
   border: 1px solid gray;
 }
 
-.v-input__slot {
+.searchbar > .v-input__control > .v-input__slot {
   border: 1px solid #593d3b;
   box-shadow: none !important;
 }
@@ -245,9 +245,9 @@ body {
 }
 
 .site-border {
-  border: 2px solid #593d3b;
   min-width: 200px;
   height: 150px;
+  border: 2px solid #593d3b;
 }
 
 .editori-container {

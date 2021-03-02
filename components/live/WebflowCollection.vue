@@ -13,11 +13,17 @@
           <v-col
             align="center"
             cols="3"
-            v-for="data in collection"
-            :key="data.id"
+            v-for="collection in collections"
+            :key="collection.id"
             class="site-border ma-4"
           >
-            {{ data }}
+            <v-checkbox
+              v-model="selectedCollection"
+              :label="collection"
+              :value="collection"
+              class="checkbox-site"
+            >
+            </v-checkbox>
           </v-col>
         </v-row>
       </div>
@@ -39,14 +45,15 @@
 export default {
   data() {
     return {
-      collection: [
+      collections: [
         'Blog Posts',
         'Authors',
         'Categories',
         'Tags',
         'Team Members'
       ],
-      stepNumber: 'done'
+      stepNumber: 'done',
+      selectedCollection: ''
     }
   },
   methods: {
