@@ -1,25 +1,84 @@
 <template>
-  <div class="webflow-settings-root">
-    <ul v-if="connections && connections.length > 0">
-      <li v-for="connection in connections" :key="connection.id">
-        <p>
-          Connected to {{ connection.service }} at {{ connection.created_at }}
+  <v-app>
+    <div class="mt-12 pt-12"></div>
+    <v-container class="container-700" v-if="webflowStep == 1">
+      <div align="center">
+        <h3>
+          AH, SO YOU'RE TEAM WEBFLOW
+        </h3>
+        <p class="f-16 py-8">
+          No Problem, we will use it as the source of truth to stay in sync.
+          Just connect your account.
         </p>
-        <p>
-          <b>Token:</b> <code>{{ connection.data.access_token }}</code>
+        <a @click="authorizeWebflow()">
+          <div class="editori-border mb-4">
+            <v-container>
+              <img
+                src="~/assets/svgs/webflowconnect.svg"
+                alt="webflowconnect"
+              />
+              <div class="mt-4">
+                <span>Connect to Webflow</span>
+              </div>
+            </v-container>
+          </div>
+        </a>
+        <div class="mb-12">
+          <i>Click to login to Webflow</i>
+        </div>
+        <v-container class="container-300">
+          <v-btn
+            @click="proceed()"
+            type="submit"
+            block
+            class="py-7"
+            color="brown darken-3 white--text"
+            >NEXT</v-btn
+          >
+        </v-container>
+      </div>
+    </v-container>
+
+    <v-container class="container-1200" v-if="webflowStep == 2">
+      <div align="center">
+        <h3 class="pb-8">
+          WHICH SITE ARE WE FOCUSING ON?
+        </h3>
+        <p class="f-16 py-8">
+          Okay, you granted permission but let's confirm which workspace we are
+          focusing on
         </p>
-      </li>
-    </ul>
-    <div v-if="sites">
-      Choose a site:
-      <select>
-        <option v-for="site in sites" :key="site['_id']">{{
-          site.name
-        }}</option>
-      </select>
-    </div>
-    <button @click="authorizeWebflow">Connect Webflow</button>
-  </div>
+      </div>
+      <v-row>
+        <v-col v-for="site in sampleSites" :key="site.id">
+          <v-btn @click="selectSite($event)" class="sample-sites" :value="site">
+            {{ site }}
+          </v-btn>
+        </v-col>
+      </v-row>
+    </v-container>
+    <v-container v-if="webflowStep == 3" class="container-1200">
+      <div align="center">
+        <h3 class="pb-8">
+          WHICH...
+        </h3>
+        <p class="f-16 py-8">
+          Okay, you granted permission but let's confirm which workspace we are
+          focusing on
+        </p>
+      </div>
+      <v-row>
+        <v-col v-for="collection in sampleCollections" :key="collection.id">
+          <v-btn
+            @click="selectCollection($event)"
+            class="sample-sites"
+            :value="collection"
+            >{{ collection }}</v-btn
+          >
+        </v-col>
+      </v-row>
+    </v-container>
+  </v-app>
 </template>
 
 <script>
@@ -41,6 +100,7 @@ const deserialize = function(s) {
 }
 
 export default {
+  layout: 'empty',
   async asyncData(ctx) {
     const webflowAxios = await axiosForService(ctx, 'webflow')
     const sitesResponse = await webflowAxios.get('/sites')
@@ -53,7 +113,19 @@ export default {
       connections: [],
       sites: [],
       workspaceSlug: this.$route.params.workspace,
-      workspaces: []
+      workspaces: [],
+      webflowStep: '1',
+      sampleSites: ['Drink Filtered', 'Ebb Studio', 'Example Site'],
+      sampleCollections: [
+        'Blog Posts',
+        'Authors',
+        'Categories',
+        'Tags',
+        'Team Members',
+        'Others'
+      ],
+      selectedSite: undefined,
+      selectedCollection: undefined
     }
   },
   computed: {
@@ -127,6 +199,22 @@ export default {
         `?client_id=${process.env.apiKeys.webflow.clientId}` +
         `&response_type=${RESPONSE_TYPE}` +
         `&state=${serialize(state)}`
+    },
+    proceed() {
+      return (this.webflowStep = '2')
+    },
+    selectSite(e) {
+      this.selectedSite = e.target.value
+      if (this.selectedSite) {
+        console.log('Selected Site: ' + this.selectedSite)
+        this.webflowStep = '3'
+      }
+    },
+    selectCollection(e) {
+      this.selectedCollection = e.target.value
+      if (this.selectedCollection) {
+        console.log('Selected Collection: ' + this.selectedCollection)
+      }
     }
   },
   apollo: {
@@ -153,27 +241,4 @@ export default {
 }
 </script>
 
-<style scoped>
-.webflow-settings-root {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-code {
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  display: inline-block;
-  border-radius: 4px;
-  color: #555;
-  padding: 4px;
-}
-p {
-  margin: 0;
-  padding: 0;
-  line-height: 1.5;
-}
-li,
-select {
-  margin-bottom: 20px;
-}
-</style>
+<style></style>

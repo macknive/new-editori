@@ -84,9 +84,11 @@ export default {
       this.chosenBlogInfo = blogSelected
       if (this.chosenBlogInfo == 'wordpress') {
         this.step = 2
+        this.$router.push(`/${this.workspaceSlug}/settings/connect/wordpress`)
       }
       if (this.chosenBlogInfo == 'webflow') {
         this.step = 3
+        this.$router.push(`/${this.workspaceSlug}/settings/connect/webflow`)
       }
     },
     wordpressSetupIncomplete(wpCurrentStatus) {

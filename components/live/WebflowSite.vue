@@ -1,7 +1,7 @@
 <template> </template>
 <template>
   <v-app>
-    <v-container class="container-700">
+    <v-container class="container-700" align="center" justify="center">
       <div align="center">
         <h3 class="pb-8">
           WHICH SITE ARE WE FOCUSING ON?
