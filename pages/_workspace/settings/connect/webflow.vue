@@ -82,6 +82,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import CreateConnection from '~/queries/CreateConnection'
 import ListConnectionsByWorkspace from '~/queries/ListConnectionsByWorkspace'
 import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug'
@@ -129,6 +130,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['platformIntegration']),
     workspace() {
       return this.workspaces[0]
     }
@@ -214,6 +216,8 @@ export default {
       this.selectedCollection = e.target.value
       if (this.selectedCollection) {
         console.log('Selected Collection: ' + this.selectedCollection)
+        this.$store.commit('platformWebflow')
+        this.$router.push(`/${this.workspaceSlug}/`)
       }
     }
   },

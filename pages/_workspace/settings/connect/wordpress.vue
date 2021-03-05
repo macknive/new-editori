@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container v-if="!wpIncomplete" class="container-700">
-      <div align="center">
+      <div align="center" class="mt-12">
         <h3 class="pb-8">HEY, NOT SO FAST...</h3>
         <div class="placeholder-gray"></div>
         <p class="f-16 py-8">
@@ -33,7 +33,7 @@
     </v-container>
     <v-container v-if="wpIncomplete" class="container-700">
       <div align="center">
-        <h3 class="pb-8">
+        <h3 class="pb-8 mt-12">
           AH, SO YOU'RE TEAM WORDPRESS
         </h3>
         <p class="f-16 pb-8">
@@ -70,13 +70,17 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug'
 export default {
   layout: 'empty',
   data() {
     return {
+      workspaceSlug: this.$route.params.workspace,
+      workspaces: [],
       wpStatus: undefined,
       wpConnection: false,
-      wpIncomplete: false
+      wpIncomplete: true
     }
   },
   methods: {
@@ -84,13 +88,31 @@ export default {
       if (this.wpConnection == true) {
         this.wpStatus = 'complete'
         console.log('sucess')
+        this.$store.commit('platformWordPress')
+        this.$router.push(`/${this.workspaceSlug}/`)
+        return
       }
       this.wpIncomplete = false
       this.wpStatus = 'incomplete'
       console.log('fail')
+      this.wpConnection = true
     },
     back() {
       this.wpIncomplete = true
+    }
+  },
+  computed: {
+    ...mapState(['platformIntegration'])
+  },
+  apollo: {
+    workspaces: {
+      prefetch: true,
+      query: GetWorkspaceBySlug,
+      variables() {
+        return {
+          workspaceSlug: this.workspaceSlug
+        }
+      }
     }
   }
 }

@@ -42,8 +42,21 @@
             </v-container>
           </div>
           <div v-if="integration">
-            <Alert />
-            WordPress / Webflow integrated successfully
+            <v-alert type="success" class="success-alert" :value="alert">
+              <div align="left">
+                <v-row>
+                  <v-col><p class="mb-0">Success!</p></v-col>
+                  <v-col align="right"
+                    ><i
+                      aria-hidden="true"
+                      class="v-icon notranslate v-alert__icon mdi mdi-check-circle theme--dark"
+                    ></i
+                  ></v-col>
+                </v-row>
+                <div>Your posts are being imported from {{ platform }}</div>
+              </div>
+            </v-alert>
+            {{ platform }} integrated successfully
           </div>
         </div>
         <div v-if="!live">
@@ -65,16 +78,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import DeliverableTableRow from '~/components/DeliverableTableRow'
 import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug'
 import ListDeliverablesByWorkspace from '~/queries/ListDeliverablesByWorkspace'
-import Alert from '~/components/live/Alert'
 
 export default {
   layout: 'empty',
   components: {
-    DeliverableTableRow,
-    Alert
+    DeliverableTableRow
   },
   data() {
     return {
@@ -84,11 +96,18 @@ export default {
       toggle_exclusive: undefined,
       search: '',
       live: true,
-      //set to true once integrated from live components
-      integration: false
+      integration: this.$store.state.platformIntegration,
+      alert: this.$store.state.alertStatus,
+      platform: this.$store.state.chosenPlatform
     }
   },
+  created() {
+    setTimeout(() => {
+      this.alert = false
+    }, 7000)
+  },
   computed: {
+    ...mapState(['platformIntegration', 'alertStatus', 'chosenPlatform']),
     workspace() {
       return this.workspaces[0]
     },

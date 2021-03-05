@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-container class="container-700">
-      <div align="center">
+      <div align="center" class="pt-12 mt-12">
         <h3>WHERE IS YOUR BLOG?</h3>
         <p class="f-16">
           Okay, so you ready to get your blog out to the world, where do you go
@@ -12,7 +12,7 @@
     <v-container class="container-1000">
       <v-row align="center" class="blog-selection-row">
         <v-col>
-          <a @click="wordPress()">
+          <nuxt-link :to="`${baseUrl}/settings/connect/wordpress`">
             <div class="svg-container">
               <img
                 src="~/assets/svgs/wordpress.svg"
@@ -20,13 +20,13 @@
                 class="svg-live"
               />
             </div>
-          </a>
+          </nuxt-link>
         </v-col>
 
         <v-col><h3 align="center">OR</h3></v-col>
 
         <v-col>
-          <a @click="webFlow()">
+          <nuxt-link :to="`${baseUrl}/settings/connect/webflow`">
             <div class="svg-container">
               <img
                 src="~/assets/svgs/webflow.svg"
@@ -34,7 +34,7 @@
                 class="svg-live"
               />
             </div>
-          </a>
+          </nuxt-link>
         </v-col>
       </v-row>
     </v-container>
@@ -49,6 +49,7 @@ export default {
       blogChoice: undefined
     }
   },
+  props: ['baseUrl'],
   methods: {
     wordPress() {
       this.blogChoice = 'wordpress'
