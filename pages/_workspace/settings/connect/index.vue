@@ -4,7 +4,7 @@
 
 <script>
 import BlogSelection from '~/components/BlogSelection'
-import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug'
+import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug'
 export default {
   layout: 'empty',
   components: {
@@ -16,17 +16,7 @@ export default {
       workspaceSlug: this.$route.params.workspace
     }
   },
-  apollo: {
-    workspaces: {
-      prefetch: true,
-      query: GetWorkspaceBySlug,
-      variables() {
-        return {
-          workspaceSlug: this.workspaceSlug
-        }
-      }
-    }
-  }
+  mixins: [getWorkspaceBySlug]
 }
 </script>
 

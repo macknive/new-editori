@@ -80,8 +80,8 @@
 <script>
 import { mapState } from 'vuex'
 import DeliverableTableRow from '~/components/DeliverableTableRow'
-import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug'
 import ListDeliverablesByWorkspace from '~/queries/ListDeliverablesByWorkspace'
+import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug'
 
 export default {
   layout: 'empty',
@@ -132,17 +132,9 @@ export default {
           workspaceSlug: this.workspaceSlug
         }
       }
-    },
-    workspaces: {
-      prefetch: true,
-      query: GetWorkspaceBySlug,
-      variables() {
-        return {
-          workspaceSlug: this.workspaceSlug
-        }
-      }
     }
-  }
+  },
+  mixins: [getWorkspaceBySlug]
 }
 </script>
 

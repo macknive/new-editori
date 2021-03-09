@@ -54,7 +54,7 @@ import Workflow from '~/components/Workflow'
 import GetViewerId from '~/queries/GetViewerId'
 import GetDeliverableBySlug from '~/queries/GetDeliverableBySlug'
 import UpdateDeliverable from '~/queries/UpdateDeliverable'
-import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug'
+import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug'
 import { debounce } from 'vue-debounce'
 import { nextStepRequiringAction } from '~/utils/steps'
 
@@ -303,17 +303,9 @@ export default {
 
         this.onDeliverableLoaded()
       }
-    },
-    workspaces: {
-      prefetch: true,
-      query: GetWorkspaceBySlug,
-      variables() {
-        return {
-          workspaceSlug: this.workspaceSlug
-        }
-      }
     }
-  }
+  },
+  mixins: [getWorkspaceBySlug]
 }
 </script>
 

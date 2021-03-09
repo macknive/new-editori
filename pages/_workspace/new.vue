@@ -93,7 +93,7 @@
 <script>
 import CreateDeliverable from '~/queries/CreateDeliverable'
 import ListWorkflowsByWorkspace from '~/queries/ListWorkflowsByWorkspace'
-import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug'
+import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug'
 import slugify from 'slugify'
 import { getRandomAnimal } from '~/assets/animals'
 import { required, minLength } from 'vuelidate/lib/validators'
@@ -250,17 +250,9 @@ export default {
           workspaceSlug: this.workspaceSlug
         }
       }
-    },
-    workspaces: {
-      prefetch: true,
-      query: GetWorkspaceBySlug,
-      variables() {
-        return {
-          workspaceSlug: this.workspaceSlug
-        }
-      }
     }
-  }
+  },
+  mixins: [getWorkspaceBySlug]
 }
 </script>
 

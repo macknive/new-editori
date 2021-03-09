@@ -71,7 +71,7 @@
 
 <script>
 import { mapState } from 'vuex'
-import GetWorkspaceBySlug from '~/queries/GetWorkspaceBySlug'
+import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug'
 export default {
   layout: 'empty',
   data() {
@@ -89,7 +89,7 @@ export default {
         this.wpStatus = 'complete'
         console.log('sucess')
         this.$store.commit('platformWordPress')
-        this.$router.push(`/${this.workspaceSlug}/`)
+        this.$router.push(`/${this.workspaceSlug}`)
         return
       }
       this.wpIncomplete = false
@@ -104,17 +104,7 @@ export default {
   computed: {
     ...mapState(['platformIntegration'])
   },
-  apollo: {
-    workspaces: {
-      prefetch: true,
-      query: GetWorkspaceBySlug,
-      variables() {
-        return {
-          workspaceSlug: this.workspaceSlug
-        }
-      }
-    }
-  }
+  mixins: [getWorkspaceBySlug]
 }
 </script>
 
