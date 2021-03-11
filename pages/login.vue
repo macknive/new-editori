@@ -36,7 +36,8 @@
                   :disabled="!valid"
                   block
                   @click="validate() ? login() : errorMessage()"
-                  color="brown darken-3 white--text py-7 step-button"
+                  color="brown darken-3 white--text"
+                  class="py-7 step-button"
                   >LOG IN</v-btn
                 >
               </v-col>

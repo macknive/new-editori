@@ -14,7 +14,8 @@
             @click="proceed()"
             type="submit"
             block
-            color="brown darken-3 white--text py-7 step-button"
+            color="brown darken-3 white--text"
+            class="py-7 step-button"
             >NEXT</v-btn
           >
         </div>

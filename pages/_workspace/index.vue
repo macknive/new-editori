@@ -34,7 +34,8 @@
                   painless. Easy Peasy!
                 </p>
                 <v-btn
-                  class="brown darken-3 white--text py-7 step-button"
+                  color="brown darken-3 white--text"
+                  class="py-7 step-button"
                   :to="`${workspaceSlug}/settings/connect/`"
                   >SURE, HERE IS WHAT YOU NEED...</v-btn
                 >
