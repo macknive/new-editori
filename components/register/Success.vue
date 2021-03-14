@@ -13,7 +13,8 @@
             <v-btn
               type="submit"
               block
-              color="brown darken-3 white--text py-7 step-button"
+              color="brown darken-3 white--text"
+              class="py-7 step-button"
               >GO TO DASHBOARD</v-btn
             >
           </div>

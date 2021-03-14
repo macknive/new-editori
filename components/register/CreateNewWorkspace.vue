@@ -64,7 +64,8 @@
                 <v-btn
                   @click="visible = !visible"
                   block
-                  color="brown darken-3 white--text py-7 step-button"
+                  color="brown darken-3 white--text"
+                  class="py-7 step-button"
                   ><font-awesome-icon
                     class="text-white"
                     icon="credit-card"
@@ -130,7 +131,8 @@
         :disabled="!valid"
         block
         @click="validate() ? addWorkspace() : errorMessage()"
-        color="brown darken-3 white--text py-7 step-button"
+        color="brown darken-3 white--text"
+        class="py-7 step-button"
         >NEXT</v-btn
       >
     </v-form>
