@@ -43,7 +43,6 @@
 
 <script>
 export default {
-  layout: 'empty',
   data() {
     return {
       blogChoice: undefined

@@ -70,7 +70,6 @@ import { mapGetters } from 'vuex'
 import CreateWorkspace from '~/queries/CreateWorkspace'
 
 export default {
-  layout: 'empty',
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser'])
   },

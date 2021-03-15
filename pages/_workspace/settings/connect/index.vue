@@ -6,7 +6,6 @@
 import BlogSelection from '~/components/BlogSelection'
 import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug'
 export default {
-  layout: 'empty',
   components: {
     BlogSelection
   },

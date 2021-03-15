@@ -80,7 +80,6 @@ const SaveStatus = {
 }
 
 export default {
-  layout: 'empty',
   components: {
     ApprovalWidget,
     ArticleEditor,

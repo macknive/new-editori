@@ -73,7 +73,6 @@
 import { mapState } from 'vuex'
 import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug'
 export default {
-  layout: 'empty',
   data() {
     return {
       workspaceSlug: this.$route.params.workspace,

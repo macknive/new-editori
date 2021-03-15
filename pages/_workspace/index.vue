@@ -85,7 +85,6 @@ import ListDeliverablesByWorkspace from '~/queries/ListDeliverablesByWorkspace'
 import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug'
 
 export default {
-  layout: 'empty',
   components: {
     DeliverableTableRow
   },
