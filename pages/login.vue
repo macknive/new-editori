@@ -7,7 +7,7 @@
             <v-form ref="form" v-model="valid" lazy-validation>
               <div align="center">
                 <img
-                  src="~/assets/editorilogo.png"
+                  src="~/assets/editori-logo.png"
                   alt=""
                   class="editori mt-12"
                 />
