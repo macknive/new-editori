@@ -1,12 +1,20 @@
 <template>
   <v-app>
     <v-row>
-      <v-col class="pa-0 brown lighten-2"> </v-col>
       <v-col class="pa-0">
         <div class="d-flex flex-column">
           <v-container class="container-700">
             <v-form ref="form" v-model="valid" lazy-validation>
-              <h1 align="center" class="py-12 mt-12 testclass">LOGIN</h1>
+              <div align="center">
+                <img
+                  src="~/assets/editori-logo.png"
+                  alt=""
+                  class="editori mt-12"
+                />
+              </div>
+              <h1 align="center" class="mt-12 mb-12 testclass">
+                WELCOME TO EDITORI
+              </h1>
               <v-col class="px-10">
                 <p class="mb-0 text-brown">EMAIL ADDRESS</p>
                 <v-text-field
@@ -91,7 +99,6 @@
 </template>
 
 <script>
-2
 export default {
   middleware: 'guest',
   data() {
