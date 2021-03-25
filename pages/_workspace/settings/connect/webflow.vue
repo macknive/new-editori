@@ -101,7 +101,6 @@ const deserialize = function(s) {
 }
 
 export default {
-  layout: 'empty',
   async asyncData(ctx) {
     const webflowAxios = await axiosForService(ctx, 'webflow')
     const sitesResponse = await webflowAxios.get('/sites')
