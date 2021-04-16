@@ -2,11 +2,11 @@
   <v-app>
     <v-container class="container-1200">
       <div align="right" class="text-gray">
-        Last updated {{ formattedDate }}
+        Last updated formattedDate
       </div>
       <h1 align="center">dashboard</h1>
       <p align="center" class="my-6">
-        Hey {{ this.loggedInUser.display_name }}, view {{ workspace.name }}'s
+        Hey {{ this.loggedInUser.display_name }}, view workspace.name's
         performance focusing on
         <nuxt-link to="/" class="text-brown">page views</nuxt-link> over the
         <nuxt-link to="/" class="text-brown">last week</nuxt-link>
@@ -30,7 +30,7 @@ export default {
   layout: 'dashboard',
   head() {
     return {
-      title: this.workspace.name,
+      title: 'this.workspace.name',
       meta: [
         {
           hid: 'description',

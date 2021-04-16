@@ -1,6 +1,5 @@
 <template>
   <v-container>
-    <h1>Landing page</h1>
     <div v-if="!isAuthenticated">
       Not Authenticated. Please <nuxt-link to="/login">login</nuxt-link> to
       continue.
@@ -12,8 +11,8 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import WorkspaceList from '@/components/WorkspaceList'
+import { mapGetters } from 'vuex';
+import WorkspaceList from '@/components/WorkspaceList';
 
 export default {
   middleware: 'auth',
@@ -25,11 +24,11 @@ export default {
   },
   methods: {
     async onLogout() {
-      await this.$apolloHelpers.onLogout()
-      await this.$auth.logout()
+      await this.$apolloHelpers.onLogout();
+      await this.$auth.logout();
     }
   }
-}
+};
 </script>
 
 <style></style>

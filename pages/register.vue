@@ -60,16 +60,17 @@
 </template>
 
 <script>
-import BasicInformation from '~/components/register/BasicInformation'
-import JoinWorkspace from '~/components/register/JoinWorkspace'
-import CreateNewWorkspace from '~/components/register/CreateNewWorkspace'
-import WorkspaceMenu from '~/components/register/WorkspaceMenu'
-import Success from '~/components/register/Success'
-import Authenticated from '~/components/register/Authenticated'
-import { mapGetters } from 'vuex'
-import CreateWorkspace from '~/queries/CreateWorkspace'
+import BasicInformation from '~/components/register/BasicInformation';
+import JoinWorkspace from '~/components/register/JoinWorkspace';
+import CreateNewWorkspace from '~/components/register/CreateNewWorkspace';
+import WorkspaceMenu from '~/components/register/WorkspaceMenu';
+import Success from '~/components/register/Success';
+import Authenticated from '~/components/register/Authenticated';
+import { mapGetters } from 'vuex';
+import CreateWorkspace from '~/queries/CreateWorkspace';
 
 export default {
+  layout: 'empty',
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser'])
   },
@@ -89,20 +90,20 @@ export default {
       workspaceInfo: {},
       joinWorkspaceInfo: {},
       joinCreateInfo: {}
-    }
+    };
   },
   methods: {
     async register(addNewUser) {
-      this.userInfo = addNewUser
-      this.error = null
+      this.userInfo = addNewUser;
+      this.error = null;
       try {
-        this.$axios.setToken(false)
+        this.$axios.setToken(false);
         await this.$axios.post('auth/local/register', {
           email: this.userInfo.email,
           username: this.userInfo.username,
           password: this.userInfo.password,
           display_name: this.userInfo.displayName
-        })
+        });
         await this.$auth
           .loginWith('local', {
             data: {
@@ -111,61 +112,61 @@ export default {
             }
           })
           .then(response => {
-            this.$apolloHelpers.onLogin(response.data.jwt)
-            console.log('Well done!')
-            console.log('User profile', response.data.user)
-            console.log('User token', response.data.jwt)
-          })
-        this.step = 2
-        document.querySelector('.basicinformation').style.display = 'none'
-        console.log('success')
+            this.$apolloHelpers.onLogin(response.data.jwt);
+            console.log('Well done!');
+            console.log('User profile', response.data.user);
+            console.log('User token', response.data.jwt);
+          });
+        this.step = 2;
+        document.querySelector('.basicinformation').style.display = 'none';
+        console.log('success');
       } catch (e) {
-        this.error = e.response.data.message[0].messages[0].message
-        alert(this.error)
+        this.error = e.response.data.message[0].messages[0].message;
+        alert(this.error);
       }
     },
     proceedToNextStep() {
-      this.step = 2
+      this.step = 2;
     },
     joinOrCreate(joinCreate) {
-      this.joinCreateInfo = joinCreate
+      this.joinCreateInfo = joinCreate;
       if (this.joinCreateInfo == 'join') {
-        this.step = 3
+        this.step = 3;
       }
       if (this.joinCreateInfo == 'create') {
-        this.step = 4
+        this.step = 4;
       }
     },
     createWorkspace(addNewWorkspace) {
-      this.workspaceInfo = addNewWorkspace
+      this.workspaceInfo = addNewWorkspace;
       const mutationConfig = {
         mutation: CreateWorkspace,
         variables: {
           name: this.workspaceInfo.workspaceName,
           slug: this.workspaceInfo.workspaceSlug
         }
-      }
+      };
       this.$apollo
         .mutate(mutationConfig)
         .then(this.onCreateSuccess())
-        .catch(err => this.onCreateError(err))
-      this.step = 5
+        .catch(err => this.onCreateError(err));
+      this.step = 5;
     },
     onCreateSuccess() {
-      console.log('success')
-      console.log(this.workspaceInfo.workspaceName)
-      console.log(this.workspaceInfo.workspaceSlug)
+      console.log('success');
+      console.log(this.workspaceInfo.workspaceName);
+      console.log(this.workspaceInfo.workspaceSlug);
     },
     onCreateError(err) {
-      console.log(err)
+      console.log(err);
     },
 
     joinWorkspace(joinNewWorkspace) {
-      this.joinWorkspaceInfo = joinNewWorkspace
-      this.step = 5
+      this.joinWorkspaceInfo = joinNewWorkspace;
+      this.step = 5;
     }
   }
-}
+};
 </script>
 
 <style></style>
