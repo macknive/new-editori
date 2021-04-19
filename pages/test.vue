@@ -30,19 +30,7 @@ export default {
   layout: 'dashboard',
   head() {
     return {
-      title: 'this.workspace.name',
-      meta: [
-        {
-          hid: 'description',
-          name: 'description',
-          content: 'sample description'
-        },
-        {
-          hid: 'ogtitle',
-          property: 'og:title',
-          content: 'sample content'
-        }
-      ]
+      title: 'this.workspace.name'
     };
   },
   components: {
@@ -51,7 +39,6 @@ export default {
   },
   data() {
     return {
-      moment: moment,
       workspaces: [],
       workspaceSlug: this.$route.params.workspace
     };
