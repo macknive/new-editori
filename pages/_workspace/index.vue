@@ -14,7 +14,8 @@
       <h4 class="my-6">SITE OVERVIEW</h4>
       <SiteOverview />
       <h4 class="my-6">POST YOU'RE WORKING ON (10)</h4>
-      <WorkingPosts />
+      <WorkingPosts /><br />
+      <PostStatus />
     </v-container>
   </v-app>
 </template>
@@ -25,6 +26,7 @@ import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug';
 import moment from 'moment';
 import SiteOverview from '~/components/SiteOverview';
 import WorkingPosts from '~/components/WorkingPosts';
+import PostStatus from '~/components/PostStatus';
 
 export default {
   layout: 'dashboard',
@@ -35,7 +37,8 @@ export default {
   },
   components: {
     SiteOverview,
-    WorkingPosts
+    WorkingPosts,
+    PostStatus
   },
   data() {
     return {
