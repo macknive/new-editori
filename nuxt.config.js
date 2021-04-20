@@ -50,7 +50,8 @@ export default {
    */
   plugins: [
     '~/plugins/vue-fontawesome.js',
-    '~/plugins/vuelidate.js'
+    '~/plugins/vuelidate.js',
+    '~/plugins/highcharts-vue.js'
   ],
   /*
    ** Nuxt.js dev-modules
