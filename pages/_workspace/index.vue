@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    
+    <button @click="connectGoogle">Connect Your Google Account</button>
   </v-app>
 </template>
 
@@ -8,6 +8,13 @@
 import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug'
 
 export default {
+  async asyncData(ctx) {
+    const response = await ctx.$axios.get('/connections/google');
+
+    return {
+      googleOauthUrl: response.data,
+    }
+  },
   data() {
     return {
       workspaces: [],
@@ -19,10 +26,22 @@ export default {
       return this.workspaces[0]
     },
   },
-  mixins: [getWorkspaceBySlug]
+  mixins: [getWorkspaceBySlug],
+  methods: {
+    connectGoogle() {
+      window.location.href = this.googleOauthUrl;
+    }
+  },
+  mounted() {
+    console.log('redirect URL', this.googleOauthUrl)
+  }
 }
 </script>
 
 <style scoped>
-
+  button {
+    display: inline-block;
+    background: #ccc;
+    padding: 20px 60px;
+  }
 </style>

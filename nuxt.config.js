@@ -34,8 +34,8 @@ export default {
    * Environment variables
    */
   env: {
-    clientBaseUrl: process.env.CLIENT_BASE_URL || 'http://localhost:3000',
-    strapiBaseUri: process.env.API_URL || 'http://localhost:1337'
+    clientBaseUrl: process.env.CLIENT_BASE_URL,
+    strapiBaseUri: process.env.API_URL,
   },
   /*
    ** Customize the progress-bar color
@@ -48,10 +48,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [
-    '~/plugins/vue-fontawesome.js',
-    '~/plugins/vuelidate.js'
-  ],
+  plugins: ['~/plugins/vue-fontawesome.js', '~/plugins/vuelidate.js'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -73,12 +70,12 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: process.env.BACKEND_URL || 'http://localhost:1337/graphql'
+        httpEndpoint: process.env.BACKEND_URL
       }
     }
   },
   axios: {
-    baseURL: process.env.API_URL || 'http://localhost:1337'
+    baseURL: process.env.API_URL
   },
   auth: {
     strategies: {
