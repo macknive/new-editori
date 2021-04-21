@@ -3,7 +3,7 @@
     <p>List of workspace</p>
     <ul v-for="workspace in workspaces" :key="workspace.id">
       <li>
-        <nuxt-link :to="`${workspace.slug}`" target="_blank">{{
+        <nuxt-link :to="`${workspace.slug}`">{{
           workspace.name
         }}</nuxt-link>
       </li>

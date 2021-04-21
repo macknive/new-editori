@@ -26,6 +26,7 @@
           euismod dapibus quis at neque. Donec eget tortor eget nulla pretium
           molestie. Aliquam consectetur tincidunt ex at auctor.
         </p>
+        <button @click="connectGoogle">Connect Your Google Account</button>
       </HomeCard>
     </BodySection>
   </div>
@@ -53,6 +54,13 @@ function pad(value, totalDigits) {
 
 export default {
   components: { HeroSection, BodySection, EditorButton, Glance, HomeCard },
+  async asyncData(ctx) {
+    const response = await ctx.$axios.get('/connections/google');
+
+    return {
+      googleOauthUrl: response.data,
+    }
+  },
   data() {
     return {
       shapes: [
@@ -67,9 +75,6 @@ export default {
         { value: '$700', caption: 'Total income' },
         { value: '$300', caption: 'Total spend' },
       ]
-    },
-    hideNavbarWorkspace() {
-      return false;
     },
     messages() {
       return new Array(22);
@@ -89,6 +94,15 @@ export default {
         slug: 'drink-filtered',
       }
     }
+  },
+  mixins: [getWorkspaceBySlug],
+  methods: {
+    connectGoogle() {
+      window.location.href = this.googleOauthUrl;
+    }
+  },
+  mounted() {
+    console.log('redirect URL', this.googleOauthUrl)
   }
 }
 </script>
@@ -133,5 +147,9 @@ export default {
   .editor-button {
     left: 900rem;
     top: 300rem;
+  button {
+    display: inline-block;
+    background: #ccc;
+    padding: 20px 60px;
   }
 </style>
