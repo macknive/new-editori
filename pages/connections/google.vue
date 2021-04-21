@@ -12,9 +12,10 @@
 <script>
 export default {
   async asyncData(ctx) {
-    const code = ctx.query.code;
+    const { code, state } = ctx.query;
     const response = await ctx.$axios.post('/connections/google', {
-      'code': code,
+      code,
+      state
     })
 
     return {

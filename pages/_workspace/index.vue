@@ -55,7 +55,11 @@ function pad(value, totalDigits) {
 export default {
   components: { HeroSection, BodySection, EditorButton, Glance, HomeCard },
   async asyncData(ctx) {
-    const response = await ctx.$axios.get('/connections/google');
+    const response = await ctx.$axios.get('/connections/google', {
+      params: {
+        'workspace': ctx.route.params.workspace,
+      }
+    });
 
     return {
       googleOauthUrl: response.data,
