@@ -1,31 +1,24 @@
 <template>
   <div>
-    Successfully connected account!
-    
-    <dl>
-      <dt>Code:</dt><dd>{{code}}</dd>
-      <dt>Access Token:</dt><dd>{{accessToken}}</dd>
-    </dl>
+    <!--
+      This template should never be rendered; it should instead redirect due to
+      the middleware installed below.
+    -->
   </div>
 </template>
 
 <script>
 export default {
-  async asyncData(ctx) {
+  async middleware(ctx) {
     const { code, state } = ctx.query;
     const response = await ctx.$axios.post('/connections/google', {
       code,
       state
     })
 
-    return {
-      code: code,
-      accessToken: response.data
-    }
+    const { workspaceSlug } = response.data;
+    
+    return ctx.redirect(`/${workspaceSlug}/settings`);
   }
 }
 </script>
-
-<style>
-
-</style>
