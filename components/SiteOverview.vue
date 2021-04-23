@@ -19,9 +19,9 @@
     <v-card>
       <v-app-bar color="brown">
         <v-row>
-          <v-col>Title</v-col>
-          <v-col>Assignee</v-col>
-          <v-col>Status</v-col>
+          <v-col><h4 class="text-white">Title</h4></v-col>
+          <v-col><h4 class="text-white">Assignee</h4></v-col>
+          <v-col><h4 class="text-white">Status</h4></v-col>
         </v-row>
       </v-app-bar>
       <v-row v-for="post in posts" :key="post.id">
@@ -38,19 +38,24 @@
             <v-col> {{ post.title }}</v-col>
           </v-row>
         </v-col>
-        <v-col>{{ post.assignee }}</v-col>
+        <v-col>
+          <div class="avatar-placeholder">
+            <div align="center" class="mt-1">
+              <v-menu offset-y>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-btn v-bind="attrs" v-on="on" icon><h2>KC</h2></v-btn>
+                </template>
+              </v-menu>
+            </div>
+          </div>
+        </v-col>
         <v-col>{{ post.status }}</v-col>
       </v-row>
     </v-card>
 
     <v-sheet class="mx-auto mt-12">
       <h4>POST THAT ARE DECREASING ({{ decreasing() }})</h4>
-      <v-slide-group
-        v-model="model"
-        class="pa-4"
-        active-class="success"
-        show-arrows
-      >
+      <v-slide-group class="pa-4" active-class="success" show-arrows>
         <v-slide-item v-for="post in posts" :key="post.id">
           <v-card
             v-if="post.trend == 'decreasing'"
@@ -66,6 +71,12 @@
                 <v-col>{{ post.trend }} in page views </v-col>
               </v-row>
               {{ post.title }}
+              <br /><br /><br />
+              <span class="text-gray"
+                ><font-awesome-icon :icon="['fa', 'lightbulb']" size="1x" />
+                This article does not show up on the first page for any
+                keyword</span
+              >
             </v-container>
           </v-card>
         </v-slide-item>
@@ -74,12 +85,7 @@
 
     <v-sheet class="mx-auto mt-12">
       <h4>POST THAT ARE INCREASING ({{ increasing() }})</h4>
-      <v-slide-group
-        v-model="model"
-        class="pa-4"
-        active-class="success"
-        show-arrows
-      >
+      <v-slide-group class="pa-4" active-class="success" show-arrows>
         <v-slide-item v-for="post in posts" :key="post.id">
           <v-card
             v-if="post.trend == 'increasing'"
@@ -103,12 +109,7 @@
 
     <v-sheet class="mx-auto mt-12">
       <h4>POST THAT ARE STABLE ({{ stable() }})</h4>
-      <v-slide-group
-        v-model="model"
-        class="pa-4"
-        active-class="success"
-        show-arrows
-      >
+      <v-slide-group class="pa-4" active-class="success" show-arrows>
         <v-slide-item v-for="post in posts" :key="post.id">
           <v-card
             v-if="post.trend == 'stable'"
@@ -137,9 +138,9 @@ export default {
   props: ['posts'],
   data() {
     return {
-      decreasingTraffic: '',
-      increasingTraffic: '',
-      stableTraffic: '',
+      decreasingTraffic: undefined,
+      increasingTraffic: undefined,
+      stableTraffic: undefined,
       lineArray: [5, 2, 3, 3]
     };
   },
@@ -181,8 +182,16 @@ export default {
         },
         plotOptions: {
           pie: {
+            colors: ['#eb6258', '#a7d36f', '#777777'],
             dataLabels: {
-              enabled: false
+              enabled: false,
+              formatter: function() {
+                var sliceIndex = this.point.index;
+                var sliceName = this.series.chart.axes[0].categories[
+                  sliceIndex
+                ];
+                return sliceName;
+              }
             },
             borderWidth: 0
           }
@@ -191,9 +200,18 @@ export default {
           {
             type: 'pie',
             data: [
-              this.decreasingTraffic,
-              this.increasingTraffic,
-              this.stableTraffic
+              {
+                name: 'Decreasing Traffic',
+                y: this.decreasingTraffic
+              },
+              {
+                name: 'Increasing Traffic',
+                y: this.increasingTraffic
+              },
+              {
+                name: 'Stable Traffic',
+                y: this.stableTraffic
+              }
             ],
             innerSize: '90%'
           }
