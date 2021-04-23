@@ -10,7 +10,12 @@
 <script>
 export default {
   async middleware(ctx) {
-    const { code, state } = ctx.query;
+    const { code, state, error } = ctx.query;
+
+    if (error) {
+      // TODO: Handle error use case.
+    }
+
     const response = await ctx.$axios.post('/connections/google', {
       code,
       state
