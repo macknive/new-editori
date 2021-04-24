@@ -116,6 +116,7 @@ export default {
     z-index: 2;
   }
   .workspace-switcher {
+    cursor: pointer;
     font-size: 18rem;
     left: 100rem;
     top: 360rem;

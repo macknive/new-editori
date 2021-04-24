@@ -4,12 +4,12 @@
       <v-row>
         <v-col
           ><nuxt-link to="/" class="link-style"
-            ><h3 class="ml-12 text-brown">EDITORI</h3>
+            ><h3 class="inline ml-12 text-brown">EDITORI</h3>
           </nuxt-link>
 
           <div v-if="workspaceSlug" class="ml-6 inline">
-            <h3>></h3>
-            <h3 class="ml-3">{{ workspace.name }}</h3>
+            <h3 class="inline">></h3>
+            <h3 class="inline ml-3">{{ workspace.name }}</h3>
           </div>
         </v-col>
         <v-col align="right" cols="1">
@@ -78,12 +78,11 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 .v-list {
   width: 80px;
 }
 
-h3,
 .inline {
   display: inline;
 }

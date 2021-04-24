@@ -1,8 +1,10 @@
 <template>
   <article class="card-root" tabindex="0">
-    <h3>{{title}}</h3>
-    <h4>{{subtitle}}</h4>
-    <slot></slot>
+    <h3 class="card-title">{{title}}</h3>
+    <h4 class="card-subtitle">{{subtitle}}</h4>
+    <div class="card-content">
+      <slot></slot>
+    </div>
   </article>
 </template>
 
@@ -16,25 +18,30 @@ export default {
   .card-root {
     background: #fff;
     border: 1px solid #8a7968;
-    padding: 50rem 100rem;
+    padding: 50px 100px;
     font-family: var(--body-font);
     font-weight: 400;
-    font-size: 16rem;
+    font-size: 16px;
+    line-height: 200%;
   }
-  .card-root h3 {
+  .card-title {
+    display: inline-block;
     font-family: var(--display-font);
     font-weight: 400;
-    font-size: 18rem;
+    font-size: 18px;
     text-transform: uppercase;
-    padding-right: 60rem;
-    padding-bottom: 10rem;
+    padding-right: 60px;
+    padding-bottom: 10px;
     border-bottom: 1px solid #8A7968;
-    margin-bottom: 10rem;
+    margin-bottom: 10px;
   }
-  .card-root h4 {
+  .card-subtitle {
     font-family: var(--body-font);
     font-weight: 700;
-    font-size: 14rem;
+    font-size: 14px;
     text-transform: uppercase;
+  }
+  .card-content {
+    margin-top: 30px;
   }
 </style>

@@ -1,22 +1,5 @@
-@font-face {
-  font-family: 'Enriq';
-  src: url('~assets/fonts/ENRIQRegular.ttf');
-}
-
-@font-face {
-  font-family: 'Noto Sans';
-  src: url('~assets/fonts/NotoSans-Regular.ttf');
-}
-
-@font-face {
-  font-family: 'Noto Serif';
-  src: url('~assets/fonts/NotoSerif-Regular.ttf');
-}
-
-h1,
-h3,
 .step-button {
-  font-family: 'Enriq';
+  font-family: 'Montserrat';
 }
 
 h1 {
@@ -30,7 +13,7 @@ h3 {
 h4,
 .noto-serif,
 input[type='text'] {
-  font-family: 'Noto Serif';
+  font-family: 'Noto Sans';
 }
 
 h5 {
@@ -54,11 +37,6 @@ h5 {
   font-size: 16px;
 }
 
-p {
-  line-height: 36px;
-  letter-spacing: 1px;
-}
-
 .step-button {
   font-weight: 700 !important;
   font-size: 18px !important;
@@ -79,14 +57,13 @@ p {
   min-width: 140px !important;
 }
 
-p,
 .step1 div > span,
 .step2 div > span,
 .step3 div > span,
 .step4 div > span {
   font-family: 'Noto Sans';
-  font-weight: 700 !important;
-  font-size: 18px !important;
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .step1 div > span,
