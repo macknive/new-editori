@@ -11,9 +11,6 @@ export default {
 </script>
 
 <style>
-  .body-content {
-    min-height: 100vh;
-  }
   h2 {
     font-family: var(--body-font);
     font-weight: 700;

@@ -5,7 +5,9 @@
       <portal-target name="hero-section"></portal-target>
     </header>
     <main class="main">
-      <nuxt/>
+      <div class="body-wrapper">
+        <nuxt/>
+      </div>
       <footer class="footer">
         Copyright &copy; 2021, Editori
       </footer>
@@ -24,9 +26,14 @@ export default {
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser']),
     userInitial() {
-      var str = this.loggedInUser.display_name
-      var res = str.charAt(0)
-      return res
+      const names = this.loggedInUser.display_name.split(' ');
+      const lastIndex = names.length - 1;
+
+      if (lastIndex === 0) {
+        return names[0];
+      }
+
+      return `${names[0].charAt(0)}${names[lastIndex].charAt(0)}`;
     },
     workspace() {
       return {
@@ -72,8 +79,9 @@ export default {
     letter-spacing: 0.27em;
     text-transform: uppercase;
   }
-  h1 {
+  h1, h2, h3, h4, h5, h6 {
     font-family: var(--display-font);
+    font-weight: 400;
     letter-spacing: 0.015em;
     text-transform: uppercase;
   }
@@ -107,11 +115,18 @@ export default {
     z-index: 1;
   }
   .main {
+    --main-top-margin: 0;
     background: #fffefd;
     box-shadow: 0 0 50rem #0001;
     padding: 80rem 80rem 0;
     position: relative;
     z-index: 2;
+    margin-top: var(--main-top-margin);
+    min-height: calc(100vh - var(--section-height) - var(--main-top-margin));
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .footer {
     background: #fffefd;

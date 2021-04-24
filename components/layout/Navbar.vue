@@ -1,27 +1,27 @@
 <template>
   <nav class="nav-root">
     <div class="home-link">
-      <nuxt-link :to="`/${workspace.slug}`" class="logo">
+      <nuxt-link :to="`/${workspace && workspace.slug}`" class="logo">
         <h1 class="wordmark">Editori</h1>
       </nuxt-link>
       <div class="logo-separator">›</div>
-      <nuxt-link :to="`/${workspace.slug}`" class="workspace" v-if="!hideWorkspace">
+      <nuxt-link :to="`/${workspace.slug}`" class="workspace" v-if="workspace && !hideWorkspace">
         {{workspace.name}}
       </nuxt-link>
     </div>
     <ul class="menu">
       <li>
-        <nuxt-link :to="`/${workspace.slug}/performance`" class="menu-link">
+        <nuxt-link :to="`/${workspace.slug}/performance`" class="menu-link" v-if="workspace">
           Performance
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="`/${workspace.slug}/content`" class="menu-link">
+        <nuxt-link :to="`/${workspace.slug}/content`" class="menu-link" v-if="workspace">
           Content Calendar
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="`/${workspace.slug}/team`" class="menu-link">
+        <nuxt-link :to="`/${workspace.slug}/team`" class="menu-link" v-if="workspace">
           Team
         </nuxt-link>
       </li>

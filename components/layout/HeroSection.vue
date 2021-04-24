@@ -1,15 +1,17 @@
 <template>
   <portal to="hero-section">
-    <aside class="shapes">
-      <svg v-for="(shape, index) in shapes" :key="index" class="shape"
-          v-bind="shapeWrapperOptions(shape)">
-        <component :is="shape.type" :fill="shape.color" :class="shape.class"
-            v-bind="shapeOptions(shape)">
-        </component>
-      </svg>
-    </aside>
-    <div class="__hero-section-content">
-      <slot></slot>
+    <div class="hero-root">
+      <aside class="shapes">
+        <svg v-for="(shape, index) in shapes" :key="index" class="shape"
+            v-bind="shapeWrapperOptions(shape)">
+          <component :is="shape.type" :fill="shape.color" :class="shape.class"
+              v-bind="shapeOptions(shape)">
+          </component>
+        </svg>
+      </aside>
+      <div class="__hero-section-content">
+        <slot></slot>
+      </div>
     </div>
   </portal>
 </template>
@@ -55,11 +57,23 @@ export default {
 </style>
 
 <style scoped>
-  h2 {
-    font-family: var(--display-font);
-    font-weight: 400;
-    letter-spacing: 0.015em;
-    text-transform: uppercase;
+  .hero-root >>> h1 {
+    font-size: 4em;
+  }
+  .hero-root >>> h2 {
+    font-size: 3em;
+  }
+  .hero-root >>> h3 {
+    font-size: 2em;
+  }
+  .hero-root >>> h4 {
+    font-size: 1.5em;
+  }
+  .hero-root >>> h5 {
+    font-size: 1.25em;
+  }
+  .hero-root >>> h6 {
+    font-size: 1.1em;
   }
   .__hero-section-content {
     position: relative;
