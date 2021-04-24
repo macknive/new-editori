@@ -22,11 +22,13 @@ export default {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'stylesheet',
-        href: '//fonts.googleapis.com/css2?family=Merriweather&display=block'
+        href:
+          '//fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=block'
       },
       {
         rel: 'stylesheet',
-        href: '//fonts.googleapis.com/css2?family=Open+Sans&display=fallback'
+        href:
+          '//fonts.googleapis.com/css2?family=Noto+Sans:wght@400;600;700&display=fallback'
       }
     ]
   },

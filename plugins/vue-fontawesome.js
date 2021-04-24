@@ -11,7 +11,9 @@ import {
   faPlus,
   faTrashAlt,
   faCreditCard,
-} from '@fortawesome/free-solid-svg-icons'
+  faCaretDown,
+  faSearch
+} from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
   faFacebook,
@@ -36,5 +38,7 @@ library.add(faTrashAlt);
 library.add(faCreditCard);
 library.add(faGooglePay);
 library.add(faApplePay);
+library.add(faSearch);
+library.add(faCaretDown);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
