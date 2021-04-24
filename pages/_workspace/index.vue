@@ -151,6 +151,7 @@ export default {
   .editor-button {
     left: 900rem;
     top: 300rem;
+  }
   button {
     display: inline-block;
     background: #ccc;
