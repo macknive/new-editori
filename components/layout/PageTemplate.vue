@@ -1,11 +1,11 @@
 <template>
-  <article>
+  <div class="root">
     <header class="header">
       <Navbar class="nav" :workspace="workspace" :hideWorkspace="hideWorkspace" />
       <aside class="shapes">
         <svg v-for="(shape, index) in shapes" :key="index" class="shape"
             v-bind="shapeWrapperOptions(shape)">
-          <component :is="shape.type" :fill="shape.color"
+          <component :is="shape.type" :fill="shape.color" :class="shape.class"
               v-bind="shapeOptions(shape)">
           </component>
         </svg>
@@ -15,12 +15,12 @@
       </div>
     </header>
     <main class="main">
-      <slot></slot>
+      <slot name="content"></slot>
     </main>
     <footer>
       <slot name="footer"></slot>
     </footer>
-  </article>
+  </div>
 </template>
 
 <script>
@@ -63,22 +63,27 @@ export default {
 
 <style>
   html {
-    --aspect-ratio: calc(16 / 10);
+    --aspect-ratio: calc(2 / 1);
     --base-width: 1400;
-    --base-height: 900;
-    --section-width: 100vw;
-    --section-height: calc(100vw / var(--aspect-ratio));
+    --base-height: 720;
+    --section-width: 80vw;
+    --section-height: calc(var(--section-width) / var(--aspect-ratio));
     --width-unit: calc(var(--section-width) / var(--base-width));
     --height-unit: calc(var(--section-height) / var(--base-height));
     --display-font: 'Montserrat', sans-serif;
     --body-font: 'Noto Sans', 'Roboto', sans-serif;
+    --failing-red: #af125a;
+    --passing-green: #68b684;
     color: #191919;
     font-size: var(--height-unit);
-    font-family: 'Noto Sans', 'Roboto', sans-serif;
+    font-family: var(--body-font);
+    letter-spacing: 0.015em;
+  }
+  body {
+    background: #fff8f0;
   }
   .label, .main h2, button {
     font-family: var(--body-font);
-    font-size: 18rem;
     font-weight: 700;
     letter-spacing: 0.27em;
     text-transform: uppercase;
@@ -97,10 +102,40 @@ export default {
     color: #fff;
     padding: 16rem;
   }
+  .card {
+    background: #fff;
+    border: 1px solid #8a7968;
+    padding: 50rem 100rem;
+  }
+  .card h3 {
+    font-family: var(--display-font);
+    font-weight: 400;
+    font-size: 18rem;
+    text-transform: uppercase;
+    padding-right: 60rem;
+    padding-bottom: 10rem;
+    border-bottom: 1px solid #8A7968;
+    margin-bottom: 10rem;
+  }
+  .card h4 {
+    font-family: var(--body-font);
+    font-weight: 700;
+    font-size: 14rem;
+    text-transform: uppercase;
+  }
+  .card p {
+    font-family: var(--body-font);
+    font-weight: 400;
+    font-size: 16rem;
+  }
 </style>
 
 <style>
   /* TODO: Why don't scoped styles work? */
+  .root {
+    width: var(--section-width);
+    margin: 0 auto;
+  }
   .nav {
     position: absolute;
     top: 60rem;
@@ -135,7 +170,10 @@ export default {
     position: absolute;
   }
   .main {
+    background: #fffefd;
+    box-shadow: 0 0 50rem #0001;
     min-height: 100vh;
+    padding: 80rem;
     position: relative;
     z-index: 2;
   }
