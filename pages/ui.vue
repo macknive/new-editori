@@ -131,7 +131,7 @@ export default {
     top: 493rem;
   }
   .editor-button {
-    left: 1000rem;
-    top: 245rem;
+    left: 900rem;
+    top: 300rem;
   }
 </style>

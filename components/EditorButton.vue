@@ -19,37 +19,40 @@ export default {
 </script>
 
 <style>
+  .editor-button-wrapper {
+    outline-offset: 45rem;
+    --outer-ring-width: 360rem;
+    --inner-ring-width: 330rem;
+    --outer-ring-offset: calc((var(--outer-ring-width) - var(--inner-ring-width)) / 2);
+  }
+
   @keyframes pulse {
     0% {
-      transform: scale(0.92);
+      transform: scale(0.9);
       box-shadow: 0 0 0 0 #8a7968b3;
     }
     
     70% {
       transform: scale(1);
-      box-shadow: 0 0 0 30rem #8a796800;
+      box-shadow: 0 0 0 calc(var(--outer-ring-offset) * 3) #8a796800;
     }
     
     100% {
-      transform: scale(0.92);
+      transform: scale(0.9);
       box-shadow: 0 0 0 0 #8a796800;
     }
-  }
-
-  .editor-button-wrapper {
-    outline-offset: 45rem;
   }
 
   .editor-button-animation {
     animation: pulse 2s infinite;
     background: #8a7968ff;
     box-shadow: 0 0 0 0 #8a7968ff;
-    width: 380rem;
-    height: 380rem;
+    width: var(--outer-ring-width);
+    height: var(--outer-ring-width);
     position: absolute;
     border-radius: 50%;
-    left: -15rem;
-    top: -15rem;
+    left: calc(-1 * var(--outer-ring-offset));
+    top: calc(-1 * var(--outer-ring-offset));
     z-index: 1;
   }
 
@@ -62,8 +65,8 @@ export default {
     flex-direction: column;
     color: #fff;
     position: relative;
-    width: 350rem;
-    height: 350rem;
+    width:  var(--inner-ring-width);
+    height:  var(--inner-ring-width);
     z-index: 2;
   }
   .editor-button-root .promo {
@@ -81,12 +84,12 @@ export default {
     font-size: 32rem;
     letter-spacing: 0.015em;
     text-transform: uppercase;
-    width: 300rem;
+    width: 85%;
     text-align: center;
   }
   .editor-button-root .message-count {
-    left: 280rem;
-    top: 40rem;
+    left: 80%;
+    top: 12%;
     width: 64rem;
     height: 64rem;
     background: var(--failing-red);
