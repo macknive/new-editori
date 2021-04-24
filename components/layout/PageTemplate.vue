@@ -104,8 +104,7 @@ export default {
   }
 </style>
 
-<style>
-  /* TODO: Why don't scoped styles work? */
+<style scoped>
   .root {
     width: var(--section-width);
     margin: 0 auto;
