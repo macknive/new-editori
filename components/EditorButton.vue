@@ -18,7 +18,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .editor-button-wrapper {
     outline-offset: 45rem;
     --outer-ring-width: 360rem;
