@@ -13,9 +13,7 @@
       <EditorButton class="editor-button" :messages="messages"></EditorButton>
     </template>
     <template v-slot:content>
-      <article class="card" tabindex="0">
-        <h3>Set up your workspace</h3>
-        <h4>Follow us</h4>
+      <HomeCard title="Set up your workspace" subtitle="Follow us">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
           vestibulum faucibus libero, eu posuere sem sagittis ut. Proin ac neque
@@ -28,7 +26,7 @@
           euismod dapibus quis at neque. Donec eget tortor eget nulla pretium
           molestie. Aliquam consectetur tincidunt ex at auctor.
         </p>
-      </article>
+      </HomeCard>
     </template>
   </PageTemplate>
 </template>
@@ -36,6 +34,7 @@
 <script>
 import EditorButton from '~/components/EditorButton';
 import Glance from '~/components/Glance';
+import HomeCard from '~/components/cards/HomeCard';
 import PageTemplate from '~/components/layout/PageTemplate';
 
 const currentTime = new Date();
@@ -52,7 +51,7 @@ function pad(value, totalDigits) {
 }
 
 export default {
-  components: { EditorButton, Glance, PageTemplate },
+  components: { EditorButton, Glance, HomeCard, PageTemplate },
   data() {
     return {
       shapes: [

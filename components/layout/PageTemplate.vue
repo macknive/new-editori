@@ -102,32 +102,6 @@ export default {
     color: #fff;
     padding: 16rem;
   }
-  .card {
-    background: #fff;
-    border: 1px solid #8a7968;
-    padding: 50rem 100rem;
-  }
-  .card h3 {
-    font-family: var(--display-font);
-    font-weight: 400;
-    font-size: 18rem;
-    text-transform: uppercase;
-    padding-right: 60rem;
-    padding-bottom: 10rem;
-    border-bottom: 1px solid #8A7968;
-    margin-bottom: 10rem;
-  }
-  .card h4 {
-    font-family: var(--body-font);
-    font-weight: 700;
-    font-size: 14rem;
-    text-transform: uppercase;
-  }
-  .card p {
-    font-family: var(--body-font);
-    font-weight: 400;
-    font-size: 16rem;
-  }
 </style>
 
 <style>
