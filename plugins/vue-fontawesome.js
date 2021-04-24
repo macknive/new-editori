@@ -11,6 +11,7 @@ import {
   faPlus,
   faTrashAlt,
   faCreditCard,
+  faLightbulb,
 } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import {
@@ -36,5 +37,6 @@ library.add(faTrashAlt);
 library.add(faCreditCard);
 library.add(faGooglePay);
 library.add(faApplePay);
+library.add(faLightbulb);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

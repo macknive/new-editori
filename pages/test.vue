@@ -6,15 +6,13 @@
       </div>
       <h1 align="center">dashboard</h1>
       <p align="center" class="my-6">
-        Hey {{ this.loggedInUser.display_name }}, view workspace.name's
-        performance focusing on
+        Hey this.loggedInUser.display_name , view workspace.name's performance
+        focusing on
         <nuxt-link to="/" class="text-brown">page views</nuxt-link> over the
         <nuxt-link to="/" class="text-brown">last week</nuxt-link>
       </p>
       <h4 class="my-6">SITE OVERVIEW</h4>
-      <SiteOverview />
-      <h4 class="my-6">POST YOU'RE WORKING ON (10)</h4>
-      <WorkingPosts />
+      <SiteOverview :posts="posts" />
     </v-container>
   </v-app>
 </template>
@@ -24,7 +22,6 @@ import { mapGetters } from 'vuex';
 import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug';
 import moment from 'moment';
 import SiteOverview from '~/components/SiteOverview';
-import WorkingPosts from '~/components/WorkingPosts';
 
 export default {
   layout: 'dashboard',
@@ -34,13 +31,68 @@ export default {
     };
   },
   components: {
-    SiteOverview,
-    WorkingPosts
+    SiteOverview
   },
   data() {
     return {
       workspaces: [],
-      workspaceSlug: this.$route.params.workspace
+      workspaceSlug: this.$route.params.workspace,
+      posts: [
+        {
+          title: 'Best Animal Milk v1',
+          trend: 'decreasing',
+          assignee: 'user1',
+          status: "Waiting on Editor's review"
+        },
+        {
+          title: 'Best Animal Milk v2',
+          trend: 'decreasing',
+          assignee: 'user1',
+          status: "Waiting on Editor's review"
+        },
+        {
+          title: 'Best Animal Milk v3',
+          trend: 'decreasing',
+          assignee: 'user1',
+          status: "Waiting on Editor's review"
+        },
+        {
+          title: 'The Top Benefits Of Kombucha',
+          trend: 'increasing',
+          assignee: 'user1',
+          status: "Waiting on Editor's review"
+        },
+        {
+          title: 'Top 10 Juicers',
+          trend: 'stable',
+          assignee: 'user2',
+          status: "Waiting on Editor's review"
+        },
+        {
+          title: 'Green Tea Vs Black Tea',
+          trend: 'decreasing',
+          assignee: 'user3',
+          status: "Waiting on Editor's review"
+        },
+        {
+          title: 'A Guide For Kombucha Enthusiasts',
+          trend: 'increasing',
+          assignee: 'user1',
+          status: "Waiting on Editor's review"
+        },
+        {
+          title: 'The Best Tea Infuser',
+          trend: 'decreasing',
+          assignee: 'user3',
+          status: "Waiting on Editor's review"
+        },
+        {
+          title: 'Cheap Coffee You Should Buy Today',
+          trend: 'stable',
+          assignee: 'user2',
+          status: "Waiting on Editor's review"
+        }
+      ]
     };
   },
   computed: {

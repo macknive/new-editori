@@ -1,7 +1,5 @@
 <template>
-  <v-card>
-    Working Post Component<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
-  </v-card>
+  <div></div>
 </template>
 
 <script>

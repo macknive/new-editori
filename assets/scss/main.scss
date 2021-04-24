@@ -7,7 +7,7 @@ body {
 }
 
 .navbar {
-  background-color:whitesmoke ;
+  background-color: whitesmoke;
 }
 
 .round-corners {
@@ -46,6 +46,10 @@ body {
 
 .container-1200 {
   max-width: 1200px !important;
+}
+
+.container-1500 {
+  max-width: 1350px !important;
 }
 
 .register-container {
@@ -180,17 +184,17 @@ body {
   top: 12px;
 }
 
-.status-green,
+.status-increasing,
 .status-yellow,
-.status-red,
-.status-gray {
-  margin-top: 3px;
-  height: 24px;
-  width: 24px;
+.status-decreasing,
+.status-stable {
+  margin-top: 5px;
+  height: 12px;
+  width: 12px;
   border-radius: 50%;
 }
 
-.status-green {
+.status-increasing {
   background-color: #a7d36f;
   border: 1px solid #a7d36f;
 }
@@ -200,12 +204,12 @@ body {
   border: 1px solid #f5e658;
 }
 
-.status-red {
+.status-decreasing {
   background-color: #eb6258;
   border: 1px solid #eb6258;
 }
 
-.status-gray {
+.status-stable {
   background-color: #777777;
   border: 1px solid #777777;
 }
