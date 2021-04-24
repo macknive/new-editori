@@ -24,7 +24,6 @@ import moment from 'moment';
 import SiteOverview from '~/components/SiteOverview';
 
 export default {
-  layout: 'dashboard',
   head() {
     return {
       title: 'this.workspace.name'
@@ -115,5 +114,11 @@ span {
 }
 h4 {
   font-family: unset;
+}
+.v-list {
+  width: 80px;
+}
+.inline {
+  display: inline;
 }
 </style>

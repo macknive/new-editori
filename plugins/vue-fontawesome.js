@@ -1,5 +1,5 @@
-import Vue from 'vue'
-import { library } from '@fortawesome/fontawesome-svg-core'
+import Vue from 'vue';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faCheck,
   faCheckCircle,
@@ -12,15 +12,17 @@ import {
   faTrashAlt,
   faCreditCard,
   faLightbulb,
-} from '@fortawesome/free-solid-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+  faCaretDown,
+  faSearch
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
   faFacebook,
   faGoogle,
   faApple,
   faGooglePay,
-  faApplePay,
-} from "@fortawesome/free-brands-svg-icons";
+  faApplePay
+} from '@fortawesome/free-brands-svg-icons';
 
 library.add(faCheck);
 library.add(faCheckCircle);
@@ -38,5 +40,7 @@ library.add(faCreditCard);
 library.add(faGooglePay);
 library.add(faApplePay);
 library.add(faLightbulb);
+library.add(faSearch);
+library.add(faCaretDown);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

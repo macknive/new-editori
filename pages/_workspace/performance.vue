@@ -24,7 +24,6 @@ import moment from 'moment';
 import SiteOverview from '~/components/SiteOverview';
 
 export default {
-  layout: 'dashboard',
   head() {
     return {
       title: this.workspace.name
@@ -102,9 +101,18 @@ export default {
     },
     formattedDate() {
       return moment(this.workspace.updated_at).format('ll');
+    },
+    workspace() {
+      return this.workspaces[0];
     }
   },
-  mixins: [getWorkspaceBySlug]
+  mixins: [getWorkspaceBySlug],
+  methods: {
+    async onLogout() {
+      await this.$apolloHelpers.onLogout();
+      await this.$auth.logout();
+    }
+  },
 };
 </script>
 
@@ -115,5 +123,11 @@ span {
 }
 h4 {
   font-family: unset;
+}
+.v-list {
+  width: 80px;
+}
+.inline {
+  display: inline;
 }
 </style>

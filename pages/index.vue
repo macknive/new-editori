@@ -5,29 +5,25 @@
       continue.
     </div>
     <div v-if="isAuthenticated">
-      <WorkspaceList />
+      No worspaces found
     </div>
   </v-container>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-import WorkspaceList from '@/components/WorkspaceList';
 
 export default {
-  middleware: 'auth',
+  middleware: ['auth', 'default-workspace'],
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser'])
-  },
-  components: {
-    WorkspaceList
   },
   methods: {
     async onLogout() {
       await this.$apolloHelpers.onLogout();
       await this.$auth.logout();
     }
-  }
+  },
 };
 </script>
 

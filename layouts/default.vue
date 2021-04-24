@@ -1,56 +1,38 @@
 <template>
-  <v-app>
-    <div class="navbar">
-      <v-row>
-        <v-col
-          ><nuxt-link to="/" class="link-style"
-            ><h3 class="ml-12">EDITORI</h3></nuxt-link
-          ></v-col
-        >
-        <v-col align="right" cols="1">
-          <v-btn icon class="mt-2">
-            <v-icon medium>mdi-magnify</v-icon>
-          </v-btn>
-        </v-col>
-        <v-col cols="2">
-          <div v-if="isAuthenticated">
-            <div class="avatar-placeholder">
-              <div align="center" class="mt-1">
-                <v-menu offset-y>
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-btn v-bind="attrs" v-on="on" icon
-                      ><h2>{{ userInitial }}</h2></v-btn
-                    >
-                  </template>
-                  <v-list>
-                    <v-list-item>
-                      <div align="center">
-                        <a @click="onLogout" class="logout">Logout</a>
-                      </div>
-                    </v-list-item>
-                  </v-list>
-                </v-menu>
-              </div>
-            </div>
-          </div>
-          <div v-if="!isAuthenticated" class="mt-3">
-            <nuxt-link to="/login">login</nuxt-link>
-          </div>
-        </v-col>
-      </v-row>
-    </div>
-    <nuxt />
-  </v-app>
+  <div class="app-root">
+    <Navbar class="nav" :workspace="workspace" :hideWorkspace="hideWorkspace" :userInitial="userInitial" />
+    <header class="header">
+      <portal-target name="hero-section"></portal-target>
+    </header>
+    <main class="main">
+      <nuxt/>
+      <footer class="footer">
+        Copyright &copy; 2021, Editori
+      </footer>
+    </main>
+  </div>
 </template>
 <script>
-import { mapGetters } from 'vuex'
+import Navbar from '~/components/layout/Navbar';
+import { mapGetters } from 'vuex';
+
 export default {
+  components: {
+    Navbar,
+  },
+  props: [ 'hideWorkspace' ],
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser']),
     userInitial() {
       var str = this.loggedInUser.display_name
       var res = str.charAt(0)
       return res
+    },
+    workspace() {
+      return {
+        name: 'Drink Filtered',
+        slug: 'drink-filtered',
+      }
     }
   },
   methods: {
@@ -62,8 +44,79 @@ export default {
 }
 </script>
 
-<style scope>
-.v-list {
-  width: 80px;
-}
+<style>
+  html {
+    --aspect-ratio: calc(2 / 1);
+    --base-width: 1400;
+    --base-height: 720;
+    --section-width: 80vw;
+    --section-height: calc(var(--section-width) / var(--aspect-ratio));
+    --width-unit: calc(var(--section-width) / var(--base-width));
+    --height-unit: calc(var(--section-height) / var(--base-height));
+    --display-font: 'Montserrat', sans-serif;
+    --body-font: 'Noto Sans', 'Roboto', sans-serif;
+    --failing-red: #af125a;
+    --passing-green: #68b684;
+    color: #191919;
+    font-size: var(--height-unit);
+    font-family: var(--body-font);
+    letter-spacing: 0.015em;
+  }
+  body {
+    background: #fff8f0;
+    font-size: 16px;
+  }
+  .label, button {
+    font-family: var(--body-font);
+    font-weight: 700;
+    letter-spacing: 0.27em;
+    text-transform: uppercase;
+  }
+  h1 {
+    font-family: var(--display-font);
+    letter-spacing: 0.015em;
+    text-transform: uppercase;
+  }
+  button {
+    background: #593d3b;
+    border-radius: 5rem;
+    color: #fff;
+    padding: 16rem;
+  }
+</style>
+
+<style scoped>
+  .app-root {
+    width: var(--section-width);
+    margin: 0 auto;
+    position: relative;
+  }
+  .nav {
+    position: absolute;
+    top: 60rem;
+    left: 0;
+    right: 0;
+    z-index: 999;
+  }
+  .header {
+    background: #fff8f0;
+    height: var(--section-height);
+    width: var(--section-width);
+    font-size: 16rem;
+    position: relative;
+    z-index: 1;
+  }
+  .main {
+    background: #fffefd;
+    box-shadow: 0 0 50rem #0001;
+    padding: 80rem 80rem 0;
+    position: relative;
+    z-index: 2;
+  }
+  .footer {
+    background: #fffefd;
+    display: grid;
+    padding: 30px;
+    place-items: center;
+  }
 </style>
