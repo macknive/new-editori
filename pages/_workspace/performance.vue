@@ -34,8 +34,6 @@ export default {
   },
   data() {
     return {
-      workspaces: [],
-      workspaceSlug: this.$route.params.workspace,
       posts: [
         {
           title: 'Best Animal Milk v1',
@@ -96,15 +94,9 @@ export default {
   },
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser']),
-    workspace() {
-      return this.workspaces[0];
-    },
     formattedDate() {
       return moment(this.workspace.updated_at).format('ll');
     },
-    workspace() {
-      return this.workspaces[0];
-    }
   },
   mixins: [getWorkspaceBySlug],
   methods: {

@@ -87,12 +87,6 @@ export default {
         date
       }
     },
-    workspace() {
-      return {
-        name: 'Drink Filtered',
-        slug: 'drink-filtered',
-      }
-    }
   },
   mixins: [getWorkspaceBySlug],
   methods: {

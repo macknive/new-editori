@@ -34,8 +34,6 @@ export default {
   },
   data() {
     return {
-      workspaces: [],
-      workspaceSlug: this.$route.params.workspace,
       posts: [
         {
           title: 'Best Animal Milk v1',
