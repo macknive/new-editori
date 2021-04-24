@@ -8,13 +8,16 @@ export default {
   },
   computed: {
     workspace() {
-      return this.workspaces[0];
+      return this.workspaces ? this.workspaces[0] : undefined;
     }
   },
   apollo: {
     workspaces: {
       prefetch: true,
       query: GetWorkspaceBySlug,
+      skip() {
+        return !this.workspaceSlug;
+      },
       variables() {
         return {
           workspaceSlug: this.workspaceSlug

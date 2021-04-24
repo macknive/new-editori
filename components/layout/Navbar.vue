@@ -1,27 +1,27 @@
 <template>
   <nav class="nav-root">
     <div class="home-link">
-      <nuxt-link :to="`/${workspace.slug}`" class="logo">
+      <nuxt-link :to="`/${workspaceSlug}`" class="logo">
         <h1 class="wordmark">Editori</h1>
       </nuxt-link>
-      <div class="logo-separator">›</div>
-      <nuxt-link :to="`/${workspace.slug}`" class="workspace" v-if="!hideWorkspace">
+      <div class="logo-separator" v-if="shouldShowWorkspace">›</div>
+      <nuxt-link :to="`/${workspaceSlug}`" class="workspace" v-if="shouldShowWorkspace">
         {{workspace.name}}
       </nuxt-link>
     </div>
     <ul class="menu">
       <li>
-        <nuxt-link :to="`/${workspace.slug}/performance`" class="menu-link">
+        <nuxt-link :to="`/${workspaceSlug}/performance`" class="menu-link" v-if="workspaceSlug">
           Performance
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="`/${workspace.slug}/content`" class="menu-link">
+        <nuxt-link :to="`/${workspaceSlug}/content`" class="menu-link" v-if="workspaceSlug">
           Content Calendar
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="`/${workspace.slug}/team`" class="menu-link">
+        <nuxt-link :to="`/${workspaceSlug}/team`" class="menu-link" v-if="workspaceSlug">
           Team
         </nuxt-link>
       </li>
@@ -31,7 +31,7 @@
         <font-awesome-icon class="search-icon" icon="search" size="2x">
         </font-awesome-icon>
       </div>
-      <nuxt-link to="/account" class="avatar">
+      <nuxt-link to="/account" class="avatar" v-if="loggedInUser">
         {{userInitial}}
       </nuxt-link>
     </div>
@@ -40,7 +40,21 @@
 
 <script>
 export default {
-  props: [ 'workspace', 'hideWorkspace', 'userInitial' ],
+  props: [ 'loggedInUser', 'workspace', 'userInitial' ],
+  computed: {
+    shouldShowWorkspace() {
+      if (!this.workspace) {
+        return false;
+      }
+
+      // We do not show the workspace name on the workspace index page, as it
+      // is otherwise duplicated.
+      return this.$route.path !== `/${this.workspace.slug}`;
+    },
+    workspaceSlug() {
+      return this.workspace ? this.workspace.slug : '';
+    }
+  }
 }
 </script>
 
@@ -49,7 +63,6 @@ export default {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: 0 60rem;
   }
   a {
     color: #191919;
@@ -91,6 +104,7 @@ export default {
     font-size: 22rem;
   }
   .wordmark {
+    font-weight: 700;
     letter-spacing: 0.27em;
     text-transform: uppercase;
   }
