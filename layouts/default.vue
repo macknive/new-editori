@@ -1,6 +1,6 @@
 <template>
   <div class="app-root">
-    <Navbar class="nav" :workspace="workspace" :hideWorkspace="hideWorkspace" :userInitial="userInitial" />
+    <Navbar class="nav" :workspace="workspace" :loggedInUser="loggedInUser" :userInitial="userInitial" />
     <header class="header">
       <portal-target name="hero-section"></portal-target>
     </header>
@@ -27,6 +27,10 @@ export default {
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser']),
     userInitial() {
+      if (!this.loggedInUser) {
+        return undefined;
+      }
+
       const names = this.loggedInUser.display_name.split(' ');
       const lastIndex = names.length - 1;
 
@@ -51,10 +55,10 @@ export default {
     --aspect-ratio: calc(2 / 1);
     --base-width: 1400;
     --base-height: 720;
-    --section-width: 80vw;
-    --section-height: calc(var(--section-width) / var(--aspect-ratio));
-    --width-unit: calc(var(--section-width) / var(--base-width));
-    --height-unit: calc(var(--section-height) / var(--base-height));
+    --hero-width: 80vw;
+    --hero-height: calc(var(--hero-width) / var(--aspect-ratio));
+    --width-unit: calc(var(--hero-width) / var(--base-width));
+    --height-unit: calc(var(--hero-height) / var(--base-height));
     --display-font: 'Montserrat', sans-serif;
     --body-font: 'Noto Sans', 'Roboto', sans-serif;
     --failing-red: #af125a;
@@ -90,7 +94,7 @@ export default {
 
 <style scoped>
   .app-root {
-    width: var(--section-width);
+    width: var(--hero-width);
     margin: 0 auto;
     position: relative;
   }
@@ -103,21 +107,20 @@ export default {
   }
   .header {
     background: #fff8f0;
-    height: var(--section-height);
-    width: var(--section-width);
+    height: var(--hero-height);
+    width: var(--hero-width);
     font-size: 16rem;
     position: relative;
     z-index: 1;
   }
   .main {
-    --main-top-margin: 0;
     background: #fffefd;
     box-shadow: 0 0 50rem #0001;
     padding: 80rem 80rem 0;
     position: relative;
     z-index: 2;
     margin-top: var(--main-top-margin);
-    min-height: calc(100vh - var(--section-height) - var(--main-top-margin));
+    min-height: calc(100vh - var(--hero-height));
     box-sizing: border-box;
     display: flex;
     flex-direction: column;

@@ -31,7 +31,7 @@
         <font-awesome-icon class="search-icon" icon="search" size="2x">
         </font-awesome-icon>
       </div>
-      <nuxt-link to="/account" class="avatar">
+      <nuxt-link to="/account" class="avatar" v-if="loggedInUser">
         {{userInitial}}
       </nuxt-link>
     </div>
@@ -40,9 +40,13 @@
 
 <script>
 export default {
-  props: [ 'workspace', 'userInitial' ],
+  props: [ 'loggedInUser', 'workspace', 'userInitial' ],
   computed: {
     shouldShowWorkspace() {
+      if (!this.workspace) {
+        return false;
+      }
+
       // We do not show the workspace name on the workspace index page, as it
       // is otherwise duplicated.
       return this.$route.path !== `/${this.workspace.slug}`;
@@ -59,7 +63,6 @@ export default {
     align-items: center;
     display: flex;
     justify-content: space-between;
-    padding: 0 60rem;
   }
   a {
     color: #191919;

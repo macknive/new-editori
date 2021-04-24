@@ -1,19 +1,24 @@
 <template>
   <v-app>
-    <v-container class="container-1200">
-      <div align="right" class="text-gray">
-        Last updated {{ formattedDate }}
-      </div>
-      <h1 align="center">dashboard</h1>
-      <p align="center" class="my-6">
-        Hey {{ this.loggedInUser.display_name }}, view {{ workspace.name }}'s
-        performance focusing on
-        <nuxt-link to="/" class="text-brown">page views</nuxt-link> over the
-        <nuxt-link to="/" class="text-brown">last week</nuxt-link>
-      </p>
-      <h4 class="my-6">SITE OVERVIEW</h4>
-      <SiteOverview :posts="posts" />
-    </v-container>
+    <HeroSection>
+      <h1 class="title">Performance</h1>
+    </HeroSection>
+    <BodySection>
+      <v-container class="container-1200">
+        <div align="right" class="text-gray">
+          Last updated {{ formattedDate }}
+        </div>
+        <h1 align="center">dashboard</h1>
+        <p align="center" class="my-6">
+          Hey {{ this.loggedInUser.display_name }}, view {{ workspace.name }}'s
+          performance focusing on
+          <nuxt-link to="/" class="text-brown">page views</nuxt-link> over the
+          <nuxt-link to="/" class="text-brown">last week</nuxt-link>
+        </p>
+        <h4 class="my-6">SITE OVERVIEW</h4>
+        <SiteOverview :posts="posts" />
+      </v-container>
+    </BodySection>
   </v-app>
 </template>
 
@@ -22,6 +27,8 @@ import { mapGetters } from 'vuex';
 import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug';
 import moment from 'moment';
 import SiteOverview from '~/components/SiteOverview';
+import BodySection from '~/components/layout/BodySection'
+import HeroSection from '~/components/layout/HeroSection'
 
 export default {
   head() {
@@ -30,7 +37,7 @@ export default {
     };
   },
   components: {
-    SiteOverview
+    SiteOverview, BodySection, HeroSection
   },
   data() {
     return {
@@ -121,5 +128,9 @@ h4 {
 }
 .inline {
   display: inline;
+}
+.title {
+  top: 200rem;
+  left: 100rem;
 }
 </style>

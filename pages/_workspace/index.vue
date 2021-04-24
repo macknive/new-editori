@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HeroSection :shapes="shapes" hideWorkspace="false">
+    <HeroSection :shapes="shapes">
       <h1 class="workspace-name">{{workspace.name}}</h1>
       <time class="date" :datetime="`${now.month}-${now.date}`">
         {{now.month}}.{{now.date}}
