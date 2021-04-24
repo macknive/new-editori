@@ -19,7 +19,6 @@ export default {
   components: {
     BodySection
   },
-  layout: 'new',
   props: {
     error: {
       type: Object,

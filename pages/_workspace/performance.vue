@@ -24,7 +24,6 @@ import moment from 'moment';
 import SiteOverview from '~/components/SiteOverview';
 
 export default {
-  layout: 'new',
   head() {
     return {
       title: this.workspace.name

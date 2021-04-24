@@ -60,7 +60,6 @@ export default {
       ]
     }
   },
-  layout: 'new',
   computed: {
     figures() {
       return [
