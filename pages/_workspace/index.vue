@@ -13,19 +13,14 @@
       <EditorButton class="editor-button" :messages="messages"></EditorButton>
     </HeroSection>
     <BodySection>
-      <HomeCard title="Set up your workspace" subtitle="Follow us">
+      <HomeCard title="Grant Access to Google" subtitle="Follow us">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-          vestibulum faucibus libero, eu posuere sem sagittis ut. Proin ac neque
-          at est dapibus faucibus quis vel lectus. Curabitur quis neque posuere,
-          feugiat nisi eget, scelerisque orci. Nulla condimentum vehicula lacus,
-          et pellentesque nunc sagittis efficitur. Quisque id neque at risus
-          gravida fermentum. Nunc ultrices bibendum sem. Cras quis elit tempor,
-          volutpat justo sed, pharetra ex. Pellentesque eros lectus, commodo at
-          nunc ac, consequat tristique magna. Pellentesque at massa et lorem
-          euismod dapibus quis at neque. Donec eget tortor eget nulla pretium
-          molestie. Aliquam consectetur tincidunt ex at auctor.
+          In order to retrieve performance information about your posts, you
+          will need to grant Editori access to your Google Account.
         </p>
+        <button class="connect-google" @click="connectGoogle">
+          Connect Your Google Account
+        </button>
       </HomeCard>
     </BodySection>
   </div>
@@ -37,6 +32,7 @@ import BodySection from '~/components/layout/BodySection';
 import EditorButton from '~/components/EditorButton';
 import Glance from '~/components/Glance';
 import HomeCard from '~/components/cards/HomeCard';
+import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug';
 
 const currentTime = new Date();
 
@@ -53,6 +49,17 @@ function pad(value, totalDigits) {
 
 export default {
   components: { HeroSection, BodySection, EditorButton, Glance, HomeCard },
+  async asyncData(ctx) {
+    const response = await ctx.$axios.get('/connections/google', {
+      params: {
+        'workspace': ctx.route.params.workspace,
+      }
+    });
+
+    return {
+      googleOauthUrl: response.data,
+    }
+  },
   data() {
     return {
       shapes: [
@@ -68,9 +75,6 @@ export default {
         { value: '$300', caption: 'Total spend' },
       ]
     },
-    hideNavbarWorkspace() {
-      return false;
-    },
     messages() {
       return new Array(22);
     },
@@ -83,12 +87,15 @@ export default {
         date
       }
     },
-    workspace() {
-      return {
-        name: 'Drink Filtered',
-        slug: 'drink-filtered',
-      }
+  },
+  mixins: [getWorkspaceBySlug],
+  methods: {
+    connectGoogle() {
+      window.location.href = this.googleOauthUrl;
     }
+  },
+  mounted() {
+    console.log('redirect URL', this.googleOauthUrl)
   }
 }
 </script>
@@ -133,5 +140,8 @@ export default {
   .editor-button {
     left: 900rem;
     top: 300rem;
+  }
+  .connect-google {
+    margin-top: 30px;
   }
 </style>
