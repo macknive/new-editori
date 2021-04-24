@@ -1,27 +1,27 @@
 <template>
   <nav class="nav-root">
     <div class="home-link">
-      <nuxt-link :to="`/${workspace && workspace.slug}`" class="logo">
+      <nuxt-link :to="`/${workspaceSlug}`" class="logo">
         <h1 class="wordmark">Editori</h1>
       </nuxt-link>
-      <div class="logo-separator">›</div>
-      <nuxt-link :to="`/${workspace.slug}`" class="workspace" v-if="workspace && !hideWorkspace">
+      <div class="logo-separator" v-if="shouldShowWorkspace">›</div>
+      <nuxt-link :to="`/${workspaceSlug}`" class="workspace" v-if="shouldShowWorkspace">
         {{workspace.name}}
       </nuxt-link>
     </div>
     <ul class="menu">
       <li>
-        <nuxt-link :to="`/${workspace.slug}/performance`" class="menu-link" v-if="workspace">
+        <nuxt-link :to="`/${workspaceSlug}/performance`" class="menu-link" v-if="workspaceSlug">
           Performance
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="`/${workspace.slug}/content`" class="menu-link" v-if="workspace">
+        <nuxt-link :to="`/${workspaceSlug}/content`" class="menu-link" v-if="workspaceSlug">
           Content Calendar
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="`/${workspace.slug}/team`" class="menu-link" v-if="workspace">
+        <nuxt-link :to="`/${workspaceSlug}/team`" class="menu-link" v-if="workspaceSlug">
           Team
         </nuxt-link>
       </li>
@@ -40,7 +40,17 @@
 
 <script>
 export default {
-  props: [ 'workspace', 'hideWorkspace', 'userInitial' ],
+  props: [ 'workspace', 'userInitial' ],
+  computed: {
+    shouldShowWorkspace() {
+      // We do not show the workspace name on the workspace index page, as it
+      // is otherwise duplicated.
+      return this.$route.path !== `/${this.workspace.slug}`;
+    },
+    workspaceSlug() {
+      return this.workspace ? this.workspace.slug : '';
+    }
+  }
 }
 </script>
 
@@ -91,6 +101,7 @@ export default {
     font-size: 22rem;
   }
   .wordmark {
+    font-weight: 700;
     letter-spacing: 0.27em;
     text-transform: uppercase;
   }

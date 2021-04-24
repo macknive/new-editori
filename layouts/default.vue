@@ -15,6 +15,7 @@
   </div>
 </template>
 <script>
+import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug';
 import Navbar from '~/components/layout/Navbar';
 import { mapGetters } from 'vuex';
 
@@ -22,7 +23,7 @@ export default {
   components: {
     Navbar,
   },
-  props: [ 'hideWorkspace' ],
+  mixins: [getWorkspaceBySlug],
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser']),
     userInitial() {
@@ -35,12 +36,6 @@ export default {
 
       return `${names[0].charAt(0)}${names[lastIndex].charAt(0)}`;
     },
-    workspace() {
-      return {
-        name: 'Drink Filtered',
-        slug: 'drink-filtered',
-      }
-    }
   },
   methods: {
     async onLogout() {
