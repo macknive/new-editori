@@ -5,26 +5,36 @@
       <time class="date" :datetime="`${now.month}-${now.date}`">
         {{now.month}}.{{now.date}}
       </time>
-      <div class="workspace-switcher label" role="button">
+      <div class="workspace-switcher label" role="listbox" tabindex="0">
         <span>Switch workspace</span>
         <font-awesome-icon class="caret" icon="caret-down" />
       </div>
-      <Glance title="This Week" :figures="figures" />
-      <img src="~/assets/svgs/editor.svg" alt="" class="editor">
-      <button class="editor-button">
-        Chat with Editor
-      </button>
-      <span class="speech-bubble label">Got a minute?</span>
+      <Glance class="glance" title="This Week" :figures="figures" />
+      <EditorButton class="editor-button" :messages="messages"></EditorButton>
     </template>
-    <template>
-      <div>
-
-      </div>
+    <template v-slot:content>
+      <article class="card" tabindex="0">
+        <h3>Set up your workspace</h3>
+        <h4>Follow us</h4>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+          vestibulum faucibus libero, eu posuere sem sagittis ut. Proin ac neque
+          at est dapibus faucibus quis vel lectus. Curabitur quis neque posuere,
+          feugiat nisi eget, scelerisque orci. Nulla condimentum vehicula lacus,
+          et pellentesque nunc sagittis efficitur. Quisque id neque at risus
+          gravida fermentum. Nunc ultrices bibendum sem. Cras quis elit tempor,
+          volutpat justo sed, pharetra ex. Pellentesque eros lectus, commodo at
+          nunc ac, consequat tristique magna. Pellentesque at massa et lorem
+          euismod dapibus quis at neque. Donec eget tortor eget nulla pretium
+          molestie. Aliquam consectetur tincidunt ex at auctor.
+        </p>
+      </article>
     </template>
   </PageTemplate>
 </template>
 
 <script>
+import EditorButton from '~/components/EditorButton';
 import Glance from '~/components/Glance';
 import PageTemplate from '~/components/layout/PageTemplate';
 
@@ -42,12 +52,11 @@ function pad(value, totalDigits) {
 }
 
 export default {
-  components: { Glance, PageTemplate },
+  components: { EditorButton, Glance, PageTemplate },
   data() {
     return {
       shapes: [
-        { type: 'circle', x: -265, y: -198, size: 792, color: '#fffefd' },
-        { type: 'circle', x: 847, y: 381, size: 715, color: '#8a7968' },
+        { type: 'circle', x: -141, y: -281, size: 724, color: '#fffefd' },
       ]
     }
   },
@@ -62,6 +71,9 @@ export default {
     },
     hideNavbarWorkspace() {
       return false;
+    },
+    messages() {
+      return new Array(22);
     },
     now() {
       const month = pad(currentTime.getMonth() + 1, 2);
@@ -84,13 +96,17 @@ export default {
 
 <style>
   .date {
-    color: #f2f2f2;
+    color: #f5eee8aa;
     font-size: 144rem;
     font-weight: 900;
     font-family: var(--display-font);
-    left: 138rem;
-    top: 149rem;
+    left: 0rem;
+    top: 150rem;
     z-index: 1;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   .workspace-name {
     font-size: 70rem;
@@ -101,32 +117,21 @@ export default {
     z-index: 2;
   }
   .workspace-switcher {
+    font-size: 18rem;
     left: 100rem;
     top: 360rem;
     text-transform: uppercase;
+    outline-offset: 10rem;
   }
-  .editor {
-    left: 795rem;
-    top: 163rem;
-    width: 590rem;
-    height: 834rem;
+  .workspace-switcher .caret {
+    height: 18rem; 
+  }
+  .glance {
+    left: 150rem;
+    top: 493rem;
   }
   .editor-button {
-    left: 993rem;
-    top: 760rem;
-    font-size: 24rem;
-    box-shadow: 0 0 10rem #0004;
-  }
-  .speech-bubble {
-    color: #8A7968;
-    width: 190rem;
-    height: 128rem;
-    transform: rotate(-3.37deg);
-    left: 1069rem;
-    top: 188rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    left: 1000rem;
+    top: 245rem;
   }
 </style>

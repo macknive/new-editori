@@ -1,5 +1,5 @@
 <template>
-  <div class="glance">
+  <div class="glance-root">
     <h2>{{title}}</h2>
     <div class="figures">
       <figure class="figure" v-for="(figure, index) in figures" :key="index">
@@ -17,22 +17,20 @@ export default {
 </script>
 
 <style>
-.glance {
-  left: 192rem;
-  top: 614rem;
+.glance-root {
   border-left: 6rem solid #593D3B;
   padding-left: 24rem;
 }
-.glance h2 {
+.glance-root h2 {
   margin-bottom: 24rem;
 }
-.glance .figures {
+.glance-root .figures {
   display: flex;
   flex-direction: row;
 }
 .figure {
   font-family: var(--display-font);
-  font-size: 36rem;
+  font-size: 40rem;
   margin-right: 40rem;
 }
 .caption {

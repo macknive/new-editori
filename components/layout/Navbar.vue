@@ -1,32 +1,33 @@
 <template>
-  <nav class="root">
-    <nuxt-link :to="`/${workspace.slug}`" class="home-link">
-      <span class="logo">
+  <nav class="nav-root">
+    <div class="home-link">
+      <nuxt-link :to="`/${workspace.slug}`" class="logo">
         <h1 class="wordmark">Editori</h1>
-      </span>
-      <span class="workspace" v-if="!hideWorkspace">
+      </nuxt-link>
+      <div class="logo-separator">›</div>
+      <nuxt-link :to="`/${workspace.slug}`" class="workspace" v-if="!hideWorkspace">
         {{workspace.name}}
-      </span>
-    </nuxt-link>
+      </nuxt-link>
+    </div>
     <ul class="menu">
       <li>
-        <nuxt-link :to="`/${workspace.slug}/performance`">
+        <nuxt-link :to="`/${workspace.slug}/performance`" class="menu-link">
           Performance
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="`/${workspace.slug}/content`">
+        <nuxt-link :to="`/${workspace.slug}/content`" class="menu-link">
           Content Calendar
         </nuxt-link>
       </li>
       <li>
-        <nuxt-link :to="`/${workspace.slug}/team`">
+        <nuxt-link :to="`/${workspace.slug}/team`" class="menu-link">
           Team
         </nuxt-link>
       </li>
     </ul>
     <div class="right">
-      <div role="button" class="search" aria-label="Search">
+      <div role="button" tabindex="0" class="search" aria-label="Search">
         <font-awesome-icon class="search-icon" icon="search" size="2x">
         </font-awesome-icon>
       </div>
@@ -49,7 +50,7 @@ export default {
 </script>
 
 <style scoped>
-  .root {
+  .nav-root {
     align-items: center;
     display: flex;
     justify-content: space-between;
@@ -58,20 +59,39 @@ export default {
   a {
     color: #191919;
     text-decoration: none;
+    height: 48rem;
   }
   .home-link {
-    display: inline;
+    align-items: center;
+    display: flex;
+    height: 48rem;
+    width: 450rem;
   }
-  .workspace::before {
-    content: '›';
+  .home-link a {
+    display: inline-flex;
+    align-items: center;
+  }
+  .logo-separator {
+    display: inline-flex;
+    align-items: center;
+    height: 48rem;
+    border: 0;
+    font-size: 24rem;
     margin: 0 16rem;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   .workspace {
-    font-family: ''
+    font-family: var(--display-font);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
   .wordmark, .workspace, .avatar {
     color: #191919;
-    display: inline;
+    display: inline-block;
     font-family: 'Montserrat';
     font-size: 22rem;
   }
@@ -86,8 +106,8 @@ export default {
     justify-content: center;
     border-radius: 50%;
     font-weight: 600;
-    height: calc(48 * var(--height-unit));
-    width: calc(48 * var(--height-unit));
+    height: 48rem;
+    width: 48rem;
   }
   .avatar {
     border: 2px solid #8A7968;
@@ -96,7 +116,7 @@ export default {
   .menu {
     display: flex;
     flex-direction: row;
-    gap: 60rem;
+    gap: 20rem;
     list-style-type: none;
   }
   .menu li {
@@ -106,6 +126,12 @@ export default {
     font-weight: 700;
     letter-spacing: 0.27em;
     text-transform: uppercase;
+  }
+  .menu li a {
+    display: block;
+    padding: 0 20rem;
+    height: 48rem;
+    line-height: 48rem;
   }
   .right {
     display: flex;
