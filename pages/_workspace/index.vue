@@ -93,7 +93,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .date {
     color: #f5eee8aa;
     font-size: 144rem;
