@@ -8,7 +8,7 @@
         </component>
       </svg>
     </aside>
-    <div class="content">
+    <div class="__hero-section-content">
       <slot></slot>
     </div>
   </portal>
@@ -48,27 +48,29 @@ export default {
 </script>
 
 <style>
-  .header {
-    background: #fff8f0;
-    height: var(--section-height);
-    width: var(--section-width);
-    font-size: 16rem;
-    position: relative;
-    z-index: 1;
+  /* TODO: Determine why this selector fails if scoped to the component. */
+  .__hero-section-content > * {
+    position: absolute;
   }
-  .header > .content {
+</style>
+
+<style scoped>
+  h2 {
+    font-family: var(--display-font);
+    font-weight: 400;
+    letter-spacing: 0.015em;
+    text-transform: uppercase;
+  }
+  .__hero-section-content {
     position: relative;
     z-index: 2;
   }
-  .content > * {
-    position: absolute;
-  }
-  .header > .shapes {
+  .shapes {
     pointer-events: none;
     position: relative;
     z-index: 1;
   }
-  .header .shape {
+  .shape {
     position: absolute;
   }
 </style>

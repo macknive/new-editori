@@ -1,5 +1,5 @@
 <template>
-  <v-app dark>
+  <BodySection>
     <h1 v-if="error.statusCode === 404">
       {{ pageNotFound }}
     </h1>
@@ -9,11 +9,17 @@
     <NuxtLink to="/">
       Home page
     </NuxtLink>
-  </v-app>
+  </BodySection>
 </template>
 
 <script>
+import BodySection from '~/components/layout/BodySection';
+
 export default {
+  components: {
+    BodySection
+  },
+  layout: 'new',
   props: {
     error: {
       type: Object,

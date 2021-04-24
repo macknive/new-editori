@@ -66,19 +66,16 @@ export default {
     background: #fff8f0;
     font-size: 16px;
   }
-  .label, .main h2, button {
+  .label, button {
     font-family: var(--body-font);
     font-weight: 700;
     letter-spacing: 0.27em;
     text-transform: uppercase;
   }
-  h1, .header h2 {
+  h1 {
     font-family: var(--display-font);
     letter-spacing: 0.015em;
     text-transform: uppercase;
-  }
-  .header h2 {
-    font-weight: 400;
   }
   button {
     background: #593d3b;
@@ -100,6 +97,14 @@ export default {
     left: 0;
     right: 0;
     z-index: 999;
+  }
+  .header {
+    background: #fff8f0;
+    height: var(--section-height);
+    width: var(--section-width);
+    font-size: 16rem;
+    position: relative;
+    z-index: 1;
   }
   .main {
     background: #fffefd;
