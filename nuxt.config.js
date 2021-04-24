@@ -71,7 +71,8 @@ export default {
     '@nuxtjs/dotenv',
     '@nuxtjs/auth',
     '@nuxtjs/vuetify',
-    '@nuxtjs/moment'
+    '@nuxtjs/moment',
+    'portal-vue/nuxt'
   ],
   apollo: {
     clientConfigs: {

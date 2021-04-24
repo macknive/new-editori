@@ -1,6 +1,6 @@
 <template>
-  <PageTemplate :shapes="shapes" :workspace="workspace" :hideWorkspace="hideNavbarWorkspace">
-    <template v-slot:header>
+  <div>
+    <HeroSection :shapes="shapes" hideWorkspace="false">
       <h1 class="workspace-name">{{workspace.name}}</h1>
       <time class="date" :datetime="`${now.month}-${now.date}`">
         {{now.month}}.{{now.date}}
@@ -11,8 +11,8 @@
       </div>
       <Glance class="glance" title="This Week" :figures="figures" />
       <EditorButton class="editor-button" :messages="messages"></EditorButton>
-    </template>
-    <template v-slot:content>
+    </HeroSection>
+    <BodySection>
       <HomeCard title="Set up your workspace" subtitle="Follow us">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
@@ -27,15 +27,16 @@
           molestie. Aliquam consectetur tincidunt ex at auctor.
         </p>
       </HomeCard>
-    </template>
-  </PageTemplate>
+    </BodySection>
+  </div>
 </template>
 
 <script>
+import HeroSection from '~/components/layout/HeroSection';
+import BodySection from '~/components/layout/BodySection';
 import EditorButton from '~/components/EditorButton';
 import Glance from '~/components/Glance';
 import HomeCard from '~/components/cards/HomeCard';
-import PageTemplate from '~/components/layout/PageTemplate';
 
 const currentTime = new Date();
 
@@ -51,7 +52,7 @@ function pad(value, totalDigits) {
 }
 
 export default {
-  components: { EditorButton, Glance, HomeCard, PageTemplate },
+  components: { HeroSection, BodySection, EditorButton, Glance, HomeCard },
   data() {
     return {
       shapes: [
@@ -59,7 +60,7 @@ export default {
       ]
     }
   },
-  layout: 'empty',
+  layout: 'new',
   computed: {
     figures() {
       return [

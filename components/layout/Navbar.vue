@@ -40,12 +40,7 @@
 
 <script>
 export default {
-  props: [ 'workspace', 'hideWorkspace' ],
-  computed: {
-    userInitial() {
-      return 'MN';
-    }
-  }
+  props: [ 'workspace', 'hideWorkspace', 'userInitial' ],
 }
 </script>
 
