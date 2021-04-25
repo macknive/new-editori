@@ -13,7 +13,8 @@ import {
   faCreditCard,
   faLightbulb,
   faCaretDown,
-  faSearch
+  faSearch,
+  faCog
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
@@ -42,5 +43,6 @@ library.add(faApplePay);
 library.add(faLightbulb);
 library.add(faSearch);
 library.add(faCaretDown);
+library.add(faCog);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);

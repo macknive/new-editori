@@ -1,7 +1,10 @@
 <template>
   <div>
     <HeroSection :shapes="shapes">
-      <h1 class="workspace-name">{{workspace.name}}</h1>
+      <nuxt-link :to="`/${workspace.slug}/settings`" class="workspace-name">
+        <h1>{{workspace.name}}</h1>
+        <font-awesome-icon class="workspace-settings" icon="cog" />
+      </nuxt-link>
       <time class="date" :datetime="`${now.month}-${now.date}`">
         {{now.month}}.{{now.date}}
       </time>
@@ -115,12 +118,26 @@ export default {
     user-select: none;
   }
   .workspace-name {
-    font-size: 70rem;
-    font-weight: 700;
+    color: inherit;
     left: 100rem;
     top: 240rem;
-    text-transform: uppercase;
     z-index: 2;
+  }
+  .workspace-name h1 {
+    display: inline-block;
+    font-size: 70rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  .workspace-settings {
+    width: 24rem;
+    height: 24rem;
+    vertical-align: top;
+    opacity: 0.33;
+    transition: opacity 300ms ease;
+  }
+  .workspace-name:hover .workspace-settings {
+    opacity: 1;
   }
   .workspace-switcher {
     cursor: pointer;
