@@ -16,7 +16,7 @@
           <nuxt-link to="/" class="text-brown">last week</nuxt-link>
         </p>
         <h4 class="my-6">SITE OVERVIEW</h4>
-        <SiteOverview :posts="posts" />
+        <SiteOverview :posts="posts" :workspace="workspace" />
       </v-container>
     </BodySection>
   </v-app>
