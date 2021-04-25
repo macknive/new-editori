@@ -148,7 +148,7 @@
 
 <script>
 export default {
-  props: ['posts'],
+  props: [ 'workspaceSlug', 'posts'],
   data() {
     return {
       decreasingTraffic: undefined,
@@ -254,4 +254,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+  a {
+    color: #191919;
+    text-decoration: none;
+  }
+</style>
