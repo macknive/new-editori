@@ -16,14 +16,8 @@
       <EditorButton class="editor-button" :messages="messages"></EditorButton>
     </HeroSection>
     <BodySection>
-      <HomeCard title="Grant Access to Google" subtitle="Follow us">
-        <p>
-          In order to retrieve performance information about your posts, you
-          will need to grant Editori access to your Google Account.
-        </p>
-        <button class="connect-google" @click="connectGoogle">
-          Connect Your Google Account
-        </button>
+      <HomeCard title="Foo bar baz" subtitle="test">
+        <p>Lorem ipsum dolor sit amet</p>
       </HomeCard>
     </BodySection>
   </div>
@@ -52,17 +46,6 @@ function pad(value, totalDigits) {
 
 export default {
   components: { HeroSection, BodySection, EditorButton, Glance, HomeCard },
-  async asyncData(ctx) {
-    const response = await ctx.$axios.get('/connections/google', {
-      params: {
-        'workspace': ctx.route.params.workspace,
-      }
-    });
-
-    return {
-      googleOauthUrl: response.data,
-    }
-  },
   data() {
     return {
       shapes: [
@@ -92,14 +75,6 @@ export default {
     },
   },
   mixins: [getWorkspaceBySlug],
-  methods: {
-    connectGoogle() {
-      window.location.href = this.googleOauthUrl;
-    }
-  },
-  mounted() {
-    console.log('redirect URL', this.googleOauthUrl)
-  }
 }
 </script>
 
