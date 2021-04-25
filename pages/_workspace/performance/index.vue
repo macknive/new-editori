@@ -46,55 +46,64 @@ export default {
           title: 'Best Animal Milk v1',
           trend: 'decreasing',
           assignee: 'user1',
-          status: "Waiting on Editor's review"
+          status: "Waiting on Editor's review",
+          slug: 'animal-milk-1',
         },
         {
           title: 'Best Animal Milk v2',
           trend: 'decreasing',
           assignee: 'user1',
-          status: "Waiting on Editor's review"
+          status: "Waiting on Editor's review",
+          slug: 'animal-milk-2',
         },
         {
           title: 'Best Animal Milk v3',
           trend: 'decreasing',
           assignee: 'user1',
-          status: "Waiting on Editor's review"
+          status: "Waiting on Editor's review",
+          slug: 'animal-milk-3',
         },
         {
           title: 'The Top Benefits Of Kombucha',
           trend: 'increasing',
           assignee: 'user1',
-          status: "Waiting on Editor's review"
+          status: "Waiting on Editor's review",
+          slug: 'benefits-of-kombucha',
         },
         {
           title: 'Top 10 Juicers',
           trend: 'stable',
           assignee: 'user2',
-          status: "Waiting on Editor's review"
+          status: "Waiting on Editor's review",
+          slug: 'top-10-juicers',
         },
         {
           title: 'Green Tea Vs Black Tea',
           trend: 'decreasing',
           assignee: 'user3',
-          status: "Waiting on Editor's review"
+          status: "Waiting on Editor's review",
+          slug: 'green-tea-vs-black-tea',
         },
         {
           title: 'A Guide For Kombucha Enthusiasts',
           trend: 'increasing',
           assignee: 'user1',
-          status: "Waiting on Editor's review"
+          status: "Waiting on Editor's review",
+          slug: 'a-guide-for-kombucha-enthusiasts',
         },
         {
           title: 'The Best Tea Infuser',
           trend: 'decreasing',
           assignee: 'user3',
-          status: "Waiting on Editor's review"
+          status: "Waiting on Editor's review",
+          slug: 'best-tea-infuser',
         },
         {
           title: 'Cheap Coffee You Should Buy Today',
           trend: 'stable',
           assignee: 'user2',
-          status: "Waiting on Editor's review"
+          status: "Waiting on Editor's review",
+          slug: 'cheap-coffee',
         }
       ]
     };

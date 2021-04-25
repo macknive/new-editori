@@ -24,110 +24,123 @@
           <v-col><h4 class="text-white">Status</h4></v-col>
         </v-row>
       </v-app-bar>
-      <v-row v-for="post in posts" :key="post.id">
-        <v-col>
-          <v-row no-gutters class="flex-column ml-4">
-            <v-col
-              ><v-row no-gutters>
-                <v-col cols="1">
-                  <div :class="`status-${post.trend}`"></div
-                ></v-col>
-                <v-col>{{ post.trend }} in page views </v-col>
-              </v-row></v-col
-            >
-            <v-col> {{ post.title }}</v-col>
-          </v-row>
-        </v-col>
-        <v-col>
-          <div class="avatar-placeholder">
-            <div align="center" class="mt-1">
-              <v-menu offset-y>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-btn v-bind="attrs" v-on="on" icon><h2>KC</h2></v-btn>
-                </template>
-              </v-menu>
+
+      <nuxt-link v-for="post in posts" :key="post.id"
+          :to="postLink(workspaceSlug, post.slug)">
+        <v-row>
+          <v-col>
+            <v-row no-gutters class="flex-column ml-4">
+              <v-col>
+                <v-row no-gutters>
+                  <v-col cols="1">
+                    <div :class="`status-${post.trend}`"></div>
+                  </v-col>
+                  <v-col>{{ post.trend }} in page views </v-col>
+                </v-row>
+              </v-col>
+              <v-col> {{ post.title }}</v-col>
+            </v-row>
+          </v-col>
+          <v-col>
+            <div class="avatar-placeholder">
+              <div align="center" class="mt-1">
+                <v-menu offset-y>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-btn v-bind="attrs" v-on="on" icon><h2>KC</h2></v-btn>
+                  </template>
+                </v-menu>
+              </div>
             </div>
-          </div>
-        </v-col>
-        <v-col>{{ post.status }}</v-col>
-      </v-row>
+          </v-col>
+          <v-col>{{ post.status }}</v-col>
+        </v-row>
+      </nuxt-link>
     </v-card>
 
     <v-sheet class="mx-auto mt-12">
       <h4>POST THAT ARE DECREASING ({{ decreasing() }})</h4>
       <v-slide-group class="pa-4" active-class="success" show-arrows>
-        <v-slide-item v-for="post in posts" :key="post.id">
-          <v-card
-            v-if="post.trend == 'decreasing'"
-            class="ma-4"
-            height="200"
-            width="300"
-          >
-            <v-container>
-              <v-row no-gutters>
-                <v-col cols="1">
-                  <div :class="`status-${post.trend}`"></div
-                ></v-col>
-                <v-col>{{ post.trend }} in page views </v-col>
-              </v-row>
-              {{ post.title }}
-              <br /><br /><br />
-              <span class="text-gray"
-                ><font-awesome-icon :icon="['fa', 'lightbulb']" size="1x" />
-                This article does not show up on the first page for any
-                keyword</span
-              >
-            </v-container>
-          </v-card>
-        </v-slide-item>
+        <nuxt-link v-for="post in posts" :key="post.id"
+            :to="postLink(workspaceSlug, post.slug)">
+          <v-slide-item>
+            <v-card
+              v-if="post.trend == 'decreasing'"
+              class="ma-4"
+              height="200"
+              width="300"
+            >
+              <v-container>
+                <v-row no-gutters>
+                  <v-col cols="1">
+                    <div :class="`status-${post.trend}`"></div>
+                  </v-col>
+                  <v-col>{{ post.trend }} in page views </v-col>
+                </v-row>
+                {{ post.title }}
+                <br /><br /><br />
+                <span class="text-gray"
+                  ><font-awesome-icon :icon="['fa', 'lightbulb']" size="1x" />
+                  This article does not show up on the first page for any
+                  keyword</span
+                >
+              </v-container>
+            </v-card>
+          </v-slide-item>
+        </nuxt-link>
       </v-slide-group>
     </v-sheet>
 
     <v-sheet class="mx-auto mt-12">
       <h4>POST THAT ARE INCREASING ({{ increasing() }})</h4>
       <v-slide-group class="pa-4" active-class="success" show-arrows>
-        <v-slide-item v-for="post in posts" :key="post.id">
-          <v-card
-            v-if="post.trend == 'increasing'"
-            class="ma-4"
-            height="200"
-            width="300"
-          >
-            <v-container>
-              <v-row no-gutters>
-                <v-col cols="1">
-                  <div :class="`status-${post.trend}`"></div
-                ></v-col>
-                <v-col>{{ post.trend }} in page views </v-col>
-              </v-row>
-              {{ post.title }}
-            </v-container>
-          </v-card>
-        </v-slide-item>
+        <nuxt-link v-for="post in posts" :key="post.id"
+            :to="postLink(workspaceSlug, post.slug)">
+          <v-slide-item>
+            <v-card
+              v-if="post.trend == 'increasing'"
+              class="ma-4"
+              height="200"
+              width="300"
+            >
+              <v-container>
+                <v-row no-gutters>
+                  <v-col cols="1">
+                    <div :class="`status-${post.trend}`"></div
+                  ></v-col>
+                  <v-col>{{ post.trend }} in page views </v-col>
+                </v-row>
+                {{ post.title }}
+              </v-container>
+            </v-card>
+          </v-slide-item>
+        </nuxt-link>
       </v-slide-group>
     </v-sheet>
 
     <v-sheet class="mx-auto mt-12">
       <h4>POST THAT ARE STABLE ({{ stable() }})</h4>
       <v-slide-group class="pa-4" active-class="success" show-arrows>
-        <v-slide-item v-for="post in posts" :key="post.id">
-          <v-card
-            v-if="post.trend == 'stable'"
-            class="ma-4"
-            height="200"
-            width="300"
-          >
-            <v-container>
-              <v-row no-gutters>
-                <v-col cols="1">
-                  <div :class="`status-${post.trend}`"></div
-                ></v-col>
-                <v-col>{{ post.trend }} in page views </v-col>
-              </v-row>
-              {{ post.title }}
-            </v-container>
-          </v-card>
-        </v-slide-item>
+        <nuxt-link v-for="post in posts" :key="post.id"
+            :to="postLink(workspaceSlug, post.slug)">
+          <v-slide-item>
+            <v-card
+              v-if="post.trend == 'stable'"
+              class="ma-4"
+              height="200"
+              width="300"
+            >
+              <v-container>
+                <v-row no-gutters>
+                  <v-col cols="1">
+                    <div :class="`status-${post.trend}`"></div
+                  ></v-col>
+                  <v-col>{{ post.trend }} in page views </v-col>
+                </v-row>
+                {{ post.title }}
+              </v-container>
+            </v-card>
+          </v-slide-item>
+        </nuxt-link>
       </v-slide-group>
     </v-sheet>
   </div>
@@ -162,6 +175,9 @@ export default {
         value => value.trend === 'stable'
       ).length;
       return this.stableTraffic;
+    },
+    postLink(workspaceSlug, postSlug) {
+      return `/${workspaceSlug}/performance/${postSlug}`;
     }
   },
   computed: {
