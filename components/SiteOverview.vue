@@ -6,9 +6,9 @@
         <v-row>
           <v-col cols="4">
             <v-col><highcharts :options="pieData"></highcharts></v-col>
-            <div>{{ decreasing() }} POSTS WITH DECREASING TRAFFIC</div>
-            <div>{{ increasing() }} POSTS WITH INCREASING TRAFFIC</div>
-            <div>{{ stable() }} POSTS WITH STABLE TRAFFIC</div>
+            <div>{{ decreasing.length }} POSTS WITH DECREASING TRAFFIC</div>
+            <div>{{ increasing.length }} POSTS WITH INCREASING TRAFFIC</div>
+            <div>{{ stable.length }} POSTS WITH STABLE TRAFFIC</div>
           </v-col>
           <v-col><highcharts :options="lineData"></highcharts></v-col>
         </v-row>
@@ -26,7 +26,7 @@
       </v-app-bar>
 
       <nuxt-link v-for="post in posts" :key="post.id"
-          :to="postLink(workspaceSlug, post.slug)">
+          :to="postLink(workspace.slug, post.slug)">
         <v-row>
           <v-col>
             <v-row no-gutters class="flex-column ml-4">
@@ -57,130 +57,55 @@
       </nuxt-link>
     </v-card>
 
-    <v-sheet class="mx-auto mt-12">
-      <h4>POST THAT ARE DECREASING ({{ decreasing() }})</h4>
-      <v-slide-group class="pa-4" active-class="success" show-arrows>
-        <nuxt-link v-for="post in posts" :key="post.id"
-            :to="postLink(workspaceSlug, post.slug)">
-          <v-slide-item>
-            <v-card
-              v-if="post.trend == 'decreasing'"
-              class="ma-4"
-              height="200"
-              width="300"
-            >
-              <v-container>
-                <v-row no-gutters>
-                  <v-col cols="1">
-                    <div :class="`status-${post.trend}`"></div>
-                  </v-col>
-                  <v-col>{{ post.trend }} in page views </v-col>
-                </v-row>
-                {{ post.title }}
-                <br /><br /><br />
-                <span class="text-gray"
-                  ><font-awesome-icon :icon="['fa', 'lightbulb']" size="1x" />
-                  This article does not show up on the first page for any
-                  keyword</span
-                >
-              </v-container>
-            </v-card>
-          </v-slide-item>
-        </nuxt-link>
-      </v-slide-group>
-    </v-sheet>
+    <PerformancePostCarousel :posts="decreasing" :workspace="workspace"
+        title="Posts that are Decreasing">
+    </PerformancePostCarousel>
 
-    <v-sheet class="mx-auto mt-12">
-      <h4>POST THAT ARE INCREASING ({{ increasing() }})</h4>
-      <v-slide-group class="pa-4" active-class="success" show-arrows>
-        <nuxt-link v-for="post in posts" :key="post.id"
-            :to="postLink(workspaceSlug, post.slug)">
-          <v-slide-item>
-            <v-card
-              v-if="post.trend == 'increasing'"
-              class="ma-4"
-              height="200"
-              width="300"
-            >
-              <v-container>
-                <v-row no-gutters>
-                  <v-col cols="1">
-                    <div :class="`status-${post.trend}`"></div
-                  ></v-col>
-                  <v-col>{{ post.trend }} in page views </v-col>
-                </v-row>
-                {{ post.title }}
-              </v-container>
-            </v-card>
-          </v-slide-item>
-        </nuxt-link>
-      </v-slide-group>
-    </v-sheet>
+    <PerformancePostCarousel :posts="increasing" :workspace="workspace"
+        title="Posts that are Increasing">
+    </PerformancePostCarousel>
 
-    <v-sheet class="mx-auto mt-12">
-      <h4>POST THAT ARE STABLE ({{ stable() }})</h4>
-      <v-slide-group class="pa-4" active-class="success" show-arrows>
-        <nuxt-link v-for="post in posts" :key="post.id"
-            :to="postLink(workspaceSlug, post.slug)">
-          <v-slide-item>
-            <v-card
-              v-if="post.trend == 'stable'"
-              class="ma-4"
-              height="200"
-              width="300"
-            >
-              <v-container>
-                <v-row no-gutters>
-                  <v-col cols="1">
-                    <div :class="`status-${post.trend}`"></div
-                  ></v-col>
-                  <v-col>{{ post.trend }} in page views </v-col>
-                </v-row>
-                {{ post.title }}
-              </v-container>
-            </v-card>
-          </v-slide-item>
-        </nuxt-link>
-      </v-slide-group>
-    </v-sheet>
+    <PerformancePostCarousel :posts="stable" :workspace="workspace"
+        title="Posts that are Stable">
+    </PerformancePostCarousel>
   </div>
 </template>
 
 <script>
+import PerformancePostCarousel from '~/components/cardgroups/PerformancePostCarousel'
+
+// TODO: Determine if this can be directly compiled in, from editori-api. 
+const PostTrend = {
+  DECREASING: 'decreasing',
+  INCREASING: 'increasing',
+  STABLE: 'stable'
+}
+
 export default {
-  props: [ 'workspaceSlug', 'posts'],
+  props: [ 'workspace', 'posts'],
+  components: {
+    PerformancePostCarousel
+  },
   data() {
     return {
-      decreasingTraffic: undefined,
-      increasingTraffic: undefined,
-      stableTraffic: undefined,
       lineArray: [5, 2, 3, 3]
     };
   },
   methods: {
-    decreasing() {
-      this.decreasingTraffic = this.posts.filter(
-        value => value.trend === 'decreasing'
-      ).length;
-      return this.decreasingTraffic;
-    },
-    increasing() {
-      this.increasingTraffic = this.posts.filter(
-        value => value.trend === 'increasing'
-      ).length;
-      return this.increasingTraffic;
-    },
-    stable() {
-      this.stableTraffic = this.posts.filter(
-        value => value.trend === 'stable'
-      ).length;
-      return this.stableTraffic;
-    },
     postLink(workspaceSlug, postSlug) {
       return `/${workspaceSlug}/performance/${postSlug}`;
     }
   },
   computed: {
+    decreasing() {
+      return this.posts.filter(value => value.trend === PostTrend.DECREASING);
+    },
+    increasing() {
+      return this.posts.filter(value => value.trend === PostTrend.INCREASING);
+    },
+    stable() {
+      return this.posts.filter(value => value.trend === PostTrend.STABLE);
+    },
     pieData() {
       return {
         credits: {
@@ -218,15 +143,15 @@ export default {
             data: [
               {
                 name: 'Decreasing Traffic',
-                y: this.decreasingTraffic
+                y: this.decreasing.length
               },
               {
                 name: 'Increasing Traffic',
-                y: this.increasingTraffic
+                y: this.increasing.length
               },
               {
                 name: 'Stable Traffic',
-                y: this.stableTraffic
+                y: this.stable.length
               }
             ],
             innerSize: '90%'
