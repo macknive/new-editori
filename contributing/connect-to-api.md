@@ -12,6 +12,8 @@ following contents:
 ```
 API_URL=https://dev.api.editori.io
 BACKEND_URL=https://dev.api.editori.io/graphql
+CLIENT_BASE_URL=http://localhost:3000
+OAUTH_REDIRECT_URI_GOOGLE=/connections/google
 ```
 
 That's it!  Your Editori instance should now be connected to the hosted
@@ -27,14 +29,14 @@ project using Git.
 2. Install its dependencies
 3. Start the local server
 
-If you have started the local server on its default port (1337), no additional
-changes will be necessary.  If you started the server on a custom port, you will
-additionally need to create a `.env` file in the root of your editori-frontend
-project, with the following contents (replacing `9999` with the port number you
-have selected):
+If you started the server on a custom port, you will additionally need to
+create a `.env` file in the root of your editori-frontend project, with the
+following contents (replacing `1337` with the port number you have selected):
 ```
-API_URL=https://localhost:9999
-BACKEND_URL=https://localhost:9999/graphql
+API_URL=http://localhost:1337
+BACKEND_URL=http://localhost:1337/graphql
+CLIENT_BASE_URL=http://localhost:3000
+OAUTH_REDIRECT_URI_GOOGLE=/connections/google
 ```
 
 ## Option 3: Connect to the production API server
@@ -48,6 +50,8 @@ following contents:
 ```
 API_URL=https://api.editori.io
 BACKEND_URL=https://api.editori.io/graphql
+CLIENT_BASE_URL=http://localhost:3000
+OAUTH_REDIRECT_URI_GOOGLE=/connections/google
 ```
 
 Your Editori instance should now be connected to the production API server.
