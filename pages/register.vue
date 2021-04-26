@@ -169,4 +169,165 @@ export default {
 };
 </script>
 
-<style></style>
+<style scope>
+.step-button {
+  font-family: 'Montserrat';
+  font-weight: 700 !important;
+  font-size: 18px !important;
+}
+
+.container-700 {
+  max-width: 700px;
+}
+
+.step {
+  border-left: none !important;
+}
+
+.register-container {
+  max-width: unset;
+}
+
+.step-col {
+  max-width: 50px;
+  padding-bottom: 20px;
+}
+
+.v-stepper {
+  box-shadow: none !important;
+}
+
+.step1 div > span {
+  background: #593d3b !important;
+}
+
+.step2 div > span {
+  top: 250px !important;
+  background: #6f5e53 !important;
+}
+
+.step3 div > span {
+  top: 400px !important;
+  background: #8a7968 !important;
+}
+
+.step4 div > span {
+  top: 550px !important;
+  background: #ab947e !important;
+}
+
+.v-stepper--vertical .v-stepper__step {
+  padding: unset;
+}
+
+.v-stepper__step__step {
+  height: 50px !important;
+  width: 150px !important;
+  transform: rotate(-90deg) !important;
+  border-radius: unset !important;
+  position: fixed;
+  top: 100px;
+  font-size: 20px;
+  left: -23px;
+}
+
+.step1-bg,
+.step2-bg,
+.step3-bg,
+.step4-bg {
+  position: fixed;
+  left: 17px;
+  height: 150px;
+  width: 10px;
+}
+
+.step1-bg {
+  top: 50px;
+  border: 1px solid #593d3b;
+  background: #593d3b;
+}
+
+.step2-bg {
+  top: 200px;
+  border: 1px solid #6f5e53;
+  background: #6f5e53;
+}
+
+.step3-bg {
+  top: 350px;
+  border: 1px solid #8a7968;
+  background: #8a7968;
+}
+
+.step4-bg {
+  top: 500px;
+  border: 1px solid #ab947e;
+  background: #ab947e;
+}
+
+.svg-apple,
+.svg-google {
+  height: 56px;
+  border-radius: 4px;
+  width: 120px !important;
+}
+
+.svg-apple {
+  color: white;
+  background: black;
+}
+
+.svg-google {
+  border: 1px solid gray;
+}
+
+@media only screen and (max-width: 375px) {
+  .step1-bg,
+  .step2-bg,
+  .step3-bg,
+  .step4-bg {
+    left: 0px;
+    height: 130px;
+  }
+
+  .step1-bg {
+    top: 20px;
+  }
+
+  .step2-bg {
+    top: 150px;
+  }
+
+  .step3-bg {
+    top: 280px;
+  }
+
+  .step4-bg {
+    top: 410px;
+  }
+
+  .v-stepper__step__step {
+    height: 30px !important;
+    width: 130px !important;
+    top: 50px;
+    font-size: 16px;
+    left: -40px;
+  }
+
+  .step1 div > span {
+    top: 70px;
+  }
+
+  .step2 div > span {
+    top: 200px !important;
+  }
+
+  .step3 div > span {
+    top: 330px !important;
+  }
+
+  .step4 div > span {
+    top: 460px !important;
+  }
+}
+</style>

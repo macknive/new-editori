@@ -67,7 +67,7 @@
                   color="brown darken-3 white--text"
                   class="py-7 step-button"
                   ><font-awesome-icon
-                    class="text-white"
+                    class="white"
                     icon="credit-card"
                     size="1x"
                   ></font-awesome-icon
@@ -140,7 +140,7 @@
 </template>
 
 <script>
-import moment from 'moment'
+import moment from 'moment';
 export default {
   data() {
     return {
@@ -158,33 +158,33 @@ export default {
       },
       rules: [value => !!value || 'Required.'],
       visible: true
-    }
+    };
   },
   methods: {
     validate() {
       if (!this.$refs.form.validate()) {
-        return false
+        return false;
       }
-      return true
+      return true;
     },
     addWorkspace() {
-      this.$emit('thisWorkspace', this.newWorkspace)
+      this.$emit('thisWorkspace', this.newWorkspace);
     },
     errorMessage() {
-      console.log('Please fill the required form')
+      console.log('Please fill the required form');
     }
   },
   computed: {
     totalPrice() {
-      return this.selected * this.basePrice
+      return this.selected * this.basePrice;
     },
     formattedDate() {
       return moment(this.givenDate)
         .add(3, 'days')
-        .format('MMMM DD, YYYY')
+        .format('MMMM DD, YYYY');
     }
   }
-}
+};
 </script>
 
 <style></style>

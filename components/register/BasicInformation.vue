@@ -105,30 +105,30 @@ export default {
         confirmPassword: [v => !!v || 'Password is required'],
         termsOfService: [v => !!v || 'You must agree to continue!']
       }
-    }
+    };
   },
   computed: {
     passwordConfirmationRule() {
       return () =>
         this.newUser.password === this.newUser.confirmPassword ||
-        'Password must match'
+        'Password must match';
     }
   },
   methods: {
     validate() {
       if (!this.$refs.form.validate()) {
-        return false
+        return false;
       }
-      return true
+      return true;
     },
     addUser() {
-      this.$emit('thisUser', this.newUser)
+      this.$emit('thisUser', this.newUser);
     },
     errorMessage() {
-      console.log('Please fill the required form')
+      console.log('Please fill the required form');
     }
   }
-}
+};
 </script>
 
 <style></style>

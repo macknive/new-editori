@@ -19,14 +19,17 @@
     <v-card>
       <v-app-bar color="brown">
         <v-row>
-          <v-col><h4 class="text-white">Title</h4></v-col>
-          <v-col><h4 class="text-white">Assignee</h4></v-col>
-          <v-col><h4 class="text-white">Status</h4></v-col>
+          <v-col><h4 style="color: white">Title</h4></v-col>
+          <v-col><h4 style="color: white">Assignee</h4></v-col>
+          <v-col><h4 style="color: white">Status</h4></v-col>
         </v-row>
       </v-app-bar>
 
-      <nuxt-link v-for="post in posts" :key="post.id"
-          :to="postLink(workspace.slug, post.slug)">
+      <nuxt-link
+        v-for="post in posts"
+        :key="post.id"
+        :to="postLink(workspace.slug, post.slug)"
+      >
         <v-row>
           <v-col>
             <v-row no-gutters class="flex-column ml-4">
@@ -57,32 +60,41 @@
       </nuxt-link>
     </v-card>
 
-    <PerformancePostCarousel :posts="decreasing" :workspace="workspace"
-        title="Posts that are Decreasing">
+    <PerformancePostCarousel
+      :posts="decreasing"
+      :workspace="workspace"
+      title="Posts that are Decreasing"
+    >
     </PerformancePostCarousel>
 
-    <PerformancePostCarousel :posts="increasing" :workspace="workspace"
-        title="Posts that are Increasing">
+    <PerformancePostCarousel
+      :posts="increasing"
+      :workspace="workspace"
+      title="Posts that are Increasing"
+    >
     </PerformancePostCarousel>
 
-    <PerformancePostCarousel :posts="stable" :workspace="workspace"
-        title="Posts that are Stable">
+    <PerformancePostCarousel
+      :posts="stable"
+      :workspace="workspace"
+      title="Posts that are Stable"
+    >
     </PerformancePostCarousel>
   </div>
 </template>
 
 <script>
-import PerformancePostCarousel from '~/components/cardgroups/PerformancePostCarousel'
+import PerformancePostCarousel from '~/components/cardgroups/PerformancePostCarousel';
 
-// TODO: Determine if this can be directly compiled in, from editori-api. 
+// TODO: Determine if this can be directly compiled in, from editori-api.
 const PostTrend = {
   DECREASING: 'decreasing',
   INCREASING: 'increasing',
   STABLE: 'stable'
-}
+};
 
 export default {
-  props: [ 'workspace', 'posts'],
+  props: ['workspace', 'posts'],
   components: {
     PerformancePostCarousel
   },
@@ -180,8 +192,8 @@ export default {
 </script>
 
 <style scoped>
-  a {
-    color: #191919;
-    text-decoration: none;
-  }
+a {
+  color: #191919;
+  text-decoration: none;
+}
 </style>
