@@ -4,5 +4,10 @@ query GetWorkspaceBySlug($workspaceSlug: String!) {
     name
     slug
     updated_at
+    pages {
+      trend
+      url
+      slug
+    }
   }
 }

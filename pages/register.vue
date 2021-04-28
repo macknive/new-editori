@@ -169,7 +169,7 @@ export default {
 };
 </script>
 
-<style scope>
+<style scoped>
 .step-button {
   font-family: 'Montserrat';
   font-weight: 700 !important;

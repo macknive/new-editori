@@ -26,7 +26,7 @@
       </v-app-bar>
 
       <nuxt-link
-        v-for="post in posts"
+        v-for="post in workspace.pages"
         :key="post.id"
         :to="postLink(workspace.slug, post.slug)"
       >
@@ -41,7 +41,7 @@
                   <v-col>{{ post.trend }} in page views </v-col>
                 </v-row>
               </v-col>
-              <v-col> {{ post.title }}</v-col>
+              <v-col> {{ post.slug }}</v-col>
             </v-row>
           </v-col>
           <v-col>
@@ -124,7 +124,7 @@ export default {
           enabled: false
         },
         title: {
-          text: this.posts.length + ' POST',
+          text: this.posts.length + ' POSTS',
           align: 'center',
           verticalAlign: 'middle'
         },
