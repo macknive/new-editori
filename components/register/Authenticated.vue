@@ -29,14 +29,14 @@ export default {
   data() {
     return {
       stepNumber: ''
-    }
+    };
   },
   methods: {
     proceed() {
-      this.$emit('thisStep', this.stepNumber)
+      this.$emit('thisStep', this.stepNumber);
     }
   }
-}
+};
 </script>
 
 <style></style>

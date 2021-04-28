@@ -16,7 +16,7 @@
           <nuxt-link to="/" class="text-brown">last week</nuxt-link>
         </p>
         <h4 class="my-6">SITE OVERVIEW</h4>
-        <SiteOverview :posts="posts" :workspace="workspace" />
+        <SiteOverview :posts="this.workspace.pages" :workspace="workspace" />
       </v-container>
     </BodySection>
   </v-app>
@@ -27,8 +27,8 @@ import { mapGetters } from 'vuex';
 import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug';
 import moment from 'moment';
 import SiteOverview from '~/components/SiteOverview';
-import BodySection from '~/components/layout/BodySection'
-import HeroSection from '~/components/layout/HeroSection'
+import BodySection from '~/components/layout/BodySection';
+import HeroSection from '~/components/layout/HeroSection';
 
 export default {
   head() {
@@ -37,82 +37,21 @@ export default {
     };
   },
   components: {
-    SiteOverview, BodySection, HeroSection
+    SiteOverview,
+    BodySection,
+    HeroSection
   },
   data() {
     return {
-      posts: [
-        {
-          title: 'Best Animal Milk v1',
-          trend: 'decreasing',
-          assignee: 'user1',
-          status: "Waiting on Editor's review",
-          slug: 'animal-milk-1',
-        },
-        {
-          title: 'Best Animal Milk v2',
-          trend: 'decreasing',
-          assignee: 'user1',
-          status: "Waiting on Editor's review",
-          slug: 'animal-milk-2',
-        },
-        {
-          title: 'Best Animal Milk v3',
-          trend: 'decreasing',
-          assignee: 'user1',
-          status: "Waiting on Editor's review",
-          slug: 'animal-milk-3',
-        },
-        {
-          title: 'The Top Benefits Of Kombucha',
-          trend: 'increasing',
-          assignee: 'user1',
-          status: "Waiting on Editor's review",
-          slug: 'benefits-of-kombucha',
-        },
-        {
-          title: 'Top 10 Juicers',
-          trend: 'stable',
-          assignee: 'user2',
-          status: "Waiting on Editor's review",
-          slug: 'top-10-juicers',
-        },
-        {
-          title: 'Green Tea Vs Black Tea',
-          trend: 'decreasing',
-          assignee: 'user3',
-          status: "Waiting on Editor's review",
-          slug: 'green-tea-vs-black-tea',
-        },
-        {
-          title: 'A Guide For Kombucha Enthusiasts',
-          trend: 'increasing',
-          assignee: 'user1',
-          status: "Waiting on Editor's review",
-          slug: 'a-guide-for-kombucha-enthusiasts',
-        },
-        {
-          title: 'The Best Tea Infuser',
-          trend: 'decreasing',
-          assignee: 'user3',
-          status: "Waiting on Editor's review",
-          slug: 'best-tea-infuser',
-        },
-        {
-          title: 'Cheap Coffee You Should Buy Today',
-          trend: 'stable',
-          assignee: 'user2',
-          status: "Waiting on Editor's review",
-          slug: 'cheap-coffee',
-        }
-      ]
+      pages: [],
+      pageContents: []
     };
   },
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser']),
     formattedDate() {
       return moment(this.workspace.updated_at).format('ll');
-    },
+    }
   },
   mixins: [getWorkspaceBySlug],
   methods: {
@@ -120,7 +59,7 @@ export default {
       await this.$apolloHelpers.onLogout();
       await this.$auth.logout();
     }
-  },
+  }
 };
 </script>
 

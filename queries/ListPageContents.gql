@@ -1,0 +1,13 @@
+query ListPageContents {
+  pageContents {
+    id
+    created_at
+    updated_at
+    url
+    contents
+    title
+    author
+    image_url
+    description
+  }
+}
