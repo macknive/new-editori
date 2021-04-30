@@ -41,7 +41,7 @@
                   <v-col>{{ post.trend }} in page views </v-col>
                 </v-row>
               </v-col>
-              <v-col> {{ post.slug }}</v-col>
+              <v-col> {{ post.title }}</v-col>
             </v-row>
           </v-col>
           <v-col>
@@ -59,6 +59,13 @@
         </v-row>
       </nuxt-link>
     </v-card>
+
+    <PerformancePostCarousel
+      :posts="pinned"
+      :workspace="workspace"
+      title="Pinned Posts"
+    >
+    </PerformancePostCarousel>
 
     <PerformancePostCarousel
       :posts="decreasing"
@@ -90,7 +97,8 @@ import PerformancePostCarousel from '~/components/cardgroups/PerformancePostCaro
 const PostTrend = {
   DECREASING: 'decreasing',
   INCREASING: 'increasing',
-  STABLE: 'stable'
+  STABLE: 'stable',
+  PINNED: 'pinned'
 };
 
 export default {
@@ -109,6 +117,11 @@ export default {
     }
   },
   computed: {
+    pinned() {
+      return this.posts.filter(
+        value => value.presentation === PostTrend.PINNED
+      );
+    },
     decreasing() {
       return this.posts.filter(value => value.trend === PostTrend.DECREASING);
     },

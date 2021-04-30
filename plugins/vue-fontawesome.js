@@ -14,7 +14,8 @@ import {
   faLightbulb,
   faCaretDown,
   faSearch,
-  faCog
+  faCog,
+  faThumbtack
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import {
@@ -44,5 +45,6 @@ library.add(faLightbulb);
 library.add(faSearch);
 library.add(faCaretDown);
 library.add(faCog);
+library.add(faThumbtack);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
