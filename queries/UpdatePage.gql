@@ -1,0 +1,10 @@
+mutation updatePage($id: ID!, $presentation: ENUM_PAGE_PRESENTATION) {
+  updatePage(
+    input: { where: { id: $id }, data: { presentation: $presentation } }
+  ) {
+    page {
+      id
+      presentation
+    }
+  }
+}

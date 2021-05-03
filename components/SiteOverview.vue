@@ -41,7 +41,7 @@
                   <v-col>{{ post.trend }} in page views </v-col>
                 </v-row>
               </v-col>
-              <v-col> {{ post.slug }}</v-col>
+              <v-col> {{ post.title }}</v-col>
             </v-row>
           </v-col>
           <v-col>
@@ -59,6 +59,13 @@
         </v-row>
       </nuxt-link>
     </v-card>
+
+    <PerformancePostCarousel
+      :posts="pinned"
+      :workspace="workspace"
+      title="Pinned Posts"
+    >
+    </PerformancePostCarousel>
 
     <PerformancePostCarousel
       :posts="decreasing"
@@ -93,6 +100,11 @@ const PostTrend = {
   STABLE: 'stable'
 };
 
+const PostPresentation = {
+  NORMAL: 'normal',
+  PINNED: 'pinned'
+};
+
 export default {
   props: ['workspace', 'posts'],
   components: {
@@ -109,14 +121,31 @@ export default {
     }
   },
   computed: {
+    pinned() {
+      return this.posts.filter(
+        value => value.presentation === PostPresentation.PINNED
+      );
+    },
     decreasing() {
-      return this.posts.filter(value => value.trend === PostTrend.DECREASING);
+      return this.posts.filter(
+        value =>
+          value.trend === PostTrend.DECREASING &&
+          value.presentation === PostPresentation.NORMAL
+      );
     },
     increasing() {
-      return this.posts.filter(value => value.trend === PostTrend.INCREASING);
+      return this.posts.filter(
+        value =>
+          value.trend === PostTrend.INCREASING &&
+          value.presentation === PostPresentation.NORMAL
+      );
     },
     stable() {
-      return this.posts.filter(value => value.trend === PostTrend.STABLE);
+      return this.posts.filter(
+        value =>
+          value.trend === PostTrend.STABLE &&
+          value.presentation === PostPresentation.NORMAL
+      );
     },
     pieData() {
       return {
