@@ -97,7 +97,11 @@ import PerformancePostCarousel from '~/components/cardgroups/PerformancePostCaro
 const PostTrend = {
   DECREASING: 'decreasing',
   INCREASING: 'increasing',
-  STABLE: 'stable',
+  STABLE: 'stable'
+};
+
+const PostPresentation = {
+  NORMAL: 'normal',
   PINNED: 'pinned'
 };
 
@@ -119,17 +123,29 @@ export default {
   computed: {
     pinned() {
       return this.posts.filter(
-        value => value.presentation === PostTrend.PINNED
+        value => value.presentation === PostPresentation.PINNED
       );
     },
     decreasing() {
-      return this.posts.filter(value => value.trend === PostTrend.DECREASING);
+      return this.posts.filter(
+        value =>
+          value.trend === PostTrend.DECREASING &&
+          value.presentation === PostPresentation.NORMAL
+      );
     },
     increasing() {
-      return this.posts.filter(value => value.trend === PostTrend.INCREASING);
+      return this.posts.filter(
+        value =>
+          value.trend === PostTrend.INCREASING &&
+          value.presentation === PostPresentation.NORMAL
+      );
     },
     stable() {
-      return this.posts.filter(value => value.trend === PostTrend.STABLE);
+      return this.posts.filter(
+        value =>
+          value.trend === PostTrend.STABLE &&
+          value.presentation === PostPresentation.NORMAL
+      );
     },
     pieData() {
       return {

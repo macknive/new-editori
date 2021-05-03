@@ -4,7 +4,7 @@
       <font-awesome-icon
         :icon="['fa', 'thumbtack']"
         size="1x"
-        :class="pinned ? 'color-black' : 'color-grey'"
+        :class="pinned ? 'pinned' : 'unpinned'"
         @click="togglePin()"
       />
     </div>
@@ -33,40 +33,26 @@
 <script>
 import UpdatePage from '~/queries/UpdatePage';
 export default {
-  data() {
-    return {
-      pinned: false,
-      presentation: undefined
-    };
-  },
   props: ['post', 'workspace'],
-
   methods: {
     postLink(workspaceSlug, postSlug) {
       return `/${workspaceSlug}/performance/${postSlug}`;
     },
     togglePin() {
-      this.pinned = !this.pinned;
-      if (this.pinned) {
-        const mutationConfig = {
-          mutation: UpdatePage,
-          variables: {
-            id: this.post.id,
-            presentation: 'pinned'
-          }
-        };
-        this.$apollo.mutate(mutationConfig);
-      }
-      if (!this.pinned) {
-        const mutationConfig = {
-          mutation: UpdatePage,
-          variables: {
-            id: this.post.id,
-            presentation: 'normal'
-          }
-        };
-        this.$apollo.mutate(mutationConfig);
-      }
+      const newState = this.pinned ? 'normal' : 'pinned';
+      const mutationConfig = {
+        mutation: UpdatePage,
+        variables: {
+          id: this.post.id,
+          presentation: newState
+        }
+      };
+      this.$apollo.mutate(mutationConfig);
+    }
+  },
+  computed: {
+    pinned() {
+      return this.post.presentation === 'pinned';
     }
   }
 };
@@ -81,7 +67,12 @@ a {
 .color-grey {
   color: lightgrey;
 }
-.color-black {
+.pinned,
+.unpinned {
   color: black;
+}
+
+.unpinned {
+  opacity: 0.25;
 }
 </style>
