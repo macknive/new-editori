@@ -41,12 +41,6 @@ export default {
     BodySection,
     HeroSection
   },
-  data() {
-    return {
-      pages: [],
-      pageContents: []
-    };
-  },
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser']),
     formattedDate() {

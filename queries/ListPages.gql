@@ -1,8 +1,0 @@
-query ListPages {
-  pages {
-    created_at
-    updated_at
-    url
-    trend
-  }
-}
