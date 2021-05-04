@@ -35,7 +35,7 @@ export default {
     };
   },
   computed: {
-    async page() {
+    page() {
       return this.pages ? this.pages[0] : undefined;
     }
   },
