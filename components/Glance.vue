@@ -1,10 +1,10 @@
 <template>
   <div class="glance-root">
-    <h2>{{title}}</h2>
+    <h2>{{ title }}</h2>
     <div class="figures">
       <figure class="figure" v-for="(figure, index) in figures" :key="index">
-        {{figure.value}}
-        <figcaption class="caption label">{{figure.caption}}</figcaption>
+        {{ figure.value }}
+        <figcaption class="caption label">{{ figure.caption }}</figcaption>
       </figure>
     </div>
   </div>
@@ -12,13 +12,13 @@
 
 <script>
 export default {
-  props: [ 'title', 'figures' ]
-}
+  props: ['title', 'figures']
+};
 </script>
 
 <style>
 .glance-root {
-  border-left: 6rem solid #593D3B;
+  border-left: 6rem solid #593d3b;
   padding-left: 24rem;
 }
 .glance-root h2 {
