@@ -57,24 +57,6 @@ export default {
 </style>
 
 <style scoped>
-  .hero-root >>> h1 {
-    font-size: 4em;
-  }
-  .hero-root >>> h2 {
-    font-size: 3em;
-  }
-  .hero-root >>> h3 {
-    font-size: 2em;
-  }
-  .hero-root >>> h4 {
-    font-size: 1.5em;
-  }
-  .hero-root >>> h5 {
-    font-size: 1.25em;
-  }
-  .hero-root >>> h6 {
-    font-size: 1.1em;
-  }
   .__hero-section-content {
     position: relative;
     z-index: 2;

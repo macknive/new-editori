@@ -63,6 +63,7 @@ export default {
     align-items: center;
     display: flex;
     justify-content: space-between;
+    padding: 0 60rem;
   }
   a {
     color: #191919;
@@ -119,7 +120,7 @@ export default {
     width: 48rem;
   }
   .avatar {
-    border: 2px solid #8A7968;
+    border: 1px solid #8A7968;
     font-size: 18rem;
   }
   .menu {
