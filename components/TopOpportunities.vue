@@ -1,5 +1,7 @@
 <template>
-  <div></div>
+  <div>
+    TOP OPPORTUNITIES COMPONENT
+  </div>
 </template>
 
 <script>

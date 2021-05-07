@@ -5,35 +5,44 @@
         Hone in on performance, focusing on <a href="#">page views</a> over the
         <a href="#">last week</a>.
       </h1>
-      <Glance class="glance" title="Site Stats" :figures="glance" size="68rem" />
+      <Glance
+        class="glance"
+        title="Site Stats"
+        :figures="glance"
+        size="68rem"
+      />
     </HeroSection>
     <BodySection>
       <PerformancePostCarousel
         :posts="pinned"
         :workspace="workspace"
         title="Pinned Posts"
-        v-if="pinned.length">
+        v-if="pinned.length"
+      >
       </PerformancePostCarousel>
 
       <PerformancePostCarousel
         :posts="decreasing"
         :workspace="workspace"
         title="Posts that are Declining"
-        v-if="decreasing.length">
+        v-if="decreasing.length"
+      >
       </PerformancePostCarousel>
 
       <PerformancePostCarousel
         :posts="increasing"
         :workspace="workspace"
         title="Posts that are Increasing"
-        v-if="increasing.length">
+        v-if="increasing.length"
+      >
       </PerformancePostCarousel>
 
       <PerformancePostCarousel
         :posts="stable"
         :workspace="workspace"
         title="Posts that are Stable"
-        v-if="stable.length">
+        v-if="stable.length"
+      >
       </PerformancePostCarousel>
     </BodySection>
   </v-app>
@@ -49,7 +58,6 @@ import Glance from '~/components/Glance.vue';
 import PerformancePostCarousel from '~/components/cardgroups/PerformancePostCarousel';
 import { PostTrend, PostPresentation } from '~/types/post-enums';
 
-
 export default {
   head() {
     return {
@@ -64,9 +72,7 @@ export default {
   },
   data() {
     return {
-      shapes: [
-        { type: 'circle', x: 674, y: -167, size: 792, color: '#fffefd' },
-      ]
+      shapes: [{ type: 'circle', x: 674, y: -167, size: 792, color: '#fffefd' }]
     };
   },
   computed: {
@@ -78,7 +84,7 @@ export default {
       return [
         { value: this.allDecreasing.length, caption: 'Declining posts' },
         { value: this.allIncreasing.length, caption: 'Increasing posts' },
-        { value: this.allStable.length, caption: 'Stable posts' },
+        { value: this.allStable.length, caption: 'Stable posts' }
       ];
     },
     pinned() {
@@ -102,16 +108,22 @@ export default {
       );
     },
     allDecreasing() {
-      return this.workspace.pages.filter(value => value.trend === PostTrend.DECREASING);
+      return this.workspace.pages.filter(
+        value => value.trend === PostTrend.DECREASING
+      );
     },
     allIncreasing() {
-      return this.workspace.pages.filter(value => value.trend === PostTrend.INCREASING);
+      return this.workspace.pages.filter(
+        value => value.trend === PostTrend.INCREASING
+      );
     },
     allStable() {
-      return this.workspace.pages.filter(value => value.trend === PostTrend.STABLE);
-    },
+      return this.workspace.pages.filter(
+        value => value.trend === PostTrend.STABLE
+      );
+    }
   },
-  mixins: [getWorkspaceBySlug],
+  mixins: [getWorkspaceBySlug]
 };
 </script>
 
@@ -140,7 +152,7 @@ h4 {
   width: 571rem;
 }
 .title > a {
-  color: #593D3B;
+  color: #593d3b;
   font-weight: 700;
   text-decoration: underline;
 }

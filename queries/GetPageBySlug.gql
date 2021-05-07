@@ -1,0 +1,13 @@
+query ListPages($postSlug: String!) {
+  pages(where: { slug: $postSlug }) {
+    created_at
+    updated_at
+    url
+    trend
+    slug
+    presentation
+    viewCountDelta
+    ranking
+    title
+  }
+}
