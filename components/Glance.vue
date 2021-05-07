@@ -2,7 +2,14 @@
   <div class="glance-root">
     <h2>{{ title }}</h2>
     <div class="figures">
-      <figure class="figure" v-for="(figure, index) in figures" :key="index">
+      <figure
+        class="figure"
+        v-for="(figure, index) in figures"
+        :key="index"
+        :style="{
+          'font-size': size
+        }"
+      >
         {{ figure.value }}
         <figcaption class="caption label">{{ figure.caption }}</figcaption>
       </figure>
