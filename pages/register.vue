@@ -169,7 +169,23 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+.step1 div > span,
+.step2 div > span,
+.step3 div > span,
+.step4 div > span {
+  font-family: 'Noto Sans';
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.step1 div > span,
+.step2 div > span,
+.step3 div > span,
+.step4 div > span {
+  padding-bottom: 10px;
+}
+
 .step-button {
   font-family: 'Montserrat';
   font-weight: 700 !important;

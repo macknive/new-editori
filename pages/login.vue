@@ -115,20 +115,20 @@ export default {
         ],
         password: [v => !!v || 'Password is required']
       }
-    }
+    };
   },
   methods: {
     validate() {
       if (!this.$refs.form.validate()) {
-        return false
+        return false;
       }
-      return true
+      return true;
     },
     errorMessage() {
-      console.log('Please fill the required form')
+      console.log('Please fill the required form');
     },
     async login() {
-      this.error = null
+      this.error = null;
       try {
         await this.$auth
           .loginWith('local', {
@@ -138,19 +138,23 @@ export default {
             }
           })
           .then(response => {
-            this.$apolloHelpers.onLogin(response.data.jwt)
-            console.log('Well done!')
-            console.log('User profile', response.data.user)
-            console.log('User token', response.data.jwt)
-          })
-        this.$router.push('/')
+            this.$apolloHelpers.onLogin(response.data.jwt);
+            console.log('Well done!');
+            console.log('User profile', response.data.user);
+            console.log('User token', response.data.jwt);
+          });
+        this.$router.push('/');
       } catch (e) {
-        this.error = e.response.data.message[0].messages[0].message
-        alert('Wrong account input')
+        this.error = e.response.data.message[0].messages[0].message;
+        alert('Wrong account input');
       }
     }
   }
-}
+};
 </script>
 
-<style></style>
+<style scoped>
+.v-btn.v-size--default {
+  font-size: unset;
+}
+</style>

@@ -1,42 +1,7 @@
-h1 {
-  font-size: 48px;
-}
-
-h3 {
-  font-size: 32px;
-}
-
-h4,
-.noto-serif,
-input[type='text'] {
-  font-family: 'Noto Sans';
-}
-
-h5 {
-  font-family: 'Noto Sans';
-  font-size: 16px;
-}
-
-.title {
-  font-family: 'Noto Sans';
-  font-size: 24px;
-  letter-spacing: 0.65px;
-  text-decoration: none;
-  color: #000000;
-}
-
-.step1 div > span,
-.step2 div > span,
-.step3 div > span,
-.step4 div > span {
-  font-family: 'Noto Sans';
-  font-weight: 700;
-  font-size: 18px;
-}
-
-.step1 div > span,
-.step2 div > span,
-.step3 div > span,
-.step4 div > span {
-  padding-bottom: 10px;
+@font-face {
+  font-family: 'noto-sans-light';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('~assets/fonts/NotoSans-Light.ttf') format('truetype');
 }
