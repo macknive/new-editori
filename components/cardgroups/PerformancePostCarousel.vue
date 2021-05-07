@@ -1,6 +1,6 @@
 <template>
   <v-sheet class="mx-auto mt-12">
-    <h4>{{ title }} ({{ posts.length }})</h4>
+    <h4 class="section-title">{{ title }} ({{ posts.length }})</h4>
     <v-slide-group class="pa-4" active-class="success" show-arrows>
       <v-slide-item v-for="post in posts" :key="post.id">
         <PerformancePostCard :post="post" :workspace="workspace">

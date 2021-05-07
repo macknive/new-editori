@@ -1,13 +1,5 @@
 <template>
-  <v-card class="ma-4" height="200" width="300">
-    <div align="right">
-      <font-awesome-icon
-        :icon="['fa', 'thumbtack']"
-        size="1x"
-        :class="pinned ? 'pinned' : 'unpinned'"
-        @click="togglePin()"
-      />
-    </div>
+  <v-card class="ma-4 rounded-lg elevation-6" height="200" width="300">
     <nuxt-link :to="postLink(workspace.slug, post.slug)">
       <v-container>
         <v-row no-gutters>
@@ -15,6 +7,14 @@
             <div :class="`status-${post.trend}`"></div>
           </v-col>
           <v-col>{{ post.trend }} in page views </v-col>
+          <v-col>
+            <font-awesome-icon
+                :icon="['fa', 'thumbtack']"
+                size="1x"
+                :class="pinned ? 'pinned' : 'unpinned'"
+                @click="togglePin()"
+              />
+          </v-col>
         </v-row>
         {{ post.title }}<br /><br /><br />
         <font-awesome-icon
@@ -74,5 +74,12 @@ a {
 
 .unpinned {
   opacity: 0.25;
+}
+.post-card {
+  box-shadow: 0 0 12px #0003;
+  border-radius: 12px;
+  width: 340px;
+  height: 285px;
+  padding: 20px;
 }
 </style>

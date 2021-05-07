@@ -1,23 +1,40 @@
 <template>
   <v-app>
-    <HeroSection>
-      <h1 class="title">Performance</h1>
+    <HeroSection :shapes="shapes">
+      <h1 class="title">
+        Hone in on performance, focusing on <a href="#">page views</a> over the
+        <a href="#">last week</a>.
+      </h1>
+      <Glance class="glance" title="Site Stats" :figures="glance" size="68rem" />
     </HeroSection>
     <BodySection>
-      <v-container class="container-1200">
-        <div align="right" class="text-gray">
-          Last updated {{ formattedDate }}
-        </div>
-        <h1 align="center">dashboard</h1>
-        <p align="center" class="my-6">
-          Hey {{ this.loggedInUser.display_name }}, view {{ workspace.name }}'s
-          performance focusing on
-          <nuxt-link to="/" class="text-brown">page views</nuxt-link> over the
-          <nuxt-link to="/" class="text-brown">last week</nuxt-link>
-        </p>
-        <h4 class="my-6">SITE OVERVIEW</h4>
-        <SiteOverview :posts="this.workspace.pages" :workspace="workspace" />
-      </v-container>
+      <PerformancePostCarousel
+        :posts="pinned"
+        :workspace="workspace"
+        title="Pinned Posts"
+        v-if="pinned.length">
+      </PerformancePostCarousel>
+
+      <PerformancePostCarousel
+        :posts="decreasing"
+        :workspace="workspace"
+        title="Posts that are Declining"
+        v-if="decreasing.length">
+      </PerformancePostCarousel>
+
+      <PerformancePostCarousel
+        :posts="increasing"
+        :workspace="workspace"
+        title="Posts that are Increasing"
+        v-if="increasing.length">
+      </PerformancePostCarousel>
+
+      <PerformancePostCarousel
+        :posts="stable"
+        :workspace="workspace"
+        title="Posts that are Stable"
+        v-if="stable.length">
+      </PerformancePostCarousel>
     </BodySection>
   </v-app>
 </template>
@@ -26,9 +43,12 @@
 import { mapGetters } from 'vuex';
 import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug';
 import moment from 'moment';
-import SiteOverview from '~/components/SiteOverview';
 import BodySection from '~/components/layout/BodySection';
 import HeroSection from '~/components/layout/HeroSection';
+import Glance from '~/components/Glance.vue';
+import PerformancePostCarousel from '~/components/cardgroups/PerformancePostCarousel';
+import { PostTrend, PostPresentation } from '~/types/post-enums';
+
 
 export default {
   head() {
@@ -37,23 +57,64 @@ export default {
     };
   },
   components: {
-    SiteOverview,
+    PerformancePostCarousel,
     BodySection,
-    HeroSection
+    HeroSection,
+    Glance
   },
+<<<<<<< HEAD
+=======
+  data() {
+    return {
+      shapes: [
+        { type: 'circle', x: 674, y: -167, size: 792, color: '#fffefd' },
+      ]
+    };
+  },
+>>>>>>> master
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser']),
     formattedDate() {
       return moment(this.workspace.updated_at).format('ll');
-    }
+    },
+    glance() {
+      return [
+        { value: this.allDecreasing.length, caption: 'Declining posts' },
+        { value: this.allIncreasing.length, caption: 'Increasing posts' },
+        { value: this.allStable.length, caption: 'Stable posts' },
+      ];
+    },
+    pinned() {
+      return this.workspace.pages.filter(
+        value => value.presentation === PostPresentation.PINNED
+      );
+    },
+    decreasing() {
+      return this.allDecreasing.filter(
+        value => value.presentation === PostPresentation.NORMAL
+      );
+    },
+    increasing() {
+      return this.allIncreasing.filter(
+        value => value.presentation === PostPresentation.NORMAL
+      );
+    },
+    stable() {
+      return this.allStable.filter(
+        value => value.presentation === PostPresentation.NORMAL
+      );
+    },
+    allDecreasing() {
+      return this.workspace.pages.filter(value => value.trend === PostTrend.DECREASING);
+    },
+    allIncreasing() {
+      return this.workspace.pages.filter(value => value.trend === PostTrend.INCREASING);
+    },
+    allStable() {
+      return this.workspace.pages.filter(value => value.trend === PostTrend.STABLE);
+    },
   },
   mixins: [getWorkspaceBySlug],
-  methods: {
-    async onLogout() {
-      await this.$apolloHelpers.onLogout();
-      await this.$auth.logout();
-    }
-  }
 };
 </script>
 
@@ -72,7 +133,22 @@ h4 {
   display: inline;
 }
 .title {
-  top: 200rem;
-  left: 100rem;
+  left: 48rem;
+  top: 278rem;
+  font-family: var(--body-font);
+  font-size: 46rem;
+  font-weight: 300;
+  text-transform: none;
+  line-height: 224.5%;
+  width: 571rem;
+}
+.title > a {
+  color: #593D3B;
+  font-weight: 700;
+  text-decoration: underline;
+}
+.glance {
+  left: 823rem;
+  top: 280rem;
 }
 </style>

@@ -79,7 +79,8 @@ export default {
       default: {
         httpEndpoint: process.env.BACKEND_URL
       }
-    }
+    },
+    errorHandler: '~/plugins/errorhandler.apollo.js'
   },
   axios: {
     baseURL: process.env.API_URL

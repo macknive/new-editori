@@ -2,9 +2,18 @@
   <div class="glance-root">
     <h2>{{ title }}</h2>
     <div class="figures">
+<<<<<<< HEAD
       <figure class="figure" v-for="(figure, index) in figures" :key="index">
         {{ figure.value }}
         <figcaption class="caption label">{{ figure.caption }}</figcaption>
+=======
+      <figure class="figure" v-for="(figure, index) in figures" :key="index"
+          :style="{
+            'font-size': size
+          }">
+        {{figure.value}}
+        <figcaption class="caption label">{{figure.caption}}</figcaption>
+>>>>>>> master
       </figure>
     </div>
   </div>
@@ -12,8 +21,13 @@
 
 <script>
 export default {
+<<<<<<< HEAD
   props: ['title', 'figures']
 };
+=======
+  props: [ 'title', 'figures', 'size' ]
+}
+>>>>>>> master
 </script>
 
 <style>
@@ -30,8 +44,8 @@ export default {
 }
 .figure {
   font-family: var(--display-font);
-  font-size: 40rem;
-  margin-right: 40rem;
+  font-size: var(--font-size, 40rem);
+  margin-right: var(--font-size, 40rem);
 }
 .caption {
   font-family: var(--body-font);
