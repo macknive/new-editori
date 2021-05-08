@@ -1,6 +1,5 @@
 import { mount } from '@cypress/vue';
 import Navbar from './Navbar.vue';
-`F1`;
 import loggedInUser from '~/cypress/fixtures/loggedInUser.json';
 import workspace from '~/cypress/fixtures/workspace.json';
 
