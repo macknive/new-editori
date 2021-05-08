@@ -18,6 +18,7 @@
               <v-col class="px-10">
                 <p class="mb-0 text-brown">EMAIL ADDRESS</p>
                 <v-text-field
+                  class="email"
                   v-model="email"
                   solo
                   :rules="rules.email"
@@ -27,6 +28,7 @@
               <v-col class="px-10 pb-0">
                 <p class="mb-0 text-brown">PASSWORD</p>
                 <v-text-field
+                  class="password"
                   v-model="password"
                   solo
                   :rules="rules.password"
@@ -35,7 +37,7 @@
                 ></v-text-field>
               </v-col>
               <v-col align="right" class="pt-0 pb-10">
-                <nuxt-link to="#" class="pr-10 text-brown"
+                <nuxt-link to="#" class="pr-10 text-brown forgot-password"
                   >Forgot Password?</nuxt-link
                 >
               </v-col>
@@ -45,7 +47,7 @@
                   block
                   @click="validate() ? login() : errorMessage()"
                   color="brown darken-3 white--text"
-                  class="py-7 step-button"
+                  class="py-7 step-button login-button"
                   >LOG IN</v-btn
                 >
               </v-col>
