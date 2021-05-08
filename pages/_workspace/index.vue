@@ -13,7 +13,6 @@
         <font-awesome-icon class="caret" icon="caret-down" />
       </div>
       <Glance class="glance" title="This Week" :figures="figures" />
-      <EditorButton class="editor-button" :messages="messages"></EditorButton>
     </HeroSection>
     <BodySection>
       <HomeCard title="Foo bar baz" subtitle="test">
@@ -63,9 +62,6 @@ export default {
         { value: '$700', caption: 'Total income' },
         { value: '$300', caption: 'Total spend' },
       ]
-    },
-    messages() {
-      return new Array(22);
     },
     now() {
       const month = pad(currentTime.getMonth() + 1, 2);
@@ -131,10 +127,6 @@ export default {
   .glance {
     left: 150rem;
     top: 493rem;
-  }
-  .editor-button {
-    left: 900rem;
-    top: 300rem;
   }
   .connect-google {
     margin-top: 30px;
