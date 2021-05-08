@@ -1,6 +1,8 @@
 <template>
   <HeroSection>
-    <h1 class="title">Content Calendar</h1>
+    <no-ssr>
+      <v-calendar class="calendar"></v-calendar>
+    </no-ssr>
   </HeroSection>
 </template>
 
@@ -17,8 +19,26 @@ export default {
 </script>
 
 <style scoped>
-  .title {
-    top: 200rem;
-    left: 100rem;
+  .calendar {
+    background: transparent;
+    border: 0;
+    left: 929rem;
+    top: 228rem;
+    width: 425rem;
+    height: 481rem;
+    font-family: var(--display-font);
+  }
+
+  .calendar >>> .vc-title {
+    text-transform: uppercase;
+  }
+
+  .calendar >>> .vc-day {
+    font-size: 28rem !important;
+  }
+
+  .calendar >>> .vc-day.is-not-in-month {
+    font-size: 16rem !important;
+    opacity: 0.4 !important;
   }
 </style>
