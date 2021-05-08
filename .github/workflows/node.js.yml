@@ -11,6 +11,12 @@ on:
 
 jobs:
   build:
+    env:
+      API_URL: https://dev.api.editori.io
+      BACKEND_URL: https://dev.api.editori.io/graphql
+      CLIENT_BASE_URL: http://localhost:3000
+      NODE_ENV: staging
+      NPM_CONFIG_PRODUCTION: false
 
     runs-on: ubuntu-latest
 
