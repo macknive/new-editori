@@ -53,7 +53,8 @@ export default {
   plugins: [
     '~/plugins/vue-fontawesome.js',
     '~/plugins/vuelidate.js',
-    '~/plugins/highcharts-vue.js'
+    '~/plugins/highcharts-vue.js',
+    { src: '~/plugins/v-calendar.js', ssr: false }
   ],
   /*
    ** Nuxt.js dev-modules
