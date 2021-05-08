@@ -74,6 +74,9 @@ export default {
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser'])
   },
+  created() {
+    this.$store.commit('navbar/setShouldShowWorkspace', false);
+  },
   components: {
     BasicInformation,
     Authenticated,

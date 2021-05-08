@@ -18,6 +18,9 @@ export default {
   computed: {
     ...mapGetters(['isAuthenticated', 'loggedInUser'])
   },
+  created() {
+    this.$store.commit('navbar/setShouldShowWorkspace', false);
+  },
   methods: {
     async onLogout() {
       await this.$apolloHelpers.onLogout();

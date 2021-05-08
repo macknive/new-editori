@@ -12,7 +12,10 @@ import HeroSection from '~/components/layout/HeroSection'
 export default {
   components: {
     BodySection, HeroSection
-  }
+  },
+  created() {
+    this.$store.commit('navbar/setShouldShowWorkspace', true);
+  },
 }
 </script>
 
