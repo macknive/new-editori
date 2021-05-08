@@ -70,6 +70,9 @@ export default {
     HeroSection,
     Glance
   },
+  created() {
+    this.$store.commit('navbar/setShouldShowWorkspace', true);
+  },
   data() {
     return {
       shapes: [{ type: 'circle', x: 674, y: -167, size: 792, color: '#fffefd' }]

@@ -28,6 +28,9 @@ export default {
     TopOpportunities,
     ArticleDetail
   },
+  created() {
+    this.$store.commit('navbar/setShouldShowWorkspace', true);
+  },
   data() {
     return {
       postSlug: this.$route.params.post,

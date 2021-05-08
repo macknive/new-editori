@@ -40,17 +40,8 @@
 
 <script>
 export default {
-  props: [ 'loggedInUser', 'workspace', 'userInitial' ],
+  props: [ 'loggedInUser', 'workspace', 'userInitial', 'shouldShowWorkspace' ],
   computed: {
-    shouldShowWorkspace() {
-      if (!this.workspace) {
-        return false;
-      }
-
-      // We do not show the workspace name on the workspace index page, as it
-      // is otherwise duplicated.
-      // return this.$route.path !== `/${this.workspace.slug}`;
-    },
     workspaceSlug() {
       return this.workspace ? this.workspace.slug : '';
     }

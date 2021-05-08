@@ -18,6 +18,9 @@ export default {
   components: {
     BodySection, HeroSection
   },
+  created() {
+    this.$store.commit('navbar/setShouldShowWorkspace', false);
+  },
   methods: {
     async onLogout() {
       await this.$apolloHelpers.onLogout();

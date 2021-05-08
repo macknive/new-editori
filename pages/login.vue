@@ -103,6 +103,9 @@
 <script>
 export default {
   middleware: 'guest',
+  created() {
+    this.$store.commit('navbar/setShouldShowWorkspace', false);
+  },
   data() {
     return {
       valid: true,

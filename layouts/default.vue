@@ -1,6 +1,8 @@
 <template>
   <div class="app-root">
-    <Navbar class="nav" :workspace="workspace" :loggedInUser="loggedInUser" :userInitial="userInitial" />
+    <Navbar class="nav" :workspace="workspace" :loggedInUser="loggedInUser"
+        :userInitial="userInitial"
+        :shouldShowWorkspace="shouldShowWorkspaceInNavbar" />
     <header class="header">
       <portal-target name="hero-section"></portal-target>
     </header>
@@ -40,6 +42,9 @@ export default {
 
       return `${names[0].charAt(0)}${names[lastIndex].charAt(0)}`;
     },
+    shouldShowWorkspaceInNavbar() {
+      return this.$store.getters['navbar/shouldShowWorkspace'];
+    }
   },
   methods: {
     async onLogout() {

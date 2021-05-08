@@ -46,6 +46,9 @@ function pad(value, totalDigits) {
 
 export default {
   components: { HeroSection, BodySection, EditorButton, Glance, HomeCard },
+  created() {
+    this.$store.commit('navbar/setShouldShowWorkspace', false);
+  },
   data() {
     return {
       shapes: [

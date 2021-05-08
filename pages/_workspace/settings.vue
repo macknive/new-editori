@@ -21,6 +21,9 @@ import SiteList from "~/components/settings/SiteList.vue"
 
 export default {
   components: { BodySection, HeroSection, SiteList },
+  created() {
+    this.$store.commit('navbar/setShouldShowWorkspace', true);
+  },
   async asyncData(ctx) {
     const response = await ctx.$axios.get('/connections/google', {
       params: {
