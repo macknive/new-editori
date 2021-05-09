@@ -1,6 +1,6 @@
 <template>
   <div>
-    TOP OPPORTUNITIES
+    TOP OPPORTUNITIES COMPONENT
   </div>
 </template>
 
