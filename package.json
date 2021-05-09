@@ -5,7 +5,6 @@
   "author": "Nikomi, LLC",
   "private": true,
   "scripts": {
-    "ci": "cypress run-ct && cypress run",
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
