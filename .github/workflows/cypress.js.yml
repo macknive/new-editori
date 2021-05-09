@@ -7,9 +7,9 @@ on:
     branches: [ master ]
 
 jobs:
-  cypress-run:
+  cypress-e2e-tests:
     runs-on: ubuntu-20.04
-    name: E2E on Chrome
+    name: E2E tests (Chrome)
     steps:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
@@ -18,9 +18,26 @@ jobs:
           start: yarn start
           wait-on: 'http://localhost:3000'
           browser: chrome
-          spec: |
-            cypress/integration/**/*.spec.js
-            components/**/*.spec.js
+          spec: cypress/integration/**/*.spec.js
+        env:
+          API_URL: https://dev.api.editori.io
+          BACKEND_URL: https://dev.api.editori.io/graphql
+          CLIENT_BASE_URL: http://localhost:3000
+          NODE_ENV: staging
+          NPM_CONFIG_PRODUCTION: false
+
+  cypress-component-tests:
+    runs-on: ubuntu-20.04
+    name: Component tests (Chrome)
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          build: yarn build
+          start: yarn start
+          wait-on: 'http://localhost:3000'
+          browser: chrome
+          spec: components/**/*.spec.js
         env:
           API_URL: https://dev.api.editori.io
           BACKEND_URL: https://dev.api.editori.io/graphql
