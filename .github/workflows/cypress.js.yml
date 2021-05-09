@@ -9,7 +9,7 @@ on:
 jobs:
   cypress-e2e-tests:
     runs-on: ubuntu-20.04
-    name: End-to-end tests (Chrome)
+    name: End-to-end tests / Chrome
     steps:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
@@ -18,7 +18,7 @@ jobs:
           start: yarn start
           wait-on: 'http://localhost:3000'
           browser: chrome
-          spec: 'cypress/integration/**/*.spec.js'
+          spec: cypress/integration/**/*.spec.js
         env:
           API_URL: https://dev.api.editori.io
           BACKEND_URL: https://dev.api.editori.io/graphql
@@ -28,7 +28,7 @@ jobs:
 
   cypress-component-tests:
     runs-on: ubuntu-20.04
-    name: Component tests (Chrome)
+    name: Component tests / Chrome
     steps:
       - uses: actions/checkout@v2
       - uses: cypress-io/github-action@v2
@@ -37,7 +37,7 @@ jobs:
           start: yarn start
           wait-on: 'http://localhost:3000'
           browser: chrome
-          spec: 'components/**/*.spec.js'
+          spec: cypress/components/**/*.spec.js
         env:
           API_URL: https://dev.api.editori.io
           BACKEND_URL: https://dev.api.editori.io/graphql
