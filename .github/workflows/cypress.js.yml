@@ -1,0 +1,26 @@
+name: E2E on Chrome
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-20.04
+    name: E2E on Chrome
+    steps:
+      - uses: actions/checkout@v2
+      - uses: cypress-io/github-action@v2
+        with:
+          browser: chrome
+          spec: |
+            cypress/integration/**/*.spec.js
+            components/**/*.spec.js
+        env:
+          API_URL: https://dev.api.editori.io
+          BACKEND_URL: https://dev.api.editori.io/graphql
+          CLIENT_BASE_URL: http://localhost:3000
+          NODE_ENV: staging
+          NPM_CONFIG_PRODUCTION: false
