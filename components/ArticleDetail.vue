@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     ARTICLE DETAIL COMPONENT
     <v-btn-toggle v-model="toggle_exclusive" group mandatory class="mb-6">
       <v-btn @click="toggle = true">POST AT A GLANCE</v-btn>
@@ -9,14 +9,14 @@
       <Glance class="glance" title="This Week" :figures="figures" />
     </div>
     <div v-if="!toggle">
-      <v-row>
-        <v-col> <RankingStable /></v-col>
-        <v-col><NotedChanges /></v-col>
-      </v-row>
+      <vs-row>
+        <vs-col> <RankingStable /></vs-col>
+        <vs-col><NotedChanges /></vs-col>
+      </vs-row>
     </div>
     <br /><br /><br /><br />
     <QueryDetails />
-  </v-app>
+  </div>
 </template>
 
 <script>

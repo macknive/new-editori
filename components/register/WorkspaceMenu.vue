@@ -1,13 +1,13 @@
 <template>
   <v-app>
     <v-container class="container-700">
-      <v-row class="d-flex flex-column">
+      <vs-row class="d-flex flex-column">
         <v-col align="center" class="mb-12">
           <h1>How can we help you?</h1>
           <h4>The best relationships start with at least this much...</h4>
         </v-col>
-      </v-row>
-      <v-row>
+      </vs-row>
+      <vs-row>
         <v-col>
           <a @click="proceedToJoin()"
             ><div class="workspace-border pa-12 mb-3" align="center">
@@ -30,7 +30,7 @@
           ></a>
           <p align="center" class="text-brown">Create New Workspace</p>
         </v-col>
-      </v-row>
+      </vs-row>
     </v-container>
   </v-app>
 </template>
@@ -40,22 +40,22 @@ export default {
   data() {
     return {
       workspaceChoiceStatus: ''
-    }
+    };
   },
   methods: {
     proceedToJoin(stepThree) {
-      this.workspaceChoiceStatus = 'join'
-      this.$emit('thisPickWorkspace', this.workspaceChoiceStatus)
+      this.workspaceChoiceStatus = 'join';
+      this.$emit('thisPickWorkspace', this.workspaceChoiceStatus);
     },
     proceedToCreate(stepFour) {
-      this.workspaceChoiceStatus = 'create'
-      this.$emit('thisPickWorkspace', this.workspaceChoiceStatus)
+      this.workspaceChoiceStatus = 'create';
+      this.$emit('thisPickWorkspace', this.workspaceChoiceStatus);
     },
     errorMessage() {
-      console.log('error')
+      console.log('error');
     }
   }
-}
+};
 </script>
 
 <style></style>

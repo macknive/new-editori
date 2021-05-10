@@ -54,6 +54,7 @@ export default {
     '~/plugins/vue-fontawesome.js',
     '~/plugins/vuelidate.js',
     '~/plugins/highcharts-vue.js',
+    '~plugins/vuesax.js', 
     { src: '~/plugins/v-calendar.js', ssr: false }
   ],
   /*

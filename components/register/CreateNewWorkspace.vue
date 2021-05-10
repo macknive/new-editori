@@ -40,7 +40,7 @@
       <v-card class="pa-1 mb-8 pb-3" v-if="selected">
         <v-container>
           <p class="text-brown">Monthly Subscription</p>
-          <v-row>
+          <vs-row>
             <v-col class="pb-0 mb-0">
               <span class="noto-serif text-gray">
                 {{ selected }} collaborators @ ${{ basePrice }} per month
@@ -49,17 +49,17 @@
             <v-col class="pb-0 mb-0" align="right">
               <span class="noto-serif text-gray">3-day free trial</span>
             </v-col>
-          </v-row>
-          <v-row>
+          </vs-row>
+          <vs-row>
             <v-col>
               <h4 class="noto-serif">${{ totalPrice }} per month</h4>
             </v-col>
             <v-col align="right">
               <h4 class="noto-serif">$0 due today</h4>
             </v-col>
-          </v-row>
+          </vs-row>
           <div v-if="visible" class="pb-3">
-            <v-row>
+            <vs-row>
               <v-col class="col-6" align="center">
                 <v-btn
                   @click="visible = !visible"
@@ -88,11 +88,11 @@
                   size="4x"
                 />
               </v-col>
-            </v-row>
+            </vs-row>
           </div>
 
           <div v-if="!visible" class="pb-3">
-            <v-row>
+            <vs-row>
               <v-col>
                 <v-text-field
                   class="payment-textfield"
@@ -116,7 +116,7 @@
                   >SUBSCRIBE</v-btn
                 >
               </v-col>
-            </v-row>
+            </vs-row>
             <a @click="visible = !visible" class="text-brown pb-3"
               >Other payment methods</a
             >

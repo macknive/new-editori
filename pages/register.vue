@@ -2,7 +2,7 @@
   <v-app>
     <v-stepper v-model="step" vertical>
       <v-container class="register-container">
-        <v-row>
+        <vs-row>
           <v-col class="col-1 step-col">
             <div class="step1-bg"></div>
             <div class="step2-bg"></div>
@@ -53,7 +53,7 @@
               <Success />
             </v-stepper-content>
           </v-col>
-        </v-row>
+        </vs-row>
       </v-container>
     </v-stepper>
   </v-app>

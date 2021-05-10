@@ -1,6 +1,6 @@
 <template>
   <v-container class="container-700">
-    <v-row class="d-flex flex-column">
+    <vs-row class="d-flex flex-column">
       <v-col align="center">
         <h1>Tell Us About You...</h1>
         <h4>The best relationships start with at least this much...</h4>
@@ -76,7 +76,7 @@
           >
         </p>
       </v-col>
-    </v-row>
+    </vs-row>
   </v-container>
 </template>
 

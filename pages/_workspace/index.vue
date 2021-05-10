@@ -2,11 +2,11 @@
   <div>
     <HeroSection :shapes="shapes">
       <nuxt-link :to="`/${workspace.slug}/settings`" class="workspace-name">
-        <h1>{{workspace.name}}</h1>
+        <h1>{{ workspace.name }}</h1>
         <font-awesome-icon class="workspace-settings" icon="cog" />
       </nuxt-link>
       <time class="date" :datetime="`${now.month}-${now.date}`">
-        {{now.month}}.{{now.date}}
+        {{ now.month }}.{{ now.date }}
       </time>
       <div class="workspace-switcher label" role="listbox" tabindex="0">
         <span>Switch workspace</span>
@@ -51,17 +51,17 @@ export default {
   data() {
     return {
       shapes: [
-        { type: 'circle', x: -141, y: -281, size: 724, color: '#fffefd' },
+        { type: 'circle', x: -141, y: -281, size: 724, color: '#fffefd' }
       ]
-    }
+    };
   },
   computed: {
     figures() {
       return [
         { value: '40k', caption: 'Total traffic' },
         { value: '$700', caption: 'Total income' },
-        { value: '$300', caption: 'Total spend' },
-      ]
+        { value: '$300', caption: 'Total spend' }
+      ];
     },
     now() {
       const month = pad(currentTime.getMonth() + 1, 2);
@@ -70,65 +70,65 @@ export default {
       return {
         month,
         date
-      }
-    },
+      };
+    }
   },
-  mixins: [getWorkspaceBySlug],
-}
+  mixins: [getWorkspaceBySlug]
+};
 </script>
 
 <style scoped>
-  .date {
-    color: #f5eee8aa;
-    font-size: 144rem;
-    font-weight: 900;
-    font-family: var(--display-font);
-    left: 0rem;
-    top: 150rem;
-    z-index: 1;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  .workspace-name {
-    color: inherit;
-    left: 100rem;
-    top: 240rem;
-    z-index: 2;
-  }
-  .workspace-name h1 {
-    display: inline-block;
-    font-size: 70rem;
-    font-weight: 700;
-    text-transform: uppercase;
-  }
-  .workspace-settings {
-    width: 24rem;
-    height: 24rem;
-    vertical-align: top;
-    opacity: 0.33;
-    transition: opacity 300ms ease;
-  }
-  .workspace-name:hover .workspace-settings {
-    opacity: 1;
-  }
-  .workspace-switcher {
-    cursor: pointer;
-    font-size: 18rem;
-    left: 100rem;
-    top: 360rem;
-    text-transform: uppercase;
-    outline-offset: 10rem;
-  }
-  .workspace-switcher .caret {
-    height: 18rem; 
-  }
-  .glance {
-    left: 150rem;
-    top: 493rem;
-  }
-  .connect-google {
-    margin-top: 30px;
-  }
+.date {
+  color: #f5eee8aa;
+  font-size: 144rem;
+  font-weight: 900;
+  font-family: var(--display-font);
+  left: 0rem;
+  top: 150rem;
+  z-index: 1;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.workspace-name {
+  color: inherit;
+  left: 100rem;
+  top: 240rem;
+  z-index: 2;
+}
+.workspace-name h1 {
+  display: inline-block;
+  font-size: 70rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.workspace-settings {
+  width: 24rem;
+  height: 24rem;
+  vertical-align: top;
+  opacity: 0.33;
+  transition: opacity 300ms ease;
+}
+.workspace-name:hover .workspace-settings {
+  opacity: 1;
+}
+.workspace-switcher {
+  cursor: pointer;
+  font-size: 18rem;
+  left: 100rem;
+  top: 360rem;
+  text-transform: uppercase;
+  outline-offset: 10rem;
+}
+.workspace-switcher .caret {
+  height: 18rem;
+}
+.glance {
+  left: 150rem;
+  top: 493rem;
+}
+.connect-google {
+  margin-top: 30px;
+}
 </style>
