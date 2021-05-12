@@ -6,6 +6,28 @@ body {
   overflow-x: hidden;
 }
 
+.container-row,
+.container-column {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container-row {
+  flex-direction: row;
+}
+
+.container-column {
+  flex-direction: column;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.nowrap {
+  flex-wrap: nowrap;
+}
+
 .round-corners {
   border-radius: 50%;
   border: 1px solid #593d3b;

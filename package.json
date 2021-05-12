@@ -13,6 +13,7 @@
     "heroku-postbuild": "nuxt build"
   },
   "dependencies": {
+    "@egjs/vue-flicking": "^3.7.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.28",
     "@fortawesome/free-brands-svg-icons": "^5.15.1",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",

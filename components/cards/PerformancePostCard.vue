@@ -1,32 +1,39 @@
 <template>
   <v-card class="ma-4 rounded-lg elevation-6" height="200" width="300">
-    <nuxt-link :to="postLink(workspace.slug, post.slug)">
-      <v-container>
-        <vs-row vs-type="flex">
-          <vs-col vs-w="1">
-            <div :class="`status-${post.trend}`"></div>
-          </vs-col>
-          <vs-col>{{ post.trend }} in page views </vs-col>
-          <vs-col>
+    <div class="container-row nowrap">
+      <div>
+        <nuxt-link :to="postLink(workspace.slug, post.slug)">
+          <div class="container-column">
+            <div class="container-row">
+              <div class="flex-grow">
+                <div :class="`status-${post.trend}`"></div>
+              </div>
+              <div class="flex-grow">{{ post.trend }} in page views</div>
+            </div>
+
+            {{ post.title }}<br /><br /><br />
             <font-awesome-icon
-              :icon="['fa', 'thumbtack']"
+              :icon="['fa', 'lightbulb']"
               size="1x"
-              :class="pinned ? 'pinned' : 'unpinned'"
-              @click="togglePin()"
+              class="color-grey"
             />
-          </vs-col>
-        </vs-row>
-        {{ post.title }}<br /><br /><br />
+            <span class="color-grey"
+              >This article does not show up on the first page for any
+              keyword</span
+            >
+          </div>
+        </nuxt-link>
+      </div>
+
+      <div class="flex-grow">
         <font-awesome-icon
-          :icon="['fa', 'lightbulb']"
+          :icon="['fa', 'thumbtack']"
           size="1x"
-          class="color-grey"
+          :class="pinned ? 'pinned' : 'unpinned'"
+          @click="togglePin()"
         />
-        <span class="color-grey"
-          >This article does not show up on the first page for any keyword</span
-        >
-      </v-container>
-    </nuxt-link>
+      </div>
+    </div>
   </v-card>
 </template>
 

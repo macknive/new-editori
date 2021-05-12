@@ -9,10 +9,10 @@
       <Glance class="glance" title="This Week" :figures="figures" />
     </div>
     <div v-if="!toggle">
-      <vs-row>
-        <vs-col> <RankingStable /></vs-col>
-        <vs-col><NotedChanges /></vs-col>
-      </vs-row>
+      <div class="container-row">
+        <div class="flex-grow"><RankingStable /></div>
+        <div class="flex-grow"><NotedChanges /></div>
+      </div>
     </div>
     <br /><br /><br /><br />
     <QueryDetails />
