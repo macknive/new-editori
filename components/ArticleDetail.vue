@@ -1,10 +1,14 @@
 <template>
   <div>
-    ARTICLE DETAIL COMPONENT
-    <v-btn-toggle v-model="toggle_exclusive" group mandatory class="mb-6">
-      <v-btn @click="toggle = true">POST AT A GLANCE</v-btn>
-      <v-btn @click="toggle = false">RANKING & STABLE</v-btn>
-    </v-btn-toggle>
+    ARTICLE DETAIL COMPONENT<br /><br />
+
+    <vs-button :color="color" type="flat" @click="toggle = true"
+      >POST AT A GLANCE</vs-button
+    >
+    <vs-button :color="color" type="flat" @click="toggle = false"
+      >RANKING & STABLE</vs-button
+    >
+    <br /><br />
     <div v-if="toggle">
       <Glance class="glance" title="This Week" :figures="figures" />
     </div>
@@ -34,6 +38,7 @@ export default {
   },
   data() {
     return {
+      color: '#593d3b',
       toggle_exclusive: undefined,
       toggle: true
     };
