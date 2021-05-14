@@ -2,15 +2,16 @@
   <v-app>
     <v-stepper v-model="step" vertical>
       <v-container class="register-container">
-        <vs-row>
-          <v-col class="col-1 step-col">
+        <div>
+          <div class="col-1 step-col">
             <div class="step1-bg"></div>
             <div class="step2-bg"></div>
             <div class="step3-bg"></div>
             <div class="step4-bg"></div>
             <div v-if="step == 1" class="step1">
               <v-stepper-step :complete="step > 1" step="Step 1">
-              </v-stepper-step>
+              </v-stepper-step
+              >2
             </div>
             <div v-if="step == 2" class="step2">
               <v-stepper-step :complete="step > 2" step="Step 2">
@@ -28,8 +29,8 @@
               <v-stepper-step :complete="step > 5" step="Step 4">
               </v-stepper-step>
             </div>
-          </v-col>
-          <v-col class="pt-12">
+          </div>
+          <div class="pt-12">
             <v-stepper-content step="1" class="pt-0 step basicinformation">
               <div v-if="!isAuthenticated">
                 <BasicInformation v-on:thisUser="register($event)" />
@@ -52,8 +53,8 @@
             <v-stepper-content step="5" class="pt-0 step">
               <Success />
             </v-stepper-content>
-          </v-col>
-        </vs-row>
+          </div>
+        </div>
       </v-container>
     </v-stepper>
   </v-app>

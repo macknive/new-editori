@@ -1,97 +1,96 @@
 <template>
-  <v-app>
-    <vs-row>
-      <vs-col class="pa-0">
-        <div>
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <div align="center">
-              <img src="~/assets/editori-logo.png" alt="" class="editori" />
-            </div>
-            <h1 align="center" class="mt-12 mb-12">
-              WELCOME TO EDITORI
-            </h1>
-            <vs-col class="px-10">
-              <p class="mb-0 text-brown">EMAIL ADDRESS</p>
-              <v-text-field
-                class="email"
-                v-model="email"
-                solo
-                :rules="rules.email"
-                hide-details="auto"
-              ></v-text-field>
-            </vs-col>
-            <vs-col class="px-10 pb-0">
-              <p class="mb-0 text-brown">PASSWORD</p>
-              <v-text-field
-                class="password"
-                v-model="password"
-                solo
-                :rules="rules.password"
-                :type="show ? 'text' : 'password'"
-                name="input-10-1"
-              ></v-text-field>
-            </vs-col>
-            <vs-col align="right" class="pt-0 pb-10">
-              <nuxt-link to="#" class="pr-10 text-brown forgot-password"
-                >Forgot Password?</nuxt-link
-              >
-            </vs-col>
-            <vs-col class="px-10">
-              <v-btn
-                :disabled="!valid"
-                block
-                @click="validate() ? login() : errorMessage()"
-                color="brown darken-3 white--text"
-                class="py-7 step-button login-button"
-                >LOG IN</v-btn
-              >
-            </vs-col>
-            <vs-col align="right" class="pt-0 pb-10">
-              Don't have an account?
-              <nuxt-link to="/register" class="pr-10 text-brown"
-                >Sign Up</nuxt-link
-              >
-            </vs-col>
-            <vs-col align="center">
-              <p class="text-brown">CONTINUE WITH</p>
-              <div class="d-flex justify-center">
-                <div class="px-5">
-                  <nuxt-link to="#"
-                    ><div class="round-corners">
-                      <font-awesome-icon
-                        :icon="['fab', 'facebook']"
-                        class="icon alt text-brown"
-                        size="2x"
-                      /></div
-                  ></nuxt-link>
-                </div>
-                <div class="px-5">
-                  <nuxt-link to="#"
-                    ><div class="round-corners">
-                      <font-awesome-icon
-                        :icon="['fab', 'google']"
-                        class="icon alt text-brown"
-                        size="2x"
-                      /></div
-                  ></nuxt-link>
-                </div>
-                <div class="px-5">
-                  <nuxt-link to="#"
-                    ><div class="round-corners">
-                      <font-awesome-icon
-                        :icon="['fab', 'apple']"
-                        class="icon alt text-brown"
-                        size="2x"
-                      /></div
-                  ></nuxt-link>
-                </div>
-              </div>
-            </vs-col>
-          </v-form>
+  <div class="container-1200">
+    <v-form ref="form" v-model="valid" lazy-validation>
+      <div align="center">
+        <img src="~/assets/editori-logo.png" alt="" class="editori" />
+      </div>
+      <br />
+      <h1 align="center" class="mt-12 mb-12">
+        WELCOME TO EDITORI
+      </h1>
+      <div>
+        <br />
+        <p class="mb-0 text-brown">EMAIL ADDRESS</p>
+        <vs-input
+          class="email"
+          v-model="email"
+          solo
+          :rules="rules.email"
+          hide-details="auto"
+        ></vs-input>
+      </div>
+      <br />
+      <div>
+        <p class="mb-0 text-brown">PASSWORD</p>
+        <vs-input
+          class="password"
+          v-model="password"
+          solo
+          :rules="rules.password"
+          :type="show ? 'text' : 'password'"
+          name="input-10-1"
+        ></vs-input>
+      </div>
+      <br />
+      <div align="right">
+        <nuxt-link to="#" class="pr-10 text-brown forgot-password"
+          >Forgot Password?</nuxt-link
+        ><br /><br />
+      </div>
+      <div>
+        <vs-button
+          :color="color"
+          :disabled="!valid"
+          block
+          @click="validate() ? login() : errorMessage()"
+          class="step-button width-100"
+          >LOG IN</vs-button
+        >
+      </div>
+      <br />
+      <div align="right">
+        Don't have an account?
+        <nuxt-link to="/register" class="pr-10 text-brown">Sign Up</nuxt-link>
+      </div>
+      <div align="center">
+        <br />
+        <p class="text-brown">CONTINUE WITH</p>
+        <br />
+        <div class="container-row">
+          <div class="flex-grow">
+            <nuxt-link to="#"
+              ><div class="round-corners">
+                <font-awesome-icon
+                  :icon="['fab', 'facebook']"
+                  class="icon alt text-brown"
+                  size="2x"
+                /></div
+            ></nuxt-link>
+          </div>
+          <div class="flex-grow">
+            <nuxt-link to="#"
+              ><div class="round-corners">
+                <font-awesome-icon
+                  :icon="['fab', 'google']"
+                  class="icon alt text-brown"
+                  size="2x"
+                /></div
+            ></nuxt-link>
+          </div>
+          <div class="flex-grow">
+            <nuxt-link to="#"
+              ><div class="round-corners">
+                <font-awesome-icon
+                  :icon="['fab', 'apple']"
+                  class="icon alt text-brown"
+                  size="2x"
+                /></div
+            ></nuxt-link>
+          </div>
         </div>
-      </vs-col>
-    </vs-row>
-  </v-app>
+      </div>
+    </v-form>
+  </div>
 </template>
 
 <script>
@@ -103,6 +102,7 @@ export default {
   data() {
     return {
       valid: true,
+      color: '#593d3b',
       email: '',
       password: '',
       error: null,
@@ -152,8 +152,12 @@ export default {
 };
 </script>
 
-<style scoped>
-.v-btn.v-size--default {
-  font-size: unset;
+<style>
+.vs-con-input-label {
+  width: 100%;
+}
+
+.vs-inputx {
+  height: 40px;
 }
 </style>

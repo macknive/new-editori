@@ -4,14 +4,14 @@
       <h1>Pending Invitations</h1>
       <h4>You have been invited to the following workspaces</h4>
     </div>
-    <vs-row class="d-flex flex-column pt-12">
-      <v-col>
-        <vs-row v-for="workspace in workspaces" :key="workspace.id">
-          <v-col>
+    <div class="d-flex flex-column pt-12">
+      <div>
+        <div v-for="workspace in workspaces" :key="workspace.id">
+          <div>
             <h3>{{ workspace.name }}</h3>
             <p>{{ workspaceOwner }}</p>
-          </v-col>
-          <v-col align="right" class="pt-8">
+          </div>
+          <div align="right" class="pt-8">
             <a
               ><font-awesome-icon
                 class="text-brown trashbtn mr-3"
@@ -26,10 +26,10 @@
                 size="2x"
               ></font-awesome-icon
             ></a>
-          </v-col>
-        </vs-row>
-      </v-col>
-    </vs-row>
+          </div>
+        </div>
+      </div>
+    </div>
     <div class="btn-end">
       <v-btn
         block
