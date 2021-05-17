@@ -1,5 +1,5 @@
 <template>
-  <v-container class="container-700">
+  <div class="container-700">
     <div align="center">
       <h1>Tell Us About You...</h1>
       <h4>The best relationships start with at least this much...</h4>
@@ -7,64 +7,60 @@
     <div class="mt-5">
       <p class="text-brown mb-0">USERNAME</p>
       <v-form ref="form" v-model="valid" lazy-validation>
-        <v-text-field
+        <vs-input
           v-model="newUser.username"
           solo
           :rules="rules.username"
           hide-details="auto"
           class="pb-3"
-        ></v-text-field>
+        ></vs-input>
         <p class="text-brown mb-0">EMAIL ADDRESS</p>
-        <v-text-field
+        <vs-input
           v-model="newUser.email"
           solo
           :rules="rules.email"
           hide-details="auto"
           class="pb-3"
-        ></v-text-field>
+        ></vs-input>
         <p class="text-brown mb-0">NAME</p>
 
-        <v-text-field
+        <vs-input
           v-model="newUser.displayName"
           solo
           :rules="rules.username"
           hide-details="auto"
           class="pb-3"
-        ></v-text-field>
+        ></vs-input>
         <p class="text-brown mb-0">PASSWORD</p>
-        <v-text-field
+        <vs-input
           v-model="newUser.password"
           solo
           :rules="rules.password"
           :type="show ? 'text' : 'password'"
           name="input-10-1"
-        ></v-text-field>
+        ></vs-input>
         <p class="text-brown mb-0">CONFIRM PASSWORD</p>
-        <v-text-field
+        <vs-input
           v-model="newUser.confirmPassword"
           solo
           :rules="rules.confirmPassword.concat(passwordConfirmationRule)"
           :type="show ? 'text' : 'password'"
           name="input-10-1"
-        ></v-text-field>
+        ></vs-input>
         <vs-checkbox
           class="checkbox"
           v-model="newUser.checkbox"
           :rules="rules.termsOfService"
         >
-          <template v-slot:label
-            >I accept the<a class="ml-1 text-brown"
-              >Terms of Service</a
-            ></template
-          >
+          I accept the <a class="ml-1 text-brown">Terms of Service</a>
         </vs-checkbox>
-        <vs-btn
+        <vs-button
           :disabled="!valid"
           block
           @click="validate() ? addUser() : errorMessage()"
-          color="brown darken-3 white--text"
-          class="py-7 step-button"
-          >NEXT</vs-btn
+          :color="color"
+          class="step-button"
+          >NEXT</vs-button
         >
       </v-form>
       <p align="right">
@@ -73,13 +69,14 @@
         >
       </p>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
 export default {
   data() {
     return {
+      color: '#593d3b',
       valid: true,
       error: null,
       show: false,

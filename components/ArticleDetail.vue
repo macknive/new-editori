@@ -56,7 +56,7 @@ export default {
 </script>
 
 <style>
-.v-btn.v-size--default {
+.vs-button.v-size--default {
   font-size: unset;
 }
 .v-application .caption {

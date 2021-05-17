@@ -56,6 +56,7 @@ export default {
     '~/plugins/highcharts-vue.js',
     '~plugins/vuesax.js', 
     '~plugins/vueflicking.js', 
+    { src: "~/plugins/vue-stepper", mode: "client" }, 
     { src: '~/plugins/v-calendar.js', ssr: false }
   ],
   /*

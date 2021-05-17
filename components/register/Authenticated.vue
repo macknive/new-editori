@@ -10,13 +10,13 @@
       <v-container class="workspace-container">
         <div class="spacer"></div>
         <div class="btn-end mb-12">
-          <v-btn
+          <vs-button
             @click="proceed()"
             type="submit"
             block
-            color="brown darken-3 white--text"
+            :color="color"
             class="py-7 step-button"
-            >NEXT</v-btn
+            >NEXT</vs-button
           >
         </div>
       </v-container>
@@ -26,6 +26,7 @@
 
 <script>
 export default {
+  props: ['color'],
   data() {
     return {
       stepNumber: ''

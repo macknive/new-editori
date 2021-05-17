@@ -1,8 +1,8 @@
-export const state = {
+export const state = () => ({
   navbar: {
     shouldShowWorkspace: false
   }
-};
+})
 
 export const getters = {
   shouldShowWorkspace(state) {
