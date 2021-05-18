@@ -28,7 +28,7 @@
       <label class="form__label">PASSWORD</label>
       <vs-input
         type="password"
-        class="form__input"
+        class="form__input password"
         v-model.trim="$v.password.$model"
         placeholder="Disabled"
       />
