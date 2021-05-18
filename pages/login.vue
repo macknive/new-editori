@@ -16,7 +16,7 @@
       />
     </div>
     <div class="error" v-if="!$v.email.required">Email is required</div>
-    <div class="error v-messages" v-if="!$v.email.email">
+    <div class="error email v-messages" v-if="!$v.email.email">
       E-mail must be valid
     </div>
 
