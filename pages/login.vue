@@ -11,31 +11,32 @@
       <label class="form__label">EMAIL ADDRESS</label>
       <vs-input
         type="email"
-        class="form__input email"
+        class="form__input email v-messages"
         v-model.trim="$v.email.$model"
       />
-    </div>
-    <div class="error" v-if="!$v.email.required">Email is required</div>
-    <div class="error email v-messages" v-if="!$v.email.email">
-      E-mail must be valid
-    </div>
 
-    <br />
-    <div
-      class="form-group"
-      :class="{ 'form-group--error': $v.password.$error }"
-    >
-      <label class="form__label">PASSWORD</label>
-      <vs-input
-        type="password"
-        class="form__input password"
-        v-model.trim="$v.password.$model"
-        placeholder="Disabled"
-      />
-    </div>
-    <div class="error" v-if="!$v.password.required">password is required</div>
+      <div class="error" v-if="!$v.email.required">Email is required</div>
+      <div class="error error-message" v-if="!$v.email.email">
+        E-mail must be valid
+      </div>
 
+      <br />
+      <div
+        class="form-group"
+        :class="{ 'form-group--error': $v.password.$error }"
+      >
+        <label class="form__label">PASSWORD</label>
+        <vs-input
+          type="password"
+          class="form__input password"
+          v-model.trim="$v.password.$model"
+          placeholder="Disabled"
+        />
+      </div>
+      <div class="error" v-if="!$v.password.required">password is required</div>
+    </div>
     <br />
+
     <div align="right">
       <nuxt-link to="#" class="pr-10 text-brown forgot-password"
         >Forgot Password?</nuxt-link

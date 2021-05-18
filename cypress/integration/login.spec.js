@@ -26,7 +26,7 @@ describe('Login', () => {
   it('should reject malformed email address', () => {
     cy.visit('/login');
     cy.get('.email input').type('testemailcom');
-    cy.get('.email .v-messages').contains('E-mail must be valid');
+    cy.get('.error-message').contains('E-mail must be valid');
   });
 
   // TODO: What happens when you log in with invalid credentials
