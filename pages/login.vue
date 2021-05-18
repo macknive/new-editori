@@ -11,7 +11,7 @@
       <label class="form__label">EMAIL ADDRESS</label>
       <vs-input
         type="email"
-        class="form__input"
+        class="form__input email"
         v-model.trim="$v.email.$model"
       />
     </div>
