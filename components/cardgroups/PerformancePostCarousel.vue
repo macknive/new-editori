@@ -1,13 +1,16 @@
 <template>
-  <v-sheet class="mx-auto mt-12">
-    <h4 class="section-title">{{ title }} ({{ posts.length }})</h4>
-    <v-slide-group class="pa-4" active-class="success" show-arrows>
-      <v-slide-item v-for="post in posts" :key="post.id">
-        <PerformancePostCard :post="post" :workspace="workspace">
-        </PerformancePostCard>
-      </v-slide-item>
-    </v-slide-group>
-  </v-sheet>
+  <div>
+    <div>
+      <h4 class="section-title">{{ title }} ({{ posts.length }})</h4>
+      <flicking :options="{ gap: 10, moveType: 'freeScroll' }">
+        <div v-for="post in posts" :key="post.id">
+          <PerformancePostCard :post="post" :workspace="workspace">
+          </PerformancePostCard>
+        </div>
+      </flicking>
+    </div>
+    <br />
+  </div>
 </template>
 
 <script>

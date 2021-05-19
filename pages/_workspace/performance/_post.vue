@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <HeroSection>
       <h1 class="title relative" align="center">{{ page.title }}</h1>
       <div class="header-body">
@@ -12,7 +12,7 @@
     <BodySection>
       <ArticleDetail />
     </BodySection>
-  </v-app>
+  </div>
 </template>
 
 <script>

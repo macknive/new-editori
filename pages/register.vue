@@ -1,62 +1,61 @@
 <template>
-  <v-app>
-    <v-stepper v-model="step" vertical>
-      <v-container class="register-container">
-        <v-row>
-          <v-col class="col-1 step-col">
-            <div class="step1-bg"></div>
-            <div class="step2-bg"></div>
-            <div class="step3-bg"></div>
-            <div class="step4-bg"></div>
-            <div v-if="step == 1" class="step1">
-              <v-stepper-step :complete="step > 1" step="Step 1">
-              </v-stepper-step>
+  <v-stepper v-model="step" vertical>
+    <v-container class="register-container">
+      <div>
+        <div class="col-1 step-col">
+          <div class="step1-bg"></div>
+          <div class="step2-bg"></div>
+          <div class="step3-bg"></div>
+          <div class="step4-bg"></div>
+          <div v-if="step == 1" class="step1">
+            <v-stepper-step :complete="step > 1" step="Step 1"> </v-stepper-step
+            >2
+          </div>
+          <div v-if="step == 2" class="step2">
+            <v-stepper-step :complete="step > 2" step="Step 2">
+            </v-stepper-step>
+          </div>
+          <div v-if="step == 3" class="step3">
+            <v-stepper-step :complete="step > 3" step="Step 3">
+            </v-stepper-step>
+          </div>
+          <div v-if="step == 4" class="step3">
+            <v-stepper-step :complete="step > 4" step="Step 3">
+            </v-stepper-step>
+          </div>
+          <div v-if="step == 5" class="step4">
+            <v-stepper-step :complete="step > 5" step="Step 4">
+            </v-stepper-step>
+          </div>
+        </div>
+        <div class="pt-12">
+          <v-stepper-content step="1" class="pt-0 step basicinformation">
+            <div v-if="!isAuthenticated">
+              <BasicInformation v-on:thisUser="register($event)" />
             </div>
-            <div v-if="step == 2" class="step2">
-              <v-stepper-step :complete="step > 2" step="Step 2">
-              </v-stepper-step>
-            </div>
-            <div v-if="step == 3" class="step3">
-              <v-stepper-step :complete="step > 3" step="Step 3">
-              </v-stepper-step>
-            </div>
-            <div v-if="step == 4" class="step3">
-              <v-stepper-step :complete="step > 4" step="Step 3">
-              </v-stepper-step>
-            </div>
-            <div v-if="step == 5" class="step4">
-              <v-stepper-step :complete="step > 5" step="Step 4">
-              </v-stepper-step>
-            </div>
-          </v-col>
-          <v-col class="pt-12">
-            <v-stepper-content step="1" class="pt-0 step basicinformation">
-              <div v-if="!isAuthenticated">
-                <BasicInformation v-on:thisUser="register($event)" />
-              </div>
-              <div v-if="isAuthenticated">
-                <Authenticated v-on:thisStep="proceedToNextStep($event)" />
-              </div>
-            </v-stepper-content>
-            <v-stepper-content step="2" class="pt-0 step">
-              <WorkspaceMenu v-on:thisPickWorkspace="joinOrCreate($event)" />
-            </v-stepper-content>
-            <v-stepper-content step="3" class="pt-0 step">
-              <JoinWorkspace v-on:thisJoinWorkspace="joinWorkspace($event)" />
-            </v-stepper-content>
-            <v-stepper-content step="4" class="pt-0 step">
-              <CreateNewWorkspace
-                v-on:thisWorkspace="createWorkspace($event)"
+            <div v-if="isAuthenticated">
+              <Authenticated
+                v-on:thisStep="proceedToNextStep($event)"
+                :color="color"
               />
-            </v-stepper-content>
-            <v-stepper-content step="5" class="pt-0 step">
-              <Success />
-            </v-stepper-content>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-stepper>
-  </v-app>
+            </div>
+          </v-stepper-content>
+          <v-stepper-content step="2" class="pt-0 step">
+            <WorkspaceMenu v-on:thisPickWorkspace="joinOrCreate($event)" />
+          </v-stepper-content>
+          <v-stepper-content step="3" class="pt-0 step">
+            <JoinWorkspace v-on:thisJoinWorkspace="joinWorkspace($event)" />
+          </v-stepper-content>
+          <v-stepper-content step="4" class="pt-0 step">
+            <CreateNewWorkspace v-on:thisWorkspace="createWorkspace($event)" />
+          </v-stepper-content>
+          <v-stepper-content step="5" class="pt-0 step">
+            <Success />
+          </v-stepper-content>
+        </div>
+      </div>
+    </v-container>
+  </v-stepper>
 </template>
 
 <script>
@@ -88,6 +87,7 @@ export default {
   },
   data() {
     return {
+      color: '#593d3b',
       step: 1,
       userInfo: {},
       workspaceInfo: {},
@@ -173,6 +173,11 @@ export default {
 </script>
 
 <style>
+.vs-button {
+  width: 100%;
+  background: #593d3b;
+}
+
 .step1 div > span,
 .step2 div > span,
 .step3 div > span,
@@ -187,16 +192,6 @@ export default {
 .step3 div > span,
 .step4 div > span {
   padding-bottom: 10px;
-}
-
-.step-button {
-  font-family: 'Montserrat';
-  font-weight: 700 !important;
-  font-size: 18px !important;
-}
-
-.container-700 {
-  max-width: 700px;
 }
 
 .step {

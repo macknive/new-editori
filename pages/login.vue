@@ -1,106 +1,112 @@
 <template>
-  <v-app>
-    <v-row>
-      <v-col class="pa-0">
-        <div class="d-flex flex-column">
-          <v-container class="container-700">
-            <v-form ref="form" v-model="valid" lazy-validation>
-              <div align="center">
-                <img
-                  src="~/assets/editori-logo.png"
-                  alt=""
-                  class="editori mt-12"
-                />
-              </div>
-              <h1 align="center" class="mt-12 mb-12 testclass">
-                WELCOME TO EDITORI
-              </h1>
-              <v-col class="px-10">
-                <p class="mb-0 text-brown">EMAIL ADDRESS</p>
-                <v-text-field
-                  class="email"
-                  v-model="email"
-                  solo
-                  :rules="rules.email"
-                  hide-details="auto"
-                ></v-text-field>
-              </v-col>
-              <v-col class="px-10 pb-0">
-                <p class="mb-0 text-brown">PASSWORD</p>
-                <v-text-field
-                  class="password"
-                  v-model="password"
-                  solo
-                  :rules="rules.password"
-                  :type="show ? 'text' : 'password'"
-                  name="input-10-1"
-                ></v-text-field>
-              </v-col>
-              <v-col align="right" class="pt-0 pb-10">
-                <nuxt-link to="#" class="pr-10 text-brown forgot-password"
-                  >Forgot Password?</nuxt-link
-                >
-              </v-col>
-              <v-col class="px-10">
-                <v-btn
-                  :disabled="!valid"
-                  block
-                  @click="validate() ? login() : errorMessage()"
-                  color="brown darken-3 white--text"
-                  class="py-7 step-button login-button"
-                  >LOG IN</v-btn
-                >
-              </v-col>
-              <v-col align="right" class="pt-0 pb-10">
-                Don't have an account?
-                <nuxt-link to="/register" class="pr-10 text-brown"
-                  >Sign Up</nuxt-link
-                >
-              </v-col>
-              <v-col align="center">
-                <p class="text-brown">CONTINUE WITH</p>
-                <div class="d-flex justify-center">
-                  <div class="px-5">
-                    <nuxt-link to="#"
-                      ><div class="round-corners">
-                        <font-awesome-icon
-                          :icon="['fab', 'facebook']"
-                          class="icon alt text-brown"
-                          size="2x"
-                        /></div
-                    ></nuxt-link>
-                  </div>
-                  <div class="px-5">
-                    <nuxt-link to="#"
-                      ><div class="round-corners">
-                        <font-awesome-icon
-                          :icon="['fab', 'google']"
-                          class="icon alt text-brown"
-                          size="2x"
-                        /></div
-                    ></nuxt-link>
-                  </div>
-                  <div class="px-5">
-                    <nuxt-link to="#"
-                      ><div class="round-corners">
-                        <font-awesome-icon
-                          :icon="['fab', 'apple']"
-                          class="icon alt text-brown"
-                          size="2x"
-                        /></div
-                    ></nuxt-link>
-                  </div>
-                </div>
-              </v-col>
-            </v-form>
-          </v-container>
+  <div class="container-1200">
+    <div align="center">
+      <img src="~/assets/editori-logo.png" alt="" class="editori" />
+    </div>
+    <br />
+    <h1 align="center" class="mt-12 mb-12">
+      WELCOME TO EDITORI
+    </h1>
+    <div class="form-group" :class="{ 'form-group--error': $v.email.$error }">
+      <label class="form__label">EMAIL ADDRESS</label>
+      <vs-input
+        type="email"
+        class="form__input email v-messages"
+        v-model.trim="$v.email.$model"
+      />
+
+      <div class="error" v-if="!$v.email.required">Email is required</div>
+      <div class="error error-message" v-if="!$v.email.email">
+        E-mail must be valid
+      </div>
+
+      <br />
+      <div
+        class="form-group"
+        :class="{ 'form-group--error': $v.password.$error }"
+      >
+        <label class="form__label">PASSWORD</label>
+        <vs-input
+          type="password"
+          class="form__input password"
+          v-model.trim="$v.password.$model"
+          placeholder="Disabled"
+        />
+      </div>
+      <div class="error" v-if="!$v.password.required">password is required</div>
+    </div>
+    <br />
+
+    <div align="right">
+      <nuxt-link to="#" class="pr-10 text-brown forgot-password"
+        >Forgot Password?</nuxt-link
+      ><br /><br />
+    </div>
+    <div>
+      <vs-button
+        :color="color"
+        block
+        @click="login()"
+        class="step-button width-100 login-button"
+        type="submit"
+        :disabled="submitStatus === 'PENDING'"
+        >LOG IN</vs-button
+      >
+      <p class="typo__p" v-if="submitStatus === 'OK'">
+        Thanks for your submission!
+      </p>
+      <p class="typo__p" v-if="submitStatus === 'ERROR'">
+        Please fill the form correctly.
+      </p>
+      <p class="typo__p" v-if="submitStatus === 'PENDING'">Sending...</p>
+    </div>
+    <br />
+    <div align="right">
+      Don't have an account?
+      <nuxt-link to="/register" class="pr-10 text-brown">Sign Up</nuxt-link>
+    </div>
+    <div align="center">
+      <br />
+      <p class="text-brown">CONTINUE WITH</p>
+      <br />
+      <div class="container-row">
+        <div class="flex-grow">
+          <nuxt-link to="#"
+            ><div class="round-corners">
+              <font-awesome-icon
+                :icon="['fab', 'facebook']"
+                class="icon alt text-brown"
+                size="2x"
+              /></div
+          ></nuxt-link>
         </div>
-      </v-col>
-    </v-row>
-  </v-app>
+        <div class="flex-grow">
+          <nuxt-link to="#"
+            ><div class="round-corners">
+              <font-awesome-icon
+                :icon="['fab', 'google']"
+                class="icon alt text-brown"
+                size="2x"
+              /></div
+          ></nuxt-link>
+        </div>
+        <div class="flex-grow">
+          <nuxt-link to="#"
+            ><div class="round-corners">
+              <font-awesome-icon
+                :icon="['fab', 'apple']"
+                class="icon alt text-brown"
+                size="2x"
+              /></div
+          ></nuxt-link>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
+import { required, email } from 'vuelidate/lib/validators';
 export default {
   middleware: 'guest',
   created() {
@@ -108,58 +114,59 @@ export default {
   },
   data() {
     return {
-      valid: true,
+      color: '#593d3b',
       email: '',
       password: '',
-      error: null,
-      show: false,
-      rules: {
-        email: [
-          v => !!v || 'E-mail is required',
-          v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
-        ],
-        password: [v => !!v || 'Password is required']
-      }
+      submitStatus: null
     };
   },
+  validations: {
+    email: {
+      required,
+      email
+    },
+    password: {
+      required
+    }
+  },
   methods: {
-    validate() {
-      if (!this.$refs.form.validate()) {
-        return false;
-      }
-      return true;
-    },
-    errorMessage() {
-      console.log('Please fill the required form');
-    },
     async login() {
-      this.error = null;
-      try {
-        await this.$auth
-          .loginWith('local', {
-            data: {
-              identifier: this.email,
-              password: this.password
-            }
-          })
-          .then(response => {
-            this.$apolloHelpers.onLogin(response.data.jwt);
-            console.log('Well done!');
-            console.log('User profile', response.data.user);
-            console.log('User token', response.data.jwt);
-          });
-        this.$router.push('/');
-      } catch (e) {
-        this.error = e.response.data.message[0].messages[0].message;
-        alert('Wrong account input');
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        this.submitStatus = 'ERROR';
+      } else {
+        this.error = null;
+        try {
+          await this.$auth
+            .loginWith('local', {
+              data: {
+                identifier: this.email,
+                password: this.password
+              }
+            })
+            .then(response => {
+              this.$apolloHelpers.onLogin(response.data.jwt);
+              console.log('Well done!');
+              console.log('User profile', response.data.user);
+              console.log('User token', response.data.jwt);
+            });
+          this.$router.push('/');
+        } catch (e) {
+          this.error = e.response.data.message[0].messages[0].message;
+          alert('Wrong account input');
+        }
       }
     }
   }
 };
 </script>
 
-<style scoped>
-.v-btn.v-size--default {
-  font-size: unset;
+<style>
+.vs-con-input-label {
+  width: 100%;
+}
+
+.vs-inputx {
+  height: 40px;
 }
 </style>

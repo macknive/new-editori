@@ -1,22 +1,26 @@
 <template>
-  <v-app>
-    ARTICLE DETAIL COMPONENT
-    <v-btn-toggle v-model="toggle_exclusive" group mandatory class="mb-6">
-      <v-btn @click="toggle = true">POST AT A GLANCE</v-btn>
-      <v-btn @click="toggle = false">RANKING & STABLE</v-btn>
-    </v-btn-toggle>
+  <div>
+    ARTICLE DETAIL COMPONENT<br /><br />
+
+    <vs-button :color="color" type="flat" @click="toggle = true"
+      >POST AT A GLANCE</vs-button
+    >
+    <vs-button :color="color" type="flat" @click="toggle = false"
+      >RANKING & STABLE</vs-button
+    >
+    <br /><br />
     <div v-if="toggle">
       <Glance class="glance" title="This Week" :figures="figures" />
     </div>
     <div v-if="!toggle">
-      <v-row>
-        <v-col> <RankingStable /></v-col>
-        <v-col><NotedChanges /></v-col>
-      </v-row>
+      <div class="container-row">
+        <div class="flex-grow"><RankingStable /></div>
+        <div class="flex-grow"><NotedChanges /></div>
+      </div>
     </div>
     <br /><br /><br /><br />
     <QueryDetails />
-  </v-app>
+  </div>
 </template>
 
 <script>
@@ -34,6 +38,7 @@ export default {
   },
   data() {
     return {
+      color: '#593d3b',
       toggle_exclusive: undefined,
       toggle: true
     };
@@ -51,7 +56,7 @@ export default {
 </script>
 
 <style>
-.v-btn.v-size--default {
+.vs-button.v-size--default {
   font-size: unset;
 }
 .v-application .caption {

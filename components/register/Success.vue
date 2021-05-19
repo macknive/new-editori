@@ -10,12 +10,12 @@
         <v-container class="workspace-container">
           <div class="spacer"></div>
           <div class="btn-end">
-            <v-btn
+            <vs-button
               type="submit"
               block
               color="brown darken-3 white--text"
               class="py-7 step-button"
-              >GO TO DASHBOARD</v-btn
+              >GO TO DASHBOARD</vs-button
             >
           </div>
         </v-container>
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-export default {}
+export default {};
 </script>
 
 <style></style>

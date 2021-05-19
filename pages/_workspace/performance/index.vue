@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <div>
     <HeroSection :shapes="shapes">
       <h1 class="title">
         Hone in on performance, focusing on <a href="#">page views</a> over the
@@ -45,7 +45,7 @@
       >
       </PerformancePostCarousel>
     </BodySection>
-  </v-app>
+  </div>
 </template>
 
 <script>
