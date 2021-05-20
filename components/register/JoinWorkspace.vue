@@ -1,20 +1,23 @@
 <template>
-  <v-container>
-    <div align="center">
+  <div class="container-700 m-auto">
+    <div class="center">
       <h1>Pending Invitations</h1>
       <h4>You have been invited to the following workspaces</h4>
     </div>
     <br /><br />
-    <div class="btn-end">
-      <vs-button
-        block
-        @click="joinNewWorkspace()"
-        color="brown darken-3 white--text"
-        class="py-7 step-button bottom-button"
-        >NEXT</vs-button
-      >
+    <div class="workspace-container">
+      <div class="spacer"></div>
+      <div class="btn-end">
+        <vs-button
+          block
+          @click="joinNewWorkspace()"
+          color="brown darken-3 white--text"
+          class="py-7 step-button bottom-button"
+          >NEXT</vs-button
+        >
+      </div>
     </div>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -36,4 +39,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.input-select-con {
+  width: 100%;
+}
+</style>

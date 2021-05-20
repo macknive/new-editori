@@ -1,27 +1,25 @@
 <template>
-  <v-app>
-    <v-container class="container-700">
-      <h1 align="center" class="py-5">Already Authenticated</h1>
-      <p align="center">
-        You can go to <nuxt-link to="/">Dashboard</nuxt-link> or proceed to the
-        next step
-      </p>
+  <div class="container-700 m-auto">
+    <h1 align="center" class="py-5">Already Authenticated</h1>
+    <p align="center">
+      You can go to <nuxt-link to="/">Dashboard</nuxt-link> or proceed to the
+      next step
+    </p>
 
-      <v-container class="workspace-container">
-        <div class="spacer"></div>
-        <div class="btn-end mb-12">
-          <vs-button
-            @click="proceed()"
-            type="submit"
-            block
-            :color="color"
-            class="py-7 step-button"
-            >NEXT</vs-button
-          >
-        </div>
-      </v-container>
-    </v-container>
-  </v-app>
+    <div class="workspace-container">
+      <div class="spacer"></div>
+      <div class="btn-end mb-12">
+        <vs-button
+          @click="proceed()"
+          type="submit"
+          block
+          :color="color"
+          class="py-7 step-button"
+          >NEXT</vs-button
+        >
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

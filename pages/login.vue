@@ -1,5 +1,5 @@
 <template>
-  <div class="container-1200">
+  <div class="container-700">
     <div align="center">
       <img src="~/assets/editori-logo.png" alt="" class="editori" />
     </div>
@@ -14,27 +14,27 @@
         class="form__input email"
         v-model.trim="$v.email.$model"
       />
-
-      <div class="error" v-if="!$v.email.required">Email is required</div>
-      <div class="error error-message" v-if="!$v.email.email">
-        E-mail must be valid
-      </div>
-
-      <br />
-      <div
-        class="form-group"
-        :class="{ 'form-group--error': $v.password.$error }"
-      >
-        <label class="form__label">PASSWORD</label>
-        <vs-input
-          type="password"
-          class="form__input password"
-          v-model.trim="$v.password.$model"
-          placeholder="Disabled"
-        />
-      </div>
-      <div class="error" v-if="!$v.password.required">password is required</div>
     </div>
+    <div class="error" v-if="!$v.email.required">Email is required</div>
+    <div class="error error-message" v-if="!$v.email.email">
+      E-mail must be valid
+    </div>
+
+    <br />
+    <div
+      class="form-group"
+      :class="{ 'form-group--error': $v.password.$error }"
+    >
+      <label class="form__label">PASSWORD</label>
+      <vs-input
+        type="password"
+        class="form__input password"
+        v-model.trim="$v.password.$model"
+        placeholder="Disabled"
+      />
+    </div>
+    <div class="error" v-if="!$v.password.required">password is required</div>
+
     <br />
 
     <div align="right">

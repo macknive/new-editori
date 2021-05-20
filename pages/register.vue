@@ -8,8 +8,8 @@
           <div class="step3-bg"></div>
           <div class="step4-bg"></div>
           <div v-if="step == 1" class="step1">
-            <v-stepper-step :complete="step > 1" step="Step 1"> </v-stepper-step
-            >2
+            <v-stepper-step :complete="step > 1" step="Step 1">
+            </v-stepper-step>
           </div>
           <div v-if="step == 2" class="step2">
             <v-stepper-step :complete="step > 2" step="Step 2">
