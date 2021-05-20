@@ -1,127 +1,109 @@
 <template>
-  <div class="container-700">
-    <div align="center">
-      <h1>Tell Us About You...</h1>
-      <h4>The best relationships start with at least this much...</h4>
+  <div style="padding: 2rem 3rem; text-align: left;">
+    <div class="field">
+      <label class="label">Username</label>
+      <div class="control">
+        <input
+          :class="['input', $v.form.username.$error ? 'is-danger' : '']"
+          type="text"
+          placeholder="Text input"
+          v-model="form.username"
+        />
+      </div>
+      <p v-if="$v.form.username.$error" class="help is-danger">
+        This username is invalid
+      </p>
     </div>
-    <div class="mt-5">
-      <p class="text-brown mb-0">USERNAME</p>
-      <v-form ref="form" v-model="valid" lazy-validation>
-        <vs-input
-          v-model="newUser.username"
-          solo
-          :rules="rules.username"
-          hide-details="auto"
-          class="pb-3"
-        ></vs-input>
-        <p class="text-brown mb-0">EMAIL ADDRESS</p>
-        <vs-input
-          v-model="newUser.email"
-          solo
-          :rules="rules.email"
-          hide-details="auto"
-          class="pb-3"
-        ></vs-input>
-        <p class="text-brown mb-0">NAME</p>
-
-        <vs-input
-          v-model="newUser.displayName"
-          solo
-          :rules="rules.username"
-          hide-details="auto"
-          class="pb-3"
-        ></vs-input>
-        <p class="text-brown mb-0">PASSWORD</p>
-        <vs-input
-          v-model="newUser.password"
-          solo
-          :rules="rules.password"
-          :type="show ? 'text' : 'password'"
-          name="input-10-1"
-        ></vs-input>
-        <p class="text-brown mb-0">CONFIRM PASSWORD</p>
-        <vs-input
-          v-model="newUser.confirmPassword"
-          solo
-          :rules="rules.confirmPassword.concat(passwordConfirmationRule)"
-          :type="show ? 'text' : 'password'"
-          name="input-10-1"
-        ></vs-input>
-        <vs-checkbox
-          class="checkbox"
-          v-model="newUser.checkbox"
-          :rules="rules.termsOfService"
-        >
-          I accept the <a class="ml-1 text-brown">Terms of Service</a>
-        </vs-checkbox>
-        <vs-button
-          :disabled="!valid"
-          block
-          @click="validate() ? addUser() : errorMessage()"
-          :color="color"
-          class="step-button"
-          >NEXT</vs-button
-        >
-      </v-form>
-      <p align="right">
-        Already have an account?&nbsp;<nuxt-link to="/login" class="text-brown"
-          >Login</nuxt-link
-        >
+    <div class="field">
+      <label class="label">Email</label>
+      <div class="control">
+        <input
+          :class="['input', $v.form.demoEmail.$error ? 'is-danger' : '']"
+          type="text"
+          placeholder="Email input"
+          v-model="form.demoEmail"
+        />
+      </div>
+      <p v-if="$v.form.demoEmail.$error" class="help is-danger">
+        This email is invalid
+      </p>
+    </div>
+    <div class="field">
+      <label class="label">Password</label>
+      <div class="control">
+        <input
+          :class="['input', $v.form.password.$error ? 'is-danger' : '']"
+          type="password"
+          placeholder="Password input"
+          v-model="form.password"
+        />
+      </div>
+      <p v-if="$v.form.password.$error" class="help is-danger">
+        This password is invalid
       </p>
     </div>
   </div>
 </template>
 
 <script>
+import { validationMixin } from 'vuelidate';
+import { required, email } from 'vuelidate/lib/validators';
+
 export default {
+  props: ['clickedNext', 'currentStep'],
+  mixins: [validationMixin],
   data() {
     return {
-      color: '#593d3b',
-      valid: true,
-      error: null,
-      show: false,
-      newUser: {
+      form: {
         username: '',
-        email: '',
-        password: '',
-        confirmPassword: '',
-        displayName: '',
-        checkbox: false
-      },
-      rules: {
-        username: [value => !!value || 'Required.'],
-        email: [
-          v => !!v || 'E-mail is required',
-          v => /.+@.+\..+/.test(v) || 'E-mail must be valid'
-        ],
-        password: [v => !!v || 'Password is required'],
-        confirmPassword: [v => !!v || 'Password is required'],
-        termsOfService: [v => !!v || 'You must agree to continue!']
+        demoEmail: '',
+        message: '',
+        password: ''
       }
     };
   },
-  computed: {
-    passwordConfirmationRule() {
-      return () =>
-        this.newUser.password === this.newUser.confirmPassword ||
-        'Password must match';
+  validations: {
+    form: {
+      username: {
+        required
+      },
+      password: {
+        required
+      },
+      demoEmail: {
+        required,
+        email
+      }
     }
   },
-  methods: {
-    validate() {
-      if (!this.$refs.form.validate()) {
-        return false;
+  watch: {
+    $v: {
+      handler: function(val) {
+        if (!val.$invalid) {
+          this.$emit('can-continue', { value: true });
+        } else {
+          this.$emit('can-continue', { value: false });
+          setTimeout(() => {
+            this.$emit('change-next', { nextBtnValue: false });
+          }, 3000);
+        }
+      },
+      deep: true
+    },
+
+    clickedNext(val) {
+      console.log(val);
+      if (val === true) {
+        this.$v.form.$touch();
       }
-      return true;
-    },
-    addUser() {
-      this.$emit('thisUser', this.newUser);
-    },
-    errorMessage() {
-      console.log('Please fill the required form');
+    }
+  },
+  mounted() {
+    if (!this.$v.$invalid) {
+      this.$emit('can-continue', { value: true });
+    } else {
+      this.$emit('can-continue', { value: false });
     }
   }
 };
 </script>
-
-<style></style>
