@@ -1,5 +1,5 @@
 <template>
-  <div class="container-700">
+  <div class="container-700 m-auto">
     <div align="center">
       <img src="~/assets/editori-logo.png" alt="" class="editori" />
     </div>
@@ -104,7 +104,6 @@
     </div>
   </div>
 </template>
-
 <script>
 import { required, email } from 'vuelidate/lib/validators';
 export default {
@@ -160,12 +159,10 @@ export default {
   }
 };
 </script>
-
 <style>
 .vs-con-input-label {
   width: 100%;
 }
-
 .vs-inputx {
   height: 40px;
 }

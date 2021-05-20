@@ -18,7 +18,7 @@ describe('Login', () => {
     cy.get('.email input').type(USERNAME);
     cy.get('.password input').type(PASSWORD);
     cy.get('.login-button').click();
-    cy.url().should('include', '/drink-filtered');
+    cy.url().should('include', '/little-travelers');
   });
 
   // If a malformed email address (e.g. testemailcom) is provided, the
