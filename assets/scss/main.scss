@@ -40,8 +40,16 @@ body {
   text-align: center;
 }
 
-.margin-auto {
+.m-auto {
   margin: auto;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.mt-20 {
+  margin-top: 20px;
 }
 
 .width-100 {
@@ -63,6 +71,7 @@ body {
 
 .workspace-border {
   height: 240px;
+  width: 300px;
   border: 1px solid #593d3b;
   border-radius: 3%;
 }
