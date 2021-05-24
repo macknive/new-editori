@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import UpdatePage from '~/queries/UpdatePage';
+import UpdatePagePresentation from '~/queries/UpdatePagePresentation';
 export default {
   props: ['post', 'workspace'],
   methods: {
@@ -47,7 +47,7 @@ export default {
     togglePin() {
       const newState = this.pinned ? 'normal' : 'pinned';
       const mutationConfig = {
-        mutation: UpdatePage,
+        mutation: UpdatePagePresentation,
         variables: {
           id: this.post.id,
           presentation: newState

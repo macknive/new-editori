@@ -12,6 +12,7 @@ query GetWorkspaceBySlug($workspaceSlug: String!) {
       presentation
       title
       viewCountDelta
+      trackingType
     }
   }
 }

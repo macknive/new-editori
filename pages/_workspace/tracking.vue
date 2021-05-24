@@ -14,7 +14,7 @@
             <div class="tracked">
               {{ tracking }}
             </div>
-            <div class="untracked">/{{ untracked }}</div>
+            <div class="untracked">/{{ workspace.pages.length }}</div>
           </div>
         </div>
       </div>
@@ -24,17 +24,8 @@
         <div class="width-500">Title</div>
         <div class="m-auto">Tracking</div>
       </div>
-
-      <div v-for="page in pages" :key="page.id">
-        <div v-if="page.title" class="container-row">
-          <div class="width-500 mb-20">
-            {{ page.title }}
-            <p>Written by: {{ writer }}</p>
-          </div>
-          <div class="m-auto">
-            <vs-switch v-model="page.trackingType" />
-          </div>
-        </div>
+      <div v-for="page in workspace.pages" :key="page.id">
+        <Track :page="page" />
       </div>
     </BodySection>
   </div>
@@ -43,35 +34,22 @@
 <script>
 import BodySection from '~/components/layout/BodySection';
 import HeroSection from '~/components/layout/HeroSection';
-import ListPages from '~/queries/ListPages';
+import Track from '~/components/Track';
+import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug';
 export default {
   components: {
     BodySection,
-    HeroSection
-  },
-  data() {
-    return {
-      pages: [],
-      //color: '#593d3b',
-      writer: 'Meg',
-      trackStatus: ''
-    };
+    HeroSection,
+    Track
   },
   computed: {
     tracking() {
-      return this.pages.filter(value => value.trackingType === true).length;
-    },
-    untracked() {
-      return this.pages.filter(value => value.trackingType === null || false)
-        .length;
+      return this.workspace.pages.filter(
+        value => value.trackingType === 'TRACKING_ENABLED'
+      ).length;
     }
   },
-  apollo: {
-    pages: {
-      prefetch: true,
-      query: ListPages
-    }
-  }
+  mixins: [getWorkspaceBySlug]
 };
 </script>
 
