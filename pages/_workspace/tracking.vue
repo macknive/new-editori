@@ -67,8 +67,9 @@ export default {
   background-color: #593d3b;
 }
 .tracked {
-  margin: 60px 0 0 30px;
+  margin: 60px 0 0 50px;
   font-size: 24px;
+  font-weight: bold;
   color: white;
 }
 
@@ -76,5 +77,6 @@ export default {
   margin-top: 35px;
   font-size: 48px;
   color: white;
+  font-weight: bold;
 }
 </style>

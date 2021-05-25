@@ -45,4 +45,16 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.vs-switch-active {
+  background: #593d3b !important;
+}
+
+.vs-switch > .vs-circle-switch {
+  background: #593d3b !important;
+}
+
+.vs-switch-active > .vs-circle-switch {
+  background: white !important;
+}
+</style>
