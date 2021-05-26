@@ -34,10 +34,7 @@
               <BasicInformation v-on:thisUser="register($event)" />
             </div>
             <div v-if="isAuthenticated">
-              <Authenticated
-                v-on:thisStep="proceedToNextStep($event)"
-                :color="color"
-              />
+              <Authenticated v-on:thisStep="proceedToNextStep($event)" />
             </div>
           </v-stepper-content>
           <v-stepper-content step="2" class="pt-0 step">
@@ -173,9 +170,9 @@ export default {
 </script>
 
 <style>
-.vs-button {
+.step-button {
+  background-color: #593d3b;
   width: 100%;
-  background: #593d3b;
 }
 
 .step1 div > span,

@@ -1,27 +1,21 @@
 <template>
-  <v-app>
-    <v-container class="container-700">
-      <h1 align="center" class="pt-5">You Are All Set</h1>
-      <h4 align="center">
-        It all starts here, let's invite the people that help make your projects
-        a success
-      </h4>
-      <form action="/">
-        <v-container class="workspace-container">
-          <div class="spacer"></div>
-          <div class="btn-end">
-            <vs-button
-              type="submit"
-              block
-              color="brown darken-3 white--text"
-              class="py-7 step-button"
-              >GO TO DASHBOARD</vs-button
-            >
-          </div>
-        </v-container>
-      </form>
-    </v-container>
-  </v-app>
+  <div class="container-700 m-auto">
+    <h1 class="center mb-20">You Are All Set</h1>
+    <h4 class="center">
+      It all starts here, let's invite the people that help make your projects a
+      success
+    </h4>
+    <form action="/">
+      <div class="workspace-container">
+        <div class="spacer"></div>
+        <div class="btn-end">
+          <vs-button type="submit" class="step-button"
+            >GO TO DASHBOARD</vs-button
+          >
+        </div>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
