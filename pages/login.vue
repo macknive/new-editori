@@ -1,5 +1,5 @@
 <template>
-  <div class="container-700 m-auto">
+  <div class="container-500 m-auto">
     <div align="center">
       <img src="~/assets/editori-logo.png" alt="" class="editori" />
     </div>
@@ -30,7 +30,6 @@
           type="password"
           class="form__input password"
           v-model.trim="$v.password.$model"
-          placeholder="Disabled"
         />
       </div>
       <div class="error" v-if="!$v.password.required">password is required</div>

@@ -14,6 +14,10 @@ body {
   max-width: 700px;
 }
 
+.container-500 {
+  max-width: 500px;
+}
+
 .container-row,
 .container-column {
   display: flex;
@@ -56,8 +60,16 @@ body {
   width: 100%;
 }
 
+.width-500 {
+  width: 500px;
+}
+
 .text-brown {
   color: #593d3b;
+}
+
+.text-white {
+  color: white;
 }
 
 .round-corners {
@@ -90,7 +102,7 @@ body {
 }
 
 .workspace-container {
-  height: 700px;
+  height: 500px;
   justify-content: space-between;
   flex-direction: column;
   display: flex;

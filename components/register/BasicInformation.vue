@@ -1,5 +1,5 @@
 <template>
-  <div class="container-700 m-auto">
+  <div class="container-500 m-auto">
     <div class="center mb-20">
       <h1>Tell Us About You...</h1>
       <h4>The best relationships start with at least this much...</h4>
@@ -80,13 +80,13 @@
           Passwords must be identical.
         </div>
       </div>
-      <button
-        class="button mt-20"
+      <vs-button
+        class="mt-20 step-button"
         type="submit"
         :disabled="submitStatus === 'PENDING'"
       >
         NEXT
-      </button>
+      </vs-button>
       <p class="typo__p" v-if="submitStatus === 'OK'">
         Thanks for your submission!
       </p>
@@ -103,7 +103,6 @@ import { required, email, minLength, sameAs } from 'vuelidate/lib/validators';
 export default {
   data() {
     return {
-      color: '#593d3b',
       submitStatus: null,
       newUser: {
         username: '',

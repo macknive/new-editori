@@ -1,5 +1,5 @@
 <template>
-  <div class="container-700 m-auto">
+  <div class="container-500 m-auto">
     <h1 align="center" class="py-5">Already Authenticated</h1>
     <p align="center">
       You can go to <nuxt-link to="/">Dashboard</nuxt-link> or proceed to the
@@ -9,12 +9,7 @@
     <div class="workspace-container">
       <div class="spacer"></div>
       <div class="btn-end mb-12">
-        <vs-button
-          @click="proceed()"
-          type="submit"
-          block
-          :color="color"
-          class="py-7 step-button"
+        <vs-button @click="proceed()" type="submit" block class="step-button"
           >NEXT</vs-button
         >
       </div>
@@ -24,7 +19,6 @@
 
 <script>
 export default {
-  props: ['color'],
   data() {
     return {
       stepNumber: ''

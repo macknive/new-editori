@@ -1,0 +1,10 @@
+mutation updatePageTracking($id: ID!, $trackingType: ENUM_PAGE_TRACKINGTYPE) {
+  updatePage(
+    input: { where: { id: $id }, data: { trackingType: $trackingType } }
+  ) {
+    page {
+      id
+      trackingType
+    }
+  }
+}

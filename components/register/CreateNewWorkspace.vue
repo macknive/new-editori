@@ -1,5 +1,5 @@
 <template>
-  <div class="container-700 m-auto">
+  <div class="container-500 m-auto">
     <div align="center">
       <h1>Workspace Setup</h1>
       <h4>The best relationships start with at least this much...</h4>
@@ -45,7 +45,7 @@
             <h4 class="noto-serif">${{ totalPrice }} per month</h4>
           </div>
           <div align="right">
-            <h4 class="noto-serif">$0 due today</h4>
+            <h4 class="noto-serif mb-20">$0 due today</h4>
           </div>
         </div>
         <div v-if="visible">
@@ -83,26 +83,25 @@
 
         <div v-if="!visible">
           <div>
-            <div>
-              <vs-input
-                class="payment-textfield"
-                v-model="newWorkspace.cardName"
-                label="Card Number"
-                solo
-                hide-details="auto"
-              ></vs-input>
+            <div class="container-row">
+              <div class="m-auto">
+                <vs-input
+                  class="payment-textfield"
+                  v-model="newWorkspace.cardName"
+                  placeholder="Card Number"
+                ></vs-input>
+              </div>
+              <div class="m-auto">
+                <vs-input
+                  class="payment-textfield"
+                  v-model="newWorkspace.cardNumber"
+                  placeholder="MM/YY"
+                ></vs-input>
+              </div>
             </div>
+
             <div>
-              <vs-input
-                class="payment-textfield"
-                v-model="newWorkspace.cardNumber"
-                label="MM/YY"
-                solo
-                hide-details="auto"
-              ></vs-input>
-            </div>
-            <div>
-              <vs-button block color="step-button">SUBSCRIBE</vs-button>
+              <button class="step-button mt-20">SUBSCRIBE</button>
             </div>
           </div>
           <a @click="visible = !visible" class="text-brown"
@@ -110,19 +109,12 @@
           >
         </div>
 
-        <h4 align="center">
+        <h4 align="center" class="mt-20 mb-20">
           You will be charged ${{ totalPrice }} on {{ formattedDate }}
         </h4>
       </div>
     </div>
-    <vs-button
-      :disabled="!valid"
-      :color="color"
-      block
-      @click="addWorkspace()"
-      class="step-button width-100"
-      >NEXT</vs-button
-    >
+    <button class="step-button" @click="addWorkspace()">NEXT</button>
   </div>
 </template>
 
@@ -133,7 +125,6 @@ export default {
     return {
       valid: true,
       moment: moment,
-      color: '#593d3b',
       selected: '',
       basePrice: 9.99,
       newWorkspace: {
@@ -170,6 +161,9 @@ export default {
 </script>
 
 <style>
+.vs-button-primary.vs-button-filled {
+  background: unset;
+}
 .vs-con-input-label,
 select {
   width: 100%;
@@ -178,7 +172,8 @@ select {
 .vs-inputx {
   height: 40px;
 }
-.vs-button {
-  background: unset;
+
+.vs-con-input > span {
+  font-size: unset;
 }
 </style>
