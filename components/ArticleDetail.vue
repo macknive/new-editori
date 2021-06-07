@@ -38,7 +38,7 @@ export default {
   },
   data() {
     return {
-      color: '#593d3b',
+      color: '#6f5e53',
       toggle_exclusive: undefined,
       toggle: true
     };

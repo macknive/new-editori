@@ -1,10 +1,9 @@
 <template>
   <div>
     <HeroSection>
-      <h1 class="title relative" align="center">{{ page.title }}</h1>
-      <div class="header-body">
-        <h3 class="pr-6">TOP OPPORTUNITIES</h3>
-        <nuxt-link to="/"><h4>SEE ALL(12)</h4></nuxt-link>
+      <h1 class="title relative center">{{ page.title }}</h1>
+
+      <div class="header-body relative">
         <TopOpportunities />
       </div>
     </HeroSection>
