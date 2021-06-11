@@ -9,8 +9,15 @@
         {{ now.month }}.{{ now.date }}
       </time>
       <div class="workspace-switcher label" role="listbox" tabindex="0">
-        <span>Switch workspace</span>
-        <font-awesome-icon class="caret" icon="caret-down" />
+        <vs-select width="100%" placeholder="Switch Workspace">
+          <vs-select-item
+            v-for="workspace in workspaces"
+            :key="workspace.id"
+            :text="workspace.name"
+            :value="workspace.slug"
+            v-model="selectedWorkspace"
+          ></vs-select-item>
+        </vs-select>
       </div>
       <Glance class="glance" title="This Week" :figures="figures" />
     </HeroSection>
@@ -29,6 +36,7 @@ import EditorButton from '~/components/EditorButton';
 import Glance from '~/components/Glance';
 import HomeCard from '~/components/cards/HomeCard';
 import getWorkspaceBySlug from '~/mixins/getWorkspaceBySlug';
+import ListWorkspaces from '~/queries/ListWorkspaces';
 
 const currentTime = new Date();
 
@@ -50,6 +58,7 @@ export default {
   },
   data() {
     return {
+      selectedWorkspace: null,
       shapes: [
         { type: 'circle', x: -141, y: -281, size: 724, color: '#fffefd' }
       ]
@@ -71,6 +80,12 @@ export default {
         month,
         date
       };
+    }
+  },
+  apollo: {
+    workspaces: {
+      prefetch: true,
+      query: ListWorkspaces
     }
   },
   mixins: [getWorkspaceBySlug]

@@ -2,11 +2,18 @@
   <portal to="hero-section">
     <div class="hero-root">
       <aside class="shapes">
-        <svg v-for="(shape, index) in shapes" :key="index" class="shape"
-            v-bind="shapeWrapperOptions(shape)">
-          <component :is="shape.type" :fill="shape.color" :class="shape.class"
-              v-bind="shapeOptions(shape)">
-          </component>
+        <svg
+          v-for="(shape, index) in shapes"
+          :key="index"
+          class="shape"
+          v-bind="shapeWrapperOptions(shape)"
+        >
+          <component
+            :is="shape.type"
+            :fill="shape.color"
+            :class="shape.class"
+            v-bind="shapeOptions(shape)"
+          ></component>
         </svg>
       </aside>
       <div class="__hero-section-content">
@@ -18,7 +25,7 @@
 
 <script>
 export default {
-  props: [ 'shapes' ],
+  props: ['shapes'],
   methods: {
     shapeOptions(shape) {
       const options = {};
@@ -42,31 +49,31 @@ export default {
           top: ${shape.y}rem;
           width: ${shape.size}rem;
           height: ${shape.size}rem;
-        `,
+        `
       };
     }
   }
-}
+};
 </script>
 
 <style>
-  /* TODO: Determine why this selector fails if scoped to the component. */
-  .__hero-section-content > * {
-    position: absolute;
-  }
+/* TODO: Determine why this selector fails if scoped to the component. */
+.__hero-section-content > * {
+  position: absolute;
+}
 </style>
 
 <style scoped>
-  .__hero-section-content {
-    position: relative;
-    z-index: 2;
-  }
-  .shapes {
-    pointer-events: none;
-    position: relative;
-    z-index: 1;
-  }
-  .shape {
-    position: absolute;
-  }
+.__hero-section-content {
+  position: relative;
+  z-index: 2;
+}
+.shapes {
+  pointer-events: none;
+  position: relative;
+  z-index: 1;
+}
+.shape {
+  position: absolute;
+}
 </style>
